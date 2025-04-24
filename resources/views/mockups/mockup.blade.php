@@ -23,7 +23,7 @@
     </div>
 
     <div class="w-100 d-flex flex-column aling-items-center justify-content-center">
-        <div class="login-container w-75 mx-auto">
+        <div class="login-container mx-auto">
             <h2 class="fs-1">Iniciar sesión</h2>
             <form action="">
                 <label for="email">Correo electrónico</label>
