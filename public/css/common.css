@@ -1,0 +1,13 @@
+a{
+    text-decoration: none;
+    color: white;
+}
+.text-highlight{
+    color: #1a1a1a;
+}
+.fs-title{
+    font-size: 5rem;
+}
+.ps-6rem{
+    padding: 0 0 0 6rem;
+}

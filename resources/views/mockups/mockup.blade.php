@@ -5,7 +5,8 @@
   <title>Fondo Diagonal con Formulario</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/mockup.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
 <body>
   <div class="fondo">
@@ -26,29 +27,30 @@
                     <label for="email">Correo electrónico</label>
                     <div class="input-group">
                         <i class="fas fa-user"></i>
-                        <input type="email" id="email" placeholder="Correo electrónico" />
+                        <input type="email" id="email" placeholder="Correo electrónico"/>
                     </div>
-
                     <label for="password">Contraseña</label>
                     <div class="input-group">
                         <i class="fas fa-lock"></i>
                         <input type="password" id="password" placeholder="Contraseña" />
                         <i class="fas fa-eye"></i>
+                        <i class="fas fa-eye-slash d-none"></i>
+
                     </div>
 
                     <div class="options">
                         <label><input type="checkbox" /> Remember Me</label>
-                        <a href="#">Forgot Me ?</a>
+                        <a href="#">¿Has olvidado tu contraseña?</a>
                     </div>
 
                     <div class="register">
-                        Not register? <a href="#">Register here</a>
+                        <p>¿No registrado? <a href="#">Regístrate aquí</a></p>
                     </div>
 
-                    <button class="login-btn">Login</button>
-                    <hr />
-                    <button class="google-btn">
-                        <i class="fab fa-google"></i> Login with google
+                    <button class="login-btn w-100">Iniciar sesion</button>
+                    <hr/>
+                    <button class="google-btn w-100">
+                        <img class="google-logo" src="{{ asset('img/googleLogo.png') }}" alt="">Login with google
                     </button>
                 </form>
             
