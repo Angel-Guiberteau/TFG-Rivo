@@ -9,3 +9,7 @@ Route::get('/', function () {
 Route::get('/mockups', function () {
     return view('mockups.mockup');
 });
+
+Route::get('/home', function () {
+    return view('mockups.home');
+});

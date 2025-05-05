@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fondo Diagonal con Formulario</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/common.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fondo Diagonal con Formulario</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
 <body>
-    <div class="container min-vh-100 d-flex align-items-center justify-content-center">
+    <main class="container min-vh-100 d-flex align-items-center justify-content-center">
         <section class="row justify-content-center align-items-center py-3 gx-0 gx-lg-5">
             <article class="col-12 col-lg-6 row text-white mt-4 mt-lg-0">
                 <h1 class="w-100 fs-1 fw-bold text-center text-lg-start">Bienvenido a Rivo</h1>
@@ -90,7 +90,7 @@
                 </div>
             </article>
         </section>
-    </div>
+    </main>
     <script src="js/login.js"></script>
 </body>
 </html>
