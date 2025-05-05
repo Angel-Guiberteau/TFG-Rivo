@@ -17,81 +17,80 @@ a{
     padding: 0 0 0 6rem;
 }
 :root {
-    /* valores mínimos y máximos para la tipografía */
-    --type-min: 0.875rem;  /* ~14px */
-    --type-max: 1.125rem;  /* ~18px */
-    --scale-ratio: 1.25;   /* cada paso es 1.25× el anterior */
+  --type-min: 0.875rem;  /* ~14px */
+  --type-max: 1.125rem;  /* ~18px */
+  --scale-ratio: 1.25;   /* cada paso es 1.25× el anterior */
+}
+
+/* fs-1: título extra-grande (h1 principal) */
+.fs-1 {
+  font-size: clamp(
+    calc(var(--type-min) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio)), /* ~33.7px */
+    calc(var(--type-min) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio) + 4vw),
+    calc(var(--type-max) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio))      /* ~42.2px */
+  ) !important;
+}
+
+/* fs-2: título grande (h2/h1) */
+.fs-2 {
+  font-size: clamp(
+    calc(var(--type-min) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio)), /* ~27px */
+    calc(var(--type-min) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio) + 3vw),
+    calc(var(--type-max) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio))  /* ~34px */
+  ) !important;
+}
+
+/* fs-3: encabezado medio (h3/h2) */
+.fs-3 {
+  font-size: clamp(
+    calc(var(--type-min) * var(--scale-ratio) * var(--scale-ratio)),   /* ~21.9px */
+    calc(var(--type-min) * var(--scale-ratio) * var(--scale-ratio) + 2vw),
+    calc(var(--type-max) * var(--scale-ratio) * var(--scale-ratio))    /* ~28.1px */
+  ) !important;
+}
+
+/* fs-4: pequeño encabezado (h5/h4) */
+.fs-4 {
+  font-size: clamp(
+    calc(var(--type-min) * var(--scale-ratio)),         /* ~17.5px */
+    calc(var(--type-min) * var(--scale-ratio) + 1.5vw),
+    calc(var(--type-max) * var(--scale-ratio))          /* ~22.5px */
+  ) !important;
+}
+
+/* fs-5: texto base (body, labels, párrafos) */
+.fs-5 {
+  font-size: clamp(
+    var(--type-min),  /* ~14px */
+    calc(var(--type-min) * 0.8 + 1vw),
+    var(--type-max)   /* ~18px */
+  ) !important;
+}
+@media (max-width: 576px) {
+  .fs-1 { 
+    /* título principal algo más pequeño y fluido */
+    font-size: clamp(1.8rem, 8vw, 2.8rem) !important;
   }
-  
-  /* fs-1: título extra-grande (h1 principal) */
-  .fs-1 {
-    font-size: clamp(
-      calc(var(--type-min) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio)), /* ~33.7px */
-      calc(var(--type-min) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio) + 4vw),
-      calc(var(--type-max) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio))      /* ~42.2px */
-    ) !important;
-  }
-  
-  /* fs-2: título grande (h2/h1) */
   .fs-2 {
-    font-size: clamp(
-      calc(var(--type-min) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio)), /* ~27px */
-      calc(var(--type-min) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio) + 3vw),
-      calc(var(--type-max) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio))  /* ~34px */
-    ) !important;
+    font-size: clamp(1.4rem, 7vw, 2.2rem) !important;
   }
-  
-  /* fs-3: encabezado medio (h3/h2) */
-  .fs-3 {
-    font-size: clamp(
-      calc(var(--type-min) * var(--scale-ratio) * var(--scale-ratio)),   /* ~21.9px */
-      calc(var(--type-min) * var(--scale-ratio) * var(--scale-ratio) + 2vw),
-      calc(var(--type-max) * var(--scale-ratio) * var(--scale-ratio))    /* ~28.1px */
-    ) !important;
-  }
-  
-  /* fs-4: pequeño encabezado (h5/h4) */
   .fs-4 {
-    font-size: clamp(
-      calc(var(--type-min) * var(--scale-ratio)),         /* ~17.5px */
-      calc(var(--type-min) * var(--scale-ratio) + 1.5vw),
-      calc(var(--type-max) * var(--scale-ratio))          /* ~22.5px */
-    ) !important;
+    font-size: clamp(1rem, 4vw, 1.2rem) !important;
   }
-  
-  /* fs-5: texto base (body, labels, párrafos) */
-  .fs-5 {
-    font-size: clamp(
-      var(--type-min),  /* ~14px */
-      calc(var(--type-min) * 0.8 + 1vw),
-      var(--type-max)   /* ~18px */
-    ) !important;
+
+  /* Inputs y botones un pelín más compactos */
+  .input-group {
+    padding: 0 0.75rem;
   }
-  @media (max-width: 576px) {
-    .fs-1 { 
-      /* título principal algo más pequeño y fluido */
-      font-size: clamp(1.8rem, 8vw, 2.8rem) !important;
-    }
-    .fs-2 {
-      font-size: clamp(1.4rem, 7vw, 2.2rem) !important;
-    }
-    .fs-4 {
-      font-size: clamp(1rem, 4vw, 1.2rem) !important;
-    }
-  
-    /* Inputs y botones un pelín más compactos */
-    .input-group {
-      padding: 0 0.75rem;
-    }
-    .input-group input {
-      padding: 0.8rem 0.5rem;
-    }
-    .login-btn, .google-btn {
-      font-size: 1rem !important;
-      padding: 0.6rem;
-    }
-    .google-logo {
-      width: 18px;
-      height: 18px;
-    }
+  .input-group input {
+    padding: 0.8rem 0.5rem;
   }
+  .login-btn, .google-btn {
+    font-size: 1rem !important;
+    padding: 0.6rem;
+  }
+  .google-logo {
+    width: 18px;
+    height: 18px;
+  }
+}
