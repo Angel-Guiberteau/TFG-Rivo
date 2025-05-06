@@ -1,8 +1,16 @@
 @extends('layout')
 
-@section('title', 'Home')
+@section('title', 'Rivo Finanzas')
 
 @section('content')
+
+    @push('styles')
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+        <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/home/home.css') }}">
+        
+    @endpush
 
     <main>
         <aside class="sidebar d-flex flex-column align-items-center justify-content-between">

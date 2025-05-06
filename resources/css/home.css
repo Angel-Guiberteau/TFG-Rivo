@@ -1,0 +1,64 @@
+body{
+  color: #fff;
+}
+main{
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  align-self: start; 
+  background-color: #1b1b1b;
+  color: #fff;
+  padding: 4rem 1rem;
+  width: 17vw;
+  height: 100vh;
+  border-right: 3px solid #fff;
+}
+#asideLogo{
+  width: 50px;
+}
+.balance-bg{
+  flex: 1;
+  background: linear-gradient(
+    to right,
+    #4A148C 35%,
+    #381366 71%,
+    #140526 100%
+  );
+}
+
+#actionButtons-container{
+  width: 60%;
+  box-shadow: 0px 0px 7px #00000055;
+  border-radius: 36px;
+  margin-bottom: -6rem;
+}
+
+#actionButtons-container button{
+  background-color: transparent;
+  border: none;
+}
+#actionButtons-container button span{
+  color: #1a1a1a;
+}
+.info-container{
+  box-shadow: 0px 0px 3px #00000055;
+  border-radius: 36px;
+  color: #1a1a1a;
+}
+img{
+  width: 75px;
+}
+.negative {
+  color: red;
+  font-weight: bold;
+}
+
+.positive {
+  color: green;
+  font-weight: bold;
+}
