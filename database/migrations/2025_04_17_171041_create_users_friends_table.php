@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('users_friends', function (Blueprint $table) {
             $table->unsignedInteger('id')->autoIncrement()->primary();
-            $table->unsignedInteger('sender_id');
-            $table->unsignedInteger('receiver_id');
+            $table->unsignedBigInteger('sender_id');
+            $table->unsignedBigInteger('receiver_id');
             $table->enum('status', ['P', 'A']);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         
             $table->unique(['sender_id', 'receiver_id']);
         
-            $table->foreign('sender_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('receiver_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade')->name('fk_sender_id');
+            $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade')->name('fk_receiver_id');
         });        
     }
 
