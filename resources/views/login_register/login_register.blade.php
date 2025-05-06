@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fondo Diagonal con Formulario</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-    <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
-</head>
-<body>
+
+    
+@section('content')
+
+    @push('styles')
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+        <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/login_register/login.css') }}">
+
+    @endpush
+
     <main class="container min-vh-100 d-flex align-items-center justify-content-center">
         <section class="row justify-content-center align-items-center py-3 gx-0 gx-lg-5">
             <article class="col-12 col-lg-6 row text-white mt-4 mt-lg-0">
@@ -18,7 +18,8 @@
                     Start saving, organize your income and expenses, and reach your goals with Rivo.
                 </p>
             </article>
-        
+            
+            
             <article class="row col-12 col-lg-6 mt-4 mt-lg-0">
                 <div class="login-container register-container mx-auto">
                     <h2 class="fw-bold fs-2">Iniciar sesión</h2>
@@ -91,6 +92,11 @@
             </article>
         </section>
     </main>
-    <script src="js/login.js"></script>
-</body>
-</html>
+
+    @push('scripts')
+        <script src="js/login.js"></script>
+    @endpush
+
+@endsection
+    
+
