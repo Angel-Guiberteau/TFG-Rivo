@@ -1,3 +1,6 @@
+@extends('layout')
+
+@section('title', 'Iniciar sesión')
 
     
 @section('content')
@@ -94,7 +97,7 @@
     </main>
 
     @push('scripts')
-        <script src="js/login.js"></script>
+        <script src="js/login_register/login.js"></script>
     @endpush
 
 @endsection
