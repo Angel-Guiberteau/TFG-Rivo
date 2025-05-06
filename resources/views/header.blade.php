@@ -5,15 +5,15 @@
 <title> @yield('title') </title>
 
 <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet"/>
-<link href="{{ asset('css/datatable/datatables.min.css') }}" rel="stylesheet"/>
+{{-- <link href="{{ asset('css/datatable/datatables.min.css') }}" rel="stylesheet"/> --}}
 
 @stack('styles')
 
 @include('projectCSS')
 
 <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/sweetalert/sweetalert.min.js') }}"></script>
-<script src="{{ asset('js/datatable/datatables.min.js') }}"></script>
+{{-- <script src="{{ asset('js/sweetalert/sweetalert.min.js') }}"></script>
+<script src="{{ asset('js/datatable/datatables.min.js') }}"></script> --}}
 
 @stack('scripts')
 
