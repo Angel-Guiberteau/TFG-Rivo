@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedInteger('sender_id');
             $table->unsignedInteger('receiver_id');
             $table->enum('status', ['P', 'A']);
-            $table->boolean('enabled')->default(true);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         

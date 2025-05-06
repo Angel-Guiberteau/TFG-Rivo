@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('no_programmed', function (Blueprint $table) {
             $table->unsignedInteger('id')->autoIncrement()->primary();
             $table->unsignedInteger('operation_id');
-            $table->boolean('enabled')->default(true);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->unsignedInteger('id')->autoIncrement()->primary();
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('categories_id');
-            $table->boolean('enabled')->default(true);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         
