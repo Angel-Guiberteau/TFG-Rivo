@@ -1,0 +1,147 @@
+body{
+  color: #fff;
+}
+main{
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  align-self: start; 
+  background-color: #1b1b1b;
+  color: #fff;
+  padding: 4rem 1rem;
+  width: 17vw;
+  height: 100vh;
+  border-right: 3px solid #fff;
+}
+#asideLogo{
+  width: 50px;
+}
+.balance-bg{
+  flex: 1;
+  background: linear-gradient(
+    to right,
+    #4A148C 35%,
+    #381366 71%,
+    #140526 100%
+  );
+}
+
+#actionButtons-container{
+  width: 60%;
+  box-shadow: 0px 0px 7px #00000055;
+  border-radius: 36px;
+  margin-bottom: -6rem;
+}
+
+#actionButtons-container button{
+  background-color: transparent;
+  border: none;
+}
+#actionButtons-container button span{
+  color: #1a1a1a;
+}
+.info-container{
+  box-shadow: 0px 0px 3px #00000055;
+  border-radius: 36px;
+  color: #1a1a1a;
+}
+img{
+  width: 75px;
+}
+.negative {
+  color: red;
+  font-weight: bold;
+}
+
+.positive {
+  color: green;
+  font-weight: bold;
+}
+
+.header {
+  background: linear-gradient(135deg, #4b00c8, #7c00ff);
+  color: white;
+  padding: 2rem;
+  border-bottom-left-radius: 20px;
+}
+
+.header h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.actions {
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  width: 90%;
+  max-width: 500px;
+  margin: -1.5rem auto 1rem auto;
+  position: relative;
+  top: 20px;
+}
+
+.actions button {
+  background: none;
+  border: none;
+  font-weight: bold;
+  color: #4b00c8;
+  cursor: pointer;
+  text-align: center;
+}
+
+.section {
+  background: white;
+  margin: 1rem auto;
+  padding: 1rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.progress-bar {
+  background-color: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 10px;
+  margin-top: 0.5rem;
+}
+
+.progress-bar-fill {
+  background-color: #6b00e5;
+  width: 32%;
+  height: 100%;
+
+}
+
+.expense-category {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+}
+
+.bar-container {
+  background-color: #eee;
+  border-radius: 10px;
+  height: 10px;
+  margin-top: 0.3rem;
+  overflow: hidden;
+}
+
+.bar-fill {
+  background-color: #6b00e5;
+  height: 100%;
+}
+
+.transactions {
+  margin-top: 1rem;
+}
