@@ -9,7 +9,7 @@
 
 @stack('styles')
 
-@include('../projectCSS')
+@include('admin.adminCSS')
 
 <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
 {{-- <script src="{{ asset('js/sweetalert/sweetalert.min.js') }}"></script>
@@ -17,4 +17,4 @@
 
 @stack('scripts')
 
-@include('../projectJS')
+@include('admin.adminJS')
