@@ -10,3 +10,7 @@ Route::get('/home', function () {
     return view('home.home');
 })->name('home');
 
+//temporal
+Route::get('/admin', function () {
+    return view('admin.home.home');
+})->name('admin');

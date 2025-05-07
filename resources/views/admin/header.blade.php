@@ -1,0 +1,20 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="{{ asset('img/favicon.ico') }}">
+
+<title> @yield('title') </title>
+
+<link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet"/>
+{{-- <link href="{{ asset('css/datatable/datatables.min.css') }}" rel="stylesheet"/> --}}
+
+@stack('styles')
+
+@include('../projectCSS')
+
+<script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
+{{-- <script src="{{ asset('js/sweetalert/sweetalert.min.js') }}"></script>
+<script src="{{ asset('js/datatable/datatables.min.js') }}"></script> --}}
+
+@stack('scripts')
+
+@include('../projectJS')
