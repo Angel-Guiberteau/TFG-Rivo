@@ -288,16 +288,15 @@ a:hover {
 
 .alert-danger {
   background-color: rgba(217, 214, 219, 0.091);
+  width: 90%;
   border: 1px solid #ffffff;
   border-left: 4px solid #ffffff;
   color: #ffffff;
   padding: 0.75rem 1rem;
   border-radius: 10px;
   margin-bottom: 1rem;
-  font-size: 0.9rem;
+  margin-left: 10px;
+  font-weight: 600;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
 }
