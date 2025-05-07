@@ -62,10 +62,10 @@
         
                         <button type="submit" class="login-btn w-100 fs-4 fw-bold">Iniciar sesión</button>
                         <hr class="my-4" />
-                        <button class="google-btn w-100 fs-4 fw-bold">
+                        <a href="{{ route('login.google') }}" class="google-btn w-100 fs-4 fw-bold">
                             <img class="google-logo" src="{{ asset('img/googleLogo.png') }}" alt="Google logo">
                             <span>Login with Google</span>
-                        </button>
+                        </a>
                     </form>
                     <form id="register-form" class="fade-toggle" action="/register" aria-hidden="true" method="POST">
                         @csrf
@@ -95,10 +95,10 @@
         
                         <button type="submit" class="login-btn w-100 fs-4 fw-bold">Registrarse</button>
                         <hr class="my-4" />
-                        <button class="google-btn w-100 fs-4 fw-bold">
+                        <a href="{{ route('login.google') }}" class="google-btn w-100 fs-4 fw-bold">
                             <img class="google-logo" src="{{ asset('img/googleLogo.png') }}" alt="Google logo">
                             <span>Registrarse con Google</span>
-                        </button>
+                        </a>
                     </form>
                 </div>
             </article>
