@@ -256,3 +256,48 @@ a:hover {
   0%, 100% { opacity: 0; }
   50% { opacity: 1; }
 }
+
+.password-strength-wrapper {
+  margin-top: 0.5rem;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease, max-height 0.4s ease;
+}
+
+.password-strength-wrapper.active {
+  opacity: 1;
+  max-height: 40px;
+}
+
+.password-strength-bar {
+  width: 0%;
+  height: 6px;
+  border-radius: 4px;
+  background-color: #ccc;
+  transition: width 0.5s ease, background-color 0.4s ease;
+}
+
+.strength-text {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  color: white;
+  font-weight: 500;
+  transition: color 0.4s ease;
+}
+
+.alert-danger {
+  background-color: rgba(217, 214, 219, 0.091);
+  border: 1px solid #ffffff;
+  border-left: 4px solid #ffffff;
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}

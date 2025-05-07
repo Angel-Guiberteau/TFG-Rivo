@@ -88,6 +88,11 @@
                             <i class="fas fa-eye"></i>
                             <i class="fas fa-eye-slash d-none"></i>
                         </div>
+
+                        <div class="password-strength-wrapper mb-2 d-flex flex-row justify-content-between align-items-center">
+                            <div class="password-strength-bar" id="strengthBar"></div>
+                            <label class="strength-text" id="strengthText"></label>
+                        </div>
                         
                         <div class="register mb-4">
                             <p  class="fs-6">Ya tienes cuenta? <a href="#">Inicia sesión</a></p>
