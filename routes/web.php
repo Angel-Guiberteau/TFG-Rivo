@@ -12,5 +12,5 @@ Route::get('/home', function () {
 
 //temporal
 Route::get('/admin', function () {
-    return view('admin.home.home');
+    return view('admin.mockups.homeAdmin');
 })->name('admin');
