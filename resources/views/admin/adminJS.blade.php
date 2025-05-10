@@ -1,3 +1,1 @@
-@section('adminJS')
-    
-@endsection
+<script src="{{ asset('js/datatable/dataTable.js') }}"></script>

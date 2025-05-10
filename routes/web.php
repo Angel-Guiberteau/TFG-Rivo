@@ -10,7 +10,20 @@ Route::get('/home', function () {
     return view('home.home');
 })->name('home');
 
-//temporal
-Route::get('/admin', function () {
-    return view('admin.mockups.homeAdmin');
-})->name('admin');
+Route::group(['prefix' => 'mockups'], function () {
+    Route::get('/home', function () {
+        return view('admin.mockups.adminIni');
+    })->name('adminIni');
+    
+    Route::get('/users', function () {
+        return view('admin.mockups.adminUsers');
+    })->name('adminUsers');
+
+    Route::get('/sentences', function () {
+        return view('admin.mockups.adminSentences');
+    })->name('adminSentences');
+
+    Route::get('/categories', function () {
+        return view('admin.mockups.adminCategories');
+    })->name('adminCategories');
+});

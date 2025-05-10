@@ -17,3 +17,14 @@ nav{
 .nav-item.active a{
     color: #ffff;
 }
+
+.container-custom{
+    max-width: 80%;
+    margin: 0 auto;
+    background-color: #BFBFBF;
+}
+
+.table-custom > thead{
+    background-color: #1A1A1A;
+    color: white;
+}   
