@@ -6,7 +6,7 @@
 
 <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet"/>
 <link href="{{ asset('css/datatable/datatables.min.css') }}" rel="stylesheet"/>
-<link href="{{ asset('css/admin/menu.css') }}" rel="stylesheet"/>
+<link href="{{ asset('css/admin/commonAdmin.css') }}" rel="stylesheet"/>
 
 @stack('styles')
 

@@ -16,6 +16,19 @@ main{
   padding: 0px;
 }
 
+.container-custom{
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.bg-light {
+    background-color: #ffffff !important;
+}
+
+.nav-link.active {
+    background-color: #D9D9D9 !important;
+}
+
 /* COLOR */
 .corporativeBlue {
     background-color: #4A148C;

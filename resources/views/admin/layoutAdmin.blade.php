@@ -9,4 +9,5 @@
 
         {{-- @include('footer') --}}
     </body>
+    <script src="js/admin/datatableComponent.js"></script>
 </html>
