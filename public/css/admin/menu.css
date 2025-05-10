@@ -1,0 +1,30 @@
+
+body {
+    background-color: #D9D9D9;
+}
+
+main{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
+#logoRivo{
+  height: 30px;
+}
+
+.noPadding{
+  padding: 0px;
+}
+
+/* COLOR */
+.corporativeBlue {
+    background-color: #4A148C;
+    color: white;
+    border-color: #3a106c;
+}
+
+.below-navbar {
+    background-color: #FFFFFF;
+    color: #1E1E1E;
+}
+
