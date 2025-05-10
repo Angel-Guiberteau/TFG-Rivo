@@ -31,7 +31,7 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/', function () {
-        return view('admin.home');
-    })->name('admin.index');
+        return view('admin.home.home');
+    })->name('home');
     
 });
