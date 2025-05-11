@@ -22,3 +22,16 @@ Route::get('/home', function () {
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
+
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
+Route::group(['prefix' => 'admin'], function () {
+
+    Route::get('/', function () {
+        return view('admin.home');
+    })->name('admin.index');
+    
+});
