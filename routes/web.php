@@ -33,5 +33,23 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', function () {
         return view('admin.home.home');
     })->name('home');
+
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/', function () {
+            return view('admin.users.users');
+        })->name('users');
+    });
+
+    Route::group(['prefix' => 'sentences'], function () {
+        Route::get('/', function () {
+            return view('admin.sentences.sentences');
+        })->name('sentences');
+    });
+
+    Route::group(['prefix' => 'categories'], function () {
+        Route::get('/', function () {
+            return view('admin.categories.categories');
+        })->name('categories');
+    });
     
 });
