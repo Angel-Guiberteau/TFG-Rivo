@@ -48,6 +48,11 @@
                 <a class="w-100 d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-cog"></i> Ajustes
                 </a>
+                <form action="/logout" method="post">
+                    @csrf
+                    @method('POST')
+                    <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+                </form>
             </nav>
         </aside>
         <section class="w-100">

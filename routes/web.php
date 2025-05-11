@@ -27,8 +27,24 @@ Route::get('/home', function () {
 | Google Login/Register Routes
 |--------------------------------------------------------------------------
 */
-Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google');
-Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
+
+Route::get('/auth/google', function () {
+    return Socialite::driver('google')->redirect();
+})->name('google.login');
+    
+Route::get('/auth/google/callback', function () {
+
+    $controller = new GoogleController();
+    return $controller->handleGoogleCallback();
+
+});
+
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +55,6 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/', function () {
         return view('admin.home.home');
-    })->name('home');
+    })->name('homeAdmin');
     
 });

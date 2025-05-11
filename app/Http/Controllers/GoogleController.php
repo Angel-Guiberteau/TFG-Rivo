@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Hamcrest\Core\IsNull;
-use Illuminate\Container\Attributes\Auth;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
 
@@ -18,21 +16,24 @@ class GoogleController extends Controller
 
     public function handleGoogleCallback()
     {
-        $googleUser = Socialite::driver('google')->user();
-        // dd($googleUser);
-        $findUser = User::findGoogleUser($googleUser->getId());
-
-        if(!is_null($findUser)){
-            Auth::login($findUser);
-        }else{
-            User::create([
-                'name' => $googleUser->getName(),
-                'email' => $googleUser->getEmail(),
-                'password' => bcrypt(Str::random(8)),
-                'google_id' => $googleUser->getId(),
-            ]);
+        try{
+            $googleUser = Socialite::driver('google')->user();
+            $user = User::where('email', $googleUser->getEmail())->first();
+            if(!$user)
+            {
+                $user = User::create([
+                    'name' => $googleUser->getName(),
+                    'email' => $googleUser->getEmail(),
+                    'google_id' => $googleUser->getId(),
+                    'password' => bcrypt(Str::random(30)),
+                    'rol_id' => 2,
+                ]);
+            }
+            Auth::login($user);
+            return redirect()->route('home');
         }
-
-        return redirect()->route('home');
+        catch (\Exception $e) {
+            return redirect('/');
+        }
     }
 }
