@@ -18,4 +18,11 @@
             </li>
         </ul>
     </div>
+    <div>
+        <form action="/logout" method="post">
+            @csrf
+            @method('POST')
+            <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+        </form>
+    </div>
 </nav>

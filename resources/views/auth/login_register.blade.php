@@ -62,7 +62,7 @@
         
                         <button type="submit" class="login-btn w-100 fs-4 fw-bold">Iniciar sesión</button>
                         <hr class="my-4" />
-                        <a href="{{ route('login.google') }}" class="google-btn w-100 fs-4 fw-bold">
+                        <a href="{{ route('google.login') }}" class="google-btn w-100 fs-4 fw-bold">
                             <img class="google-logo" src="{{ asset('img/googleLogo.png') }}" alt="Google logo">
                             <span>Login with Google</span>
                         </a>
@@ -100,7 +100,7 @@
         
                         <button type="submit" class="login-btn w-100 fs-4 fw-bold">Registrarse</button>
                         <hr class="my-4" />
-                        <a href="{{ route('login.google') }}" class="google-btn w-100 fs-4 fw-bold">
+                        <a href="{{ route('google.login') }}" class="google-btn w-100 fs-4 fw-bold">
                             <img class="google-logo" src="{{ asset('img/googleLogo.png') }}" alt="Google logo">
                             <span>Registrarse con Google</span>
                         </a>
