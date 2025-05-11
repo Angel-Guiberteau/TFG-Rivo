@@ -2,22 +2,46 @@ body{
   color: #fff;
 }
 main{
-  display: flex;
   width: 100%;
   position: relative;
 }
-
-.sidebar {
-  position: sticky;
-  top: 0;
-  align-self: start; 
-  background-color: #1b1b1b;
-  color: #fff;
-  padding: 4rem 1rem;
-  width: 17vw;
-  height: 100vh;
-  border-right: 3px solid #fff;
+aside {
+  display: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden;
+  visibility: hidden;
+  position: absolute;
 }
+
+@media (min-width: 992px) {
+  aside {
+    display: flex !important;
+    visibility: visible;
+    width: 16vw !important;
+    height: 100vh !important;
+    position: static;
+    overflow: visible;
+  }
+
+  main {
+    display: flex;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 0;
+    align-self: start; 
+    background-color: #1b1b1b;
+    color: #fff;
+    padding: 3rem 1rem;
+    width: 16vw;
+    height: 100vh;
+    border-right: 3px solid #fff;
+  }
+}
+
 #asideLogo{
   width: 50px;
 }
@@ -32,12 +56,12 @@ main{
 }
 
 #actionButtons-container{
-  width: 60%;
+  display: none !important;
+  width: 100%;
   box-shadow: 0px 0px 7px #00000055;
   border-radius: 36px;
   margin-bottom: -6rem;
 }
-
 #actionButtons-container button{
   background-color: transparent;
   border: none;
@@ -45,13 +69,25 @@ main{
 #actionButtons-container button span{
   color: #1a1a1a;
 }
+
+@media (min-width: 992px) {  
+  #actionButtons-container{
+    display: flex !important;
+    width: 60%;
+  }
+}
 .info-container{
   box-shadow: 0px 0px 3px #00000055;
   border-radius: 36px;
   color: #1a1a1a;
 }
-img{
-  width: 75px;
+.info-container img{
+  width: 50px;
+}
+@media (min-width: 992px) {  
+  .info-container img{
+    width: 75px;
+  }
 }
 .negative {
   color: red;
@@ -144,4 +180,42 @@ img{
 
 .transactions {
   margin-top: 1rem;
+}
+.mobile-nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px #00000050;
+  padding: .7rem 0;
+}
+.mobile-nav button span{
+  color: #1a1a1a;
+}
+@media (min-width: 992px) {
+  .mobile-nav{
+    display: none;
+  }
+}
+.mobile-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem;
+}
+.mobile-header img{
+  width: 50px;
+}
+@media (min-width: 992px) {
+  .mobile-header{
+    display: none;
+  }
+}
+.balance-info{
+  padding: 1rem 3rem ;
 }

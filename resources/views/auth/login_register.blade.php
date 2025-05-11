@@ -8,11 +8,11 @@
     @push('styles')
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-        <link rel="stylesheet" href="{{ asset('css/common.css') }}">
         <link rel="stylesheet" href="{{ asset('css/login_register/login.css') }}">
 
     @endpush
-
+    
+      
     <main class="container min-vh-100 d-flex align-items-center justify-content-center">
         <section class="row justify-content-center align-items-center py-3 gx-0 gx-lg-5">
             <article class="col-12 col-lg-6 row text-white mt-4 mt-lg-0">
@@ -62,7 +62,7 @@
         
                         <button type="submit" class="login-btn w-100 fs-4 fw-bold">Iniciar sesión</button>
                         <hr class="my-4" />
-                        <a href="{{ route('login.google') }}" class="google-btn w-100 fs-4 fw-bold">
+                        <a href="{{ route('google.login') }}" class="google-btn w-100 fs-4 fw-bold">
                             <img class="google-logo" src="{{ asset('img/googleLogo.png') }}" alt="Google logo">
                             <span>Login with Google</span>
                         </a>
@@ -100,7 +100,7 @@
         
                         <button type="submit" class="login-btn w-100 fs-4 fw-bold">Registrarse</button>
                         <hr class="my-4" />
-                        <a href="{{ route('login.google') }}" class="google-btn w-100 fs-4 fw-bold">
+                        <a href="{{ route('google.login') }}" class="google-btn w-100 fs-4 fw-bold">
                             <img class="google-logo" src="{{ asset('img/googleLogo.png') }}" alt="Google logo">
                             <span>Registrarse con Google</span>
                         </a>
@@ -113,7 +113,7 @@
     @push('scripts')
         <script src="js/login_register/login.js"></script>
     @endpush
-
+   
 @endsection
     
 

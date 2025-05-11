@@ -8,30 +8,55 @@ use Illuminate\Support\Str;
 
 use App\Models\User;
 
-// [ ------------- GENERAL ROUTES -------------]
-
+/*
+|--------------------------------------------------------------------------
+| General Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/', function () {
     return view('auth.login_register');
 })->name('/');
 
 Route::get('/home', function () {
     return view('home.home');
-})->name('home');
+})->middleware(['auth', 'role:user'])->name('home');
 
-// [ ------------- GOOGLE LOGIN -------------]
 
-Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google');
-Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
+/*
+|--------------------------------------------------------------------------
+| Google Login/Register Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/auth/google', function () {
+    return Socialite::driver('google')->redirect();
+})->name('google.login');
+    
+Route::get('/auth/google/callback', function () {
+
+    $controller = new GoogleController();
+    return $controller->handleGoogleCallback();
+
+});
+
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/');
+});
 
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
 
     Route::get('/', function () {
         return view('admin.home.home');
+    })->name('homeAdmin');
+    
     })->name('home');
 
     Route::group(['prefix' => 'users'], function () {
