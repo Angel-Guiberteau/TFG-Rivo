@@ -3,11 +3,6 @@ body {
     background-color: #D9D9D9;
 }
 
-main{
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-
-
 #logoRivo{
   height: 30px;
 }
@@ -21,6 +16,10 @@ main{
     margin: 0 auto;
 }
 
+.bg-custom {
+    background-color: #1A1A1A !important;
+}
+
 .bg-light {
     background-color: #ffffff !important;
 }
@@ -30,10 +29,10 @@ main{
 }
 
 /* COLOR */
-.corporativeBlue {
-    background-color: #4A148C;
+.corporativeColor {
+    background-color: #1A1A1A;
     color: white;
-    border-color: #3a106c;
+    border-color: #1A1A1A;
 }
 
 .below-navbar {

@@ -2,7 +2,7 @@
     // array de rutas
 @endphp
 <nav class="navbar navbar-expand-lg below-navbar noPadding ps-2">
-    <div class="collapse navbar-collapse marginSubMenu" id="navbarNavDropdown">
+    <div class="collapse navbar-collapse">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() === '/admin' ? 'active' : '' }}" href="{{ route('/') }}">Inicio</a>
