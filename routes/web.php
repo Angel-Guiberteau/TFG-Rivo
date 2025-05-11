@@ -8,8 +8,11 @@ use Illuminate\Support\Str;
 
 use App\Models\User;
 
-// [ ------------- GENERAL ROUTES -------------]
-
+/*
+|--------------------------------------------------------------------------
+| General Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/', function () {
     return view('auth.login_register');
 })->name('/');
@@ -18,8 +21,12 @@ Route::get('/home', function () {
     return view('home.home');
 })->name('home');
 
-// [ ------------- GOOGLE LOGIN -------------]
 
+/*
+|--------------------------------------------------------------------------
+| Google Login/Register Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
 
