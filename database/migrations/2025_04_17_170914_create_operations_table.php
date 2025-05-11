@@ -18,7 +18,6 @@ return new class extends Migration
             $table->date('action_date');
             $table->unsignedInteger('account_id');
             $table->unsignedInteger('categories_id');
-            $table->boolean('enabled')->default(true);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         

@@ -14,11 +14,21 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('last_name', 100)->unique()->nullable();
+            $table->date('birth_date')->nullable();
+            $table->unsignedTinyInteger('rol_id')->default(2);
+            $table->string('google_id')->unique()->nullable();
+            $table->string('username', 75)->unique()->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('enabled')->default(true);
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
+            
+            $table->foreign('rol_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

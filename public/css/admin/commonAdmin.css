@@ -1,0 +1,42 @@
+
+body {
+    background-color: #D9D9D9;
+}
+
+#logoRivo{
+  height: 30px;
+}
+
+.noPadding{
+  padding: 0px;
+}
+
+.container-custom{
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.bg-custom {
+    background-color: #1A1A1A !important;
+}
+
+.bg-light {
+    background-color: #ffffff !important;
+}
+
+.nav-link.active {
+    background-color: #D9D9D9 !important;
+}
+
+/* COLOR */
+.corporativeColor {
+    background-color: #1A1A1A;
+    color: white;
+    border-color: #1A1A1A;
+}
+
+.below-navbar {
+    background-color: #FFFFFF;
+    color: #1E1E1E;
+}
+

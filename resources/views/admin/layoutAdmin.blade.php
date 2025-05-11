@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        @include('header')
+        @include('admin.headerAdmin')
     </head>
     <body>
         
@@ -9,4 +9,5 @@
 
         {{-- @include('footer') --}}
     </body>
+    <script src="js/admin/datatableComponent.js"></script>
 </html>
