@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'google_id',
+        'role_id',
     ];
 
     /**
@@ -47,8 +48,10 @@ class User extends Authenticatable
         ];
     }
 
-    public static function findGoogleUser($googleId)
+    public function role()
     {
-        return User::where('google_id', $googleId)->first();
+        return $this->belongsTo(Role::class, 'rol_id');
     }
+
+
 }

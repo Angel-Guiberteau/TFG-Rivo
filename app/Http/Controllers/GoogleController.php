@@ -30,9 +30,15 @@ class GoogleController extends Controller
                 ]);
             }
             Auth::login($user);
-            return redirect()->route('home');
-        }
-        catch (\Exception $e) {
+            $user->load('role');
+
+            return match ($user->role->name) {
+                'admin' => redirect()->route('homeAdmin'),
+                'user' => redirect()->route('home'),
+                default => redirect('/'),
+            };
+
+        } catch (\Exception $e) {
             return redirect('/');
         }
     }

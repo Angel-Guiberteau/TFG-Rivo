@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return view('home.home');
-})->name('home');
+})->middleware(['auth', 'role:user'])->name('home');
 
 
 /*
@@ -51,7 +51,7 @@ Route::post('/logout', function () {
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
 
     Route::get('/', function () {
         return view('admin.home.home');
