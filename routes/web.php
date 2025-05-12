@@ -15,7 +15,7 @@ use App\Models\User;
 */
 Route::get('/', function () {
     return view('auth.login_register');
-})->name('/');
+})->name('/login');
 
 Route::get('/home', function () {
     return view('home.home');

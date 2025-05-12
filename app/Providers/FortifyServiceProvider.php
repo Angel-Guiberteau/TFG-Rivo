@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Contracts\LoginResponse;
+use App\Actions\Auth\CustomLoginResponse;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -20,7 +25,21 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->instance(LoginResponse::class, new class implements LoginResponse {
+            public function toResponse($request)
+            {
+                dd('hola');
+                $user = Auth::user();
+    
+                $role = $user->role->name ?? 'user';
+    
+                return redirect()->intended(match ($role) {
+                    'admin' => route('homeAdmin'),
+                    'user' => route('home'),
+                    default => '/',
+                });
+            }
+        });
     }
 
     /**
@@ -33,6 +52,17 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
+        Fortify::authenticateUsing(function (Request $request) {
+    
+            $user = User::where('email', $request->email)->first();
+        
+            if ($user && Hash::check($request->password, $user->password)) {
+                return $user;
+            }
+        
+            return null;
+        });
+        
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 
@@ -50,4 +80,5 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.login_register');
         });
     }
+    
 }
