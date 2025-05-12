@@ -20,7 +20,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 
 Route::get('/', function () {
     return view('auth.login_register');
-})->name('login');
+});
 
 Route::get('/home', function () {
     return view('home.home');
