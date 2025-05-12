@@ -1,21 +1,26 @@
 <?php
 
-use App\Http\Controllers\GoogleController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
-use App\Models\User;
+use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
 | General Routes
 |--------------------------------------------------------------------------
 */
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware('auth')
+->name('dashboard');
+
 Route::get('/', function () {
     return view('auth.login_register');
-})->name('/');
+});
 
 Route::get('/home', function () {
     return view('home.home');
@@ -52,7 +57,7 @@ Route::post('/logout', function () {
 |--------------------------------------------------------------------------
 */
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
-
+    
     Route::get('/', function () {
         return view('admin.home.home');
     })->name('homeAdmin');

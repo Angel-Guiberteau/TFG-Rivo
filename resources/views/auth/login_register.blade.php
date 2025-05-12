@@ -113,7 +113,6 @@
     @push('scripts')
         <script src="js/login_register/login.js"></script>
     @endpush
-   
 @endsection
     
 
