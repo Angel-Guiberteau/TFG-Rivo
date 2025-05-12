@@ -72,9 +72,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::get('/', function () {
             return view('admin.sentences.sentences');
         })->name('sentences');
-        Route::get('/addSentence', function () {
-            return view('admin.sentences.sentences');
-        })->name('addSentences');
     });
 
     Route::group(['prefix' => 'categories'], function () {
