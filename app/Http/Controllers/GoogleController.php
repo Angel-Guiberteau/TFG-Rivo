@@ -19,8 +19,7 @@ class GoogleController extends Controller
         try{
             $googleUser = Socialite::driver('google')->user();
             $user = User::where('email', $googleUser->getEmail())->first();
-            if(!$user)
-            {
+            if (!$user) {
                 $user = User::create([
                     'name' => $googleUser->getName(),
                     'email' => $googleUser->getEmail(),
@@ -28,10 +27,11 @@ class GoogleController extends Controller
                     'password' => bcrypt(Str::random(30)),
                     'rol_id' => 2,
                 ]);
+            
+                $user = $user->fresh();
             }
-            Auth::login($user);
+            Auth::login($user, remember: true);
             $user->load('role');
-
             return match ($user->role->name) {
                 'admin' => redirect()->route('homeAdmin'),
                 'user' => redirect()->route('home'),
@@ -39,6 +39,7 @@ class GoogleController extends Controller
             };
 
         } catch (\Exception $e) {
+            
             return redirect('/');
         }
     }
