@@ -1,1 +1,1 @@
-<link href="{{ asset('css/admin/common.css') }}" rel="stylesheet"/>
+<link href="{{ asset('css/admin/commonAdmin.css') }}" rel="stylesheet"/>

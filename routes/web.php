@@ -51,6 +51,8 @@ Route::post('/logout', function () {
     return redirect('/');
 });
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -72,6 +74,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::get('/', function () {
             return view('admin.sentences.sentences');
         })->name('sentences');
+        Route::get('/mockups', function () {
+            return view('admin.mockups.adminSentences');
+        })->name('sentenceMockups');
     });
 
     Route::group(['prefix' => 'categories'], function () {

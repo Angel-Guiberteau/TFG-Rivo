@@ -5,16 +5,16 @@
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() === '/admin' ? 'active' : '' }}" href="{{ route('homeAdmin') }}">Inicio</a>
+                <a class="nav-link {{ Route::currentRouteName() === 'homeAdmin' ? 'active' : '' }}" href="{{ route('homeAdmin') }}">Inicio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() === '/admin/users' ? 'active' : '' }}" href="{{ route('users') }}">Usuarios</a>
+                <a class="nav-link {{ Route::currentRouteName() === 'users' ? 'active' : '' }}" href="{{ route('users') }}">Usuarios</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() === '/admin/categories' ? 'active' : '' }}" href="{{ route('categories') }}">Categorias</a>
+                <a class="nav-link {{ Route::currentRouteName() === 'categories' ? 'active' : '' }}" href="{{ route('categories') }}">Categorias</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() === '/admin/sentences' ? 'active' : '' }}" href="{{ route('sentences') }}">Frases</a>
+                <a class="nav-link {{ Route::currentRouteName() === 'sentences' ? 'active' : '' }}" href="{{ route('sentences') }}">Frases</a>
             </li>
         </ul>
     </div>
