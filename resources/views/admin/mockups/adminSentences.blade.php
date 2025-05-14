@@ -10,7 +10,7 @@
     <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/datatable/datatables.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/admin/commonAdmin.css') }}" rel="stylesheet"/>
-    <link rel="stylesheet" href="{{ asset('css/admin/modals/modal.css') }}">
+    <link href="{{ asset('css/admin/modals/modal.css') }}" rel="stylesheet">
 
     @stack('styles')
 
@@ -111,8 +111,8 @@
                 </div>
             </article>
         </section>
-        @include('admin.components.modals.addSentence')
-        @include('admin.components.modals.editSentence')
+        @include('admin.mockups.modals.addSentence')
+        @include('admin.mockups.modals.editSentence')
     </main>
     <footer>
 

@@ -6,8 +6,7 @@
                 <button type="button" class="btn-close" style="filter: invert(1);" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                {{-- <form id="form-addSentence" class="row g-3 needs-validation" action=" {{ route('addSentences') }} " method="post" accept-charset="UTF-8" enctype="multipart/form-data" novalidate> --}}
-                <form id="form-addSentence" class="row g-3 needs-validation" method="post" accept-charset="UTF-8" enctype="multipart/form-data" novalidate>
+                <form id="form-addSentence" class="row g-3 needs-validation" action=" {{ route('addSentence') }} " method="post" accept-charset="UTF-8" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="col-12">
                         <label class="form-label" for="name">Frase <span class="modal_required">*</span></label>

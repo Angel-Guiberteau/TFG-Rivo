@@ -1,11 +1,16 @@
 <?php
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\DashboardController;
+
+use App\Http\Controllers\SentenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,10 +76,26 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     });
 
     Route::group(['prefix' => 'sentences'], function () {
-        Route::get('/', function () {
-            return view('admin.sentences.sentences');
+        Route::get('/', function (): View {
+            return SentenceController::listSentences();
         })->name('sentences');
-        Route::get('/mockups', function () {
+
+        Route::post('/add', function (): RedirectResponse {
+            return SentenceController::addSentence(request()->input('name'));
+        })->name('addSentence');
+
+        Route::put('/edit', function (): RedirectResponse {
+            $data = [
+                'id' => request()->input('id'),
+                'text' => request()->input('text')
+            ];
+            return SentenceController::editSentence($data);
+        })->name('editSentence');
+        
+        Route::get('/deleteSentence/{id}', [SentenceController::class, 'deleteSentence'])
+        ->name('deleteSentence');
+
+        Route::get('/mockups', function (): View {
             return view('admin.mockups.adminSentences');
         })->name('sentenceMockups');
     });

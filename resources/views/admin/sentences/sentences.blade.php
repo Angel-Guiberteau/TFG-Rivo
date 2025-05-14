@@ -24,34 +24,22 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($sentences as $sentence)
                             <tr>
-                                <td>1</td>
-                                <td>Start saving, organize your income and expenses, and reach your goals with Rivo.</td>
+                                <td>{{ $sentence->id }}</td>
+                                <td>{{ $sentence->text }}</td>
                                 <td>
                                     <button class="btn btn-primary btn-sm"
-                                            data-id="1"
-                                            data-name="Start saving, organize your income and expenses, and reach your goals with Rivo."
+                                            data-id="{{ $sentence->id }}"
+                                            data-name="{{ $sentence->text }}"
                                             data-bs-toggle="modal"
                                             data-bs-target="#editSentence">
                                         Editar
                                     </button>
-                                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                                    <button class="btn btn-danger btn-sm" id="{{ $sentence->id }}" onclick="deleteSentence({{ $sentence->id }})">Eliminar</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Start saving, organize your income and expenses, and reach your goals with Rivo.</td>
-                                <td>
-                                    <button class="btn btn-primary btn-sm"
-                                            data-id="2"
-                                            data-name="Start saving, organize your income and expenses, and reach your goals with Rivo."
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#editSentence">
-                                        Editar
-                                    </button>
-                                    <button class="btn btn-danger btn-sm">Eliminar</button>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
