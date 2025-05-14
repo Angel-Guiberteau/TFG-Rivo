@@ -64,7 +64,7 @@
                         <hr class="my-4" />
                         <a href="{{ route('google.login') }}" class="google-btn w-100 fs-4 fw-bold">
                             <img class="google-logo" src="{{ asset('img/googleLogo.png') }}" alt="Google logo">
-                            <span>Login with Google</span>
+                            <span>Iniciar sesión con Google</span>
                         </a>
                     </form>
                     <form id="register-form" class="fade-toggle" action="/register" aria-hidden="true" method="POST">
@@ -74,10 +74,46 @@
                             <i class="fas fa-user"></i>
                             <input type="email" id="email" name="email" placeholder="Correo electrónico"/>
                         </div>
+                        <div class="fs-6 d-none">
+                            <p class="fw-bold mb-1">Requisito obligatorio:</p>
+                            <ul>
+                                <li>Mínimo 8 caracteres</li>
+                            </ul>
+                            <p class="fw-bold mb-1">Más seguridad:</p>
+                            <ul>
+                                <li>Contenga mayúsculas y minúsculas</li>
+                                <li>Numeros</li>
+                                <li>Caracteres especiales</li>
+                            </ul>
+                        </div>
                         <label for="password">Contraseña</label>
                         <div class="input-group mb-4">
                             <i class="fas fa-lock"></i>
                             <input type="password" id="password" name="password" placeholder="Contraseña" />
+                            <i
+                                id="passCheck"
+                                class="fas fa-question-circle"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="bottom"        
+                                data-bs-offset="-10,8"                  
+                                data-bs-html="true"
+                                data-bs-custom-class="tooltip-custom"   
+                                title='
+                                    <div class="fs-6 text-start w-100">
+                                        <p class="fw-bold mb-1">Requisito obligatorio:</p>
+                                        <ul class="mb-2">
+                                            <li>Mínimo 8 caracteres</li>
+                                        </ul>
+                                        <p class="fw-bold mb-1">Más seguridad:</p>
+                                        <ul class="text-start mb-0">
+                                            <li>Contenga mayúsculas y minúsculas</li>
+                                            <li>Números</li>
+                                            <li>Caracteres especiales</li>
+                                        </ul>
+                                    </div>
+                                '
+                                style="cursor: pointer;"
+                                ></i>
                             <i class="fas fa-eye"></i>
                             <i class="fas fa-eye-slash d-none"></i>
                         </div>
@@ -111,7 +147,16 @@
     </main>
 
     @push('scripts')
-        <script src="js/login_register/login.js"></script>
+        <script src="{{ asset('js/login_register/login.js') }}"></script>
+        <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              document
+                .querySelectorAll('[data-bs-toggle="tooltip"]')
+                .forEach(el => new bootstrap.Tooltip(el));
+            });
+          </script>
     @endpush
 @endsection
     

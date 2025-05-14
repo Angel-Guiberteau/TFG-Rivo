@@ -1,0 +1,7 @@
+textarea{
+    height: 8rem;
+    resize: none;
+}
+.modal_required{
+    color: red;
+}
