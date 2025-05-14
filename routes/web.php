@@ -21,7 +21,7 @@ use App\Http\Controllers\SentenceController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware('auth')
-->name('dashboard');
+    ->name('dashboard');
 
 Route::get('/', function () {
     return view('auth.login_register');
@@ -30,6 +30,10 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('home.home');
 })->middleware(['auth', 'role:user'])->name('home');
+
+Route::get('/initialSetup', function () {
+    return view('home.home');
+})->middleware(['auth', 'role:user'])->name('initialSetup');
 
 
 /*
