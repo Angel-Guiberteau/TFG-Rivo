@@ -9,5 +9,5 @@
 
         {{-- @include('footer') --}}
     </body>
-    <script src="js/admin/datatableComponent.js"></script>
+    <script src="{{ asset('js/admin/datatableComponent.js') }}"></script>
 </html>
