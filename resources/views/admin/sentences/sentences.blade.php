@@ -36,6 +36,7 @@
                                             data-bs-target="#editSentence">
                                         Editar
                                     </button>
+                                    <button class="btn btn-info btn-sm" onclick=" preViewSentence({{ json_encode($sentence->text) }})">Ver</button>
                                     <button class="btn btn-danger btn-sm" id="{{ $sentence->id }}" onclick="deleteSentence({{ $sentence->id }})">Eliminar</button>
                                 </td>
                             </tr>
