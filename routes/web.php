@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\ValidationEnum;
+use App\Validations\SentencesValidator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -81,7 +83,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('sentences');
 
         Route::post('/add', function (): RedirectResponse {
-            return SentenceController::addSentence(request()->input('name'));
+            $data = [
+                'text' => request()->input('name')
+            ];
+            $validate = SentencesValidator::validate($data, ValidationEnum::ADD->value);
+            return SentenceController::addSentence($validate);
         })->name('addSentence');
 
         Route::put('/edit', function (): RedirectResponse {
@@ -89,17 +95,26 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
                 'id' => request()->input('id'),
                 'text' => request()->input('text')
             ];
-            return SentenceController::editSentence($data);
+            $validate = SentencesValidator::validate($data, ValidationEnum::EDIT->value);
+            return SentenceController::editSentence($validate);
         })->name('editSentence');
 
         Route::post('/deleteSentence', function (): JsonResponse {
-            $data = ['id' => request('id')];
-            return SentenceController::deleteSentence($data);
+            $data = [
+                'id' => request('id')
+            ];
+            $validate = SentencesValidator::validate($data, ValidationEnum::DELETE->value);
+
+            return SentenceController::deleteSentence($validate);
         })->name('deleteSentence');
 
         Route::post('/preViewSentence', function (): View {
-            $data = request('text');
-            return view('admin.sentences.preViewSentence')->with('sentence', $data);
+            $data = [
+                'text' => request('text')
+            ];
+            // $validate = SentencesValidator::validate($data, ValidationEnum::PREVIEW->value);
+            // return view('admin.sentences.preViewSentence')->with('sentence', $validate['text']);
+            return view('admin.sentences.preViewSentence')->with('sentence', $data['text']);
         })->name('preViewSentence');
 
         Route::get('/mockups', function (): View {
