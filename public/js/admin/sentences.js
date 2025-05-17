@@ -126,3 +126,19 @@ function deleteSentence(id) {
         }
     });
 }
+
+function preViewSentence(text) {
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/admin/sentences/preViewSentence';
+
+    const csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    
+    form.innerHTML = `
+        <input type="hidden" name="_token" value="${csrf}">
+        <input type="hidden" name="text" value="${text}">
+    `;
+
+    document.body.appendChild(form);
+    form.submit();
+}
