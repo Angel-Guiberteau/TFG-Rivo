@@ -97,6 +97,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return SentenceController::deleteSentence($data);
         })->name('deleteSentence');
 
+        Route::post('/preViewSentence', function (): View {
+            $data = request('text');
+            return view('admin.sentences.preViewSentence')->with('sentence', $data);
+        })->name('preViewSentence');
+
         Route::get('/mockups', function (): View {
             return view('admin.mockups.adminSentences');
         })->name('sentenceMockups');
