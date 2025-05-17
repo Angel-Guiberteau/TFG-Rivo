@@ -17,8 +17,14 @@ class SentenceController extends Controller
         return view('admin.sentences.sentences')->with('sentences', $data);
     }
 
-    public static function addSentence(string $text): RedirectResponse {
-        if (!Sentence::addSentence($text)) {
+    public static function addSentence(array $data): RedirectResponse {
+        if (!$data['status']) { 
+            return redirect()
+                ->back()
+                ->with('error', $data['error']);
+        }
+        
+        if (!Sentence::addSentence($data['data']['text'])) {
             return redirect()
                 ->back()
                 ->with('error', 'Ha habido un error inesperado.');
@@ -30,7 +36,13 @@ class SentenceController extends Controller
     }
 
     public static function editSentence(array $data): RedirectResponse {
-        if (!Sentence::editSentence($data)) {
+        if (!$data['status']) {
+            return redirect()
+                ->back()
+                ->with('error', $data['error']);
+        }
+
+        if (!Sentence::editSentence($data['data'])) {
             return redirect()
                 ->back()
                 ->with('error', 'Ha habido un error inesperado.');
@@ -42,7 +54,11 @@ class SentenceController extends Controller
     }
 
     public static function deleteSentence(array $data): JsonResponse {
-        if (!Sentence::deleteSentence($data['id'])) {
+        if (!$data['status']) {
+            return response()->json(['error' => $data['error']]);
+        }
+
+        if (!Sentence::deleteSentence($data['data']['id'])) {
             return response()->json(['error' => 'Ha habido un error inesperado.']);
         }
 
