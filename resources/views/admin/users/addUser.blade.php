@@ -165,7 +165,6 @@
                 });
             });
         </script>
-        <script src="{{ asset('js/admin/sentences.js') }}"></script>
     @endpush
 
 @endsection

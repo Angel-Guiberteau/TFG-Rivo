@@ -61,7 +61,7 @@ class User extends Authenticatable
     {
         $users = new self();
         
-        return $users->select('name', 'last_name', 'email', 'rol_id', 'google_id', 'birth_date', 'username')
+        return $users->select('id','name', 'last_name', 'email', 'rol_id', 'google_id', 'birth_date', 'username')
                     ->where('enabled', 1)
                     ->get();
     }
@@ -79,6 +79,18 @@ class User extends Authenticatable
         $user->password = bcrypt($data['password']);
 
         return $user->save();
+    }
+
+    public static function deleteUser(int $id): bool
+    {
+        $user = self::find($id);
+
+        if ($user) {
+            $user->enabled = 0;
+            return $user->save();
+        }
+
+        return false;
     }
 
 }

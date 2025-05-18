@@ -12,6 +12,8 @@ use App\Http\Controllers\DashboardController;
 
 use App\Http\Controllers\SentenceController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Js;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +85,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::post('/storeUser', function (): RedirectResponse {
             return UserController::storeUser();
         })->name('storeUser');
+
+        Route::post('/deleteUser', function (): JsonResponse {
+            return UserController::deleteUser();
+        })->name('deleteUser');
 
     });
 

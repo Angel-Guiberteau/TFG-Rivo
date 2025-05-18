@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
@@ -55,6 +56,27 @@ class UserController extends Controller
         }
 
         return redirect()->route('users')->with('success', 'Usuario creado correctamente.');
+    }
+
+    public static function deleteUser(): JsonResponse
+    {
+        $request = request();
+
+        $validator = Validator::make($request->all(), [
+            'id' => ['required', 'exists:users,id'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => 'El usuario no existe.']);
+        }
+
+        $deleted = User::deleteUser($validator->validated()['id']);
+
+        if (!$deleted) {
+            return response()->json(['error' => 'Ha ocurrido un error al eliminar el usuario.']);
+        }
+
+        return response()->json(['success' => 'Usuario borrado correctamente.']);
     }
 
 }
