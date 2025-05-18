@@ -18,11 +18,12 @@
             </li>
         </ul>
     </div>
-    <div>
-        <form action="/logout" method="post">
+     <div class="d-flex align-items-center me-3">
+        <form action="/logout" method="POST" class="d-flex">
             @csrf
-            @method('POST')
-            <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+            <button type="submit" class="btn btn-outline-danger btn-sm d-flex align-items-center">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </button>
         </form>
     </div>
 </nav>

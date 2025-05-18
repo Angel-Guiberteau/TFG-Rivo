@@ -76,6 +76,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return UserController::listUsers();
         })->name('users');
 
+        Route::get('/addUser', function (): View {
+            return view('admin.users.addUser');
+        })->name('addUser');
+
     });
 
     Route::group(['prefix' => 'sentences'], function () {

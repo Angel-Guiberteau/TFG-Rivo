@@ -14,7 +14,7 @@
                 @include('templates.admin.title', ['title' => 'Usuarios'])
 
                 <div>
-                    <button class="btn btn-primary btn-sm">Añadir</button>
+                    <button class="btn btn-primary btn-sm" onclick="addUser()">Añadir</button>
                     <table class="datatable table table-striped">
                         <thead>
                             <tr>
@@ -55,7 +55,7 @@
     </main>
 
     @push('scripts')
-        <script src="{{ asset('js/admin/sentences.js') }}"></script>
+        <script src="{{ asset('js/admin/users.js') }}"></script>
     @endpush
 
 @endsection
