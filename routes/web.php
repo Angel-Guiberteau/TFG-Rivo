@@ -80,6 +80,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return view('admin.users.addUser');
         })->name('addUser');
 
+        Route::post('/storeUser', function (): RedirectResponse {
+            return UserController::storeUser();
+        })->name('storeUser');
+
     });
 
     Route::group(['prefix' => 'sentences'], function () {
