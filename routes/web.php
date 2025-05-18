@@ -11,6 +11,7 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\DashboardController;
 
 use App\Http\Controllers\SentenceController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,9 +71,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     })->name('homeAdmin');
 
     Route::group(['prefix' => 'users'], function () {
+
         Route::get('/', function () {
-            return view('admin.users.users');
+            return UserController::listUsers();
         })->name('users');
+
     });
 
     Route::group(['prefix' => 'sentences'], function () {

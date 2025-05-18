@@ -23,6 +23,10 @@ class User extends Authenticatable
         'password',
         'google_id',
         'rol_id',
+        'last_name',
+        'birth_date',
+        'username',
+        'enabled',
     ];
 
     /**
@@ -53,5 +57,12 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'rol_id');
     }
 
-
+    public static function getAllUsers()
+    {
+        $users = new self();
+        
+        return $users->select('name', 'last_name', 'email', 'rol_id', 'google_id', 'birth_date', 'username')
+                    ->where('enabled', 1)
+                    ->get();
+    }
 }
