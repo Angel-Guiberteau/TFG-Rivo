@@ -11,6 +11,7 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\DashboardController;
 
 use App\Http\Controllers\SentenceController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,12 +28,14 @@ Route::get('/', function () {
     return view('auth.login_register');
 });
 
-Route::get('/home', function () {
-    return view('home.home');
+Route::get('/home', function (): View {
+    $userController = new UserController();
+    $user = $userController->getUser();
+    return view('home.home')->with('user', $user);
 })->middleware(['auth', 'role:user'])->name('home');
 
 Route::get('/initialSetup', function () {
-    return view('home.home');
+    return view('home.initialSetup');
 })->middleware(['auth', 'role:user'])->name('initialSetup');
 
 
@@ -112,4 +115,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('categories');
     });
     
+});
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Test Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/test', function () {
+    return view('home.initialSetup');
 });
