@@ -54,6 +54,8 @@
         </section>
     </main>
 
+    @include('sweetAlerts.swal')
+
     @push('scripts')
         <script src="{{ asset('js/admin/users.js') }}"></script>
     @endpush

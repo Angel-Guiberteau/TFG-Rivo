@@ -21,6 +21,7 @@ class UserController extends Controller
     public static function storeUser()
     {
         $request = request();
+
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'last_name' => ['nullable', 'string', 'max:100', 'unique:users,last_name'],
@@ -38,12 +39,14 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
+            $mensajes = implode(' ', $validator->errors()->all());
+
             return redirect()->back()
-                            ->withErrors($validator)
-                            ->withInput();
+                ->with('error', $mensajes)
+                ->withInput();
         }
 
-         $created = User::storeUser($validator->validated());
+        $created = User::storeUser($validator->validated());
 
         if (!$created) {
             return redirect()->back()
@@ -52,6 +55,6 @@ class UserController extends Controller
         }
 
         return redirect()->route('users')->with('success', 'Usuario creado correctamente.');
-
     }
+
 }
