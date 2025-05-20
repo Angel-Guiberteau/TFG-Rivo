@@ -8,21 +8,8 @@
     @include('templates.admin.navBar')
 
     @push('styles')
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-        <style>
-            .flatpickr-calendar {
-                font-family: 'Segoe UI', sans-serif;
-                border-radius: 0.5rem;
-                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-            }
-
-            label.form-label {
-                font-size: 1.1rem;
-                font-weight: 600;
-                color: #333;
-            }
-        </style>
+        <link rel="stylesheet" href="{{ asset('css/admin/users/usersCommon.css') }}">
     @endpush
 
     <main>
@@ -39,8 +26,9 @@
                             <div class="input-group">
                                 <span class="input-group-text bg-white"><i class="fa-regular fa-user"></i></span>
                                 <input type="text" name="name" id="name"
-                                       class="form-control @error('name') is-invalid @enderror"
-                                       value="{{ old('name') }}" required>
+                                    class="form-control @error('name') is-invalid @enderror"
+                                    value="{{ old('name') }}"
+                                    placeholder="Introduce el nombre" required>
                                 @error('name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -52,8 +40,9 @@
                             <div class="input-group">
                                 <span class="input-group-text bg-white"><i class="fa-solid fa-id-badge"></i></span>
                                 <input type="text" name="last_name" id="last_name"
-                                       class="form-control @error('last_name') is-invalid @enderror"
-                                       value="{{ old('last_name') }}">
+                                    class="form-control @error('last_name') is-invalid @enderror"
+                                    value="{{ old('last_name') }}"
+                                    placeholder="Introduce el apellido" required>
                                 @error('last_name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -67,8 +56,9 @@
                             <div class="input-group">
                                 <span class="input-group-text bg-white"><i class="fa-solid fa-calendar-days"></i></span>
                                 <input type="text" name="birth_date" id="birth_date"
-                                       class="form-control @error('birth_date') is-invalid @enderror"
-                                       value="{{ old('birth_date') }}">
+                                    class="form-control @error('birth_date') is-invalid @enderror"
+                                    value="{{ old('birth_date') }}"
+                                    placeholder="Selecciona la fecha de nacimiento" required>
                                 @error('birth_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -99,8 +89,9 @@
                             <div class="input-group">
                                 <span class="input-group-text bg-white"><i class="fa-solid fa-envelope"></i></span>
                                 <input type="email" name="email" id="email"
-                                       class="form-control @error('email') is-invalid @enderror"
-                                       value="{{ old('email') }}" required>
+                                    class="form-control @error('email') is-invalid @enderror"
+                                    value="{{ old('email') }}"
+                                    placeholder="ejemplo@correo.com" required>
                                 @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -112,8 +103,9 @@
                             <div class="input-group">
                                 <span class="input-group-text bg-white"><i class="fa-solid fa-address-card"></i></span>
                                 <input type="text" name="username" id="username"
-                                       class="form-control @error('username') is-invalid @enderror"
-                                       value="{{ old('username') }}">
+                                    class="form-control @error('username') is-invalid @enderror"
+                                    value="{{ old('username') }}"
+                                    placeholder="Nombre de usuario deseado" required>
                                 @error('username')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -127,7 +119,8 @@
                             <div class="input-group">
                                 <span class="input-group-text bg-white"><i class="fa-solid fa-lock"></i></span>
                                 <input type="password" name="password" id="password"
-                                       class="form-control @error('password') is-invalid @enderror" required>
+                                    class="form-control @error('password') is-invalid @enderror"
+                                    placeholder="Introduce una contraseña segura" required>
                                 @error('password')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -139,7 +132,7 @@
                         <button type="submit" class="btn btn-primary btn-sm">
                             <i class="fa-solid fa-floppy-disk"></i> Guardar
                         </button>
-                        <a href="{{ route('users') }}" class="btn btn-outline-secondary btn-sm">
+                        <a href="{{ route('users') }}" class="btn btn-outline-danger btn-sm">
                             <i class="fa-solid fa-circle-xmark"></i> Cancelar
                         </a>
                     </div>
@@ -151,20 +144,7 @@
     @push('scripts')
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                flatpickr("#birth_date", {
-                    dateFormat: "Y-m-d",
-                    altInput: true,
-                    altFormat: "d-m-Y",
-                    locale: "es",
-                    altInputClass: "form-control custom-flatpickr",
-                    onReady: function(selectedDates, dateStr, instance) {
-                        instance.altInput.placeholder = "Selecciona una fecha";
-                    }
-                });
-            });
-        </script>
+        <script src="{{ asset('js/admin/users/adduser.js') }}"></script>
     @endpush
 
 @endsection

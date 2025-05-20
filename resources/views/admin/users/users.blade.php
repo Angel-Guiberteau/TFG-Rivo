@@ -57,7 +57,7 @@
     @include('sweetAlerts.swal')
 
     @push('scripts')
-        <script src="{{ asset('js/admin/users.js') }}"></script>
+        <script src="{{ asset('js/admin/users/users.js') }}"></script>
     @endpush
 
 @endsection
