@@ -48,10 +48,12 @@
                 <a class="w-100 d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-cog"></i> Ajustes
                 </a>
-                <form action="/logout" method="post">
+                <form action="/logout" method="POST" class="d-flex align-items-center gap-2">
                     @csrf
-                    @method('POST')
-                    <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+                    <button type="submit" class="bg-transparent border-0 text-white d-flex align-items-center gap-2">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="text-white">Cerrar sesión</span>
+                    </button>
                 </form>
             </nav>
         </aside>
@@ -67,7 +69,7 @@
                     </button>
                 </header>
                 <div class="balance-info pt-3 pt-lg-5 pb-3 pb-lg-5 px-3 px-lg-5 text-center text-lg-start">
-                    <h2 class="fs-1 fw-bold mb-4">Hola, Ángel!</h2>
+                    <h2 class="fs-1 fw-bold mb-4">Hola, {{ $user->username }}!</h2>
                     <p class="fs-4 fw-light mb-0">Balance disponible</p>
                     <p class="fs-1 fw-bold mt-0 mb-lg-4">€ 1.250,00</p>
                     <div id="actionButtons-container" class="mx-auto bg-white d-flex flex-row justify-content-evenly align-items-center p-3">
