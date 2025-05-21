@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use App\Models\User;
 
 
@@ -81,4 +82,31 @@ class UserController extends Controller
         return response()->json(['success' => 'Usuario borrado correctamente.']);
     }
 
+    public static function getUserbyId($id)
+    {
+        $id = request('id');
+
+        $validator = Validator::make(['id' => $id], [
+            'id' => ['required', 'exists:users,id'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('error', 'Usuario no existe.')
+                ->withInput();
+        }
+
+        $user = User::getUserById($id);
+
+        if (!$user) {
+            return redirect()->back()
+                ->with('error', 'Usuario no encontrado.')
+                ->withInput();
+        }
+
+        dd($user);
+
+        return view('admin.users.editUser')
+            ->with('user', $user);
+    }
 }

@@ -41,8 +41,8 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->username ?? '—' }}</td>
                                     <td>
-                                        <button class="btn btn-primary btn-sm">Editar</button>
-                                        <button class="btn btn-info btn-sm">Ver</button>
+                                        <button class="btn btn-primary btn-sm" onclick="editUser({{ $user->id }})">Editar</button>
+                                        <button class="btn btn-info btn-sm" >Ver</button>
                                         <button class="btn btn-danger btn-sm" onclick="deleteUser({{ $user->id }})">Eliminar</button>
                                     </td>
                                 </tr>

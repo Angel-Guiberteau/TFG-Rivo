@@ -93,4 +93,11 @@ class User extends Authenticatable
         return false;
     }
 
+    public static function getUserById(int $id): ?self
+    {
+        return self::where('id', $id)
+            ->where('enabled', 1)
+            ->first();
+    }
+
 }

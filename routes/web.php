@@ -90,6 +90,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return UserController::deleteUser();
         })->name('deleteUser');
 
+        Route::get('/editUser/{id}', function ($id) {
+            return UserController::getUserbyId($id);
+        })->name('editUser');
+
     });
 
     Route::group(['prefix' => 'sentences'], function () {
