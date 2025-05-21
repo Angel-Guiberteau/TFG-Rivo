@@ -1,1 +1,1 @@
-<button type="button" class="login-btn w-100 fs-4 fw-bold mb-4" onclick="nextStep({{ $step }})">Siguiente</button>
+<button type="{{ $step === 10 ? 'submit' : 'button' }}" class="login-btn w-100 fs-4 fw-bold mb-4" onclick="nextStep({{ $step }})">Siguiente</button>

@@ -13,4 +13,9 @@ class UserController extends Controller
     {
         return User::getUser();
     }
+    public function updateUserInfo($request): ?Authenticatable
+    {
+
+        dd($request);
+    }
 }
