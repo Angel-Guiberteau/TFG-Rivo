@@ -22,7 +22,9 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Frase</th>
-                                <th>Acciones</th>
+                                <th class="text-center">Editar</th>
+                                <th class="text-center">Visualizar</th>
+                                <th class="text-center">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,9 +36,13 @@
                                     @include('admin.components.buttons.editButton', [
                                         'data' => 'data-id="' . e($sentence->id) . '" data-name="' . e($sentence->text) . '" data-bs-toggle="modal" data-bs-target="#editSentence"'
                                     ])
+                                </td>
+                                <td>
                                     @include('admin.components.buttons.preViewButton', [
                                         'data' => 'onclick=" preViewSentence('.e(json_encode($sentence->text)).')"'
                                     ])
+                                </td>
+                                <td>
                                     @include('admin.components.buttons.deleteButton', [
                                         'data' => 'id="'. e($sentence->id) .'" onclick="deleteSentence('. e($sentence->id) .')"'
                                     ])
