@@ -1,28 +1,28 @@
 <section id="fifthStep" class="d-none">
     <div class="input-group mb-4">
         <i class="fas fa-money-bill-wave"></i>
-        <input type="number" id="dinero_libre" name="dinero_libre" placeholder="Dinero libre" value="500" disabled />
+        <input type="number" id="freeMoney" name="dinero_libre" placeholder="Dinero libre" value="500" disabled />
     </div>
     <p class="mb-2">Este es tu dinero libre, ¿qué porcentaje de ahorro quieres tener sobre este dinero?</p>
     <p>Recomendaciones:</p>
     <div class="form-check custom-checkbox-container mb-4">
-        <input class="custom-checkbox" type="radio" name="porcentaje_ahorro" id="porcentaje_10" value="10">
-        <label class="form-check-label" for="porcentaje_10">
-            10% - 50€
+        <input class="custom-checkbox" type="radio" name="percentage" id="percentage1" value="10">
+        <label id="labelPercentage1" class="form-check-label" for="porcentaje_10">
+            
         </label>
     </div>
 
     <div class="form-check custom-checkbox-container mb-4">
-        <input class="custom-checkbox" type="radio" name="porcentaje_ahorro" id="porcentaje_15" value="15">        
-        <label class="form-check-label" for="porcentaje_15">
-            15% - 75€
+        <input class="custom-checkbox" type="radio" name="percentage" id="percentage2" value="15">        
+        <label id="labelPercentage2" class="form-check-label" for="porcentaje_15">
+            
         </label>
     </div>
 
     <div class="form-check custom-checkbox-container mb-4">
-        <input class="custom-checkbox" type="radio" name="porcentaje_ahorro" id="porcentaje_20" value="20"> 
-        <label class="form-check-label" for="porcentaje_20">
-            20% - 100€
+        <input class="custom-checkbox" type="radio" name="percentage" id="percentage3" value="20"> 
+        <label id="labelPercentage3" class="form-check-label" for="porcentaje_20">
+        
         </label>
     </div>
 
