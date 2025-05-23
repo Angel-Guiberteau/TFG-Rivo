@@ -22,7 +22,9 @@
         <form action="/logout" method="post">
             @csrf
             @method('POST')
-            <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+            <button type="submit" class="btn btn-danger">
+                <i class="fa-solid fa-door-open"></i>
+            </button>
         </form>
     </div>
 </nav>
