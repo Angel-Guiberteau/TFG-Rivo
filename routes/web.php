@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\ValidationEnum;
+use App\Validations\SentencesValidator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -12,8 +14,10 @@ use App\Http\Controllers\DashboardController;
 
 use App\Http\Controllers\SentenceController;
 use App\Http\Controllers\UserController;
+
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Js;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,15 +28,21 @@ use Illuminate\Support\Js;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware('auth')
-->name('dashboard');
+    ->name('dashboard');
 
 Route::get('/', function () {
     return view('auth.login_register');
 });
 
-Route::get('/home', function () {
-    return view('home.home');
+Route::get('/home', function (): View {
+    $userController = new UserController();
+    $user = $userController->getUser();
+    return view('home.home')->with('user', $user);
 })->middleware(['auth', 'role:user'])->name('home');
+
+Route::get('/initialSetup', function () {
+    return view('home.initialSetup');
+})->middleware(['auth', 'role:user'])->name('initialSetup');
 
 
 /*
@@ -106,7 +116,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('sentences');
 
         Route::post('/add', function (): RedirectResponse {
-            return SentenceController::addSentence(request()->input('name'));
+            $data = [
+                'text' => request()->input('name')
+            ];
+            $validate = SentencesValidator::validate($data, ValidationEnum::ADD->value);
+            return SentenceController::addSentence($validate);
         })->name('addSentence');
 
         Route::put('/edit', function (): RedirectResponse {
@@ -114,17 +128,26 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
                 'id' => request()->input('id'),
                 'text' => request()->input('text')
             ];
-            return SentenceController::editSentence($data);
+            $validate = SentencesValidator::validate($data, ValidationEnum::EDIT->value);
+            return SentenceController::editSentence($validate);
         })->name('editSentence');
 
         Route::post('/deleteSentence', function (): JsonResponse {
-            $data = ['id' => request('id')];
-            return SentenceController::deleteSentence($data);
+            $data = [
+                'id' => request('id')
+            ];
+            $validate = SentencesValidator::validate($data, ValidationEnum::DELETE->value);
+
+            return SentenceController::deleteSentence($validate);
         })->name('deleteSentence');
 
         Route::post('/preViewSentence', function (): View {
-            $data = request('text');
-            return view('admin.sentences.preViewSentence')->with('sentence', $data);
+            $data = [
+                'text' => request('text')
+            ];
+            // $validate = SentencesValidator::validate($data, ValidationEnum::PREVIEW->value);
+            // return view('admin.sentences.preViewSentence')->with('sentence', $validate['text']);
+            return view('admin.sentences.preViewSentence')->with('sentence', $data['text']);
         })->name('preViewSentence');
 
         Route::get('/mockups', function (): View {
@@ -138,4 +161,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('categories');
     });
     
+});
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Test Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/test', function () {
+    return view('home.initialSetup');
 });

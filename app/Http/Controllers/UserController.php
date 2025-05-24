@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -14,6 +17,7 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+
     public static function listUsers()
     {
         $users = User::getAllUsers();
@@ -158,5 +162,9 @@ class UserController extends Controller
         return redirect()->route('users')->with('success', 'No se realizaron cambios.');
     }
 
+    public function getUser(): ?Authenticatable
+    {
+        return User::getUser();
+    }
 
 }
