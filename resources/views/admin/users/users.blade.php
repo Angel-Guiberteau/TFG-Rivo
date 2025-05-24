@@ -14,7 +14,9 @@
                 @include('templates.admin.title', ['title' => 'Usuarios'])
 
                 <div>
-                    <button class="btn btn-primary btn-sm" onclick="addUser()">Añadir</button>
+                    @include('admin.components.buttons.addButton', [
+                        'onclick' => 'addUser()'
+                    ])
                     <table class="datatable table table-striped">
                         <thead>
                             <tr>

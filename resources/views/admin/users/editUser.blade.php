@@ -132,10 +132,10 @@
                     <input type="hidden" name="id" value="{{ $user->id }}">
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary btn-sm">
-                            <i class="fa-solid fa-floppy-disk"></i> Actualizar
+                            <i class="fa-solid fa-floppy-disk"></i>
                         </button>
-                        <a href="{{ route('users') }}" class="btn btn-outline-danger btn-sm">
-                            <i class="fa-solid fa-circle-xmark"></i> Cancelar
+                        <a href="{{ route('users') }}" class="btn btn-danger btn-sm">
+                            <i class="fa-solid fa-circle-xmark"></i>
                         </a>
                     </div>
                 </form>
