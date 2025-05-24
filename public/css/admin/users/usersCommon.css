@@ -1,0 +1,12 @@
+   
+.flatpickr-calendar {
+    font-family: 'Segoe UI', sans-serif;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+label.form-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+}
