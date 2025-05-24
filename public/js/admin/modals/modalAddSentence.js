@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
-
     const nameInput = document.getElementById("name");
     const form = document.getElementById("form-addSentence");
     const submitButton = document.getElementById("buttonSubmit");
+    const addModal = document.getElementById("addSentence");
 
     function validateName() {
         const inputValue = nameInput.value.trim();
         const validPattern = /^[A-Za-z0-9ÁÉÍÓÚáéíóúÜüÑñ&().,\s]+$/;
-        
+
         if (validPattern.test(inputValue) && inputValue.length > 0) {
             nameInput.classList.remove("is-invalid");
             nameInput.classList.add("is-valid");
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     nameInput.addEventListener("input", validateName);
-    
+
     form.addEventListener("submit", function (event) {
         if (!nameInput.classList.contains("is-valid")) {
             event.preventDefault();
@@ -28,5 +28,12 @@ document.addEventListener("DOMContentLoaded", function () {
             nameInput.classList.add("is-invalid");
             submitButton.disabled = true;
         }
+    });
+
+    // Reset each time modal opens
+    addModal.addEventListener("show.bs.modal", function () {
+        nameInput.classList.remove("is-valid", "is-invalid");
+        nameInput.value = "";
+        submitButton.disabled = true;
     });
 });
