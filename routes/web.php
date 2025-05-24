@@ -94,6 +94,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return UserController::getUserbyId($id);
         })->name('editUser');
 
+        Route::put('/updateUser', function (): RedirectResponse {
+            return UserController::updateUser();
+        })->name('updateUser');
+
     });
 
     Route::group(['prefix' => 'sentences'], function () {

@@ -104,9 +104,59 @@ class UserController extends Controller
                 ->withInput();
         }
 
-        dd($user);
+        // dd($user);
 
         return view('admin.users.editUser')
             ->with('user', $user);
     }
+
+    public static function updateUser(): RedirectResponse
+    {
+        $request = request();
+       
+        $validator = Validator::make($request->all(), [
+            'id' => ['required', 'exists:users,id'],
+            'name' => ['required', 'string', 'max:255'],
+            'last_name' => ['nullable', 'string', 'max:100'],
+            'birth_date' => ['nullable', 'date'],
+            'rol_id' => ['required', 'exists:roles,id'],
+            'email' => ['required', 'email', 'max:255'],
+            'username' => ['nullable', 'string', 'max:75'],
+            'password' => ['nullable', 'string', 'min:8'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('users')
+                ->with('error', $validator->errors()->first())
+                ->withInput();
+        }
+
+        $data = $validator->validated();
+        $user = User::getUserById($data['id']);
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'Usuario no encontrado.');
+        }
+
+        $updates = [];
+
+        foreach (['name', 'last_name', 'birth_date', 'rol_id', 'email', 'username'] as $field) {
+            if ($user->$field != $data[$field]) {
+                $updates[$field] = $data[$field];
+            }
+        }
+
+        if (!empty($data['password']) && !Hash::check($data['password'], $user->password)) {
+            $updates['password'] = bcrypt($data['password']);
+        }
+
+        if (!empty($updates)) {
+            $user->update($updates);
+            return redirect()->route('users')->with('success', 'Usuario actualizado correctamente.');
+        }
+
+        return redirect()->route('users')->with('success', 'No se realizaron cambios.');
+    }
+
+
 }
