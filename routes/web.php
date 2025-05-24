@@ -15,6 +15,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SentenceController;
 use App\Http\Controllers\UserController;
 
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Js;
+
+
 /*
 |--------------------------------------------------------------------------
 | General Routes
@@ -85,9 +89,31 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     })->name('homeAdmin');
 
     Route::group(['prefix' => 'users'], function () {
+
         Route::get('/', function () {
-            return view('admin.users.users');
+            return UserController::listUsers();
         })->name('users');
+
+        Route::get('/addUser', function (): View {
+            return view('admin.users.addUser');
+        })->name('addUser');
+
+        Route::post('/storeUser', function (): RedirectResponse {
+            return UserController::storeUser();
+        })->name('storeUser');
+
+        Route::post('/deleteUser', function (): JsonResponse {
+            return UserController::deleteUser();
+        })->name('deleteUser');
+
+        Route::get('/editUser/{id}', function ($id) {
+            return UserController::getUserbyId($id);
+        })->name('editUser');
+
+        Route::put('/updateUser', function (): RedirectResponse {
+            return UserController::updateUser();
+        })->name('updateUser');
+
     });
 
     Route::group(['prefix' => 'sentences'], function () {

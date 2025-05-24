@@ -6,6 +6,7 @@
 
 <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet"/>
 <link href="{{ asset('css/datatable/datatables.min.css') }}" rel="stylesheet"/>
+<link href="{{ asset('css/fontAwesome/fontawesome.min.css') }}" rel="stylesheet"/>
 
 @stack('styles')
 

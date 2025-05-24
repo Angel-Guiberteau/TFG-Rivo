@@ -14,13 +14,17 @@
                 @include('templates.admin.title', ['title' => 'Frases'])
 
                 <div>
-                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addSentence">Añadir</button>
+                    @include('admin.components.buttons.addButton', [
+                        'data' => 'data-bs-toggle="modal" data-bs-target="#addSentence"'
+                    ])
                     <table class="datatable table table-striped">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Frase</th>
-                                <th>Acciones</th>
+                                <th class="text-center">Editar</th>
+                                <th class="text-center">Visualizar</th>
+                                <th class="text-center">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,15 +33,19 @@
                                 <td>{{ $sentence->id }}</td>
                                 <td>{{ $sentence->text }}</td>
                                 <td>
-                                    <button class="btn btn-primary btn-sm"
-                                            data-id="{{ $sentence->id }}"
-                                            data-name="{{ $sentence->text }}"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#editSentence">
-                                        Editar
-                                    </button>
-                                    <button class="btn btn-info btn-sm" onclick=" preViewSentence({{ json_encode($sentence->text) }})">Ver</button>
-                                    <button class="btn btn-danger btn-sm" id="{{ $sentence->id }}" onclick="deleteSentence({{ $sentence->id }})">Eliminar</button>
+                                    @include('admin.components.buttons.editButton', [
+                                        'data' => 'data-id="' . e($sentence->id) . '" data-name="' . e($sentence->text) . '" data-bs-toggle="modal" data-bs-target="#editSentence"'
+                                    ])
+                                </td>
+                                <td>
+                                    @include('admin.components.buttons.preViewButton', [
+                                        'data' => 'onclick=" preViewSentence('.e(json_encode($sentence->text)).')"'
+                                    ])
+                                </td>
+                                <td>
+                                    @include('admin.components.buttons.deleteButton', [
+                                        'data' => 'id="'. e($sentence->id) .'" onclick="deleteSentence('. e($sentence->id) .')"'
+                                    ])
                                 </td>
                             </tr>
                             @endforeach
