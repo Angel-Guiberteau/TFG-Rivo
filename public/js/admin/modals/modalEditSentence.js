@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Reset each time modal opens
     editModal.addEventListener("show.bs.modal", function () {
         hasChanged = false;
         nameInput.classList.remove("is-valid", "is-invalid");

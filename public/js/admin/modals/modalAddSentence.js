@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Reset each time modal opens
     addModal.addEventListener("show.bs.modal", function () {
         nameInput.classList.remove("is-valid", "is-invalid");
         nameInput.value = "";
