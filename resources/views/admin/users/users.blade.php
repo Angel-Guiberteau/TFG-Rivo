@@ -8,7 +8,7 @@
     @include('templates.admin.navBar')
 
     <main>
-        <section class="container-custom p-3 pb-5">
+        <section class="w-100 p-3 pb-5">
             <article class="bg-light p-3">
 
                 @include('templates.admin.title', ['title' => 'Usuarios'])
@@ -25,7 +25,9 @@
                                 <th>Google ID</th>
                                 <th>Email</th>
                                 <th>Nombre Usuario</th>
-                                <th>Acciones</th>
+                                <th class="text-center">Editar</th>
+                                <th class="text-center">Visualizar</th>
+                                <th class="text-center">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,9 +43,19 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->username ?? '—' }}</td>
                                     <td>
-                                        <button class="btn btn-primary btn-sm" onclick="editUser({{ $user->id }})">Editar</button>
-                                        <button class="btn btn-info btn-sm" >Ver</button>
-                                        <button class="btn btn-danger btn-sm" onclick="deleteUser({{ $user->id }})">Eliminar</button>
+                                        @include('admin.components.buttons.editButton', [
+                                            'onclick' => 'editUser(' . $user->id . ')'
+                                        ])                                       
+                                    </td>
+                                    <td>
+                                        @include('admin.components.buttons.preViewButton', [
+                                            
+                                        ])
+                                    </td>
+                                    <td>
+                                        @include('admin.components.buttons.deleteButton', [
+                                            'data' => 'id="'. e($user->id) .'" onclick="deleteUser('. e($user->id) .')"'
+                                        ])
                                     </td>
                                 </tr>
                             @endforeach
