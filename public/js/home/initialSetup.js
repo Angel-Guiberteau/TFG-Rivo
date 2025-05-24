@@ -3,6 +3,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const description = document.getElementById('description');
     const title = document.getElementById('title');
     const subtitle = document.getElementById('subtitle');
+    const firstStepFields = [
+        document.getElementById('name'),
+        document.getElementById('last_name'),
+        document.getElementById('username'),
+        document.getElementById('birth_date')
+    ];
+    const firstStepButton = document.getElementById('next1');
+
+    const secondStepFields = [
+        document.getElementById('salary'),
+        document.getElementById('familyHelp'),
+        document.getElementById('stateHelp'),
+    ];
+    const firsStepButton = document.getElementById('next1');
 
     const sectionFirstStep = document.getElementById('firstStep');
     const sectionSecondStep = document.getElementById('secondStep');
@@ -15,8 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const sectionNinthStep = document.getElementById('ninthStep');
     const sectionTenthStep = document.getElementById('tenthStep');
 
-    let fixedIncome;
-    let fixedExpenses;
+    
 
     const salaryIncome = document.getElementById('salary');
     const familyHelpIncome = document.getElementById('familyHelp');
@@ -34,10 +47,36 @@ document.addEventListener('DOMContentLoaded', function () {
     const percentage1 = document.getElementById('percentage1');
     const percentage2 = document.getElementById('percentage2');
     const percentage3 = document.getElementById('percentage3');
+    const personalizePercentage = document.getElementById('personalizePercentage');
     const labelPercentage1 = document.getElementById('labelPercentage1');
     const labelPercentage2 = document.getElementById('labelPercentage2');
     const labelPercentage3 = document.getElementById('labelPercentage3');
+    
+    let inputAvaibleSaveMoney = document.getElementById('avaibleSaveMoney');
 
+    const objEmergency = document.getElementById('objEmergency');
+    const objDebt = document.getElementById('objDebt');
+    const objSave = document.getElementById('objSave');
+    const personalizeObjective = document.getElementById('objPersonalize');
+
+
+    let avaibleMoneyToVariableExpenses = document.querySelectorAll('.avaibleMoneyToVariableExpenses');
+
+    let fixedIncome;
+    let fixedExpenses;
+    let choosedPercentage;
+    let saveMoney;
+    let suggestion;
+    let freeMoneyOriginal;
+
+    window.validateFirstStep = function (){
+        const allFilled = firstStepFields.every(input => input.value.trim() != '');
+        firstStepButton.disabled = !allFilled;
+    }
+    window.validateSecondStep = function (){
+        const allFilled = firsStepFields.every(input => input.value.trim() != '');
+        firsStepButton.disabled = !allFilled;
+    }
     flatpickr("#birth_date", {
         dateFormat: "Y-m-d",
         altInput: true,
@@ -101,14 +140,45 @@ document.addEventListener('DOMContentLoaded', function () {
         erase();
     }
 
+    function calculateAvaibleFreeMoney() {
+        const inputs = document.querySelectorAll('.variableExpense');
+        let total = 0;
+
+        inputs.forEach(input => {
+            let val = parseFloat(input.value);
+
+            if (isNaN(val) || val < 0) {
+                input.value = '';
+                val = 0;
+            }
+
+            if (total + val > freeMoneyOriginal) {
+                const maxPermitido = freeMoneyOriginal - total;
+                input.value = maxPermitido.toFixed(2);
+                total = freeMoneyOriginal;
+            } else {
+                total += val;
+            }
+        });
+
+        return total;
+    }
+    window.updateAvaibleMoney = function () {
+        const totalGastos = calculateAvaibleFreeMoney();
+        const disponible = freeMoneyOriginal - totalGastos;
+
+        avaibleMoneyToVariableExpenses.forEach(span => {
+            span.innerText = disponible.toFixed(2) + ' €';
+        });
+    }
+
     function animateSectionChange(hideSection, showSection) {
         hideSection.classList.add('d-none');
         showSection.classList.remove('d-none');
     }
 
     function adviseToSaveMoney(freeMoney) {
-        let suggestion;
-
+        let theSuggestion;
         const calculateAmounts = (percentages) => ({
             min: +(freeMoney * (percentages.min / 100)).toFixed(2),
             mid: +(freeMoney * (percentages.mid / 100)).toFixed(2),
@@ -117,65 +187,89 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (freeMoney <= 49) {
             const percentage = { min: 0, mid: 2.5, max: 5 };
-            suggestion = {
+            theSuggestion = {
                 percentage,
                 amount: calculateAmounts(percentage),
                 message: "Ahora mismo tu prioridad es estabilizar tus gastos. Puedes empezar con algo simbólico."
             };
         } else if (freeMoney <= 99) {
             const percentage = { min: 5, mid: 7.5, max: 10 };
-            suggestion = {
+            theSuggestion = {
                 percentage,
                 amount: calculateAmounts(percentage),
                 message: "Podrías empezar con un pequeño hábito de ahorro. Lo importante es la constancia."
             };
         } else if (freeMoney <= 199) {
             const percentage = { min: 10, mid: 12.5, max: 15 };
-            suggestion = {
+            theSuggestion = {
                 percentage,
                 amount: calculateAmounts(percentage),
                 message: "Es un buen momento para crear un ahorro regular sin que afecte tu día a día."
             };
         } else if (freeMoney <= 299) {
             const percentage = { min: 15, mid: 17.5, max: 20 };
-            suggestion = {
+            theSuggestion = {
                 percentage,
                 amount: calculateAmounts(percentage),
                 message: "Ya tienes un margen cómodo. Un ahorro moderado te hará avanzar rápido."
             };
         } else if (freeMoney <= 499) {
             const percentage = { min: 20, mid: 22.5, max: 25 };
-            suggestion = {
+            theSuggestion = {
                 percentage,
                 amount: calculateAmounts(percentage),
                 message: "Puedes plantearte un ahorro más ambicioso sin descuidar tus gastos variables."
             };
         } else if (freeMoney <= 799) {
             const percentage = { min: 25, mid: 27.5, max: 30 };
-            suggestion = {
+            theSuggestion = {
                 percentage,
                 amount: calculateAmounts(percentage),
                 message: "¡Muy buen margen! Este nivel te permite ahorrar con fuerza y planificar a medio plazo."
             };
         } else if (freeMoney <= 1199) {
             const percentage = { min: 30, mid: 32.5, max: 35 };
-            suggestion = {
+            theSuggestion = {
                 percentage,
                 amount: calculateAmounts(percentage),
                 message: "Estás en una excelente posición para alcanzar metas importantes."
             };
         } else {
             const percentage = { min: 35, mid: 37.5, max: 40 };
-            suggestion = {
+            theSuggestion = {
                 percentage,
                 amount: calculateAmounts(percentage),
                 message: "Tienes una gran capacidad de ahorro. Aprovechémosla para metas ambiciosas."
             };
         }
 
-        return suggestion;
+        return theSuggestion;
     }
 
+    window.clearRadios = function (){
+        percentage1.checked = false;
+        percentage2.checked = false;
+        percentage3.checked = false;
+    }
+
+    window.clearRadiosS6 = function (){
+        objEmergency.checked = false;
+        objSave.checked = false;
+        objDebt.checked = false;
+    }
+
+    window.whatPercentage = function(inputNumber){
+        if(inputNumber !=4){
+            console.log('borrado');
+            
+            personalizePercentage.value = '';
+        }
+        choosedPercentage = inputNumber;
+    }
+
+    window.clearPersonalizeObj = function(){
+        personalizeObjective.value = ''
+    }
 
     window.previousStep = function (currentStep) {
         switch (currentStep) {
@@ -279,8 +373,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 
                 freeMoney.value = fixedIncome - fixedExpenses;
                 
-                let suggestion = adviseToSaveMoney(freeMoney.value);
-            console.log(suggestion);
+                suggestion = adviseToSaveMoney(freeMoney.value);
             
                 percentage1.value = suggestion.percentage.min;
                 percentage2.value = suggestion.percentage.mid;
@@ -295,6 +388,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 updateProgress(50);
                 break;
             case 5:
+                if(choosedPercentage === 1){
+                    saveMoney = suggestion.amount.min;
+                }else{
+                    if(choosedPercentage == 2){
+                        saveMoney = suggestion.amount.mid;
+                    }else{
+                        if(choosedPercentage == 3){
+                            saveMoney = suggestion.amount.max;
+                        }else{
+                            saveMoney = personalizePercentage.value * freeMoney.value / 100;
+                        }
+                    }
+                }
+                inputAvaibleSaveMoney.value = saveMoney;
+
                 animateSectionChange(sectionFifthStep, sectionSixthStep);
                 typeWriterReplace(title, 'Objetivo actual');
                 typeWriterReplace(subtitle, 'Marquemos un objetivo a corto/medio plazo', 1); 
@@ -302,6 +410,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 updateProgress(60);
                 break;
             case 6:
+                freeMoneyOriginal = Number(freeMoney.value) - saveMoney;
+                avaibleMoneyToVariableExpenses.forEach(span => {
+                    span.innerText = freeMoneyOriginal.toFixed(2) + ' €';
+                });
+
                 animateSectionChange(sectionSixthStep, sectionSeventhStep);
                 typeWriterReplace(title, 'Gastos Variables');
                 typeWriterReplace(subtitle, 'Usaremos el dinero libre para ver cuanto deberiamos gastar', 1); 

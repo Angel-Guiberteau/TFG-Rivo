@@ -2,36 +2,36 @@
     <p class="mb-2">Ahorro objetivo mensual</p>
     <div class="input-group mb-4">
         <i class="fas fa-money-bill-wave"></i>
-        <input type="number" id="ahorro_disponible" name="ahorro_disponible" value="100" readonly />
+        <input type="number" id="avaibleSaveMoney" name="avaibleSaveMoney" value="100" readonly />
     </div>
 
     <p class="mb-2">Elijamos un objetivo</p>
 
 
     <div class="form-check custom-checkbox-container mb-4">
-        <input class="custom-checkbox" type="radio" name="objetivo_ahorro" id="objetivo_emergencia" value="emergencia">
+        <input class="custom-checkbox" type="radio" name="objective" onchange="clearPersonalizeObj()" id="objEmergency" value="emergencia">
         <label class="form-check-label" for="objetivo_emergencia">
             Fondo de emergencia
         </label>
     </div>
 
     <div class="form-check custom-checkbox-container mb-4">
-        <input class="custom-checkbox" type="radio" name="objetivo_ahorro" id="objetivo_deudas" value="deudas">        
-        <label class="form-check-label" for="objetivo_deudas">
+        <input class="custom-checkbox" type="radio" name="objective" onchange="clearPersonalizeObj()" id="objDebt" value="deudas">        
+        <label class="form-check-label" for="objDebt">
             Salir de deudas
         </label>
     </div>
 
     <div class="form-check custom-checkbox-container mb-4">
-        <input class="custom-checkbox" type="radio" name="objetivo_ahorro" id="objetivo_futuro" value="futuro"> 
-        <label class="form-check-label" for="objetivo_futuro">
+        <input class="custom-checkbox" type="radio" name="objective" onchange="clearPersonalizeObj()" id="objSave" value="futuro"> 
+        <label class="form-check-label" for="objSave">
             Ahorros a futuro
         </label>
     </div>
 
     <div class="input-group mb-4">
         <i class="fas fa-flag-checkered"></i>
-        <input type="text" id="objetivo_personalizado" name="objetivo_personalizado" placeholder="Otro objetivo" />
+        <input type="text" id="objPersonalize" name="objective" placeholder="Otro objetivo" oninput="clearRadiosS6()"/>
     </div>
     @include('home.initialSetup.buttonsContainer', ['step' => 6])
 
