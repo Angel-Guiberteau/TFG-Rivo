@@ -43,6 +43,12 @@ Route::get('/home', function (): View {
 Route::get('/initialSetup', function () {
     return view('home.initialSetup');
 })->middleware(['auth', 'role:user'])->name('initialSetup');
+Route::post('/updateUserInfo', function () {
+    $request = Request();
+
+    $controller = new UserController();
+    return  $controller->updateUserInfo($request);
+})->middleware(['auth', 'role:user'])->name('updateUserInfo');
 
 
 /*
@@ -171,7 +177,3 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 | Test Routes
 |--------------------------------------------------------------------------
 */
-
-Route::get('/test', function () {
-    return view('home.initialSetup');
-});

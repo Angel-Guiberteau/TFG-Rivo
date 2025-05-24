@@ -1,33 +1,38 @@
 <section id="sixthStep" class="d-none">
     <p class="mb-2">Ahorro objetivo mensual</p>
-    <div class="input-group mb-4 text-center">
+    <div class="input-group mb-4">
         <i class="fas fa-money-bill-wave"></i>
-        <input type="number" id="ahorro" name="compras"  value="100" disabled />
+        <input type="number" id="avaibleSaveMoney" name="avaibleSaveMoney" value="100" readonly />
     </div>
+
     <p class="mb-2">Elijamos un objetivo</p>
+
+
     <div class="form-check custom-checkbox-container mb-4">
-        <input class="custom-checkbox" type="radio" name="percentaje">
-        <label class="form-check-label" for="rememberCheck">
+        <input class="custom-checkbox" type="radio" name="objective" onchange="clearPersonalizeObj()" id="objEmergency" value="emergencia">
+        <label class="form-check-label" for="objetivo_emergencia">
             Fondo de emergencia
         </label>
     </div>
+
     <div class="form-check custom-checkbox-container mb-4">
-        <input class="custom-checkbox" type="radio" name="percentaje">        
-        <label class="form-check-label" for="rememberCheck">
+        <input class="custom-checkbox" type="radio" name="objective" onchange="clearPersonalizeObj()" id="objDebt" value="deudas">        
+        <label class="form-check-label" for="objDebt">
             Salir de deudas
         </label>
     </div>
+
     <div class="form-check custom-checkbox-container mb-4">
-        <input class="custom-checkbox" type="radio" name="percentaje"> 
-        <label class="form-check-label" for="rememberCheck">
+        <input class="custom-checkbox" type="radio" name="objective" onchange="clearPersonalizeObj()" id="objSave" value="futuro"> 
+        <label class="form-check-label" for="objSave">
             Ahorros a futuro
         </label>
     </div>
-    <div class="input-group mb-4 text-center">
+
+    <div class="input-group mb-4">
         <i class="fas fa-flag-checkered"></i>
-        <input type="number" id="compras" name="compras" placeholder="Otro objetivo" />
+        <input type="text" id="objPersonalize" name="objective" placeholder="Otro objetivo" oninput="clearRadiosS6()"/>
     </div>
-    
     @include('home.initialSetup.buttonsContainer', ['step' => 6])
 
 </section>
