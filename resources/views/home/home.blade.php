@@ -163,18 +163,18 @@
                     <div class="row">
                         <div class="col-md-8 divider-right">
                             <div class="mb-3">
-                                <label for="subject" class="fw-bold mb-0 fs-4">Subject</label>
-                                <input type="text" id="subject" name="subject" class="form-control mb-3" placeholder="Subject" required>
+                                <label for="subject" class="fw-bold mb-0 fs-4">Asunto</label>
+                                <input type="text" id="subject" name="subject" class="form-control mb-3" placeholder="Asunto" required>
                                 <textarea id="description" name="description" class="form-control" rows="3" placeholder="Description"></textarea>
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center mb-3 flex-nowrap">
                                 <div class="d-flex align-items-center gap-4">
-                                    <label for="date" class="fw-bold mb-0 fs-4">Date</label>
+                                    <label for="date" class="fw-bold mb-0 fs-4">Fecha</label>
                                     <input type="date" id="date" name="date" class="form-control border-0 p-0 bg-transparent text-muted text-center" value="{{ date('Y-m-d') }}">
                                 </div>
                                 <div class="d-flex align-items-center gap-2">
-                                    <label for="schedule" class="fw-bold mb-0 fs-4">Schedule</label>
+                                    <label for="schedule" class="fw-bold mb-0 fs-4">Programar</label>
                                     <label class="switch mb-0">
                                         <input type="checkbox" id="schedule" name="schedule" checked>
                                         <span class="slider round"></span>
@@ -183,20 +183,20 @@
                             </div>
 
                             <div class="d-flex align-items-center justify-content-between mb-3 gap-4">
-                                <label for="recurrence" class="fw-bold mb-0 fs-4">Recurrence</label>
+                                <label for="recurrence" class="fw-bold mb-0 fs-4">Recurrencia</label>
                                 <div class="custom-select-wrapper">
                                     <select id="recurrence" name="recurrence" class="form-select border-0 bg-transparent">
-                                        <option selected>Monthly</option>
-                                        <option>Weekly</option>
-                                        <option>Biweekly</option>
-                                        <option>Once</option>
+                                        <option>Una vez</option>
+                                        <option>Semanal</option>
+                                        <option>Mensual</option>
+                                        <option>Bisemanal</option>
                                     </select>
                                     <i class="fas fa-chevron-right"></i>
                                 </div>
                             </div>
 
                             <div class="d-flex align-items-center justify-content-between w-100 mb-3">
-                                <label for="expiration_date" class="fw-bold mb-0 fs-4">Expiration Date</label>
+                                <label for="expiration_date" class="fw-bold mb-0 fs-4">Fecha de expiración</label>
                                 <input type="date" id="expiration_date" name="expiration_date" 
                                     class="form-control border-0 p-0 bg-transparent text-muted text-center max-w-200"
                                     value="{{ date('Y-m-d') }}">
@@ -204,27 +204,27 @@
 
                             <div class="mb-3">
                                 <div class="input-group">
-                                    <input type="number" class="form-control fs-5" id="amount" name="amount" placeholder="€ Amount" min="0" step="0.01">
+                                    <input type="number" class="form-control fs-5" id="amount" name="amount" placeholder="€ Cantidad" min="0" step="0.01">
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-3">
                             <div class="d-flex flex-column mb-3">
-                                <label class="fw-bold mb-0 fs-4">Category</label>
+                                <label class="fw-bold mb-0 fs-4">Categorías</label>
                                 <div class="d-flex flex-wrap mt-2">
                                     @foreach([
-                                        ['work', 'fa-briefcase', 'Work'],
-                                        ['freelance', 'fa-laptop-code', 'Freelance'],
-                                        ['gift', 'fa-gift', 'Gift'],
-                                        ['award', 'fa-trophy', 'Award'],
-                                        ['sale', 'fa-tags', 'Sale'],
-                                        ['rental', 'fa-home', 'Rental'],
-                                        ['interest', 'fa-coins', 'Interest'],
-                                        ['others', 'fa-ellipsis-h', 'Others'],
-                                        ['work', 'fa-briefcase', 'Work'],
-                                        ['freelance', 'fa-laptop-code', 'Freelance'],
-                                        ['new', 'fa-plus', 'New']
+                                        ['Trabajo', 'fa-briefcase', 'Trabajo'],
+                                        ['Freelance', 'fa-laptop-code', 'Freelance'],
+                                        ['Regalo', 'fa-gift', 'Regalo'],
+                                        ['Premio', 'fa-trophy', 'Premio'],
+                                        ['Venta', 'fa-tags', 'Venta'],
+                                        ['Renta', 'fa-home', 'Renta'],
+                                        ['Intereses', 'fa-coins', 'Intereses'],
+                                        ['Otros', 'fa-ellipsis-h', 'Otros'],
+                                        ['Trabajo', 'fa-briefcase', 'Trabajo'],
+                                        ['Freelance', 'fa-laptop-code', 'Freelance'],
+                                        ['Nueva', 'fa-plus', 'Nueva']
                                     ] as [$value, $icon, $label])
                                         <div class="me-2 mb-2">
                                             <label class="d-block text-center">
@@ -242,14 +242,14 @@
 
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-primary w-100 py-2 mt-3 fw-semibold fs-5 custom-gradient-btn">
-                                Add
+                                Añadir ingreso
                             </button>
                         </div>
                     </div>
                 </form>
-
             </article>
 
+            
         </section>
     </main>
 
