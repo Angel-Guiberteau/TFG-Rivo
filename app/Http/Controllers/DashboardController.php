@@ -13,11 +13,11 @@ class DashboardController extends Controller
         if ($user->rol_id === 1) {
             return redirect()->route('homeAdmin');
         }
-        if($user->isNewUser)
+        
+        if($user->is_new_user)
         {
             return redirect()->route('initialSetup');
         }
-
         return redirect()->route('home');
     }
 }
