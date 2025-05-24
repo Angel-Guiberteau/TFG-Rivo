@@ -14,6 +14,7 @@
     <div id="loader">
         <img src="{{ asset('img/logos/whiteRivoPng.png') }}" alt="Cargando Rivo" class="loader-logo" />
     </div>
+
     <main>
         
         <nav class="mobile-nav">
@@ -98,7 +99,7 @@
             
             {{-- HOME ARTICLE --}}
 
-            <article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black home-article" id="home-section">
+            {{-- <article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black home-article" id="home-section">
                 <div class="col-12 col-lg-6 mt-2 mt-lg-4">
                     <div class="w-100 info-container py-4 px-3">
                         <div class="d-flex flex-row justify-content-start align-items-center">
@@ -153,11 +154,11 @@
                         <p class="positive fs-5">+03.00€</p>
                     </div>
                 </div>
-            </article>
+            </article> --}}
 
             {{-- INCOME ARTICLE --}}
 
-            <article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black income-article" id="income-section" style="display: none;">
+            {{-- <article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black income-article" id="income-section" style="display: none;">
 
                 <form class="col-12 col-lg-10 mx-auto mt-4">
                     <div class="row">
@@ -247,11 +248,11 @@
                         </div>
                     </div>
                 </form>
-            </article>
+            </article> --}}
 
             {{-- EGRESS ARTICLE --}}
 
-            <article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black egress-article" id="egress-section" style="display: none;">
+            {{-- <article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black egress-article" id="egress-section" style="display: none;">
 
                 <form class="col-12 col-lg-10 mx-auto mt-4">
                     <div class="row">
@@ -341,8 +342,21 @@
                         </div>
                     </div>
                 </form>
-            </article>
+            </article> --}}
 
+            {{-- HISTORY ARTICLE  --}}
+
+            <article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black history-article" id="history-section">
+
+                <div class="col-12">
+                    
+                    <div>
+                        
+                    </div>
+
+                </div>
+
+            </article>
 
         </section>
     </main>
