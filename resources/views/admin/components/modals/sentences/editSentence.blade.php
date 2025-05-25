@@ -11,9 +11,8 @@
                     @method('PUT')
                     <input type="hidden" id="edit_id" name="id">
                     <div class="col-12">
-                        <label class="form-label" for="name">Frase <span class="modal_required">*</span></label>
+                        <label class="form-label" for="text">Frase <span class="modal_required">*</span></label>
                         <textarea id="nameEdit" name="text" class="form-control" placeholder="Ingrese la frase" required maxlength="255"></textarea>
-                        <input id="idEdit" name="id" class="form-control" type="text" hidden>
                         <div class="valid-feedback">¡Parece correcto!</div>
                         <div class="invalid-feedback">Por favor, introduce una frase correcta.</div>
                     </div>
