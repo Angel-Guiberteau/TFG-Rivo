@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const nameInput = document.getElementById("name");
-    const form = document.getElementById("form-addSentence");
+    const form = document.getElementById("form-addCategory");
     const submitButton = document.getElementById("buttonSubmit");
-    const addModal = document.getElementById("addSentence");
+    const addModal = document.getElementById("addCategory");
 
     function validateName() {
         const inputValue = nameInput.value.trim();
@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Reset each time modal opens
     addModal.addEventListener("show.bs.modal", function () {
         nameInput.classList.remove("is-valid", "is-invalid");
         nameInput.value = "";

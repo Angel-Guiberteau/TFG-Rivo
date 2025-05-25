@@ -10,7 +10,7 @@ class Sentence extends Model
     protected $table = 'sentences';
     protected $fillable = [ 'text', 'enabled' ];
 
-    public static function getSentence(): Collection {
+    public static function getAllSentencesEnabled(): Collection {
         $sentence = new self();
         
         return $sentence->select('id', 'text')
