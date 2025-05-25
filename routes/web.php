@@ -1,7 +1,9 @@
 <?php
 
 use App\Enums\ValidationEnum;
+use App\Http\Controllers\CategoryController;
 use App\Validations\SentencesValidator;
+use App\Validations\CategoriesValidator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -88,6 +90,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         return view('admin.home.home');
     })->name('homeAdmin');
 
+                                // USERS
+
     Route::group(['prefix' => 'users'], function () {
 
         Route::get('/', function () {
@@ -116,6 +120,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
     });
 
+                                // SENTENCES
+
     Route::group(['prefix' => 'sentences'], function () {
         Route::get('/', function (): View {
             return SentenceController::listSentences();
@@ -138,7 +144,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return SentenceController::editSentence($validate);
         })->name('editSentence');
 
-        Route::post('/deleteSentence', function (): JsonResponse {
+        Route::post('/delete', function (): JsonResponse {
             $data = [
                 'id' => request('id')
             ];
@@ -160,11 +166,39 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return view('admin.mockups.adminSentences');
         })->name('sentenceMockups');
     });
+    
+                                // CATEGORIES
 
     Route::group(['prefix' => 'categories'], function () {
-        Route::get('/', function () {
-            return view('admin.categories.categories');
+        Route::get('/', function (): View {
+            return CategoryController::listCategories();
         })->name('categories');
+
+        Route::post('/add', function (): RedirectResponse {
+            $data = [
+                'name' => request()->input('name')
+            ];
+            $validate = CategoriesValidator::validate($data, ValidationEnum::ADD->value);
+            return CategoryController::addCategory($validate);
+        })->name('addCategory');
+
+        Route::put('/edit', function (): RedirectResponse {
+            $data = [
+                'id' => request()->input('id'),
+                'name' => request()->input('name')
+            ];
+            $validate = CategoriesValidator::validate($data, ValidationEnum::EDIT->value);
+            return CategoryController::editCategory($validate);
+        })->name('editCategory');
+
+        Route::post('/delete', function (): JsonResponse {
+            $data = [
+                'id' => request('id')
+            ];
+            $validate = CategoriesValidator::validate($data, ValidationEnum::DELETE->value);
+
+            return CategoryController::deleteCategory($validate);
+        })->name('deleteCategory');
     });
     
 });

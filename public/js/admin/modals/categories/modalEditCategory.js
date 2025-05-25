@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const nameInput = document.getElementById("nameEdit");
-    const form = document.getElementById("form-editSentence");
+    const form = document.getElementById("form-editCategory");
     const submitButton = document.getElementById("buttonSubmitEdit");
-    const editModal = document.getElementById("editSentence");
+    const editModal = document.getElementById("editCategory");
 
     let hasChanged = false;
 
@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Reset each time modal opens
     editModal.addEventListener("show.bs.modal", function () {
         hasChanged = false;
         nameInput.classList.remove("is-valid", "is-invalid");

@@ -5,14 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Sentence;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class SentenceController extends Controller
 {
 
     public static function listSentences(): View {
-        $data = Sentence::getSentence();
+        $data = Sentence::getAllSentencesEnabled();
 
         return view('admin.sentences.sentences')->with('sentences', $data);
     }

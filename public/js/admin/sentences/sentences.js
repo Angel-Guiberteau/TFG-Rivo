@@ -5,9 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', function () {
             const id = this.getAttribute('data-id');
             const sentence = this.getAttribute('data-name');
-
+            
             document.getElementById('edit_id').value = id;
-            document.getElementById('idEdit').value = id;
             document.getElementById('nameEdit').value = sentence;
         });
     });
@@ -58,7 +57,7 @@ function deleteSentence(id) {
                 }
             }).then(function (secondConfirmed) {
                 if (secondConfirmed) {
-                    fetch('/admin/sentences/deleteSentence', {
+                    fetch('/admin/sentences/delete', {
                         method: "POST",
                         headers: {
                             'Content-Type': 'application/json',
