@@ -177,7 +177,3 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 | Test Routes
 |--------------------------------------------------------------------------
 */
-
-Route::get('/test', function () {
-    return view('home.income');
-})->name('test');
