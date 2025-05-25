@@ -15,60 +15,68 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function hideContentSections() {
         contentSections.forEach(section => {
-            section.classList.remove('active');
-            // No es necesario cambiar el display aquí, el CSS lo maneja
+            section.style.display = 'none';
         });
-    }
-
-    function showSection(section) {
-        if (section) {
-            section.classList.add('active');
-        }
     }
 
     if (showIncomeFormButton) {
         showIncomeFormButton.addEventListener('click', function() {
             hideContentSections();
-            showSection(incomeSection);
+            if (incomeSection) {
+                incomeSection.style.display = 'flex';
+            }
         });
     }
 
     if (incomeAddFormButton) {
         incomeAddFormButton.addEventListener('click', function() {
             hideContentSections();
-            showSection(incomeAddFormSection);
+            if (incomeAddFormSection) {
+                incomeAddFormSection.style.display = 'flex';
+            }
         });
     }
 
     if (backHistoryIncomeButton) {
         backHistoryIncomeButton.addEventListener('click', function() {
             hideContentSections();
-            showSection(incomeSection);
+            if (incomeSection) {
+                incomeSection.style.display = 'flex';
+            }
         });
     }
 
     if (showEgressFormButton) {
         showEgressFormButton.addEventListener('click', function() {
             hideContentSections();
-            showSection(egressSection);
+            if (egressSection) {
+                egressSection.style.display = 'flex';
+            }
         });
     }
 
     if (egressAddFormButton) {
         egressAddFormButton.addEventListener('click', function() {
             hideContentSections();
-            showSection(egressAddFormSection);
+            if (egressAddFormSection) {
+                egressAddFormSection.style.display = 'flex';
+            }
         });
     }
 
     if (backHistoryEgressButton) {
         backHistoryEgressButton.addEventListener('click', function() {
             hideContentSections();
-            showSection(egressSection);
+            if (egressSection) {
+                egressSection.style.display = 'flex';
+            }
         });
     }
 
+
     hideContentSections();
     const homeSection = document.getElementById('home-section');
-    showSection(homeSection);
+    if (homeSection) {
+        homeSection.style.display = 'flex';
+    }
 });

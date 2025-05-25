@@ -221,26 +221,6 @@ aside {
 }
 
 /* =============================== */
-/*        ARTICLE ANIMATIONS       */
-/* =============================== */
-
-main > section > article.home-article,
-main > section > article.income-article,
-main > section > article.egress-article {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out; 
-    display: none; 
-}
-
-main > section > article.home-article.active,
-main > section > article.income-article.active,
-main > section > article.egress-article.active {
-    opacity: 1;
-    display: flex; 
-}
-
-
-/* =============================== */
 /*        INCOME STYLES HISRORY    */
 /* =============================== */
 
