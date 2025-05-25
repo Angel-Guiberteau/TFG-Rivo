@@ -220,9 +220,49 @@ aside {
   padding: 1rem 3rem ;
 }
 
-/* ========================= */
-/*        INCOME STYLES      */
-/* ========================= */
+/* =============================== */
+/*        ARTICLE ANIMATIONS       */
+/* =============================== */
+
+main > section > article.home-article,
+main > section > article.income-article,
+main > section > article.egress-article {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out; 
+    display: none; 
+}
+
+main > section > article.home-article.active,
+main > section > article.income-article.active,
+main > section > article.egress-article.active {
+    opacity: 1;
+    display: flex; 
+}
+
+
+/* =============================== */
+/*        INCOME STYLES HISRORY    */
+/* =============================== */
+
+.border-custom {
+  border: 1px solid #ddd;
+}
+
+.bg-custom{
+  background-color: #6727d6;
+}
+
+.bg-custom2 {
+  background-color: #16a83d;
+}
+
+.rounded-custom {
+  border-radius: 1rem;
+}
+
+/* ============================ */
+/*        INCOME STYLES FORM    */
+/* ============================ */
 
 .switch {
   position: relative;
