@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const showIncomeFormButton = document.getElementById('showIncomeForm');
     const incomeSection = document.getElementById('income-section');
     const incomeAddFormButton = document.getElementById('incomeAddForm');
@@ -15,68 +15,67 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function hideContentSections() {
         contentSections.forEach(section => {
-            section.style.display = 'none';
+            section.classList.remove('show');
+            setTimeout(() => {
+                section.classList.add('fade-section');
+                section.style.display = 'none';
+            }, 300); // Duración de la animación CSS
+        });
+    }
+
+    function showSection(section) {
+        if (!section) return;
+
+        section.style.display = 'flex';
+        requestAnimationFrame(() => {
+            section.classList.add('show');
+            section.classList.remove('fade-section');
         });
     }
 
     if (showIncomeFormButton) {
-        showIncomeFormButton.addEventListener('click', function() {
+        showIncomeFormButton.addEventListener('click', function () {
             hideContentSections();
-            if (incomeSection) {
-                incomeSection.style.display = 'flex';
-            }
+            showSection(incomeSection);
         });
     }
 
     if (incomeAddFormButton) {
-        incomeAddFormButton.addEventListener('click', function() {
+        incomeAddFormButton.addEventListener('click', function () {
             hideContentSections();
-            if (incomeAddFormSection) {
-                incomeAddFormSection.style.display = 'flex';
-            }
+            showSection(incomeAddFormSection);
         });
     }
 
     if (backHistoryIncomeButton) {
-        backHistoryIncomeButton.addEventListener('click', function() {
+        backHistoryIncomeButton.addEventListener('click', function () {
             hideContentSections();
-            if (incomeSection) {
-                incomeSection.style.display = 'flex';
-            }
+            showSection(incomeSection);
         });
     }
 
     if (showEgressFormButton) {
-        showEgressFormButton.addEventListener('click', function() {
+        showEgressFormButton.addEventListener('click', function () {
             hideContentSections();
-            if (egressSection) {
-                egressSection.style.display = 'flex';
-            }
+            showSection(egressSection);
         });
     }
 
     if (egressAddFormButton) {
-        egressAddFormButton.addEventListener('click', function() {
+        egressAddFormButton.addEventListener('click', function () {
             hideContentSections();
-            if (egressAddFormSection) {
-                egressAddFormSection.style.display = 'flex';
-            }
+            showSection(egressAddFormSection);
         });
     }
 
     if (backHistoryEgressButton) {
-        backHistoryEgressButton.addEventListener('click', function() {
+        backHistoryEgressButton.addEventListener('click', function () {
             hideContentSections();
-            if (egressSection) {
-                egressSection.style.display = 'flex';
-            }
+            showSection(egressSection);
         });
     }
 
-
     hideContentSections();
     const homeSection = document.getElementById('home-section');
-    if (homeSection) {
-        homeSection.style.display = 'flex';
-    }
+    showSection(homeSection);
 });

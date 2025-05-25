@@ -219,6 +219,35 @@ aside {
 .balance-info{
   padding: 1rem 3rem ;
 }
+/* =============================== */
+/*        ARTICLE ANIMATIONS       */
+/* =============================== */
+
+.fade-section {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    display: none;
+}
+
+.fade-section.show {
+    display: flex !important;
+    opacity: 1;
+    visibility: visible;
+}
+
+.fade-section {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.show {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
 
 /* =============================== */
 /*        INCOME STYLES HISRORY    */
