@@ -259,9 +259,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.whatPercentage = function(inputNumber){
-        if(inputNumber !=4){
-            console.log('borrado');
-            
+        if(inputNumber !=4){            
             personalizePercentage.value = '';
         }
         choosedPercentage = inputNumber;
@@ -375,9 +373,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 
                 suggestion = adviseToSaveMoney(freeMoney.value);
             
-                percentage1.value = suggestion.percentage.min;
-                percentage2.value = suggestion.percentage.mid;
-                percentage3.value = suggestion.percentage.max;
+                percentage1.value = Number(suggestion.percentage.min);
+                percentage2.value = Number(suggestion.percentage.mid);
+                percentage3.value = Number(suggestion.percentage.max);
                 labelPercentage1.innerHTML = suggestion.percentage.min + '% - ' + suggestion.amount.min +'€';
                 labelPercentage2.innerHTML = suggestion.percentage.mid + '% - ' + suggestion.amount.mid +'€';
                 labelPercentage3.innerHTML = suggestion.percentage.max + '% - ' + suggestion.amount.max +'€';
@@ -401,7 +399,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     }
                 }
-                inputAvaibleSaveMoney.value = saveMoney;
+                inputAvaibleSaveMoney.value = Number(saveMoney);
 
                 animateSectionChange(sectionFifthStep, sectionSixthStep);
                 typeWriterReplace(title, 'Objetivo actual');

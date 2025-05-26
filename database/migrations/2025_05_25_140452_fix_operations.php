@@ -40,6 +40,7 @@ return new class extends Migration
 
 
         Schema::table('operations', function (Blueprint $table) {
+            $table->renameColumn('categories_id', 'category_id');
             $table->decimal('amount', 10, 2)->unsigned()->after('description')->change();
             $table->char('type', 1)->after('amount')->change(); // i, e, s
         });
@@ -83,6 +84,7 @@ return new class extends Migration
         });
 
         Schema::table('operations', function (Blueprint $table) {
+            $table->renameColumn('category_id', 'categories_id');
             $table->decimal('amount', 10, 2)->unsigned()->change();
             $table->char('type', 1)->change();
         });
@@ -95,5 +97,6 @@ return new class extends Migration
             $table->date('expiration_date')->nullable(false)->change();
         });
     }
+
 
 };

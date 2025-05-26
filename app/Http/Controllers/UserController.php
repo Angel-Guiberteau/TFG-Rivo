@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -11,8 +11,19 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use PhpParser\Node\Expr\Cast\Array_;
+use Throwable;
 
+use App\Models\Account;
+use App\Models\Operation;
+use App\Models\OperationPlanned;
+use App\Models\OperationUnschedule;
+use App\Models\User;
+use App\Models\UserAccount;
+use Illuminate\Support\Carbon;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class UserController extends Controller
 {
@@ -116,7 +127,7 @@ class UserController extends Controller
     public static function updateUser(): RedirectResponse
     {
         $request = request();
-       
+
         $validator = Validator::make($request->all(), [
             'id' => ['required', 'exists:users,id'],
             'name' => ['required', 'string', 'max:255'],
@@ -166,10 +177,183 @@ class UserController extends Controller
         return User::getUser();
     }
 
-    public function updateUserInfo($request): ?Authenticatable
+    public function updateUserInfoFromInitialSetup($data) : RedirectResponse
     {
+        try{
+            DB::beginTransaction();
+            $user = User::updateUserInfoFromInitialSetup($data);
+            if(!$user){
+                throw new \Exception('Error al actualizar el usuario');
+            }
 
-        dd($request);
+            $account = Account::addAccount($data);
+            if(!$account){
+                throw new \Exception('Error al crear la cuenta del usuario');
+            }
+
+            $userAccount = UserAccount::addUserAccount($user->id, $account->id);
+            if(!$userAccount){
+                throw new \Exception('Error al crear la cuenta del usuario');
+            }
+
+            //FixedIncomes
+            $fixedIncomes = $this->setFixedIncomes($data, $account);
+
+            if(!empty($fixedIncomes)){
+                foreach ($fixedIncomes as $key => $value) {
+                    $operation = Operation::addOperation($value);
+                    if(!$operation){
+                        throw new \Exception('Error al añadir los ingresos');
+                    }
+                    $plannedOperation = OperationPlanned::addPlannedOperation($operation->id, $value);
+                    if(!$plannedOperation){
+                        throw new \Exception('Error al añadir los ingresos planeados');
+                    }
+                }
+            }
+
+            //FixedExpenses
+            $fixedExpenses = $this->setfixedExpenses($data, $account);
+
+            if(!empty($fixedExpenses)){
+                foreach ($fixedExpenses as $key => $value) {
+                    $operation = Operation::addOperation($value);
+
+                    if(!$operation){
+                        throw new \Exception('Error al añadir los gastos');
+                    }
+
+                    $plannedOperation = OperationPlanned::addPlannedOperation($operation->id, $value);
+
+                    if(!$plannedOperation){
+                        throw new \Exception('Error al añadir los gastos planeados');
+                    }
+                }
+            }
+
+
+            if($data['actually_save'] > 0){
+                $savedMoney = $this->setSavedMoneyOperation($data, $account);
+
+                if(!empty($savedMoney)){
+                    $savedMoneyOperation = Operation::addOperation($savedMoney);
+                    if(!$savedMoneyOperation){
+                        throw new \Exception('Error al añadir los ahorros');
+                    }
+                    $unscheduleOperation = OperationUnschedule::addUnscheduleOperation($savedMoneyOperation->id);
+                    
+                    if(!$unscheduleOperation){
+                        throw new \Exception('Error al añadir los ahorros');
+                    }
+                }
+            }
+
+            if(!User::updateNewUser($user)){
+                throw new \Exception('Error al cambiar el estado de nuevo usuario');
+            }
+            DB::commit();
+
+            return redirect()->action([DashboardController::class, 'index']);
+        } catch (Throwable $e){
+            DB::rollback();
+            return back()->withInput();
+        }
+
+    }
+
+
+    private function setFixedIncomes(Array $data, Account $account): Array{
+        $fixedIncomes = [];
+
+        if (isset($data['salary']) && !is_null($data['salary'])) {
+            $fixedIncomes['salary'] = [
+                'amount' => $data['salary'],
+                'subject' => 'Salario',
+                'description' => 'Ingreso mensual por trabajo',
+                'action_date' => Carbon::now()->toDateString(),
+                'type' => 'i',
+                'account_id' => $account->id,
+                'start_date' => Carbon::now()->startOfMonth()->toDateString(),
+                'period' => 'm',
+            ];
+        }
+
+        if (isset($data['familyHelp']) && !is_null($data['familyHelp'])) {
+            $fixedIncomes['familyHelp'] = [
+                'amount' => $data['familyHelp'],
+                'subject' => 'Ayuda familiar',
+                'description' => 'Ayuda de la familia mensualmente',
+                'action_date' => Carbon::now()->toDateString(),
+                'type' => 'i',
+                'account_id' => $account->id,
+                'start_date' => Carbon::now()->startOfMonth()->toDateString(),
+                'period' => 'm',
+            ];
+        }
+        
+        if (isset($data['stateHelp']) && !is_null($data['stateHelp'])) {
+            $fixedIncomes['stateHelp'] = [
+                'amount' => $data['stateHelp'],
+                'subject' => 'Ayudas del estado',
+                'description' => 'Ayuda del estado mensual',
+                'action_date' => Carbon::now()->toDateString(),
+                'type' => 'i',
+                'account_id' => $account->id,
+                'start_date' => Carbon::now()->startOfMonth()->toDateString(),
+                'period' => 'm',
+            ];
+        }
+        if(empty($fixedIncomes))
+            return $fixedIncomes = ['status' => false];
+        return $fixedIncomes;
+    }
+    
+    private function setSavedMoneyOperation(Array $data, Account $account): Array{
+        $savedMoney = [];
+
+        if (isset($data['actually_save']) && !is_null($data['actually_save'])) {
+            $savedMoney['amount'] = $data['actually_save'];
+            $savedMoney['subject'] = 'Ahorro';
+            $savedMoney['description'] = 'Ahorro antes de usar Rivo';
+            $savedMoney['action_date'] = Carbon::now()->toDateString();
+            $savedMoney['type'] = 's';
+            $savedMoney['account_id'] = $account->id;
+        }
+
+        return $savedMoney;
+    }
+    
+    private function setFixedExpenses(Array $data, Account $account): Array{
+        
+        $fixedExpensesKeys = [
+            'homeExpenses' => 'Casa',
+            'servicesHomeExpenses' => 'Luz, agua, gas...',
+            'feedingExpenses' => 'Alimentación',
+            'transportationExpenses' => 'Transporte',
+            'healthExpenses' => 'Salud',
+            'telephoneExpenses' => 'Telefonía',
+            'educationExpenses' => 'Educación',
+            'otherExpenses' => 'Otros gastos fijos'
+
+        ];
+        $fixedExpenses = [];
+
+        foreach ($fixedExpensesKeys as $key => $value) {
+            if (isset($data[$key]) && !is_null($data[$key])){
+                $fixedExpenses[$key] = [
+                    'amount' => $data[$key],
+                    'subject' => $value,
+                    'description' => 'Ingreso mensual por trabajo',
+                    'action_date' => Carbon::now()->toDateString(),
+                    'type' => 'e',
+                    'account_id' => $account->id,
+                    'start_date' => Carbon::now()->startOfMonth()->toDateString(),
+                    'period' => 'm',
+                ];
+            }
+        }
+
+        return $fixedExpenses;
     }
 
 }

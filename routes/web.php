@@ -14,7 +14,8 @@ use App\Http\Controllers\DashboardController;
 
 use App\Http\Controllers\SentenceController;
 use App\Http\Controllers\UserController;
-
+use App\Validations\UserValidator;
+use App\Validations\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Js;
 
@@ -43,12 +44,15 @@ Route::get('/home', function (): View {
 Route::get('/initialSetup', function () {
     return view('home.initialSetup');
 })->middleware(['auth', 'role:user'])->name('initialSetup');
-Route::post('/updateUserInfo', function () {
-    $request = Request();
 
+Route::post('/updateUserInfoFromInitialSetup', function () {
+    $request = Request()->all();
+
+    $validate = UserValidator::validate($request, ValidationEnum::INITIALSETUP->value);
+    $data = $validate['data'];
     $controller = new UserController();
-    return  $controller->updateUserInfo($request);
-})->middleware(['auth', 'role:user'])->name('updateUserInfo');
+    return  $controller->updateUserInfoFromInitialSetup($data);
+})->middleware(['auth', 'role:user'])->name('updateUserInfoFromInitialSetup');
 
 
 /*
