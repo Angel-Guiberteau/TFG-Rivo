@@ -31,7 +31,7 @@ abstract class Validator extends Controller
             'add' => static::rulesAdd(),
             'edit' => static::rulesEdit(),
             'delete' => static::rulesDelete(),
-            // 'preView' => static::rulesPreView(),
+            'initialSetup' => static::rulesInitialSetup(),
             default => [],
         };
     }
@@ -41,7 +41,7 @@ abstract class Validator extends Controller
             'add' => static::messagesAdd(),
             'edit' => static::messagesEdit(),
             'delete' => static::messagesDelete(),
-            // 'preView' => static::messagesPreView(),
+            'initialSetup' => static::messagesInitialSetup(),
             default => [],
         };
     }
@@ -52,6 +52,8 @@ abstract class Validator extends Controller
     protected static function messagesEdit(): array { return []; }
     protected static function rulesDelete(): array { return []; }
     protected static function messagesDelete(): array { return []; }
+    protected static function rulesInitialSetup(): array { return []; }
+    protected static function messagesInitialSetup(): array { return []; }
     // protected static function rulesPreView(): array { return []; }
     // protected static function messagesPreView(): array { return []; }
 }

@@ -6,5 +6,33 @@ use Illuminate\Database\Eloquent\Model;
 
 class Operation extends Model
 {
-    //
+    protected $table = 'operations';
+
+    protected $fillable = [
+        'subject',
+        'description',
+        'amount',
+        'type',
+        'action_date',
+        'account_id',
+        'category_id',
+        'enabled',
+    ];
+
+    public static function addOperation(Array $data): bool | self {
+        $operation = new self;
+
+        $operation->subject = $data['subject'];
+        $operation->description = $data['description'];
+        $operation->amount = $data['amount'];
+        $operation->action_date = $data['action_date'];
+        $operation->account_id = $data['account_id'];
+        $operation->type = $data['type'];
+        $operation->category_id = 1;
+        
+        if(!$operation->save())
+            return false;
+
+        return $operation;
+    }
 }

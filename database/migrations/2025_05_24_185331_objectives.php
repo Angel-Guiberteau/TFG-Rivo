@@ -46,8 +46,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('objectives');
         Schema::dropIfExists('objectives_operations');
+        Schema::dropIfExists('objectives');
 
     }
 };

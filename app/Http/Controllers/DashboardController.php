@@ -14,7 +14,7 @@ class DashboardController extends Controller
             return redirect()->route('homeAdmin');
         }
         
-        if($user->is_new_user)
+        if($user->isNewUser)
         {
             return redirect()->route('initialSetup');
         }
