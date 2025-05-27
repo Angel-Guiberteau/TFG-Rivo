@@ -34,7 +34,7 @@
                     
                     <h2 id="title" class="fw-bold fs-2 mb-2">¡Empecemos!</h2>
                     <p id="subtitle" class="fs-5 w-100 text-center fw-light mb-4">Cuéntanos un poco sobre ti...</p>
-                    <form class="fade-toggle active" action="/updateUserInfo" method="POST">
+                    <form class="fade-toggle active" action="/updateUserInfoFromInitialSetup" method="POST">
                         @csrf
                         
                         @include('home.initialSetup.firstStep')

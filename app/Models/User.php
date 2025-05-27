@@ -19,15 +19,15 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
         'google_id',
+        'name',
+        'last_name',
+        'username',
+        'birth_date',
         'rol_id',
         'is_new_user',
-        'last_name',
-        'birth_date',
-        'username',
         'enabled',
     ];
 
@@ -105,6 +105,32 @@ class User extends Authenticatable
         return self::where('id', $id)
             ->where('enabled', 1)
             ->first();
+    }
+
+    public static function updateUserInfoFromInitialSetup(Array $data): ?User
+    {
+        /** @var User $user */
+        $user = Auth::user();
+
+        if (!$user) {
+            return null;
+        }
+
+        $user->name = $data['name'];
+        $user->last_name = $data['last_name'];
+        $user->username = $data['username'];
+        $user->birth_date = $data['birth_date'];
+
+        return $user->save() ? $user : null;
+    }
+
+    public static function updateNewUser($user): bool{
+        $user->isNewUser = false;
+        if(!$user->save()){
+            return false;
+        }
+
+        return true;
     }
 
 }
