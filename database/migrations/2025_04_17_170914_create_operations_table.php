@@ -16,7 +16,10 @@ return new class extends Migration
             $table->string('subject');
             $table->string('description', 255);
             $table->decimal('amount', 10, 2)->unsigned();
-            $table->char('type', 1); // i, e, s
+
+            $table->unsignedInteger('movement_type_id');
+            $table->foreign('movement_type_id')->references('id')->on('movements_types')->onDelete('cascade')->onUpdate('cascade');
+            
             $table->date('action_date');
             $table->unsignedInteger('account_id');
             $table->unsignedInteger('category_id');
