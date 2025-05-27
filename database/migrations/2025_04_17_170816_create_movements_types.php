@@ -11,17 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('programmed', function (Blueprint $table) {
+        Schema::create('movements_types', function (Blueprint $table) {
             $table->unsignedInteger('id')->autoIncrement()->primary();
-            $table->unsignedInteger('operation_id');
-            $table->date('expiration_date');
-            $table->enum('period', ['m', 'w', 'd']);
+            
+            $table->string('name', 50);
+
             $table->boolean('enabled')->default(true);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
+        });     
         
-            $table->foreign('operation_id')->references('id')->on('operations')->onDelete('cascade')->onUpdate('cascade');
-        });        
     }
 
     /**
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('programmed');
+        Schema::dropIfExists('movements_types');
     }
 };
