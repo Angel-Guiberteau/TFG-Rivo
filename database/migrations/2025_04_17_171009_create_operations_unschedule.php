@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('no_programmed', function (Blueprint $table) {
+        Schema::create('operations_unschedule', function (Blueprint $table) {
             $table->unsignedInteger('id')->autoIncrement()->primary();
             $table->unsignedInteger('operation_id');
             $table->timestamp('created_at')->useCurrent();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('no_programmed');
+        Schema::dropIfExists('operations_unschedule');
     }
 };

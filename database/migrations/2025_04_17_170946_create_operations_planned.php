@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('programmed', function (Blueprint $table) {
+        Schema::create('operations_planned', function (Blueprint $table) {
             $table->unsignedInteger('id')->autoIncrement()->primary();
             $table->unsignedInteger('operation_id');
-            $table->date('expiration_date');
+            $table->date('start_date');
+            $table->date('expiration_date')->nullable();
             $table->enum('period', ['m', 'w', 'd']);
             $table->boolean('enabled')->default(true);
             $table->timestamp('created_at')->useCurrent();
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('programmed');
+        Schema::dropIfExists('operations_planned');
     }
 };

@@ -15,14 +15,17 @@ return new class extends Migration
             $table->unsignedInteger('id')->autoIncrement()->primary();
             $table->string('subject');
             $table->string('description', 255);
+            $table->decimal('amount', 10, 2)->unsigned();
+            $table->char('type', 1); // i, e, s
             $table->date('action_date');
             $table->unsignedInteger('account_id');
-            $table->unsignedInteger('categories_id');
+            $table->unsignedInteger('category_id');
+            
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         
             $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('categories_id')->references('id')->on('categories')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict')->onUpdate('cascade');
         });        
     }
 
