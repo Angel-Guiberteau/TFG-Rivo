@@ -21,7 +21,7 @@ return new class extends Migration
         });     
         
         Schema::table('categories', function (Blueprint $table) {
-            $table->unsignedInteger('icon_id');
+            $table->unsignedInteger('icon_id')->after('name');
             $table->foreign('icon_id')
                 ->references('id')
                 ->on('icons')

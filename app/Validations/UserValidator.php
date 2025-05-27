@@ -83,7 +83,8 @@ class UserValidator extends Validator {
 
             'percentage' => 'sometimes|nullable|numeric',
             'personalizePercentage' => 'sometimes|nullable|integer',
-            'objective' => 'sometimes|nullable|string|max:255',
+            'objective' => 'sometimes|nullable|numeric',
+            'personalize_objective' => 'sometimes|nullable|string|max:255',
 
             'variable_freeTime' => 'sometimes|nullable|integer',
             'variable_unexpected' => 'sometimes|nullable|integer',

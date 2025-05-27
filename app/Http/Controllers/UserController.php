@@ -17,6 +17,8 @@ use PhpParser\Node\Expr\Cast\Array_;
 use Throwable;
 
 use App\Models\Account;
+use App\Models\Objective;
+use App\Models\ObjectiveOperation;
 use App\Models\Operation;
 use App\Models\OperationPlanned;
 use App\Models\OperationUnschedule;
@@ -181,6 +183,7 @@ class UserController extends Controller
     {
         try{
             DB::beginTransaction();
+            
             $user = User::updateUserInfoFromInitialSetup($data);
             if(!$user){
                 throw new \Exception('Error al actualizar el usuario');
@@ -190,7 +193,6 @@ class UserController extends Controller
             if(!$account){
                 throw new \Exception('Error al crear la cuenta del usuario');
             }
-
             $userAccount = UserAccount::addUserAccount($user->id, $account->id);
             if(!$userAccount){
                 throw new \Exception('Error al crear la cuenta del usuario');
@@ -200,12 +202,16 @@ class UserController extends Controller
             $fixedIncomes = $this->setFixedIncomes($data, $account);
 
             if(!empty($fixedIncomes)){
+
                 foreach ($fixedIncomes as $key => $value) {
                     $operation = Operation::addOperation($value);
                     if(!$operation){
                         throw new \Exception('Error al añadir los ingresos');
                     }
+                    
+
                     $plannedOperation = OperationPlanned::addPlannedOperation($operation->id, $value);
+                    
                     if(!$plannedOperation){
                         throw new \Exception('Error al añadir los ingresos planeados');
                     }
@@ -231,12 +237,15 @@ class UserController extends Controller
                 }
             }
 
+            $savedMoneyOperation = null;
+
 
             if($data['actually_save'] > 0){
                 $savedMoney = $this->setSavedMoneyOperation($data, $account);
 
                 if(!empty($savedMoney)){
                     $savedMoneyOperation = Operation::addOperation($savedMoney);
+
                     if(!$savedMoneyOperation){
                         throw new \Exception('Error al añadir los ahorros');
                     }
@@ -245,6 +254,18 @@ class UserController extends Controller
                     if(!$unscheduleOperation){
                         throw new \Exception('Error al añadir los ahorros');
                     }
+                }
+            }
+            $objective = $this->setObjective($data, $account, $savedMoneyOperation);
+
+            if(!empty($objective)){
+                $savedObjective = Objective::addObjective($objective);
+                if(!$savedObjective){
+                    throw new \Exception('Error al añadir los ahorros');
+                }
+                $objectiveOperation =  ObjectiveOperation::addObjectiveOperation($savedObjective->id, $savedMoneyOperation->id);
+                if(!$objectiveOperation){
+                    throw new \Exception('Error al añadir los ahorros');
                 }
             }
 
@@ -303,8 +324,7 @@ class UserController extends Controller
                 'period' => 'm',
             ];
         }
-        if(empty($fixedIncomes))
-            return $fixedIncomes = ['status' => false];
+
         return $fixedIncomes;
     }
     
@@ -355,5 +375,47 @@ class UserController extends Controller
 
         return $fixedExpenses;
     }
+    private function setObjective(Array $data, Account $account, Operation $savedMoneyOperation): Array{
+
+        $objective = [];
+
+        if (isset($data['personalize_objective']) && !is_null($data['personalize_objective'])){
+            $objective = [
+                'name' => $data['personalize_objective']
+            ];
+        }else{
+            if (isset($data['objective']) && !is_null($data['objective'])) {
+                if($data['objective'] == 1){
+                    $objective = [
+                        'name' => 'Fondo de emergencia'
+                    ];
+                }else{
+                    if($data['objective'] == 2){
+                        $objective = [
+                            'name' => 'Salir de deudas'
+                        ];
+                    }else {
+                        if($data['objective'] == 3){
+                            $objective = [
+                                'name' => 'Ahorros a futuro'
+                            ];
+                        }
+                    }
+                }
+            }
+        }
+
+        $objective['target_amount'] = 2000;
+        $objective['account_id'] = $account->id;
+        $objective['deadline'] = null;
+        $objective['current_amount'] = $savedMoneyOperation ? $savedMoneyOperation->amount : 0;
+
+        if(!isset($objective['name'])){
+            return [];
+        }
+
+        return $objective;
+    }
+
 
 }
