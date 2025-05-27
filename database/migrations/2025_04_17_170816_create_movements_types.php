@@ -10,7 +10,7 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
+    { 
         Schema::create('movements_types', function (Blueprint $table) {
             $table->unsignedInteger('id')->autoIncrement()->primary();
             

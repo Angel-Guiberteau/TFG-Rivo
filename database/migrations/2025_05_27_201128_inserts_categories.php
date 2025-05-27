@@ -81,3 +81,4 @@ return new class extends Migration
         DB::table('categories')->whereIn('id', range(1, 19))->delete();
     }
 };
+ 
