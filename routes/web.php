@@ -215,3 +215,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 | Test Routes
 |--------------------------------------------------------------------------
 */
+Route::get('/test', function (): View {
+    return view('home.test');
+})->name('test');
