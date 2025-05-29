@@ -12,7 +12,7 @@ class Operation extends Model
         'subject',
         'description',
         'amount',
-        'type',
+        'movement_type_id',
         'action_date',
         'account_id',
         'category_id',
@@ -27,7 +27,7 @@ class Operation extends Model
         $operation->amount = $data['amount'];
         $operation->action_date = $data['action_date'];
         $operation->account_id = $data['account_id'];
-        $operation->type = $data['type'];
+        $operation->movement_type_id = $data['movement_type_id'];
         $operation->category_id = 1;
         
         if(!$operation->save())

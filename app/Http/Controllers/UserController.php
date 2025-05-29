@@ -292,7 +292,7 @@ class UserController extends Controller
                 'subject' => 'Salario',
                 'description' => 'Ingreso mensual por trabajo',
                 'action_date' => Carbon::now()->toDateString(),
-                'type' => 'i',
+                'movement_type_id' => 1,
                 'account_id' => $account->id,
                 'start_date' => Carbon::now()->startOfMonth()->toDateString(),
                 'period' => 'm',
@@ -305,7 +305,7 @@ class UserController extends Controller
                 'subject' => 'Ayuda familiar',
                 'description' => 'Ayuda de la familia mensualmente',
                 'action_date' => Carbon::now()->toDateString(),
-                'type' => 'i',
+                'movement_type_id' => 1,
                 'account_id' => $account->id,
                 'start_date' => Carbon::now()->startOfMonth()->toDateString(),
                 'period' => 'm',
@@ -318,7 +318,7 @@ class UserController extends Controller
                 'subject' => 'Ayudas del estado',
                 'description' => 'Ayuda del estado mensual',
                 'action_date' => Carbon::now()->toDateString(),
-                'type' => 'i',
+                'movement_type_id' => 1,
                 'account_id' => $account->id,
                 'start_date' => Carbon::now()->startOfMonth()->toDateString(),
                 'period' => 'm',
@@ -336,7 +336,7 @@ class UserController extends Controller
             $savedMoney['subject'] = 'Ahorro';
             $savedMoney['description'] = 'Ahorro antes de usar Rivo';
             $savedMoney['action_date'] = Carbon::now()->toDateString();
-            $savedMoney['type'] = 's';
+            $savedMoney['movement_type_id'] = 3;
             $savedMoney['account_id'] = $account->id;
         }
 
@@ -365,7 +365,7 @@ class UserController extends Controller
                     'subject' => $value,
                     'description' => 'Ingreso mensual por trabajo',
                     'action_date' => Carbon::now()->toDateString(),
-                    'type' => 'e',
+                    'movement_type_id' => 2,
                     'account_id' => $account->id,
                     'start_date' => Carbon::now()->startOfMonth()->toDateString(),
                     'period' => 'm',

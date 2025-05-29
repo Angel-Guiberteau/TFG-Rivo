@@ -23,4 +23,26 @@ class Account extends Model
 
         return $account->save() ? $account : false;
     }
+
+    public static function getAccountByUserId(int $userId): ?Account {
+        return self::whereHas('users', function ($query) use ($userId) {
+            $query->where('users.id', $userId);
+        })->first();
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'users_accounts', 'account_id', 'user_id');
+    }
+
+    public function objectives()
+    {
+        return $this->hasMany(Objective::class);
+    }
+
+    public function operations()
+    {
+        return $this->hasMany(Operation::class);
+    }
+
 }
