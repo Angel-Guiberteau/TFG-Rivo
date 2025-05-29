@@ -62,7 +62,6 @@
 
         {{-- MAIN CONTENT --}}
         <section class="w-100">
-        
             <article class="balance-bg  w-100">
                 <header class="mobile-header">
                     <div>
