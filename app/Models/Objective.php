@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Objective extends Model
 {
@@ -28,5 +29,16 @@ class Objective extends Model
 
         return $objective->save() ? $objective : false;
 
+    }
+
+    public static function getObjectives(): Collection{
+        return self::where('enabled', 1)
+            ->get();
+    }
+    
+    public static function getObjectivesByAccountId(int $accountsId): Collection{
+        return self::where('account_id', $accountsId)
+            ->where('enabled', 1)
+            ->get();
     }
 }

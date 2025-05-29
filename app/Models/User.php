@@ -56,7 +56,14 @@ class User extends Authenticatable
 
     public static function getUser()
     {
-        return Auth::user();
+         /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        return $user->load([
+            'accounts.objectives',
+            'accounts.operations',
+            'role',
+        ]);
     }
 
     public function role()
@@ -65,10 +72,9 @@ class User extends Authenticatable
     }
 
     public static function getAllUsers()
-    {
-        $users = new self();
-        
-        return $users->select('id','name', 'last_name', 'email', 'rol_id', 'google_id', 'birth_date', 'username')
+    {   
+        return self::with('accounts')
+                    ->select('id','name', 'last_name', 'email', 'rol_id', 'google_id', 'birth_date', 'username')
                     ->where('enabled', 1)
                     ->get();
     }
@@ -131,6 +137,11 @@ class User extends Authenticatable
         }
 
         return true;
+    }
+
+    public function accounts()
+    {
+        return $this->belongsToMany(Account::class, 'users_accounts', 'user_id', 'account_id');
     }
 
 }
