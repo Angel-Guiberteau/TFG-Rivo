@@ -14,6 +14,14 @@
                         <div class="valid-feedback">¡Parece correcto!</div>
                         <div class="invalid-feedback">Por favor, introduce una Categoria correcta.</div>
                     </div>
+                    <div>
+                        <p>Tipo <span class="modal_required">*</span></p>
+                        <div class="types d-flex justify-content-around p-1">
+                            <div class="border p-2 rounded">asdfasd</div>
+                            <div class="border p-2 rounded">sadfsa</div>
+                            <div class="border p-2 rounded">asdfasf</div>
+                        </div>
+                    </div>
                     <div class="col-12 d-flex flex-column align-items-end"> 
                         <button type="submit" class="btn btn-primary btn-sm" id="buttonSubmit"> Añadir </button>
                     </div>

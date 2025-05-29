@@ -1,7 +1,15 @@
-textarea{
+textarea {
     height: 8rem;
     resize: none;
 }
-.modal_required{
+.modal_required {
     color: red;
+}
+
+.types {
+    width: 50%;
+}
+
+.types div:hover {
+    background-color: #20b320;
 }
