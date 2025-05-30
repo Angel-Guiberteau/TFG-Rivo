@@ -29,6 +29,15 @@ class Account extends Model
             $query->where('users.id', $userId);
         })->first();
     }
+    
+    public static function updateBalance(int $accountId, float $total): bool {
+        $account = self::where('id', $accountId)
+            ->first();
+
+        $account->balance = round($total, 2);
+
+        return $account->save();
+    }
 
     public function users()
     {
