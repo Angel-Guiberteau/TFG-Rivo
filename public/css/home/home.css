@@ -381,3 +381,21 @@ input[type="radio"]:checked + .category-option i {
 .max-w-200 {
   max-width: 200px;
 }
+
+.newObjective {
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.newObjective:hover {
+    background-color: #f8f8f8;
+    border-color: #6b00e5;
+    color: #6b00e5;
+}

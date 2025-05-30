@@ -271,6 +271,9 @@ a:hover {
   max-height: 0;
   overflow: hidden;
   transition: opacity 0.4s ease, max-height 0.4s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .password-strength-wrapper.active {
@@ -279,7 +282,6 @@ a:hover {
 }
 
 .password-strength-bar {
-  width: 0%;
   height: 6px;
   border-radius: 4px;
   background-color: #ccc;
@@ -287,12 +289,12 @@ a:hover {
 }
 
 .strength-text {
-  margin-top: 0.3rem;
   font-size: 0.75rem;
   color: white;
   font-weight: 500;
-  transition: color 0.4s ease;
+  white-space: nowrap;
 }
+
 
 .alert-danger {
   background-color: rgba(217, 214, 219, 0.091);

@@ -97,6 +97,7 @@
             </article>
             
             {{-- HOME SECTION --}}
+            if
             @foreach ($objectives as $objective)
                 <article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black home-article" id="home-section">
                     <div class="col-12 col-lg-6 mt-2 mt-lg-4">
@@ -119,6 +120,18 @@
                             </div>
                         </div>
                     </div>
+                    @if ($loop->last)
+                        <div class="col-12 col-lg-6 mt-2 mt-lg-4">
+                            <div class="w-100 info-container newObjective py-4 px-3">
+                                <div class="d-flex flex-row justify-content-start align-items-center">
+                                    <div class="d-flex flex-column align-items-start gap-0">
+                                        <h3 class="mb-1 fs-4 fw-bold">Añadir un nuevo objetivo</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    
                     
                     {{-- <div class="col-12 info-container mt-4 py-4 px-4">
                         <h3 class="mb-1 fs-4 fw-bold">Resumen de gastos – Mayo 2025</h3>
