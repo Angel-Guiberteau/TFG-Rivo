@@ -256,7 +256,7 @@ class UserController extends Controller
                 } else{
                     $savedMoneyAmount = $savedMoneyOperation->amount;
                 }
-                dd($savedMoneyAmount);
+                
                 $objective = $this->setObjective($data, $account, $savedMoneyAmount);
                 
                 if(!empty($objective)){
@@ -265,11 +265,12 @@ class UserController extends Controller
                     if(!$savedObjective){
                         throw new \Exception('Error al añadir los ahorros');
                     }
-                    if($savedMoneyAmount > 0)
+               
+                    if($savedMoneyAmount > 0){
                         $objectiveOperation =  ObjectiveOperation::addObjectiveOperation($savedObjective->id, $savedMoneyOperation->id);
-
-                    if(!$objectiveOperation){
-                        throw new \Exception('Error al añadir los ahorros');
+                        if(!$objectiveOperation){
+                            throw new \Exception('Error al añadir los ahorros');
+                        }
                     }
                 }
             }
