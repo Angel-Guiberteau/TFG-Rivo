@@ -271,6 +271,9 @@ a:hover {
   max-height: 0;
   overflow: hidden;
   transition: opacity 0.4s ease, max-height 0.4s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .password-strength-wrapper.active {
@@ -279,7 +282,6 @@ a:hover {
 }
 
 .password-strength-bar {
-  width: 0%;
   height: 6px;
   border-radius: 4px;
   background-color: #ccc;
@@ -287,12 +289,12 @@ a:hover {
 }
 
 .strength-text {
-  margin-top: 0.3rem;
   font-size: 0.75rem;
   color: white;
   font-weight: 500;
-  transition: color 0.4s ease;
+  white-space: nowrap;
 }
+
 
 .alert-danger {
   background-color: rgba(217, 214, 219, 0.091);
@@ -309,17 +311,29 @@ a:hover {
   transition: all 0.3s ease;
 }
 
-.tooltip-custom .tooltip-inner {
-  background-color: #f5f5f5;      
-  color: #333;                  
-  border: 1px solid #ccc;
-  padding: 0.5rem 0.5rem 0.5rem 0.75rem;
-  font-size: 0.9rem;
-  border-radius: 0.25rem;
+.tooltip.tooltip-custom .tooltip-inner {
+  max-width: 260px;           /* Ajusta el ancho */
+  background-color: #fff;     /* Fondo blanco */
+  color: #333;                /* Texto oscuro */
+  border-radius: 10px;        /* Bordes redondeados */
+  padding: 1rem;              /* Espaciado interno */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25); /* Sombra */
+  font-size: 0.875rem;
+  text-align: left;
 }
 
-.tooltip-custom .tooltip-arrow::before {
-  border-bottom-color: #f5f5f5;   
+.tooltip.tooltip-custom.bs-tooltip-bottom .tooltip-arrow::before {
+  border-bottom-color: #fff !important;
+}
+
+.tooltip.tooltip-custom ul {
+  padding-left: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.tooltip.tooltip-custom p {
+  margin-bottom: 0.25rem;
+  font-weight: bold;
 }
 
 .btn-return{

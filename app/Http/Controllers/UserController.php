@@ -265,7 +265,6 @@ class UserController extends Controller
                     if(!$savedObjective){
                         throw new \Exception('Error al añadir los ahorros');
                     }
-               
                     if($savedMoneyAmount > 0){
                         $objectiveOperation =  ObjectiveOperation::addObjectiveOperation($savedObjective->id, $savedMoneyOperation->id);
                         if(!$objectiveOperation){
