@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const homeSection = document.getElementById('home-section');
+    const showHomeButton = document.getElementById('showHome');
+
     const showIncomeFormButton = document.getElementById('showIncomeForm');
     const incomeSection = document.getElementById('income-section');
     const incomeAddFormButton = document.getElementById('incomeAddForm');
@@ -19,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(() => {
                 section.classList.add('fade-section');
                 section.style.display = 'none';
-            }, 300); // Duración de la animación CSS
+            }, 300);
         });
     }
 
@@ -74,8 +77,14 @@ document.addEventListener('DOMContentLoaded', function () {
             showSection(egressSection);
         });
     }
+    
+    if (showHomeButton) {
+        showHomeButton.addEventListener('click', function () {
+            hideContentSections();
+            showSection(homeSection);
+        });
+    }
 
     hideContentSections();
-    const homeSection = document.getElementById('home-section');
     showSection(homeSection);
 });

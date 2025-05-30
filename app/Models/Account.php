@@ -54,4 +54,8 @@ class Account extends Model
         return $this->hasMany(Operation::class);
     }
 
+    public function icon()
+    {
+        return $this->belongsTo(Icon::class, 'icon_id');
+    }
 }
