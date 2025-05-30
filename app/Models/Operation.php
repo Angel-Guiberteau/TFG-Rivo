@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Operation extends Model
 {
@@ -34,5 +35,10 @@ class Operation extends Model
             return false;
 
         return $operation;
+    }
+    
+    public static function getAllOperationsByAccountId(int $acocuntId): ?Collection {
+        return self::where('account_id', $acocuntId)
+            ->get();
     }
 }
