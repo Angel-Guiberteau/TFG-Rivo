@@ -33,8 +33,8 @@ class GoogleController extends Controller
             Auth::login($user, remember: true);
             $user->load('role');
             return match ($user->role->name) {
-                'admin' => redirect()->route('homeAdmin'),
-                'user' => redirect()->route('home'),
+                'admin' => redirect()->route('dashboard'),
+                'user' => redirect()->route('dashboard'),
                 default => redirect('/'),
             };
 
