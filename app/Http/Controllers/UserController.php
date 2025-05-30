@@ -183,7 +183,6 @@ class UserController extends Controller
     {
         try{
             DB::beginTransaction();
-            
             $user = User::updateUserInfoFromInitialSetup($data);
             if(!$user){
                 throw new \Exception('Error al actualizar el usuario');
@@ -197,7 +196,6 @@ class UserController extends Controller
             if(!$userAccount){
                 throw new \Exception('Error al crear la cuenta del usuario');
             }
-
             //FixedIncomes
             $fixedIncomes = $this->setFixedIncomes($data, $account);
 
@@ -218,7 +216,6 @@ class UserController extends Controller
                 }
             }
 
-            //FixedExpenses
             $fixedExpenses = $this->setfixedExpenses($data, $account);
 
             if(!empty($fixedExpenses)){
@@ -239,7 +236,6 @@ class UserController extends Controller
 
             $savedMoneyOperation = null;
 
-
             if($data['actually_save'] > 0){
                 $savedMoney = $this->setSavedMoneyOperation($data, $account);
 
@@ -256,19 +252,38 @@ class UserController extends Controller
                     }
                 }
             }
-            $objective = $this->setObjective($data, $account, $savedMoneyOperation);
+            if(isset($data['objective']) || isset($data['personalize_objective'])){
+                $objective = $this->setObjective($data, $account, $savedMoneyOperation);
 
-            if(!empty($objective)){
-                $savedObjective = Objective::addObjective($objective);
-                if(!$savedObjective){
-                    throw new \Exception('Error al añadir los ahorros');
-                }
-                $objectiveOperation =  ObjectiveOperation::addObjectiveOperation($savedObjective->id, $savedMoneyOperation->id);
-                if(!$objectiveOperation){
-                    throw new \Exception('Error al añadir los ahorros');
+                if(!empty($objective)){
+                    $savedObjective = Objective::addObjective($objective);
+                    if(!$savedObjective){
+                        throw new \Exception('Error al añadir los ahorros');
+                    }
+                    $objectiveOperation =  ObjectiveOperation::addObjectiveOperation($savedObjective->id, $savedMoneyOperation->id);
+                    if(!$objectiveOperation){
+                        throw new \Exception('Error al añadir los ahorros');
+                    }
                 }
             }
+            
 
+            $allOperations = Operation::getAllOperationsByAccountId($account->id);
+            if(!is_null($allOperations)){
+                $total = 0;
+                foreach ($allOperations as $value) {
+                    $amount = (float) $value->amount;
+
+                    if($value->movement_type_id === 1 || $value->movement_type_id === 3){
+                        $total += $amount;
+                    }elseif($value->movement_type_id === 2){
+                        $total-= $amount;
+                    }
+                }
+                if(!Account::updateBalance($account->id, $total)){
+                    throw new \Exception('Error al editar el balance de la cuenta actual');
+                }
+            }
             if(!User::updateNewUser($user)){
                 throw new \Exception('Error al cambiar el estado de nuevo usuario');
             }
