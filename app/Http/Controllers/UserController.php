@@ -253,10 +253,10 @@ class UserController extends Controller
             if(isset($data['objective']) || isset($data['personalize_objective'])){
                 if(is_null($savedMoneyOperation)){
                     $savedMoneyAmount = 0;
-                }
-                else{
+                } else{
                     $savedMoneyAmount = $savedMoneyOperation->amount;
                 }
+                dd($savedMoneyAmount);
                 $objective = $this->setObjective($data, $account, $savedMoneyAmount);
                 
                 if(!empty($objective)){
@@ -265,7 +265,8 @@ class UserController extends Controller
                     if(!$savedObjective){
                         throw new \Exception('Error al añadir los ahorros');
                     }
-                    $objectiveOperation =  ObjectiveOperation::addObjectiveOperation($savedObjective->id, $savedMoneyOperation->id);
+                    if($savedMoneyAmount > 0)
+                        $objectiveOperation =  ObjectiveOperation::addObjectiveOperation($savedObjective->id, $savedMoneyOperation->id);
 
                     if(!$objectiveOperation){
                         throw new \Exception('Error al añadir los ahorros');
