@@ -10,6 +10,11 @@
         <link rel="stylesheet" href="{{ asset('css/home/home.css') }}">
 
     @endpush
+    @push('scripts')
+
+        <script src="{{ asset('js/chart/chart.umd.min.js') }}"></script>
+
+    @endpush
 
     <div id="loader">
         <img src="{{ asset('img/logos/whiteRivoPng.png') }}" alt="Cargando Rivo" class="loader-logo" />
@@ -17,24 +22,7 @@
 
     <main>
         
-        <nav class="mobile-nav">
-            <button class="fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
-                <i class="fas fa-home fs-3 text-secondary"></i>
-                <span class="fs-6">Inicio</span>
-            </button>
-            <button class="fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
-                <i class="fas fa-plus fs-3 text-success"></i>
-                <span class="fs-6">Ingreso</span>
-            </button>
-            <button class="fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
-                <i class="fas fa-minus fs-3 text-danger" style="text-shadow: 0 0 1px currentColor;"></i>
-                <span class="fs-6">Gasto</span>
-            </button>
-            <button class="fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
-                <i class="fas fa-piggy-bank fs-3 text-warning"></i>
-                <span class="fs-6">Ahorro</span>
-            </button>
-        </nav>
+        @include('templates.home.mobileNav')
         <aside class="sidebar d-flex flex-column align-items-center justify-content-between" role="complementary">
             <div class="d-flex flex-row justify-content-center align-items-center">
                 <img id="asideLogo" src="{{ asset('img/logos/whiteRivoPng.png') }}" alt="">
@@ -112,32 +100,38 @@
                     @include('templates.home.recentMovements')
                 @endif
                 
-                @if (isset($thisMonthOperations) && !is_null($thisMonthOperations))
-                    {{-- @include('templates.home.recentMovements') --}}
-                @foreach ($thisMonthOperations as $operation)
-                    <div class="col-12 info-container mt-4 py-4 px-4">
-                        <h3 class="mb-1 fs-4 fw-bold">
+                {{-- @if (isset($thisMonthOperations) && !is_null($thisMonthOperations))
+                    <div class="col-12 card-section mt-4">
+                        <h3 class="section-title">
                             Resumen de {{ ucfirst(\Carbon\Carbon::now()->locale('es')->translatedFormat('F Y')) }}
                         </h3>
-                        <div class="expense-category">{!! $operation['icon'] !!} {{ $operation['category_name'] }} {{ $operation['total_amount'] }}€</div>
+                        @foreach ($thisMonthOperations as $operation)
+                            <div class="list-entry">
+                                <div class="entry-icon">{!! $operation['icon'] !!}</div>
+                                <div class="flex-grow-1">
+                                    <span class="entry-label">{{ $operation['category_name'] }}</span>
+                                </div>
+                                <div class="entry-value
+                                    {{ $operation['movement_type_id'] == 1 ? 'income-color' : 
+                                    ($operation['movement_type_id'] == 2 ? 'expense-color' : 
+                                    ($operation['movement_type_id'] == 3 ? 'save-color' : '') ) }}">
+                                    {{ number_format($operation['total_amount'], 2) }}€
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                @endforeach
+                @endif --}}
 
+
+                @if (isset($thisMonthIncomes) && isset($thisMonthExpenses))
+                    @include('templates.home.thisMonthIncomesExpenses')
                 @endif
-                {{--
-                <div class="col-12 info-container mt-4 py-4 px-4">
-                        <h3 class="mb-1 fs-4 fw-bold">Resumen de – Mayo 2025</h3>
-                        {{-- <p class="fs-5">Este mes has gastado <strong>890€</strong></p>
-                        <div class="expense-category"> 🏠  Casa 250€</div>
-                        <div class="bar-container"><div style="border-top-right-radius: 10px; border-bottom-right-radius: 10px; background-color: #6b00e5; width: 100%; height: 100%;"></div></div>
-                        <div class="expense-category">🍽 Comida 150€</div>
-                        <div class="bar-container"><div style="border-top-right-radius: 10px; border-bottom-right-radius: 10px; background-color: #6b00e5; width: 75%; height: 100%;"></div></div>
-                        <div class="expense-category">🎉 Ocio 30€</div>
-                        <div class="bar-container"><div style="border-top-right-radius: 10px; border-bottom-right-radius: 10px; background-color: #6b00e5; width: 30%; height: 100%;"></div></div>
-                    </div> 
-                    --}}
+
+
             </article>
             
+           
+
             
 
             {{-- INCOME SECTION --}}
