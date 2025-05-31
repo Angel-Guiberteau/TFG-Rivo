@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 
 class Icon extends Model
@@ -13,8 +14,12 @@ class Icon extends Model
         'icon',
         'enabled',
     ];
-    public function categories()
-    {
+
+    public static function getAllIcons(): Collection{
+        return self::select('id', 'icon')->where('enabled', 1)->get();
+    }
+
+    public function categories(): HasMany {
         return $this->hasMany(Category::class, 'icon_id');
     }
 
