@@ -50,11 +50,14 @@ class Operation extends Model
             ->whereYear('action_date', Carbon::now()->year)
             ->get();
 
-        return $operations->groupBy('category_id')->map(function ($items) {
+        return $operations->groupBy(function ($item) {
+            return $item->category_id . '-' . $item->movement_type_id;
+        })->map(function ($items) {
             return [
                 'category_id' => $items->first()->category_id,
                 'category_name' => $items->first()->category->name ?? 'Sin categoría',
                 'icon' => $items->first()->category->icon->icon ?? 'fas fa-question-circle',
+                'movement_type_id' => $items->first()->movement_type_id,
                 'total_amount' => $items->sum('amount'),
             ];
         })->values();
@@ -68,13 +71,6 @@ class Operation extends Model
             ->orderByDesc('action_date')
             ->take(6)
             ->get();
-        
-        // return self::with('category.icon')
-        //     ->where('account_id', $accountId)
-        //     ->whereMonth('action_date', Carbon::now()->month)
-        //     ->whereYear('action_date', Carbon::now()->year)
-        //     ->orderBy('movement_type_id')
-        //     ->get();
     }
 
     public function category()

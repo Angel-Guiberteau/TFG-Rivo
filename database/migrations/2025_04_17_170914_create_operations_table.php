@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedInteger('movement_type_id');
             $table->foreign('movement_type_id')->references('id')->on('movements_types')->onDelete('cascade')->onUpdate('cascade');
             
-            $table->date('action_date');
+            $table->dateTime('action_date');
             $table->unsignedInteger('account_id');
             $table->unsignedInteger('category_id');
             
