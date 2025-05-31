@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\DashboardController;
@@ -165,6 +166,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             
             return UserController::updatePersonalCategories($validate);
         })->name('updatePersonalCategories');
+
+        Route::get('/previewUser/{id}', function (Request $request, $id) {
+
+            
+            $request = array_merge($request->all(), ['id' => $id]);
+            
+            $validate = UserValidator::validate($request, ValidationEnum::DELETE->value);
+            
+            return UserController::getFullUserbyId($validate );
+
+        })->name('previewUser');
 
     });
 

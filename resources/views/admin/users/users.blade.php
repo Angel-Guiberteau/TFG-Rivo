@@ -51,7 +51,7 @@
                                     </td>
                                     <td>
                                         @include('admin.components.buttons.preViewButton', [
-                                            
+                                            'onclick' => "viewUser('" . $user->id . "')"
                                         ])
                                     </td>
                                     <td>
