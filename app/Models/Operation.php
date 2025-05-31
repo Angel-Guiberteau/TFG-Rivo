@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\MovementTypesEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
@@ -70,6 +71,22 @@ class Operation extends Model
             ->where('account_id', $accountId)
             ->orderByDesc('action_date')
             ->take(6)
+            ->get();
+    }
+
+    public static function getAllIncomesByAccountId(int $accountId): ?Collection{
+        return self::with('category.icon')
+            ->where('account_id', $accountId)
+            ->where('movement_type_id', MovementTypesEnum::INCOME->value)
+            ->orderByDesc('action_date')
+            ->get();
+    }
+    
+    public static function getAllExpensesByAccountId(int $accountId): ?Collection{
+        return self::with('category.icon')
+            ->where('account_id', $accountId)
+            ->where('movement_type_id', MovementTypesEnum::EXPENSE->value)
+            ->orderByDesc('action_date')
             ->get();
     }
 

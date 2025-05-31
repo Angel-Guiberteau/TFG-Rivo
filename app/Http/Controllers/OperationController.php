@@ -16,4 +16,12 @@ class OperationController extends Controller
     public function thisMonthOperationsByAccountId(int $accountId): ?Collection{
         return Operation::thisMonthOperationsByAccountId($accountId);
     }
+    
+    public function getAllIncomesByAccountId(int $accountId): ?Collection{
+        return Operation::getAllIncomesByAccountId($accountId);
+    }
+    
+    public function getAllExpensesByAccountId(int $accountId): ?Collection{
+        return Operation::getAllExpensesByAccountId($accountId);
+    }
 }

@@ -64,6 +64,9 @@ Route::get('/home', function (): View {
         return in_array($op['movement_type_id'], [2]);
     });
 
+    $allIncomes = $operationController->getAllIncomesByAccountId($account->id);
+    $allExpenses = $operationController->getAllIncomesByAccountId($account->id);
+
     return view('home.home')
         ->with('user', $user)
         ->with('account', $account)
@@ -71,6 +74,8 @@ Route::get('/home', function (): View {
         ->with('thisMonthOperations', $thisMonthOperations)
         ->with('thisMonthIncomes', $incomes)
         ->with('thisMonthExpenses', $expenses)
+        ->with('allIncomes', $allIncomes)
+        ->with('allExpenses', $allExpenses)
         ->with('objectives', $objective);
 
 })->middleware(['auth', 'role:user'])->name('home');
