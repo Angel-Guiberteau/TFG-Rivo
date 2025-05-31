@@ -157,7 +157,7 @@
                             @foreach($personalCategories as $category)
                                 <div class="col-md-6 col-lg-4 mb-4 category-card">
 
-                                    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                                    <div class="card h-100 rounded shadow rounded-4 overflow-hidden">
                                         <div class="card-body d-flex flex-column p-4 bg-white">
                                             <input type="hidden" name="categories[{{ $category['id'] }}][id]" value="{{ $category['id'] }}">
                                             <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2 delete-category-btn" data-id="{{ $category['id'] }}" data-existing="true">
@@ -166,7 +166,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label fw-medium text-muted">Nombre de la categoría</label>
                                                 <input type="text" name="categories[{{ $category['id'] }}][name]"
-                                                    class="form-control border-0 border-bottom rounded-0 bg-light text-center fs-5 fw-semibold"
+                                                    class="form-control rounded bg-light text-center fs-5 fw-semibold shadow-sm"
                                                     value="{{ old("categories.{$category['id']}.name", $category['name']) }}"
                                                     placeholder="Introduce el nombre de la categoría">
                                             </div>
