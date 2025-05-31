@@ -247,6 +247,12 @@ aside {
     background-color: #6B00E5;
     color: white;
 }
+@media (min-width: 576px) and (max-width: 992px) {
+    .fab-option {
+      width: 64px;
+      height: 64px;
+  }
+}
 @media (min-width: 992px) {
   .mobile-nav{
     display: none;
@@ -270,9 +276,6 @@ aside {
 .balance-info{
   padding: 1rem 3rem ;
 }
-/* =============================== */
-/*        ARTICLE ANIMATIONS       */
-/* =============================== */
 
 .fade-section {
     opacity: 0;
@@ -555,7 +558,17 @@ input[type="radio"]:checked + .category-option i {
     padding: .7rem .5rem;
     transform: translateX(4px);
 }
-
+@media (max-width: 992px) {
+  .movement-block {
+    padding: 0;
+  }
+  .movement-row:hover {
+    background: rgba(107, 0, 229, 0.04);
+    border-radius: 12px;
+    padding: .7rem 0;
+    transform: translateX(0px);
+  }
+}
 .movement-row:last-child {
     border-bottom: none;
 }
@@ -663,7 +676,7 @@ canvas {
 }
 
 @media (min-width: 992px) {
-    .border-md-end {
+    .border-lg-end {
         border-right: 1px solid #e0e0e0;
     }
 }
