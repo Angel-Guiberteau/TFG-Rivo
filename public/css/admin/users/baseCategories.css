@@ -1,0 +1,51 @@
+
+.icon-scroll-wrapper {
+    max-height: 180px;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+}
+
+.icon-scroll-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+.icon-scroll-wrapper::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 0.5rem;
+    justify-items: center;
+    align-items: center;
+}
+
+.icon-option {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    background-color: white;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.icon-option:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+}
+
+.icon-option.selected {
+    border: 2px solid #0d6efd;
+    background-color: #e9f1ff;
+    color: #0d6efd;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+}

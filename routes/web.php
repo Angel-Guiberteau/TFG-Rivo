@@ -71,18 +71,23 @@ Route::get('/home', function (): View {
         ->with('thisMonthIncomes', $incomes)
         ->with('thisMonthExpenses', $expenses)
         ->with('objectives', $objective);
+
 })->middleware(['auth', 'role:user'])->name('home');
 
 Route::get('/initialSetup', function () {
     return view('home.initialSetup');
 })->middleware(['auth', 'role:user'])->name('initialSetup');
+
 Route::post('/updateUserInfoFromInitialSetup', function () {
+
     $request = Request()->all();
 
     $validate = UserValidator::validate($request, ValidationEnum::INITIALSETUP->value);
     $data = $validate['data'];
     $controller = new UserController();
+
     return  $controller->updateUserInfoFromInitialSetup($data);
+    
 })->middleware(['auth', 'role:user'])->name('updateUserInfoFromInitialSetup');
 
 
@@ -119,7 +124,7 @@ Route::post('/logout', function () {
 */
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
     
-    Route::get('/', function () {
+    Route::get('/', function (): View {
         return view('admin.home.home');
     })->name('homeAdmin');
 
@@ -127,7 +132,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
     Route::group(['prefix' => 'users'], function () {
 
-        Route::get('/', function () {
+        Route::get('/', function (): View {
             return UserController::listUsers();
         })->name('users');
 
@@ -143,13 +148,23 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return UserController::deleteUser();
         })->name('deleteUser');
 
-        Route::get('/editUser/{id}', function ($id) {
+        Route::get('/editUser/{id}', function ($id): RedirectResponse|View {
             return UserController::getUserbyId($id);
         })->name('editUser');
 
         Route::put('/updateUser', function (): RedirectResponse {
             return UserController::updateUser();
         })->name('updateUser');
+
+        Route::put('/updatePersonalCategories', function () {
+            // dd(request()->all());
+            
+            $request = request()->toArray();    
+
+            $validate = UserValidator::validate($request, ValidationEnum::UPDATE_PERSONAL_CATEGORIES->value);
+            
+            return UserController::updatePersonalCategories($validate);
+        })->name('updatePersonalCategories');
 
     });
 

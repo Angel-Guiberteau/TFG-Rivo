@@ -10,3 +10,27 @@ label.form-label {
     font-weight: 600;
     color: #333;
 }
+
+
+/* PROGRESS LINE */
+
+.progress-line-container a{
+    cursor: pointer;
+}
+.progress-line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: black;
+    margin: 0 10px;
+}
+
+.step {
+    font-size: 14px;
+    color: black;
+    text-decoration: none;
+}
+
+.progress-line-container .step.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
