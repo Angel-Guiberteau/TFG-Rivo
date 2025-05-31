@@ -11,7 +11,7 @@
         <section class="container-custom p-3 pb-5">
             <article class="bg-light p-3">
 
-                @include('templates.admin.title', ['title' => 'Categorias'])
+                @include('templates.admin.title', ['title' => 'Categorías base'])
 
                 <div>
                     @include('admin.components.buttons.addButton', [
@@ -23,6 +23,7 @@
                                 <th>ID</th>
                                 <th>Icono</th>
                                 <th>Categoria</th>
+                                <th>Tipo</th>
                                 <th class="text-center">Editar</th>
                                 <th class="text-center">Visualizar</th>
                                 <th class="text-center">Eliminar</th>
@@ -31,22 +32,34 @@
                         <tbody>
                             @foreach ($categories as $category)
                             <tr>
-                                <td>{{ $category->id }}</td>
-                                <td>{{-- <img src="" alt=""> --}}</td>
-                                <td>{{ $category->name }}</td>
+                                <td>{{ $category['id'] }}</td>
+                                <td>
+                                    <label class="icons">
+                                        {!! $category['icon_html'] !!}
+                                    </label>
+                                </td>
+                                <td>{{ $category['category_name'] }}</td>
+                                <td>{{ $category['movement_type_names'] }}</td>
                                 <td>
                                     @include('admin.components.buttons.editButton', [
-                                        'data' => 'data-id="' . e($category->id) . '" data-name="' . e($category->name) . '" data-bs-toggle="modal" data-bs-target="#editCategory"'
+                                        'data' =>
+                                            'data-id="' . e($category['id']) . '" ' .
+                                            'data-name="' . e($category['category_name']) . '" ' .
+                                            'data-types=\'' . e(json_encode($category['movement_type_ids'])) . '\' ' .
+                                            'data-icon="' . e($category['icon_id']) . 
+                                            '" data-bs-toggle="modal" data-bs-target="#editCategory"'
                                     ])
                                 </td>
                                 <td>
                                     @include('admin.components.buttons.preViewButton', [
-                                        'data' => 'onclick=" preViewCategory('.e(json_encode($category->name)).')" disabled'
+                                        'data' => 'disabled',
+                                        'onclick' => 'preViewCategory('.e(json_encode($category['category_name'])).')'
                                     ])
                                 </td>
                                 <td>   
                                     @include('admin.components.buttons.deleteButton', [
-                                        'data' => 'id="'. e($category->id) .'" onclick="deleteCategory('. e($category->id) .')"'
+                                        'data' => 'id="'. e($category['id']) .'"',
+                                        'onclick' => 'deleteCategory('. e($category['id']) .')'
                                     ])
                                 </td>
                             </tr>
