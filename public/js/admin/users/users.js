@@ -6,6 +6,10 @@ function editUser(id) {
     window.location.href = `/admin/users/editUser/${id}`;
 }
 
+function viewUser(id) {
+    window.location.href = `/admin/users/previewUser/${id}`;
+}
+
 function deleteUser(id) {
     swal({
         title: "¿Estás seguro?",

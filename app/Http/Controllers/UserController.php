@@ -528,4 +528,32 @@ class UserController extends Controller
         return redirect()->route('users')->with('success', 'Categorías personales actualizadas correctamente.');
     }
 
+    public static function getFullUserbyId($data)
+    {
+        
+        $objet = new UserController();
+
+        $objet->id = $data['data']['id'] ?? null;
+
+        $user = User::getUserById($objet->id);
+
+        if (!$user) {
+            return redirect()->back()
+                ->with('error', 'Usuario no encontrado.');
+        }
+
+        $personalCategories = User::getPersonalCategoriesByUserId($user->id);
+
+        if (!$personalCategories) {
+            return redirect()->back()
+                ->with('error', 'Categorias personales no encontradas.');
+        }
+
+        // dd($user, $personalCategories);
+
+        return view('admin.users.previewUser')
+            ->with('user', $user)
+            ->with('personalCategories', $personalCategories);
+    }
+
 }
