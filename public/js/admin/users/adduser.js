@@ -1,6 +1,7 @@
-document.addEventListener("DOMContentLoaded", function () {
-    
-    flatpickr("#birth_date", {
+document.addEventListener('DOMContentLoaded', () => {
+
+    const birthInput = document.getElementById("birth_date");
+    const birthPicker = flatpickr(birthInput, {
         dateFormat: "Y-m-d",
         altInput: true,
         altFormat: "d-m-Y",
@@ -12,98 +13,113 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    const form = document.querySelector("form");
+    const submitBtn = document.getElementById('submit-user');
 
     const fields = {
-        name: {
-            input: document.getElementById("name"),
-            validate: (v) => v.trim() !== "",
-            message: "El nombre es obligatorio"
-        },
-        last_name: {
-            input: document.getElementById("last_name"),
-            validate: (v) => v.trim() !== "",
-            message: "El apellido es obligatorio"
-        },
-        birth_date: {
-            input: document.getElementById("birth_date"),
-            validate: (v) => {
-                if (!v.trim()) return false;
-                const selected = new Date(v);
-                const today = new Date();
-                return selected <= today;
-            },
-            message: "Selecciona una fecha válida anterior a hoy"
-        },
-        rol_id: {
-            input: document.getElementById("rol_id"),
-            validate: (v) => v !== "",
-            message: "Selecciona un rol"
-        },
-        email: {
-            input: document.getElementById("email"),
-            validate: (v) =>
-                /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v),
-            message: "Introduce un correo electrónico válido"
-        },
-        username: {
-            input: document.getElementById("username"),
-            validate: (v) => v.trim().length >= 3,
-            message: "El nombre de usuario debe tener al menos 3 caracteres"
-        },
-        password: {
-            input: document.getElementById("password"),
-            validate: (v) => v.trim().length >= 8,
-            message: "La contraseña debe tener al menos 8 caracteres"
-        }
+        name: { required: true },
+        last_name: { required: true },
+        birth_date: { required: true },
+        rol_id: { required: true },
+        email: { required: true, type: 'email' },
+        username: { required: true },
+        password: { required: true, minLength: 8 }
     };
 
-    const showError = (input, message) => {
-        input.classList.remove("is-valid");
-        input.classList.add("is-invalid");
+    const errorMessages = {
+        name: 'El nombre es obligatorio.',
+        last_name: 'El apellido es obligatorio.',
+        birth_date: 'La fecha de nacimiento es obligatoria.',
+        rol_id: 'Debes seleccionar un rol.',
+        email: 'Introduce un correo válido.',
+        username: 'El nombre de usuario es obligatorio.',
+        password: 'La contraseña es obligatoria y debe tener al menos 8 caracteres.'
+    };
 
-        let feedback = input.parentElement.querySelector(".invalid-feedback");
+    function showError(field, message) {
+        let feedback = field.parentElement.querySelector('.invalid-feedback');
+
         if (!feedback) {
-            feedback = document.createElement("div");
-            feedback.classList.add("invalid-feedback");
-            input.parentElement.appendChild(feedback);
+            feedback = document.createElement('div');
+            feedback.className = 'invalid-feedback';
+            field.parentElement.appendChild(feedback);
         }
+
         feedback.textContent = message;
-    };
+    }
 
-    const showSuccess = (input) => {
-        input.classList.remove("is-invalid");
-        input.classList.add("is-valid");
-
-        const feedback = input.parentElement.querySelector(".invalid-feedback");
-        if (feedback) feedback.remove();
-    };
-
-    const validateField = (field) => {
-        const value = field.input.value;
-        if (!field.validate(value)) {
-            showError(field.input, field.message);
-            return false;
-        } else {
-            showSuccess(field.input);
-            return true;
+    function removeError(field) {
+        const feedback = field.parentElement.querySelector('.invalid-feedback');
+        if (feedback) {
+            feedback.remove();
         }
-    };
+    }
 
-    Object.values(fields).forEach(field => {
-        ["input", "blur", "change"].forEach(evt => {
-            field.input.addEventListener(evt, () => validateField(field));
-        });
-    });
-
-    form.addEventListener("submit", function (e) {
+    function validateField(field, rules) {
+        const value = field.value.trim();
         let valid = true;
-        Object.values(fields).forEach(field => {
-            if (!validateField(field)) valid = false;
-        });
+        let errorMessage = '';
 
-        if (!valid) {
-            e.preventDefault(); 
+        if (rules.required && value === '') {
+            valid = false;
+            errorMessage = errorMessages[field.id];
         }
-    });
+
+        if (rules.type === 'email' && value !== '') {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                valid = false;
+                errorMessage = errorMessages[field.id];
+            }
+        }
+
+        if (field.id === 'password' && value.length < rules.minLength) {
+            valid = false;
+            errorMessage = errorMessages[field.id];
+        }
+
+        field.classList.remove('is-valid', 'is-invalid');
+        removeError(field);
+
+        if (valid) {
+            field.classList.add('is-valid');
+        } else {
+            field.classList.add('is-invalid');
+            showError(field, errorMessage);
+        }
+
+        return valid;
+    }
+
+    function validateForm() {
+        let allValid = true;
+
+        for (const [id, rules] of Object.entries(fields)) {
+            const input = document.getElementById(id);
+            if (input) {
+                const isValid = validateField(input, rules);
+                if (!isValid) allValid = false;
+            }
+        }
+
+        submitBtn.disabled = !allValid;
+    }
+
+    for (const id of Object.keys(fields)) {
+        const input = document.getElementById(id);
+        if (input) {
+            input.addEventListener('input', () => {
+                validateField(input, fields[id]);
+                validateForm();
+            });
+
+            if (input.tagName === 'SELECT') {
+                input.addEventListener('change', () => {
+                    validateField(input, fields[id]);
+                    validateForm();
+                });
+            }
+        }
+    }
+
+    validateForm();
 });

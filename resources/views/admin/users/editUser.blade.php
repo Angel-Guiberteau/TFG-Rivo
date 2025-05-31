@@ -18,9 +18,6 @@
             <article class="bg-light p-4 mt-4 shadow-sm rounded-3">
                 @include('templates.admin.title', ['title' => 'Editar Usuario'])
 
-                @include('admin.components.progressLine')
-
-                <div id="personalData" class="mb-4">
 
                     <form action="{{ route('updateUser') }}" method="POST">
                         @csrf
@@ -34,7 +31,7 @@
                                     <input type="text" name="name" id="name"
                                            class="form-control @error('name') is-invalid @enderror"
                                            value="{{ old('name', $user->name) }}"
-                                           placeholder="Introduce el nombre" required>
+                                           placeholder="Introduce el nombre" >
                                     @error('name')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -48,7 +45,7 @@
                                     <input type="text" name="last_name" id="last_name"
                                            class="form-control @error('last_name') is-invalid @enderror"
                                            value="{{ old('last_name', $user->last_name) }}"
-                                           placeholder="Introduce el apellido" required>
+                                           placeholder="Introduce el apellido">
                                     @error('last_name')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -64,7 +61,7 @@
                                     <input type="text" name="birth_date" id="birth_date"
                                            class="form-control @error('birth_date') is-invalid @enderror"
                                            value="{{ old('birth_date', $user->birth_date) }}"
-                                           placeholder="Selecciona la fecha de nacimiento" required>
+                                           placeholder="Selecciona la fecha de nacimiento">
                                     @error('birth_date')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -76,7 +73,7 @@
                                 <div class="input-group">
                                     <span class="input-group-text bg-white"><i class="fa-solid fa-user-gear"></i></span>
                                     <select name="rol_id" id="rol_id"
-                                            class="form-select @error('rol_id') is-invalid @enderror" required>
+                                            class="form-select @error('rol_id') is-invalid @enderror">
                                         <option value="" hidden disabled>Seleccionar rol</option>
                                         <option value="1" {{ old('rol_id', $user->rol_id) == 1 ? 'selected' : '' }}>Admin</option>
                                         <option value="2" {{ old('rol_id', $user->rol_id) == 2 ? 'selected' : '' }}>User</option>
@@ -97,7 +94,7 @@
                                     <input type="email" name="email" id="email"
                                            class="form-control @error('email') is-invalid @enderror"
                                            value="{{ old('email', $user->email) }}"
-                                           placeholder="ejemplo@correo.com" required>
+                                           placeholder="ejemplo@correo.com">
                                     @error('email')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -111,7 +108,7 @@
                                     <input type="text" name="username" id="username"
                                            class="form-control @error('username') is-invalid @enderror"
                                            value="{{ old('username', $user->username) }}"
-                                           placeholder="Nombre de usuario deseado" required>
+                                           placeholder="Nombre de usuario deseado">
                                     @error('username')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
