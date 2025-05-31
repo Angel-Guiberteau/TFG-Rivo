@@ -8,6 +8,11 @@ window.addEventListener('load', () => {
     }, 3000);
 });
 
-
+document.querySelectorAll('.action-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.action-button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    });
+});
 
 

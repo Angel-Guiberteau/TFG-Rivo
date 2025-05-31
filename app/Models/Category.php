@@ -8,7 +8,10 @@ use Illuminate\Support\Collection;
 class Category extends Model
 {
     protected $table = 'categories';
-    protected $fillable = [ 'name' ];
+    protected $fillable = [ 
+        'name',
+        'icon_id'
+    ];
 
     public static function getAllCategoriesEnabled(): Collection {
         $category = new self();
@@ -46,5 +49,15 @@ class Category extends Model
         }
 
         return false;
+    }
+
+    public function operations()
+    {
+        return $this->hasMany(Operation::class);
+    }
+    
+    public function icon()
+    {
+        return $this->belongsTo(Icon::class, 'icon_id');
     }
 }

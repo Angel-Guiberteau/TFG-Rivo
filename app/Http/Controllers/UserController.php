@@ -183,12 +183,11 @@ class UserController extends Controller
     {
         try{
             DB::beginTransaction();
-            
             $user = User::updateUserInfoFromInitialSetup($data);
+            
             if(!$user){
                 throw new \Exception('Error al actualizar el usuario');
             }
-
             $account = Account::addAccount($data);
             if(!$account){
                 throw new \Exception('Error al crear la cuenta del usuario');
@@ -197,7 +196,6 @@ class UserController extends Controller
             if(!$userAccount){
                 throw new \Exception('Error al crear la cuenta del usuario');
             }
-
             //FixedIncomes
             $fixedIncomes = $this->setFixedIncomes($data, $account);
 
@@ -217,8 +215,6 @@ class UserController extends Controller
                     }
                 }
             }
-
-            //FixedExpenses
             $fixedExpenses = $this->setfixedExpenses($data, $account);
 
             if(!empty($fixedExpenses)){
@@ -238,8 +234,6 @@ class UserController extends Controller
             }
 
             $savedMoneyOperation = null;
-
-
             if($data['actually_save'] > 0){
                 $savedMoney = $this->setSavedMoneyOperation($data, $account);
 
@@ -256,22 +250,51 @@ class UserController extends Controller
                     }
                 }
             }
-            $objective = $this->setObjective($data, $account, $savedMoneyOperation);
-
-            if(!empty($objective)){
-                $savedObjective = Objective::addObjective($objective);
-                if(!$savedObjective){
-                    throw new \Exception('Error al añadir los ahorros');
+            if(isset($data['objective']) || isset($data['personalize_objective'])){
+                if(is_null($savedMoneyOperation)){
+                    $savedMoneyAmount = 0;
+                } else{
+                    $savedMoneyAmount = $savedMoneyOperation->amount;
                 }
-                $objectiveOperation =  ObjectiveOperation::addObjectiveOperation($savedObjective->id, $savedMoneyOperation->id);
-                if(!$objectiveOperation){
-                    throw new \Exception('Error al añadir los ahorros');
+                
+                $objective = $this->setObjective($data, $account, $savedMoneyAmount);
+                
+                if(!empty($objective)){
+                    $savedObjective = Objective::addObjective($objective);
+                    
+                    if(!$savedObjective){
+                        throw new \Exception('Error al añadir los ahorros');
+                    }
+                    if($savedMoneyAmount > 0){
+                        $objectiveOperation =  ObjectiveOperation::addObjectiveOperation($savedObjective->id, $savedMoneyOperation->id);
+                        if(!$objectiveOperation){
+                            throw new \Exception('Error al añadir los ahorros');
+                        }
+                    }
                 }
             }
+            
 
+            $allOperations = Operation::getAllOperationsByAccountId($account->id);
+            if(!is_null($allOperations)){
+                $total = 0;
+                foreach ($allOperations as $value) {
+                    $amount = (float) $value->amount;
+
+                    if($value->movement_type_id === 1 || $value->movement_type_id === 3){
+                        $total += $amount;
+                    }elseif($value->movement_type_id === 2){
+                        $total-= $amount;
+                    }
+                }
+                if(!Account::updateBalance($account->id, $total)){
+                    throw new \Exception('Error al editar el balance de la cuenta actual');
+                }
+            }
             if(!User::updateNewUser($user)){
                 throw new \Exception('Error al cambiar el estado de nuevo usuario');
             }
+
             DB::commit();
 
             return redirect()->action([DashboardController::class, 'index']);
@@ -292,7 +315,7 @@ class UserController extends Controller
                 'subject' => 'Salario',
                 'description' => 'Ingreso mensual por trabajo',
                 'action_date' => Carbon::now()->toDateString(),
-                'type' => 'i',
+                'movement_type_id' => 1,
                 'account_id' => $account->id,
                 'start_date' => Carbon::now()->startOfMonth()->toDateString(),
                 'period' => 'm',
@@ -305,7 +328,7 @@ class UserController extends Controller
                 'subject' => 'Ayuda familiar',
                 'description' => 'Ayuda de la familia mensualmente',
                 'action_date' => Carbon::now()->toDateString(),
-                'type' => 'i',
+                'movement_type_id' => 1,
                 'account_id' => $account->id,
                 'start_date' => Carbon::now()->startOfMonth()->toDateString(),
                 'period' => 'm',
@@ -318,7 +341,7 @@ class UserController extends Controller
                 'subject' => 'Ayudas del estado',
                 'description' => 'Ayuda del estado mensual',
                 'action_date' => Carbon::now()->toDateString(),
-                'type' => 'i',
+                'movement_type_id' => 1,
                 'account_id' => $account->id,
                 'start_date' => Carbon::now()->startOfMonth()->toDateString(),
                 'period' => 'm',
@@ -336,7 +359,7 @@ class UserController extends Controller
             $savedMoney['subject'] = 'Ahorro';
             $savedMoney['description'] = 'Ahorro antes de usar Rivo';
             $savedMoney['action_date'] = Carbon::now()->toDateString();
-            $savedMoney['type'] = 's';
+            $savedMoney['movement_type_id'] = 3;
             $savedMoney['account_id'] = $account->id;
         }
 
@@ -365,7 +388,7 @@ class UserController extends Controller
                     'subject' => $value,
                     'description' => 'Ingreso mensual por trabajo',
                     'action_date' => Carbon::now()->toDateString(),
-                    'type' => 'e',
+                    'movement_type_id' => 2,
                     'account_id' => $account->id,
                     'start_date' => Carbon::now()->startOfMonth()->toDateString(),
                     'period' => 'm',
@@ -375,7 +398,7 @@ class UserController extends Controller
 
         return $fixedExpenses;
     }
-    private function setObjective(Array $data, Account $account, Operation $savedMoneyOperation): Array{
+    private function setObjective(Array $data, Account $account, Float $savedMoneyAmount): Array{
 
         $objective = [];
 
@@ -408,12 +431,11 @@ class UserController extends Controller
         $objective['target_amount'] = 2000;
         $objective['account_id'] = $account->id;
         $objective['deadline'] = null;
-        $objective['current_amount'] = $savedMoneyOperation ? $savedMoneyOperation->amount : 0;
+        $objective['current_amount'] = $savedMoneyAmount;
 
         if(!isset($objective['name'])){
             return [];
         }
-
         return $objective;
     }
 

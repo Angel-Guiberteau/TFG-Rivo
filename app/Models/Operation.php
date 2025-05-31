@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 class Operation extends Model
 {
@@ -12,7 +14,7 @@ class Operation extends Model
         'subject',
         'description',
         'amount',
-        'type',
+        'movement_type_id',
         'action_date',
         'account_id',
         'category_id',
@@ -27,7 +29,7 @@ class Operation extends Model
         $operation->amount = $data['amount'];
         $operation->action_date = $data['action_date'];
         $operation->account_id = $data['account_id'];
-        $operation->type = $data['type'];
+        $operation->movement_type_id = $data['movement_type_id'];
         $operation->category_id = 1;
         
         if(!$operation->save())
@@ -35,4 +37,49 @@ class Operation extends Model
 
         return $operation;
     }
+    
+    public static function getAllOperationsByAccountId(int $accountId): ?Collection {
+        return self::where('account_id', $accountId)
+            ->get();
+    }
+    
+    public static function thisMonthOperationsByAccountId(int $accountId): ?Collection {
+        $operations = self::with('category.icon')
+            ->where('account_id', $accountId)
+            ->whereMonth('action_date', Carbon::now()->month)
+            ->whereYear('action_date', Carbon::now()->year)
+            ->get();
+
+        return $operations->groupBy('category_id')->map(function ($items) {
+            return [
+                'category_id' => $items->first()->category_id,
+                'category_name' => $items->first()->category->name ?? 'Sin categoría',
+                'icon' => $items->first()->category->icon->icon ?? 'fas fa-question-circle',
+                'total_amount' => $items->sum('amount'),
+            ];
+        })->values();
+    }
+
+    
+    public static function getSixOperationsByAccountId(int $accountId): ?Collection{
+        
+        return self::with('category.icon')
+            ->where('account_id', $accountId)
+            ->orderByDesc('action_date')
+            ->take(6)
+            ->get();
+        
+        // return self::with('category.icon')
+        //     ->where('account_id', $accountId)
+        //     ->whereMonth('action_date', Carbon::now()->month)
+        //     ->whereYear('action_date', Carbon::now()->year)
+        //     ->orderBy('movement_type_id')
+        //     ->get();
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 }

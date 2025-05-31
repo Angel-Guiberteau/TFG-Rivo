@@ -12,7 +12,6 @@
 
     @endpush
     
-      
     <main class="container min-vh-100 d-flex align-items-center justify-content-center">
         <section class="row justify-content-center align-items-center py-3 gx-0 gx-lg-5">
             <article class="col-12 col-lg-6 row text-white mt-4 mt-lg-0">
@@ -41,11 +40,11 @@
                             <input type="email" id="email" name="email" placeholder="Correo electrónico"/>
                         </div>
                         <label for="password">Contraseña</label>
-                        <div class="input-group mb-2">
+                        <div class="input-group mb-2 position-relative">
                             <i class="fas fa-lock"></i>
                             <input type="password" id="password" name="password" placeholder="Contraseña" />
-                            <i class="fas fa-eye"></i>
-                            <i class="fas fa-eye-slash d-none"></i>
+                            <i class="fas fa-eye toggle-password" style="cursor: pointer; position: absolute; right: 10px;"></i>
+                            <i class="fas fa-eye-slash toggle-password d-none" style="cursor: pointer; position: absolute; right: 10px;"></i>
                         </div>
                         
                         <div class="d-flex flex-column flex-lg-row justify-content-start justify-content-lg-between align-items-start align-items-lg-center w-100 p-1 mb-3 text-start">
@@ -87,17 +86,17 @@
                             </ul>
                         </div>
                         <label for="password">Contraseña</label>
-                        <div class="input-group mb-4">
+                        <div class="input-group mb-4 position-relative">
                             <i class="fas fa-lock"></i>
-                            <input type="password" id="password" name="password" placeholder="Contraseña" />
+                            <input type="password" id="password" name="password" placeholder="Contraseña"/>
                             <i
                                 id="passCheck"
                                 class="fas fa-question-circle"
                                 data-bs-toggle="tooltip"
-                                data-bs-placement="bottom"        
-                                data-bs-offset="-10,8"                  
+                                data-bs-placement="bottom"
+                                data-bs-offset="-10,8"
                                 data-bs-html="true"
-                                data-bs-custom-class="tooltip-custom"   
+                                data-bs-custom-class="tooltip-custom"
                                 title='
                                     <div class="fs-6 text-start w-100">
                                         <p class="fw-bold mb-1">Requisito obligatorio:</p>
@@ -112,17 +111,17 @@
                                         </ul>
                                     </div>
                                 '
-                                style="cursor: pointer;"
-                                ></i>
-                            <i class="fas fa-eye"></i>
-                            <i class="fas fa-eye-slash d-none"></i>
+                                style="cursor: pointer; position: absolute; right: 40px; top: 50%; transform: translateY(-50%);"
+                            ></i>
+                            <i class="fas fa-eye toggle-password" style="cursor: pointer; position: absolute; right: 10px;"></i>
+                            <i class="fas fa-eye-slash toggle-password d-none" style="cursor: pointer; position: absolute; right: 10px;"></i>
                         </div>
                         <label for="password">Repetir contraseña</label>
-                        <div class="input-group mb-4">
+                        <div class="input-group mb-2 position-relative">
                             <i class="fas fa-lock"></i>
                             <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Repetir la contraseña" />
-                            <i class="fas fa-eye"></i>
-                            <i class="fas fa-eye-slash d-none"></i>
+                            <i class="fas fa-eye toggle-password" style="cursor: pointer; position: absolute; right: 10px;"></i>
+                            <i class="fas fa-eye-slash toggle-password d-none" style="cursor: pointer; position: absolute; right: 10px;"></i>
                         </div>
 
                         <div class="password-strength-wrapper mb-2 d-flex flex-row justify-content-between align-items-center">
@@ -152,11 +151,34 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-              document
-                .querySelectorAll('[data-bs-toggle="tooltip"]')
-                .forEach(el => new bootstrap.Tooltip(el));
+                // Inicializar tooltips
+                document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
+
+                // Mostrar/ocultar contraseña
+                const toggleIcons = document.querySelectorAll('.toggle-password');
+
+                toggleIcons.forEach(icon => {
+                    icon.addEventListener('click', () => {
+                        const inputGroup = icon.closest('.input-group');
+                        const input = inputGroup.querySelector('input[type="password"], input[type="text"]');
+                        const eyes = inputGroup.querySelectorAll('.toggle-password');
+
+                        if (input.type === "password") {
+                            input.type = "text";
+                            eyes.forEach(i => {
+                                i.classList.toggle('d-none', i.classList.contains('fa-eye-slash') === false);
+                            });
+                        } else {
+                            input.type = "password";
+                            eyes.forEach(i => {
+                                i.classList.toggle('d-none', i.classList.contains('fa-eye') === false);
+                            });
+                        }
+                    });
+                });
             });
-          </script>
+        </script>
+
     @endpush
 @endsection
     

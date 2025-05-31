@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\ValidationEnum;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CategoryController;
 use App\Validations\SentencesValidator;
 use App\Validations\CategoriesValidator;
@@ -13,7 +14,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\ObjectiveController;
+use App\Http\Controllers\OperationController;
 use App\Http\Controllers\SentenceController;
 use App\Http\Controllers\UserController;
 use App\Validations\UserValidator;
@@ -38,15 +40,31 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function (): View {
+    
     $userController = new UserController();
     $user = $userController->getUser();
-    return view('home.home')->with('user', $user);
+
+    $accountController = new AccountController();
+    $account = $accountController->getAccountByUserId($user->id);
+
+    $objectiveController = new ObjectiveController();
+    $objective =$objectiveController->getObjectivesByAccountId($account->id);
+
+    $operationController = new OperationController();
+    $sixOperations = $operationController->getSixOperationsByAccountId($account->id);
+    
+    $thisMonthOperations = $operationController->thisMonthOperationsByAccountId($account->id);
+    return view('home.home')
+        ->with('user', $user)
+        ->with('account', $account)
+        ->with('sixOperations', $sixOperations)
+        ->with('thisMonthOperations', $thisMonthOperations)
+        ->with('objectives', $objective);
 })->middleware(['auth', 'role:user'])->name('home');
 
 Route::get('/initialSetup', function () {
     return view('home.initialSetup');
 })->middleware(['auth', 'role:user'])->name('initialSetup');
-
 Route::post('/updateUserInfoFromInitialSetup', function () {
     $request = Request()->all();
 
