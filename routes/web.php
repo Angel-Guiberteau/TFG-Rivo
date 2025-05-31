@@ -54,11 +54,22 @@ Route::get('/home', function (): View {
     $sixOperations = $operationController->getSixOperationsByAccountId($account->id);
     
     $thisMonthOperations = $operationController->thisMonthOperationsByAccountId($account->id);
+
+    $incomes = $thisMonthOperations->filter(function ($op) {
+        return $op['movement_type_id'] === 1;
+    });
+
+    $expenses = $thisMonthOperations->filter(function ($op) {
+        return in_array($op['movement_type_id'], [2]);
+    });
+
     return view('home.home')
         ->with('user', $user)
         ->with('account', $account)
         ->with('sixOperations', $sixOperations)
         ->with('thisMonthOperations', $thisMonthOperations)
+        ->with('thisMonthIncomes', $incomes)
+        ->with('thisMonthExpenses', $expenses)
         ->with('objectives', $objective);
 })->middleware(['auth', 'role:user'])->name('home');
 
