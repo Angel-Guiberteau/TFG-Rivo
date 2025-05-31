@@ -70,3 +70,7 @@ body {
     background-color: #9A9A9A;
     color: #fff;
 }
+
+.icons > i {
+  font-size: 2rem !important;
+}
