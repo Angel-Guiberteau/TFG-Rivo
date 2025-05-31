@@ -113,7 +113,7 @@ Route::post('/logout', function () {
 */
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
     
-    Route::get('/', function () {
+    Route::get('/', function (): View {
         return view('admin.home.home');
     })->name('homeAdmin');
 
@@ -121,7 +121,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
     Route::group(['prefix' => 'users'], function () {
 
-        Route::get('/', function () {
+        Route::get('/', function (): View {
             return UserController::listUsers();
         })->name('users');
 
@@ -137,7 +137,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return UserController::deleteUser();
         })->name('deleteUser');
 
-        Route::get('/editUser/{id}', function ($id) {
+        Route::get('/editUser/{id}', function ($id): RedirectResponse|View {
             return UserController::getUserbyId($id);
         })->name('editUser');
 
@@ -146,7 +146,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('updateUser');
 
         Route::put('/updatePersonalCategories', function (): View {
-            dd(request()->all());
+            // dd(request()->all());
+            
+            $request = request()->toArray();    
+
+            $validate = UserValidator::validate($request, ValidationEnum::UPDATE_PERSONAL_CATEGORIES->value);
+            dd($validate);
+            // return UserController::updatePersonalCategories($validate);
         })->name('updatePersonalCategories');
 
     });
