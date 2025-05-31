@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\UserCategory;
+use App\Models\Category;
+
 
 class User extends Authenticatable
 {
@@ -163,6 +167,136 @@ class User extends Authenticatable
             });
     }
 
+    
+    public static function deletePersonalCategory(int $userId, int $categoryId): bool
+    {
+        DB::beginTransaction();
 
+        try {
+
+            $deletedRelation = UserCategory::where('user_id', $userId)
+                ->where('categories_id', $categoryId)
+                ->delete();
+
+            if (!$deletedRelation) {
+                DB::rollBack();
+                return false;
+            }
+
+            $stillRelated = UserCategory::where('categories_id', $categoryId)->exists();
+
+            if (!$stillRelated) {
+                $deletedCategory = Category::where('id', $categoryId)->delete();
+                if (!$deletedCategory) {
+                    DB::rollBack();
+                    return false;
+                }
+            }
+
+            DB::commit();
+            return true;
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return false;
+        }
+    }
+
+    public static function updatePersonalCategory(int $userId, int $categoryId, string $newName, string $iconHtml): bool
+    {
+        DB::beginTransaction();
+
+        try {
+            
+            $category = Category::find($categoryId);
+            if (!$category) {
+                DB::rollBack();
+                return false;
+            }
+
+            
+            $isLinked = UserCategory::where('user_id', $userId)
+                ->where('categories_id', $categoryId)
+                ->exists();
+
+            if (!$isLinked) {
+                DB::rollBack();
+                return false;
+            }
+
+           
+            $icon = Icon::where('icon', $iconHtml)->first();
+            if (!$icon) {
+                DB::rollBack();
+                return false;
+            }
+
+            $hasChanges = false;
+
+            if ($category->name !== $newName) {
+                $category->name = $newName;
+                $hasChanges = true;
+            }
+
+            if ($category->icon_id !== $icon->id) {
+                $category->icon_id = $icon->id;
+                $hasChanges = true;
+            }
+
+            if ($hasChanges) {
+                $saved = $category->save();
+                if (!$saved) {
+                    DB::rollBack();
+                    return false;
+                }
+            }
+
+            DB::commit();
+            return true;
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return false;
+        }
+    }
+
+    public static function addPersonalCategory(int $userId, string $name, string $iconHtml): bool
+    {
+        DB::beginTransaction();
+
+        try {
+            
+            $icon = Icon::where('icon', $iconHtml)->first();
+            if (!$icon) {
+                DB::rollBack();
+                return false;
+            }
+            
+            $category = new Category();
+            $category->name = $name;
+            $category->icon_id = $icon->id;
+
+            if (!$category->save()) {
+                DB::rollBack();
+                return false;
+            }
+
+            $userCategory = new UserCategory();
+            $userCategory->user_id = $userId;
+            $userCategory->categories_id = $category->id;
+
+            if (!$userCategory->save()) {
+                DB::rollBack();
+                return false;
+            }
+
+            DB::commit();
+            return true;
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return false;
+        }
+    }
 
 }

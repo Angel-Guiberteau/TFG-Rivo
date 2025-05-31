@@ -145,14 +145,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return UserController::updateUser();
         })->name('updateUser');
 
-        Route::put('/updatePersonalCategories', function (): View {
+        Route::put('/updatePersonalCategories', function () {
             // dd(request()->all());
             
             $request = request()->toArray();    
 
             $validate = UserValidator::validate($request, ValidationEnum::UPDATE_PERSONAL_CATEGORIES->value);
-            dd($validate);
-            // return UserController::updatePersonalCategories($validate);
+            
+            return UserController::updatePersonalCategories($validate);
         })->name('updatePersonalCategories');
 
     });
