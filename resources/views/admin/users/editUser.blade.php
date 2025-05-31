@@ -203,16 +203,19 @@
                     <form method="POST" action="{{ route('updatePersonalCategories') }}">
                         @csrf
                         @method('PUT')
-
+                         <input type="hidden" id="deletedCategories" name="deleted" value="[]">
                         <input type="hidden" name="user_id" value="{{ $user->id }}">
 
                         <div id="categoryContainer" class="row mb-4">
                             @foreach($personalCategories as $category)
                                 <div class="col-md-6 col-lg-4 mb-4 category-card">
+
                                     <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
                                         <div class="card-body d-flex flex-column p-4 bg-white">
                                             <input type="hidden" name="categories[{{ $category['id'] }}][id]" value="{{ $category['id'] }}">
-
+                                            <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2 delete-category-btn" data-id="{{ $category['id'] }}" data-existing="true">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
                                             <div class="mb-3">
                                                 <label class="form-label fw-medium text-muted">Nombre de la categoría</label>
                                                 <input type="text" name="categories[{{ $category['id'] }}][name]"
@@ -225,6 +228,7 @@
                                                 <label class="form-label fw-medium text-muted">Icono actual</label>
                                                 <div class="fs-2 text-primary">{!! $category['icon'] !!}</div>
                                             </div>
+                                            
 
                                             <div class="mb-3">
                                                 <label class="form-label fw-medium text-muted">Seleccionar nuevo icono</label>
@@ -249,7 +253,6 @@
                                 </div>
                             @endforeach
                         </div>
-                        
                         
                         <div class="text-end">
                             <button type="button" class="btn btn-success btn-sm" id="addCustomCategoryBtn">
@@ -320,6 +323,33 @@
             });
         }
 
+        function attachDeleteCategoryListeners() {
+            document.querySelectorAll('.delete-category-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const isExisting = this.dataset.existing === "true";
+                    const categoryId = this.dataset.id;
+
+                    if (isExisting && categoryId) {
+                        const deletedInput = document.getElementById('deletedCategories');
+                        let deletedArray = JSON.parse(deletedInput.value || '[]');
+
+                        // Solo agregar si no está ya en la lista
+                        if (!deletedArray.includes(categoryId)) {
+                            deletedArray.push(categoryId);
+                            deletedInput.value = JSON.stringify(deletedArray);
+                        }
+                    }
+
+                    // Eliminar visualmente la tarjeta
+                    const categoryCard = this.closest('.category-card');
+                    if (categoryCard) {
+                        categoryCard.remove();
+                    }
+                });
+            });
+        }
+
+
         document.addEventListener('DOMContentLoaded', function () {
             const steps = document.querySelectorAll('.progress-line-container .step');
             const sections = {
@@ -343,6 +373,7 @@
             });
 
             initIconSelection();
+            attachDeleteCategoryListeners(); // 👈 Se llama al cargar también por si ya hay existentes
 
             let counter = 0;
             const addBtn = document.getElementById('addCustomCategoryBtn');
@@ -350,7 +381,7 @@
                 addBtn.addEventListener('click', function () {
                     const container = document.getElementById('categoryContainer');
                     const randomId = counter++;
-                    
+
                     const iconOptionsHtml = allIcons.map(icon => `
                         <div class="icon-option"
                             data-icon='${icon.icon}'
@@ -363,13 +394,18 @@
                         <div class="col-md-6 col-lg-4 mb-4 category-card">
                             <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
                                 <div class="card-body d-flex flex-column p-4 bg-white">
-                                    <div class="mb-3">
-                                        <label class="form-label fw-medium text-muted">Nombre de la categoría</label>
-                                        <input type="text" name="news[${randomId}][name]"
-                                            class="form-control border-0 border-bottom rounded-0 bg-light text-center fs-5 fw-semibold"
-                                            required
-                                            placeholder="Introduce el nombre de la categoría">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <label class="form-label fw-medium text-muted mb-0">Nombre de la categoría</label>
+                                        <!-- 🔽 BOTÓN DE ELIMINAR -->
+                                        <button type="button" class="btn btn-sm btn-danger delete-category-btn" title="Eliminar categoría">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                     </div>
+
+                                    <input type="text" name="news[${randomId}][name]"
+                                        class="form-control border-0 border-bottom rounded-0 bg-light text-center fs-5 fw-semibold mb-3"
+                                        required
+                                        placeholder="Introduce el nombre de la categoría">
 
                                     <div class="text-center mb-3">
                                         <label class="form-label fw-medium text-muted">Icono actual</label>
@@ -392,14 +428,11 @@
 
                     container.insertAdjacentHTML('beforeend', newCategoryHtml);
                     initIconSelection();
+                    attachDeleteCategoryListeners(); // 👈 Necesario para los nuevos botones
                 });
             }
-
         });
     </script>
 @endpush
-
-
-
 
 @endsection
