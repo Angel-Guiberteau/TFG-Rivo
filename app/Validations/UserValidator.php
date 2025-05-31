@@ -147,4 +147,56 @@ class UserValidator extends Validator {
             'account_name.max' => 'El nombre de la cuenta no puede tener más de 75 caracteres.',
         ];
     }
+
+    protected static function rulesUpdatePersonalCategories(): array {
+        return [
+            'deleted' => 'required|string',
+            'user_id' => 'required|integer',
+
+            'categories' => 'sometimes|array|min:1',
+            'categories.*.id' => 'sometimes|integer',
+            'categories.*.name' => 'sometimes|string|max:75',
+            'categories.*.icon' => 'sometimes|string|max:75',
+
+            'news' => 'sometimes|array',
+            'news.*.name' => 'sometimes|string|max:75',
+            'news.*.icon' => 'sometimes|string|max:75',
+        ];
+    }
+
+    protected static function messagesUpdatePersonalCategories(): array {
+        return [
+            'deleted.required' => 'La lista de categorías eliminadas es obligatoria.',
+            'deleted.string' => 'El formato de las categorías eliminadas no es válido.',
+
+            'user_id.required' => 'El usuario es obligatorio.',
+            'user_id.integer' => 'El identificador del usuario debe ser un número entero.',
+
+            'categories.required' => 'Debes enviar al menos una categoría existente.',
+            'categories.array' => 'Las categorías deben estar en formato de lista.',
+            'categories.min' => 'Debes tener al menos una categoría.',
+
+            'categories.*.id.required' => 'Cada categoría existente debe tener un ID.',
+            'categories.*.id.integer' => 'El ID de cada categoría debe ser un número.',
+            'categories.*.name.required' => 'El nombre de la categoría existente es obligatorio.',
+            'categories.*.name.string' => 'El nombre de la categoría existente debe ser texto.',
+            'categories.*.name.max' => 'El nombre de la categoría existente no puede exceder los 75 caracteres.',
+            'categories.*.icon.required' => 'El icono de la categoría existente es obligatorio.',
+            'categories.*.icon.string' => 'El icono de la categoría existente debe ser texto.',
+            'categories.*.icon.max' => 'El icono de la categoría existente no puede exceder los 75 caracteres.',
+
+            'news.array' => 'Las nuevas categorías deben estar en formato de lista.',
+
+            'news.*.name.required_with' => 'El nombre de la nueva categoría es obligatorio.',
+            'news.*.name.string' => 'El nombre de la nueva categoría debe ser texto.',
+            'news.*.name.max' => 'El nombre de la nueva categoría no puede exceder los 75 caracteres.',
+
+            'news.*.icon.required_with' => 'El icono de la nueva categoría es obligatorio.',
+            'news.*.icon.string' => 'El icono de la nueva categoría debe ser texto.',
+            'news.*.icon.max' => 'El icono de la nueva categoría no puede exceder los 75 caracteres.',
+        ];
+    }
+
+
+
 }

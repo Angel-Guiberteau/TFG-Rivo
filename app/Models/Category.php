@@ -60,4 +60,6 @@ class Category extends Model
     {
         return $this->belongsTo(Icon::class, 'icon_id');
     }
+
+
 }

@@ -17,6 +17,7 @@ use PhpParser\Node\Expr\Cast\Array_;
 use Throwable;
 
 use App\Models\Account;
+use App\Models\Icon;
 use App\Models\Objective;
 use App\Models\ObjectiveOperation;
 use App\Models\Operation;
@@ -24,11 +25,18 @@ use App\Models\OperationPlanned;
 use App\Models\OperationUnschedule;
 use App\Models\User;
 use App\Models\UserAccount;
+use Illuminate\Mail\Transport\ArrayTransport;
 use Illuminate\Support\Carbon;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class UserController extends Controller
 {
+
+    public Array $delete;
+    public int $id;
+    public Array $categories;
+    public Array $news;
+
 
     public static function listUsers()
     {
@@ -120,10 +128,26 @@ class UserController extends Controller
                 ->withInput();
         }
 
-        // dd($user);
+        $personalCategories = User::getPersonalCategoriesByUserId($user->id);
+
+        if (!$personalCategories) {
+            return redirect()->back()
+                ->with('error', 'Categorias personales no encontradas.')
+                ->withInput();
+        }
+
+        $allIcons = Icon::getAllIconsEnabled();
+
+        if ($allIcons->isEmpty()) {
+            return redirect()->back()
+                ->with('error', 'No hay iconos disponibles.')
+                ->withInput();
+        }
 
         return view('admin.users.editUser')
-            ->with('user', $user);
+            ->with('user', $user)
+            ->with('personalCategories', $personalCategories)
+            ->with('allIcons', $allIcons);
     }
 
     public static function updateUser(): RedirectResponse
@@ -439,5 +463,69 @@ class UserController extends Controller
         return $objective;
     }
 
+    public static function updatePersonalCategories($data): RedirectResponse
+    {
+
+        $data = $data['data'] ?? [];
+
+        $object = new UserController();
+        
+        $object->delete = json_decode($data['deleted'] ?? '[]', true);
+        $object->id = $data['user_id'] ?? null;
+        $object->categories = $data['categories'] ?? [];
+        $object->news = $data['news'] ?? [];
+
+         
+
+        if (!User::getUserById($object->id)) {
+            return Redirect::back()->with('error', 'El usuario no existe.');
+        }
+
+        // dd($object);
+        
+        if (!empty($object->delete)) {
+            foreach ($object->delete as $categoryId) {
+                $category = User::deletePersonalCategory($object->id, $categoryId);
+                if (!$category) {
+                    return redirect()->route('users')->with('error', 'Error al eliminar la categoría personal.');
+                }
+            }
+        }
+        
+        if (!empty($object->categories)) {
+            foreach ($object->categories as $category) {
+
+                $categoryId = $category['id'] ?? null;
+                $categoryName = $category['name'] ?? null;
+                $categoryIcon = $category['icon'] ?? null;
+
+                if ($categoryId && $categoryName && $categoryIcon) {
+                    $updatedCategory = User::updatePersonalCategory($object->id, $categoryId, $categoryName, $categoryIcon);
+                    if (!$updatedCategory) {
+                        return redirect()->route('users')->with('error', 'Error al actualizar la categoría personal.');
+                    }
+                }
+
+            }
+        }
+
+        if (!empty($object->news)) {
+            foreach ($object->news as $newCategory) {
+
+                $newCategoryName = $newCategory['name'] ?? null;
+                $newCategoryIcon = $newCategory['icon'] ?? null;
+
+                if ($newCategoryName && $newCategoryIcon) {
+                    $addedCategory = User::addPersonalCategory($object->id, $newCategoryName, $newCategoryIcon);
+                    if (!$addedCategory) {
+                        return redirect()->route('users')->with('error', 'Error al añadir la categoría personal.');
+                    }
+                }
+
+            }
+        }
+
+        return redirect()->route('users')->with('success', 'Categorías personales actualizadas correctamente.');
+    }
 
 }
