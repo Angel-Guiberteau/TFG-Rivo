@@ -145,6 +145,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return UserController::updateUser();
         })->name('updateUser');
 
+        Route::put('/updatePersonalCategories', function (): View {
+            dd(request()->all());
+        })->name('updatePersonalCategories');
+
     });
 
                                 // SENTENCES

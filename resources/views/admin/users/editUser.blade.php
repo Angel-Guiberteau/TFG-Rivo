@@ -200,27 +200,25 @@
                 </div>
 
                 <div id="personalCategories" class="row mb-4 d-none">
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('updatePersonalCategories') }}">
                         @csrf
                         @method('PUT')
 
-                        <div id="personalCategories" class="row mb-4">
+                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+
+                        <div id="categoryContainer" class="row mb-4">
                             @foreach($personalCategories as $category)
-                                <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="col-md-6 col-lg-4 mb-4 category-card">
                                     <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
                                         <div class="card-body d-flex flex-column p-4 bg-white">
-
                                             <input type="hidden" name="categories[{{ $category['id'] }}][id]" value="{{ $category['id'] }}">
 
                                             <div class="mb-3">
-                                                <label for="category_name_{{ $category['id'] }}" class="form-label fw-medium text-muted">Nombre de la categoría</label>
-                                                <input 
-                                                    type="text"
-                                                    name="categories[{{ $category['id'] }}][name]"
-                                                    id="category_name_{{ $category['id'] }}"
+                                                <label class="form-label fw-medium text-muted">Nombre de la categoría</label>
+                                                <input type="text" name="categories[{{ $category['id'] }}][name]"
                                                     class="form-control border-0 border-bottom rounded-0 bg-light text-center fs-5 fw-semibold"
                                                     value="{{ old("categories.{$category['id']}.name", $category['name']) }}"
-                                                >
+                                                    placeholder="Introduce el nombre de la categoría">
                                             </div>
 
                                             <div class="text-center mb-3">
@@ -230,15 +228,15 @@
 
                                             <div class="mb-3">
                                                 <label class="form-label fw-medium text-muted">Seleccionar nuevo icono</label>
-                                                <input type="hidden" name="categories[{{ $category['id'] }}][icon]" id="icon_{{ $category['id'] }}" value="{{ $category['icon'] }}">
+                                                <input type="hidden" name="categories[{{ $category['id'] }}][icon]"
+                                                    id="icon_{{ $category['id'] }}" value="{{ $category['icon'] }}">
 
                                                 <div class="icon-scroll-wrapper border rounded-4 p-3 bg-white shadow-sm">
                                                     <div class="icon-grid">
                                                         @foreach($allIcons as $icon)
-                                                            <div class="icon-option"
+                                                            <div class="icon-option {{ $category['icon'] == $icon->icon ? 'selected' : '' }}"
                                                                 data-icon="{{ $icon->icon }}"
-                                                                data-target="icon_{{ $category['id'] }}"
-                                                                title="Seleccionar icono">
+                                                                data-target="icon_{{ $category['id'] }}">
                                                                 {!! $icon->icon !!}
                                                             </div>
                                                         @endforeach
@@ -251,8 +249,12 @@
                                 </div>
                             @endforeach
                         </div>
-
+                        
+                        
                         <div class="text-end">
+                            <button type="button" class="btn btn-success btn-sm" id="addCustomCategoryBtn">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
                             <button type="submit" class="btn btn-primary btn-sm">
                                 <i class="fa-solid fa-floppy-disk"></i>
                             </button>
@@ -261,8 +263,8 @@
                             </a>
                         </div>
                     </form>
-
                 </div>
+
 
 
                 <div id="personalAccounts" class="row mb-4 d-none">
@@ -275,69 +277,129 @@
         </section>
     </main>
 
-    @push('scripts')
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-        <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
-        <script src="{{ asset('js/admin/users/editUser.js') }}"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const steps = document.querySelectorAll('.progress-line-container .step');
-                const sections = {
-                    stepInfo: document.getElementById('personalData'),
-                    stepCreation: document.getElementById('personalCategories'),
-                    stepPreview: document.getElementById('personalAccounts') 
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+    <script src="{{ asset('js/admin/users/editUser.js') }}"></script>
+
+    <script>
+        const allIcons = @json($allIcons);
+    </script>
+
+    <script>
+        function initIconSelection() {
+            document.querySelectorAll('.icon-option').forEach(icon => {
+                icon.onclick = () => {
+                    const targetId = icon.getAttribute('data-target');
+                    const newValue = icon.getAttribute('data-icon');
+                    const hiddenInput = document.getElementById(targetId);
+                    if (!hiddenInput) return;
+
+                    hiddenInput.value = newValue;
+
+                    const wrapper = icon.closest('.icon-scroll-wrapper');
+                    if (wrapper) {
+                        wrapper.querySelectorAll('.icon-option').forEach(el => el.classList.remove('selected'));
+                    }
+
+                    icon.classList.add('selected');
                 };
+            });
 
-                steps.forEach(step => {
-                    step.addEventListener('click', function () {
-                        // Remover 'active' de todos los pasos
-                        steps.forEach(s => s.classList.remove('active'));
-                        this.classList.add('active');
+            // Preselección de íconos ya asignados
+            document.querySelectorAll('input[type="hidden"][id^="icon_"]').forEach(input => {
+                const selectedValue = input.value;
+                const grid = input.closest('.card-body')?.querySelector('.icon-grid') 
+                          || input.closest('.card')?.querySelector('.icon-grid');
+                if (!grid) return;
 
-                        // Ocultar todas las secciones
-                        Object.values(sections).forEach(section => {
-                            if (section) section.classList.add('d-none');
-                        });
+                const selectedIcon = [...grid.querySelectorAll('.icon-option')].find(icon => icon.getAttribute('data-icon') === selectedValue);
+                if (selectedIcon) {
+                    selectedIcon.classList.add('selected');
+                }
+            });
+        }
 
-                        // Mostrar la sección correspondiente
-                        const sectionToShow = sections[this.id];
-                        if (sectionToShow) sectionToShow.classList.remove('d-none');
+        document.addEventListener('DOMContentLoaded', function () {
+            const steps = document.querySelectorAll('.progress-line-container .step');
+            const sections = {
+                stepInfo: document.getElementById('personalData'),
+                stepCreation: document.getElementById('personalCategories'),
+                stepPreview: document.getElementById('personalAccounts')
+            };
+
+            steps.forEach(step => {
+                step.addEventListener('click', function () {
+                    steps.forEach(s => s.classList.remove('active'));
+                    this.classList.add('active');
+
+                    Object.values(sections).forEach(section => {
+                        if (section) section.classList.add('d-none');
                     });
+
+                    const sectionToShow = sections[this.id];
+                    if (sectionToShow) sectionToShow.classList.remove('d-none');
                 });
             });
 
-        </script>
-        <script>
-    document.addEventListener('DOMContentLoaded', function () {
+            initIconSelection();
 
-        document.querySelectorAll('.icon-option').forEach(icon => {
-            icon.addEventListener('click', () => {
-                const targetId = icon.getAttribute('data-target');
-                const newValue = icon.getAttribute('data-icon');
-                const hiddenInput = document.getElementById(targetId);
-                hiddenInput.value = newValue;
+            let counter = 0;
+            const addBtn = document.getElementById('addCustomCategoryBtn');
+            if (addBtn) {
+                addBtn.addEventListener('click', function () {
+                    const container = document.getElementById('categoryContainer');
+                    const randomId = counter++;
+                    
+                    const iconOptionsHtml = allIcons.map(icon => `
+                        <div class="icon-option"
+                            data-icon='${icon.icon}'
+                            data-target="icon_new_${randomId}">
+                            ${icon.icon}
+                        </div>
+                    `).join('');
 
+                    const newCategoryHtml = `
+                        <div class="col-md-6 col-lg-4 mb-4 category-card">
+                            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                                <div class="card-body d-flex flex-column p-4 bg-white">
+                                    <div class="mb-3">
+                                        <label class="form-label fw-medium text-muted">Nombre de la categoría</label>
+                                        <input type="text" name="news[${randomId}][name]"
+                                            class="form-control border-0 border-bottom rounded-0 bg-light text-center fs-5 fw-semibold"
+                                            required
+                                            placeholder="Introduce el nombre de la categoría">
+                                    </div>
 
-                const grid = icon.closest('.icon-grid');
-                grid.querySelectorAll('.icon-option').forEach(el => el.classList.remove('selected'));
+                                    <div class="text-center mb-3">
+                                        <label class="form-label fw-medium text-muted">Icono actual</label>
+                                        <div class="fs-2 text-primary"><i class="fa-regular fa-circle-question"></i></div>
+                                    </div>
 
-                icon.classList.add('selected');
-            });
-        });
+                                    <div class="mb-3">
+                                        <label class="form-label fw-medium text-muted">Seleccionar nuevo icono</label>
+                                        <input type="hidden" name="news[${randomId}][icon]" id="icon_new_${randomId}">
+                                        <div class="icon-scroll-wrapper border rounded-4 p-3 bg-white shadow-sm">
+                                            <div class="icon-grid">
+                                                ${iconOptionsHtml}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
 
-        document.querySelectorAll('input[type="hidden"][id^="icon_"]').forEach(input => {
-            const selectedValue = input.value;
-            const grid = input.closest('.card-body').querySelector('.icon-grid');
-            if (!grid) return;
-
-            const selectedIcon = [...grid.querySelectorAll('.icon-option')].find(icon => icon.getAttribute('data-icon') === selectedValue);
-            if (selectedIcon) {
-                selectedIcon.classList.add('selected');
+                    container.insertAdjacentHTML('beforeend', newCategoryHtml);
+                    initIconSelection();
+                });
             }
-        });
-    });
-</script>
 
-    @endpush
+        });
+    </script>
+@endpush
+
+
+
 
 @endsection

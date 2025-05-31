@@ -137,7 +137,7 @@ class UserController extends Controller
                 ->withInput();
         }
 
-        // dd($personalCategories);
+        // dd($allIcons);
 
         return view('admin.users.editUser')
             ->with('user', $user)
