@@ -142,3 +142,78 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const categoryForm = document.querySelector('#personalCategories form');
+    if (!categoryForm) return;
+
+    const submitBtn = categoryForm.querySelector('button[type="submit"]');
+
+    function showSuccessMessage(input, message) {
+        removeSuccessMessage(input);
+        const feedback = document.createElement('div');
+        feedback.className = 'valid-feedback d-block small text-success';
+        feedback.textContent = message;
+        input.insertAdjacentElement('afterend', feedback);
+    }
+
+    function removeSuccessMessage(input) {
+        const feedback = input.parentElement.querySelector('.valid-feedback');
+        if (feedback) feedback.remove();
+    }
+
+    function validateCategoryForm() {
+        let isValid = true;
+
+        const categoryCards = categoryForm.querySelectorAll('.category-card');
+
+        categoryCards.forEach(card => {
+            const nameInput = card.querySelector('input[type="text"]');
+            const iconInput = card.querySelector('input[type="hidden"][id^="icon_"]');
+            const iconWrapper = card.querySelector('.icon-scroll-wrapper');
+            const selectedIcon = iconWrapper.querySelector('.icon-option.selected');
+
+            if (!nameInput.value.trim()) {
+                nameInput.classList.add('is-invalid');
+                nameInput.classList.remove('border-success');
+                removeSuccessMessage(nameInput);
+                isValid = false;
+            } else {
+                nameInput.classList.remove('is-invalid');
+                nameInput.classList.add('border-success');
+                showSuccessMessage(nameInput, 'Todo correcto');
+            }
+
+            if (!selectedIcon || !iconInput.value.trim()) {
+                iconWrapper.classList.add('border-danger');
+                iconWrapper.classList.remove('border-success');
+                isValid = false;
+            } else {
+                iconWrapper.classList.remove('border-danger');
+                iconWrapper.classList.add('border-success');
+            }
+        });
+
+        submitBtn.disabled = !isValid;
+    }
+
+    categoryForm.addEventListener('input', e => {
+        if (e.target.matches('.category-card input[type="text"]')) {
+            validateCategoryForm();
+        }
+    });
+
+    categoryForm.addEventListener('click', e => {
+        if (e.target.closest('.icon-option')) {
+            setTimeout(() => validateCategoryForm(), 50);
+        }
+    });
+
+    validateCategoryForm();
+
+    const container = document.getElementById('categoryContainer');
+    const observer = new MutationObserver(() => {
+        validateCategoryForm();
+    });
+    observer.observe(container, { childList: true });
+});
