@@ -23,4 +23,9 @@ class UserAccount extends Model
         return $userAccount->save() ? $userAccount : false;
 
     }
+
+    public static function getAccountsByUserId(int $userId){
+        $accountIds = Self::where('user_id', $userId)->pluck('account_id');
+        return Account::whereIn('id', $accountIds)->get();
+    }
 }

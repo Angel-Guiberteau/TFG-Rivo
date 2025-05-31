@@ -163,7 +163,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('updateUser');
 
         Route::put('/updatePersonalCategories', function () {
-            // dd(request()->all());
+            dd(request()->all());
             
             $request = request()->toArray();    
 
@@ -171,6 +171,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             
             return UserController::updatePersonalCategories($validate);
         })->name('updatePersonalCategories');
+
+        Route::put('/updatePersonalAccounts', function () {
+
+            dd(request()->all());
+            
+        })->name('updatePersonalAccounts');
 
         Route::get('/previewUser/{id}', function (Request $request, $id) {
 

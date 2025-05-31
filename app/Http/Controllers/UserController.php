@@ -144,10 +144,19 @@ class UserController extends Controller
                 ->withInput();
         }
 
+        $accounts = UserAccount::getAccountsByUserId($user->id);
+        // dd($accounts);
+        if ($accounts->isEmpty()) {
+            return redirect()->back()
+                ->with('error', 'No hay cuentas asociadas al usuario.')
+                ->withInput();
+        }
+
         return view('admin.users.editUser')
             ->with('user', $user)
             ->with('personalCategories', $personalCategories)
-            ->with('allIcons', $allIcons);
+            ->with('allIcons', $allIcons)
+            ->with('personalAccounts', $accounts);
     }
 
     public static function updateUser(): RedirectResponse
