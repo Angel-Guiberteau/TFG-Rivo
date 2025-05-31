@@ -17,6 +17,8 @@
             <article class="bg-light p-4 mt-4 shadow-sm rounded-3">
                 @include('templates.admin.title', ['title' => 'Editar Usuario'])
 
+                @include('admin.components.progressLine')
+
                 <form action="{{ route('updateUser') }}" method="POST">
                     @csrf
                     @method('PUT')
