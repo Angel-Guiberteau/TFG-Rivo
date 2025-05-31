@@ -144,4 +144,25 @@ class User extends Authenticatable
         return $this->belongsToMany(Account::class, 'users_accounts', 'user_id', 'account_id');
     }
 
+    public function personalCategories()
+    {
+        return $this->belongsToMany(Category::class, 'user_categories', 'user_id', 'categories_id');
+    }
+
+    public static function getPersonalCategoriesByUserId($id)
+    {
+        return self::find($id)?->personalCategories()
+            ->with('icon')
+            ->get()
+            ->map(function ($category) {
+                return [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                    'icon' => $category->icon?->icon 
+                ];
+            });
+    }
+
+
+
 }

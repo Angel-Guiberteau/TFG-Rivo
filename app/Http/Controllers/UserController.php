@@ -17,6 +17,7 @@ use PhpParser\Node\Expr\Cast\Array_;
 use Throwable;
 
 use App\Models\Account;
+use App\Models\Icon;
 use App\Models\Objective;
 use App\Models\ObjectiveOperation;
 use App\Models\Operation;
@@ -120,10 +121,28 @@ class UserController extends Controller
                 ->withInput();
         }
 
-        // dd($user);
+        $personalCategories = User::getPersonalCategoriesByUserId($user->id);
+
+        if (!$personalCategories) {
+            return redirect()->back()
+                ->with('error', 'Categorias personales no encontradas.')
+                ->withInput();
+        }
+
+        $allIcons = Icon::getAllIconsEnabled();
+
+        if ($allIcons->isEmpty()) {
+            return redirect()->back()
+                ->with('error', 'No hay iconos disponibles.')
+                ->withInput();
+        }
+
+        // dd($personalCategories);
 
         return view('admin.users.editUser')
-            ->with('user', $user);
+            ->with('user', $user)
+            ->with('personalCategories', $personalCategories)
+            ->with('allIcons', $allIcons);
     }
 
     public static function updateUser(): RedirectResponse

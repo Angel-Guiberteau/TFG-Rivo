@@ -60,18 +60,23 @@ Route::get('/home', function (): View {
         ->with('sixOperations', $sixOperations)
         ->with('thisMonthOperations', $thisMonthOperations)
         ->with('objectives', $objective);
+
 })->middleware(['auth', 'role:user'])->name('home');
 
 Route::get('/initialSetup', function () {
     return view('home.initialSetup');
 })->middleware(['auth', 'role:user'])->name('initialSetup');
+
 Route::post('/updateUserInfoFromInitialSetup', function () {
+
     $request = Request()->all();
 
     $validate = UserValidator::validate($request, ValidationEnum::INITIALSETUP->value);
     $data = $validate['data'];
     $controller = new UserController();
+
     return  $controller->updateUserInfoFromInitialSetup($data);
+    
 })->middleware(['auth', 'role:user'])->name('updateUserInfoFromInitialSetup');
 
 
