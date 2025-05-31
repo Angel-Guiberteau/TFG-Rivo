@@ -2,7 +2,7 @@
     <h3 class="section-title">Movimientos recientes</h3>
     <div class="row">
         @foreach ($sixOperations as $index => $operation)
-            <div class="col-12 col-lg-6 {{ $index % 2 === 0 ? 'border-md-end' : '' }}">
+            <div class="col-12 col-lg-6 {{ $index % 2 === 0 ? 'border-lg-end' : '' }}">
                 <div class="movement-row">
                     <div class="d-flex align-items-center gap-3">
                         <div class="movement-icon">
