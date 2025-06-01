@@ -37,9 +37,9 @@
                                         {!! $category['icon_html'] !!}
                                     </label>
                                 </td>
-                                <td>{{ $category['category_name'] }}</td>
-                                <td>{{ $category['movement_type_names'] }}</td>
-                                <td class="text-center">
+                                <td class="text-center">{{ $category['category_name'] }}</td>
+                                <td class="text-center">{{ $category['movement_type_names'] }}</td>
+                                <td class="text-center align-middle">
                                     @include('admin.components.buttons.editButton', [
                                         'data' =>
                                             'data-id="' . e($category['id']) . '" ' .
@@ -49,7 +49,7 @@
                                             '" data-bs-toggle="modal" data-bs-target="#editCategory"'
                                     ])
                                 </td>
-                                <td class="text-center">   
+                                <td class="text-center align-middle">   
                                     @include('admin.components.buttons.deleteButton', [
                                         'data' => 'id="'. e($category['id']) .'"',
                                         'onclick' => 'deleteCategory('. e($category['id']) .')'
