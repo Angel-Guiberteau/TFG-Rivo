@@ -5,24 +5,60 @@ main{
   width: 100%;
   position: relative;
 }
-aside {
-  display: none !important;
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-  overflow: hidden;
+aside.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100dvh;
+  width: 250px;
+  background-color: #1b1b1b;
+  color: #fff;
+  padding: 2rem 1rem;
+  z-index: 999999;
+  transform: translateX(-100%);
+  opacity: 0;
   visibility: hidden;
-  position: absolute;
+  transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+}
+
+aside.sidebar.sidebar-visible {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.sidebar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  z-index: 999998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar-backdrop.active {
+  opacity: 1;
+  visibility: visible;
 }
 
 @media (min-width: 992px) {
-  aside {
-    display: flex !important;
+  aside.sidebar {
+    position: sticky;
+    transform: none;
+    opacity: 1;
     visibility: visible;
-    width: 16vw !important;
-    height: 100vh !important;
-    position: static;
-    overflow: visible;
+    display: flex;
+    width: 16vw;
+    height: 100dvh; 
+    padding: 3rem 1rem;
+    background-color: #1b1b1b;
+    color: #fff;
+    border-right: 3px solid #fff;
   }
 
   main {
@@ -678,6 +714,25 @@ canvas {
 @media (min-width: 992px) {
     .border-lg-end {
         border-right: 1px solid #e0e0e0;
+    }
+}
+
+#filter-container {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    margin-top: 10px;
+}
+
+#filter-container.show {
+    display: flex;
+    opacity: 1;
+}
+
+@media (min-width: 992px) {
+    #filter-container {
+        display: flex !important;
+        opacity: 1 !important;
     }
 }
 
