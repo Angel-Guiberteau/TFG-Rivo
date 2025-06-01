@@ -36,6 +36,7 @@ class UserController extends Controller
     public int $id;
     public Array $categories;
     public Array $news;
+    public Array $accounts;
 
 
     public static function listUsers()
@@ -144,10 +145,19 @@ class UserController extends Controller
                 ->withInput();
         }
 
+        $accounts = UserAccount::getAccountsByUserId($user->id);
+        // dd($accounts);
+        if ($accounts->isEmpty()) {
+            return redirect()->back()
+                ->with('error', 'No hay cuentas asociadas al usuario.')
+                ->withInput();
+        }
+
         return view('admin.users.editUser')
             ->with('user', $user)
             ->with('personalCategories', $personalCategories)
-            ->with('allIcons', $allIcons);
+            ->with('allIcons', $allIcons)
+            ->with('personalAccounts', $accounts);
     }
 
     public static function updateUser(): RedirectResponse
@@ -556,4 +566,69 @@ class UserController extends Controller
             ->with('personalCategories', $personalCategories);
     }
 
+    public static function updatePersonalAccounts($data): RedirectResponse
+    {
+        $data = $data['data'] ?? [];
+
+        $object = new UserController();
+
+        $object->delete = json_decode($data['deleted'] ?? '[]', true);
+        $object->id = $data['user_id'] ?? null;
+        $object->accounts = $data['accounts'] ?? [];
+        $object->news = $data['news'] ?? [];
+
+        // dd($object->accounts);
+        if (!User::getUserById($object->id)) {
+            return Redirect::back()->with('error', 'El usuario no existe.');
+        }
+
+        if (!empty($object->delete)) {
+            foreach ($object->delete as $accountId) {
+                $account = UserAccount::deletePersonalAccount($object->id, $accountId);
+                if (!$account) {
+                    return redirect()->route('users')->with('error', 'Error al eliminar la cuenta personal.');
+                }
+            }
+        }
+        
+        if (!empty($object->accounts)) {
+            foreach ($object->accounts as $account) {
+
+                $accountId = $account['id'] ?? null;
+                $accountName = $account['name'] ?? null;
+                $accountBalance = $account['balance'] ?? null;
+                $accountCurrency = $account['currency'] ?? null;
+                $accountEnabled = $account['enabled'] ?? null;
+
+
+                if ($accountId && $accountName && $accountBalance && $accountCurrency) {
+                    $updatedAccount = UserAccount::updatePersonalAccount($accountId, $accountName, $accountBalance, $accountCurrency, $accountEnabled);
+                    if (!$updatedAccount) {
+                        return redirect()->route('users')->with('error', 'Error al actualizar la cuenta personal.');
+                    }
+                }
+
+            }
+        }
+
+        if (!empty($object->news)) {
+            foreach ($object->news as $newAccount) {
+
+                $newAccountName = $newAccount['name'] ?? null;
+                $newAccountBalance = $newAccount['balance'] ?? null;
+                $newAccountCurrency = $newAccount['currency'] ?? null;
+                $newAccountEnabled = $newAccount['enabled'] ?? null;
+
+                if ($newAccountName && $newAccountBalance && $newAccountCurrency) {
+                    $addedAccount = UserAccount::addPersonalAccount($object->id, $newAccountName, $newAccountBalance, $newAccountCurrency, $newAccountEnabled);
+                    if (!$addedAccount) {
+                        return redirect()->route('users')->with('error', 'Error al añadir la cuenta personal.');
+                    }
+                }
+
+            }
+        }
+        
+        return redirect()->route('users')->with('success', 'Cuentas personales actualizadas correctamente.');
+    }
 }

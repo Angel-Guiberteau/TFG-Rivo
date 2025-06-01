@@ -9,5 +9,6 @@ enum ValidationEnum: string
     case DELETE = 'delete';
     case INITIALSETUP = 'initialSetup';
     case UPDATE_PERSONAL_CATEGORIES = 'updatePersonalCategories';
+    case UPDATE_PERSONAL_ACOUNTS = 'updatePersonalAccounts';
     // case PREVIEW = 'preView';
 }

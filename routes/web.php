@@ -167,14 +167,26 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('updateUser');
 
         Route::put('/updatePersonalCategories', function () {
-            // dd(request()->all());
             
             $request = request()->toArray();    
 
             $validate = UserValidator::validate($request, ValidationEnum::UPDATE_PERSONAL_CATEGORIES->value);
             
             return UserController::updatePersonalCategories($validate);
+
         })->name('updatePersonalCategories');
+
+        Route::put('/updatePersonalAccounts', function () {
+
+            $request = request()->toArray();
+
+            // dd($request);
+
+            $validate = UserValidator::validate($request, ValidationEnum::UPDATE_PERSONAL_ACOUNTS->value);
+
+            return UserController::updatePersonalAccounts($validate);
+            
+        })->name('updatePersonalAccounts');
 
         Route::get('/previewUser/{id}', function (Request $request, $id) {
 
