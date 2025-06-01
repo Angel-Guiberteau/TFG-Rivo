@@ -60,7 +60,6 @@ Route::get('/home', function (): View {
     $sixOperations = $operationController->getSixOperationsByAccountId($account->id);
     
     $thisMonthOperations = $operationController->thisMonthOperationsByAccountId($account->id);
-
     $incomes = $thisMonthOperations->filter(function ($op) {
         return $op['movement_type_id'] === 1;
     });

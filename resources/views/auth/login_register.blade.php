@@ -47,12 +47,12 @@
                             <i class="fas fa-eye-slash toggle-password d-none" style="cursor: pointer; position: absolute; right: 10px;"></i>
                         </div>
                         
-                        <div class="d-flex flex-column flex-lg-row justify-content-start justify-content-lg-between align-items-start align-items-lg-center w-100 p-1 mb-3 text-start">
+                        <div class="d-flex flex-column flex-lg-row justify-content-start justify-content-lg-between align-items-start align-items-lg-center w-100 p-1 mb-3 text-start gap-3 gap-lg-0">
                             <div class="d-flex align-items-center gap-1">
                                 <input type="checkbox" id="rememberMe" name="remember"/>
                                 <label for="rememberMe" nam class="fs-6 m-0">Recordarme</label>
                             </div>
-                            <a href="#" class="fs-6 link-login">¿Has olvidado tu contraseña?</a>
+                            <a href="#" class="fs-6 w-100 link-login text-center text-lg-end">¿Has olvidado tu contraseña?</a>
                             </div>
         
                         <div class="register mb-2">
