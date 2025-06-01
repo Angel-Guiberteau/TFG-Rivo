@@ -5,6 +5,7 @@ main{
   width: 100%;
   position: relative;
 }
+
 aside.sidebar {
   position: fixed;
   top: 0;
@@ -18,6 +19,7 @@ aside.sidebar {
   transform: translateX(-100%);
   opacity: 0;
   visibility: hidden;
+  display: none;
   transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
 }
 
@@ -25,6 +27,7 @@ aside.sidebar.sidebar-visible {
   transform: translateX(0);
   opacity: 1;
   visibility: visible;
+  display: flex;
 }
 
 
