@@ -33,6 +33,7 @@ abstract class Validator extends Controller
             'delete' => static::rulesDelete(),
             'initialSetup' => static::rulesInitialSetup(),
             'updatePersonalCategories' => static::rulesUpdatePersonalCategories(),
+            'updatePersonalAccounts' => static::rulesUpdatePersonalAccounts(),
             default => [],
         };
     }
@@ -44,6 +45,7 @@ abstract class Validator extends Controller
             'delete' => static::messagesDelete(),
             'initialSetup' => static::messagesInitialSetup(),
             'updatePersonalCategories' => static::messagesUpdatePersonalCategories(),
+            'updatePersonalAccounts' => static::messagesUpdatePersonalAccounts(),
             default => [],
         };
     }

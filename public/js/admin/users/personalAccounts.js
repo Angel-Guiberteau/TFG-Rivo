@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    let accountCounter = 1000; 
+    let accountCounter = 1000;
     document.getElementById('addAccountBtn')?.addEventListener('click', () => {
         const container = document.getElementById('accountsContainer');
-        const index = `new_${accountCounter++}`;
+        const index = `new_${accountCounter++}`; // unique ID for each new account
 
         const newCard = document.createElement('div');
         newCard.className = 'col-md-6 col-lg-4 mb-4 account-card';
@@ -32,21 +32,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     <div class="mb-3">
                         <label class="form-label fw-medium text-muted">Nombre de la cuenta</label>
-                        <input type="text" name="accounts[${index}][name]" class="form-control text-center">
+                        <input type="text" name="news[${index}][name]" class="form-control text-center">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label fw-medium text-muted">Saldo</label>
-                        <input type="number" step="0.01" name="accounts[${index}][balance]" class="form-control text-center">
+                        <input type="number" step="0.01" name="news[${index}][balance]" class="form-control text-center">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label fw-medium text-muted">Moneda</label>
-                        <input type="text" name="accounts[${index}][currency]" class="form-control text-center" value="EUR">
+                        <input type="text" name="news[${index}][currency]" class="form-control text-center" value="EUR">
                     </div>
 
                     <div class="form-check form-switch text-center">
-                        <input class="form-check-input" type="checkbox" role="switch" id="enabledSwitch${index}" name="accounts[${index}][enabled]" value="1" checked>
+                        <input class="form-check-input" type="checkbox" role="switch" id="enabledSwitch${index}" name="news[${index}][enabled]" value="1" checked>
                         <label class="form-check-label" for="enabledSwitch${index}">Habilitada</label>
                     </div>
                 </div>

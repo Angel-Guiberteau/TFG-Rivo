@@ -155,7 +155,7 @@ class UserValidator extends Validator {
 
             'categories' => 'sometimes|array|min:1',
             'categories.*.id' => 'sometimes|integer',
-            'categories.*.name' => 'sometimes|string|max:75',
+            'categories.*.name' => 'sometimes|string|max:30',
             'categories.*.icon' => 'sometimes|string|max:75',
 
             'news' => 'sometimes|array',
@@ -180,7 +180,7 @@ class UserValidator extends Validator {
             'categories.*.id.integer' => 'El ID de cada categoría debe ser un número.',
             'categories.*.name.required' => 'El nombre de la categoría existente es obligatorio.',
             'categories.*.name.string' => 'El nombre de la categoría existente debe ser texto.',
-            'categories.*.name.max' => 'El nombre de la categoría existente no puede exceder los 75 caracteres.',
+            'categories.*.name.max' => 'El nombre de la categoría existente no puede exceder los 30 caracteres.',
             'categories.*.icon.required' => 'El icono de la categoría existente es obligatorio.',
             'categories.*.icon.string' => 'El icono de la categoría existente debe ser texto.',
             'categories.*.icon.max' => 'El icono de la categoría existente no puede exceder los 75 caracteres.',
@@ -205,11 +205,15 @@ class UserValidator extends Validator {
             'accounts' => 'sometimes|array|min:1',
             'accounts.*.id' => 'sometimes|integer',
             'accounts.*.name' => 'sometimes|string|max:75',
-            'accounts.*.icon' => 'sometimes|string|max:75',
+            'accounts.*.balance' => 'sometimes|numeric',
+            'accounts.*.currency' => 'sometimes|string|size:3',
+            'accounts.*.enabled' => 'sometimes|boolean',
 
-            'news' => 'sometimes|array',
+            'news' => 'sometimes|array|min:1',
             'news.*.name' => 'sometimes|string|max:75',
-            'news.*.icon' => 'sometimes|string|max:75',
+            'news.*.balance' => 'sometimes|numeric',
+            'news.*.currency' => 'sometimes|string|size:3',
+            'news.*.enabled' => 'sometimes|boolean',
         ];
     }
 
@@ -230,21 +234,30 @@ class UserValidator extends Validator {
             'accounts.*.name.required' => 'El nombre de la cuenta existente es obligatorio.',
             'accounts.*.name.string' => 'El nombre de la cuenta existente debe ser texto.',
             'accounts.*.name.max' => 'El nombre de la cuenta existente no puede exceder los 75 caracteres.',
-            'accounts.*.icon.required' => 'El icono de la cuenta existente es obligatorio.',
-            'accounts.*.icon.string' => 'El icono de la cuenta existente debe ser texto.',
-            'accounts.*.icon.max' => 'El icono de la cuenta existente no puede exceder los 75 caracteres.',
+            'accounts.*.balance.required' => 'El saldo de la cuenta existente es obligatorio.',
+            'accounts.*.balance.decimal' => 'El saldo de la cuenta existente debe ser un número decimal.',
+            'accounts.*.currency.required' => 'La moneda de la cuenta existente es obligatoria.',
+            'accounts.*.currency.string' => 'La moneda de la cuenta existente debe ser texto.',
+            'accounts.*.currency.size' => 'La moneda de la cuenta existente debe tener 3 caracteres.',
+            'accounts.*.enabled.boolean' => 'El campo de habilitación de la cuenta existente debe ser verdadero o falso.',
 
+            'news.required' => 'Debes enviar al menos una nueva cuenta.',
             'news.array' => 'Las nuevas cuentas deben estar en formato de lista.',
+            'news.min' => 'Debes tener al menos una nueva cuenta.',
 
-            'news.*.name.required_with' => 'El nombre de la nueva cuenta es obligatorio.',
+            'news.*.name.required' => 'El nombre de la nueva cuenta es obligatorio.',
             'news.*.name.string' => 'El nombre de la nueva cuenta debe ser texto.',
             'news.*.name.max' => 'El nombre de la nueva cuenta no puede exceder los 75 caracteres.',
-
-            'news.*.icon.required_with' => 'El icono de la nueva cuenta es obligatorio.',
-            'news.*.icon.string' => 'El icono de la nueva cuenta debe ser texto.',
-            'news.*.icon.max' => 'El icono de la nueva cuenta no puede exceder los 75 caracteres.',
+            'news.*.balance.required' => 'El saldo de la nueva cuenta es obligatorio.',
+            'news.*.balance.decimal' => 'El saldo de la nueva cuenta debe ser un número decimal.',
+            'news.*.currency.required' => 'La moneda de la nueva cuenta es obligatoria.',
+            'news.*.currency.string' => 'La moneda de la nueva cuenta debe ser texto.',
+            'news.*.currency.size' => 'La moneda de la nueva cuenta debe tener 3 caracteres.',
+            'news.*.enabled.boolean' => 'El campo de habilitación de la nueva cuenta debe ser verdadero o falso.',
         ];
     }
+
+    
 
 
 }
