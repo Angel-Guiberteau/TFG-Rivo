@@ -82,6 +82,11 @@ class Operation extends Model
             ->get();
     }
     
+    public static function getOperationById(int $operationId): ?self{
+        return Operation::with(['category.icon', 'planned', 'unschedule'])
+            ->findOrFail($operationId);
+    }
+    
     public static function getAllExpensesByAccountId(int $accountId): ?Collection{
         return self::with('category.icon')
             ->where('account_id', $accountId)
@@ -93,6 +98,16 @@ class Operation extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function planned()
+    {
+        return $this->hasOne(OperationPlanned::class);
+    }
+
+    public function unschedule()
+    {
+        return $this->hasOne(OperationUnschedule::class);
     }
 
 }

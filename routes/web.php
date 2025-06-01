@@ -159,6 +159,9 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 
 
     })->name('addOperationUser');
+
+    Route::get('/transaction/{id}', [OperationController::class, 'getOperationById']);
+
 });
 
 /*
