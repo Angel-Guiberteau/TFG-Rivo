@@ -64,7 +64,7 @@
                     </form>
                 </div>
                 <div class="text-end">
-                    <a href="{{ route('users') }}" class="btn btn-danger btn-md me-5 mt-3">
+                    <a href="{{ route('sentences') }}" class="btn btn-danger btn-md me-5 mt-3">
                         <i class="fa-solid fa-arrow-left"></i>
                     </a>
                 </div>
