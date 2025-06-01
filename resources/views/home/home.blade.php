@@ -50,6 +50,29 @@
                 </form>
             </nav>
         </aside>
+        <div id="sidebarBackdrop" class="sidebar-backdrop d-lg-none"></div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const menuToggle = document.getElementById('menuToggle');
+                const sidebar = document.querySelector('aside.sidebar');
+                const backdrop = document.getElementById('sidebarBackdrop');
+
+                function toggleSidebar() {
+                const visible = sidebar.classList.contains('sidebar-visible');
+                sidebar.classList.toggle('sidebar-visible', !visible);
+                backdrop.classList.toggle('active', !visible);
+                }
+
+                menuToggle.addEventListener('click', toggleSidebar);
+                backdrop.addEventListener('click', toggleSidebar);
+            });
+        </script>
+
+
+
+
+
 
         {{-- MAIN CONTENT --}}
         <section class="w-100">
@@ -99,47 +122,19 @@
                 @if (isset($sixOperations) && !is_null($sixOperations))
                     @include('templates.home.recentMovements')
                 @endif
-                
-                {{-- @if (isset($thisMonthOperations) && !is_null($thisMonthOperations))
-                    <div class="col-12 card-section mt-4">
-                        <h3 class="section-title">
-                            Resumen de {{ ucfirst(\Carbon\Carbon::now()->locale('es')->translatedFormat('F Y')) }}
-                        </h3>
-                        @foreach ($thisMonthOperations as $operation)
-                            <div class="list-entry">
-                                <div class="entry-icon">{!! $operation['icon'] !!}</div>
-                                <div class="flex-grow-1">
-                                    <span class="entry-label">{{ $operation['category_name'] }}</span>
-                                </div>
-                                <div class="entry-value
-                                    {{ $operation['movement_type_id'] == 1 ? 'income-color' : 
-                                    ($operation['movement_type_id'] == 2 ? 'expense-color' : 
-                                    ($operation['movement_type_id'] == 3 ? 'save-color' : '') ) }}">
-                                    {{ number_format($operation['total_amount'], 2) }}€
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @endif --}}
 
-
-                @if (isset($thisMonthIncomes) && isset($thisMonthExpenses))
+                @if (isset($thisMonthIncomes) && isset($thisMonthExpenses) && $thisMonthIncomes->isNotEmpty() && $thisMonthExpenses->isNotEmpty())
                     @include('templates.home.thisMonthIncomesExpenses')
                 @endif
 
 
             </article>
 
-            {{-- INCOME SECTION --}}
-
-            
-            
-            {{-- INCOME ADD ARTICLE --}}
             @include('templates.home.incomes')
 
             {{-- EGRESS SECTION --}}
 
-           <article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black egress-article" id="egress-section" style="display: none;">
+            <article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black egress-article" id="egress-section" style="display: none;">
 
                 <div class="col-12 col-lg-10 mx-auto mt-4">
 
