@@ -61,6 +61,22 @@ class Category extends Model
 
         return false;
     }
+    
+    public static function getPersonalCategoriesByUserId(int $userId): ?Collection {
+        $user = User::with('personalCategories.icon', 'personalCategories.movementTypes')->find($userId);
+
+        $categories = $user->personalCategories->map(function ($category) {
+            return [
+                'id' => $category->id,
+                'category_name' => $category->name,
+                'icon_id' => $category->icon?->id,
+                'icon_html' => $category->icon?->icon,
+                'movement_type_ids' => $category->movementTypes->pluck('id')->toArray(),
+                'movement_type_names' => $category->movementTypes->pluck('name')->implode(', '),
+            ];
+        });
+        return $categories;
+    }
 
     public function operations(): HasMany {
         return $this->hasMany(Operation::class);
