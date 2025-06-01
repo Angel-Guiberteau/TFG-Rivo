@@ -75,6 +75,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="text-end mt-4">
+                    <a href="{{ route('users') }}" class="btn btn-danger btn-sm">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                </div>
             </article>
         </section>
     </main>

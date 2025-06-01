@@ -12,11 +12,8 @@
 
     @endpush
     
-      
     <main class="container min-vh-100 d-flex align-items-center justify-content-center">
-        <a href="{{ route('sentences') }}" class="btn btn-primary position-absolute m-3 btn-return">
-            volver
-        </a>
+        
         <section class="row justify-content-center align-items-center py-3 gx-0 gx-lg-5">
             <article class="col-12 col-lg-6 row text-white mt-4 mt-lg-0">
                 <h1 class="w-100 fs-1 fw-bold text-center text-lg-start">Bienvenido a Rivo</h1>
@@ -65,6 +62,11 @@
                             <span>Iniciar sesión con Google</span>
                         </a>
                     </form>
+                </div>
+                <div class="text-end">
+                    <a href="{{ route('users') }}" class="btn btn-danger btn-md me-5 mt-3">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </a>
                 </div>
             </article>
         </section>

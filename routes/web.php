@@ -58,7 +58,7 @@ Route::get('/home', function (): View {
 
     $operationController = new OperationController();
     $sixOperations = $operationController->getSixOperationsByAccountId($account->id);
-    
+
     $thisMonthOperations = $operationController->thisMonthOperationsByAccountId($account->id);
     $incomes = $thisMonthOperations->filter(function ($op) {
         return $op['movement_type_id'] === 1;
@@ -67,6 +67,15 @@ Route::get('/home', function (): View {
     $expenses = $thisMonthOperations->filter(function ($op) {
         return in_array($op['movement_type_id'], [2]);
     });
+
+    $categoryController = new CategoryController();
+    $baseCategories = $categoryController->getAllBaseCategories();
+    $personalCategories = $categoryController->getPersonalCategoriesByUserId($user->id);
+    // dd([
+    //     'Categorias bases' => $baseCategories,
+    //     'Categorias personales' => $personalCategories
+    // ]);
+
 
     $allIncomes = $operationController->getAllIncomesByAccountId($account->id);
     $allExpenses = $operationController->getAllIncomesByAccountId($account->id);
@@ -80,6 +89,8 @@ Route::get('/home', function (): View {
         ->with('thisMonthExpenses', $expenses)
         ->with('allIncomes', $allIncomes)
         ->with('allExpenses', $allExpenses)
+        ->with('baseCategories', $baseCategories)
+        ->with('personalCategories', $personalCategories)
         ->with('objectives', $objective);
 
 })->middleware(['auth', 'role:user'])->name('home');
@@ -167,14 +178,26 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('updateUser');
 
         Route::put('/updatePersonalCategories', function () {
-            // dd(request()->all());
             
             $request = request()->toArray();    
 
             $validate = UserValidator::validate($request, ValidationEnum::UPDATE_PERSONAL_CATEGORIES->value);
             
             return UserController::updatePersonalCategories($validate);
+
         })->name('updatePersonalCategories');
+
+        Route::put('/updatePersonalAccounts', function () {
+
+            $request = request()->toArray();
+
+            // dd($request);
+
+            $validate = UserValidator::validate($request, ValidationEnum::UPDATE_PERSONAL_ACOUNTS->value);
+
+            return UserController::updatePersonalAccounts($validate);
+            
+        })->name('updatePersonalAccounts');
 
         Route::get('/previewUser/{id}', function (Request $request, $id) {
 
