@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const movementTypesHtml = movementTypes.map(type => {
                 const checkboxId = `movement_type_${randomId}_${type.id}`;
                 return `
-                    <div class="form-check me-3 mb-2">
+                    <div class="form-check mb-2">
                         <input class="form-check-input type-checkbox-edit"
                             id="${checkboxId}"
                             type="checkbox"
@@ -81,11 +81,11 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12 px-4 pb-4">
-                            <label class="form-label fw-medium text-muted">Tipos de movimiento <span class="text-danger">*</span></label>
-                            <div class="types d-flex flex-row flex-wrap mb-2">
-                                ${movementTypesHtml}
+                            <div class="col-12">
+                                <label class="form-label fw-medium text-muted">Tipos de movimiento <span class="text-danger">*</span></label>
+                                <div class="types d-flex flex-row flex-wrap mb-2">
+                                    ${movementTypesHtml}
+                                </div>
                             </div>
                         </div>
                     </div>
