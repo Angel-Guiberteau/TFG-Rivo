@@ -21,7 +21,9 @@ class IconController extends Controller
                 ->with('error', $data['error'] ?? 'Datos inválidos');
         }
 
-        $baseCategory = Icon::addIcon($data['data']['name']);
+        $icon = '<i class="'.$data['data']['name'].'"></i>';
+
+        $baseCategory = Icon::addIcon($icon);
 
         if (!$baseCategory) {
             return redirect()
@@ -35,14 +37,16 @@ class IconController extends Controller
     }
 
     public static function editIcon(array $data): RedirectResponse {
-
+        
         if (empty($data['status']) || !$data['status']) { 
             return redirect()
                 ->back()
                 ->with('error', $data['error'] ?? 'Datos inválidos');
         }
 
-        $baseCategory = Icon::editIcon($data['data']);
+        $icon = '<i class="'.$data['data']['name'].'"></i>';
+
+        $baseCategory = Icon::editIcon($data['data']['id'], $icon);
 
         if (!$baseCategory) {
             return redirect()

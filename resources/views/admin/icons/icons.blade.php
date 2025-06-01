@@ -8,7 +8,7 @@
     @include('templates.admin.navBar')
 
     <main>
-        <section class="container-custom p-3 pb-5">
+        <section class="container-custom-sm p-3 pb-4">
             <article class="bg-light p-3">
 
                 @include('templates.admin.title', ['title' => 'Iconos'])
@@ -20,36 +20,33 @@
                     <table class="datatable table table-striped">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Icono</th>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Icono</th>
+                                <th class="text-center">Texto HTML</th>
                                 <th class="text-center">Editar</th>
-                                <th class="text-center">Visualizar</th>
                                 <th class="text-center">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($icons as $icon)
                             <tr>
-                                <td>{{ $icon['id'] }}</td>
+                                <td class="text-start">{{ $icon['id'] }}</td>
                                 <td>
                                     <label class="icons">
                                         {!! $icon['icon'] !!}
                                     </label>
                                 </td>
-                                <td>
+                                <td>{{ $icon['icon'] }}</td>
+                                <td class="text-center">
                                     @include('admin.components.buttons.editButton', [
                                         'data' =>
                                             'data-id="' . e($icon['id']) . '" ' .
-                                            'data-name="' . e($icon['icon']) . '" ' .
-                                            'data-icon="' . e($icon['id']) . 
-                                            '" data-bs-toggle="modal" data-bs-target="#editIcon"'
+                                            'data-name="' . e(preg_replace("/^<i class=\"([^\"]+)\"><\/i>$/", '$1', $icon['icon'])) . '" ' .
+                                            'data-icon="' . e($icon['id']) . '" ' .
+                                            'data-bs-toggle="modal" data-bs-target="#editIcon"'
                                     ])
                                 </td>
-                                <td>
-                                    @include('admin.components.buttons.preViewButton', [
-                                    ])
-                                </td>
-                                <td>   
+                                <td class="text-center">
                                     @include('admin.components.buttons.deleteButton', [
                                         'data' => 'id="'. e($icon['id']) .'"',
                                         'onclick' => 'deleteIcon('. e($icon['id']) .')'
@@ -64,6 +61,7 @@
         </section>
     </main>
 
+    @include('sweetAlerts.swal')
     @include('admin.components.modals.icons.addIcon')
     @include('admin.components.modals.icons.editIcon')
 
