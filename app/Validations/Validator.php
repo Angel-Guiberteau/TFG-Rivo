@@ -58,6 +58,8 @@ abstract class Validator extends Controller
     protected static function messagesInitialSetup(): array { return []; }
     protected static function rulesUpdatePersonalCategories(): array { return []; }
     protected static function messagesUpdatePersonalCategories(): array { return []; }
+    protected static function rulesUpdatePersonalAccounts(): array { return []; }
+    protected static function messagesUpdatePersonalAccounts(): array { return []; }
     // protected static function rulesPreView(): array { return []; }
     // protected static function messagesPreView(): array { return []; }
 }

@@ -197,6 +197,54 @@ class UserValidator extends Validator {
         ];
     }
 
+    protected static function rulesUpdatePersonalAccounts(): array {
+        return [
+            'deleted' => 'required|string',
+            'user_id' => 'required|integer',
+
+            'accounts' => 'sometimes|array|min:1',
+            'accounts.*.id' => 'sometimes|integer',
+            'accounts.*.name' => 'sometimes|string|max:75',
+            'accounts.*.icon' => 'sometimes|string|max:75',
+
+            'news' => 'sometimes|array',
+            'news.*.name' => 'sometimes|string|max:75',
+            'news.*.icon' => 'sometimes|string|max:75',
+        ];
+    }
+
+    protected static function messagesUpdatePersonalAccounts(): array {
+        return [
+            'deleted.required' => 'La lista de cuentas eliminadas es obligatoria.',
+            'deleted.string' => 'El formato de las cuentas eliminadas no es válido.',
+
+            'user_id.required' => 'El usuario es obligatorio.',
+            'user_id.integer' => 'El identificador del usuario debe ser un número entero.',
+
+            'accounts.required' => 'Debes enviar al menos una cuenta existente.',
+            'accounts.array' => 'Las cuentas deben estar en formato de lista.',
+            'accounts.min' => 'Debes tener al menos una cuenta.',
+
+            'accounts.*.id.required' => 'Cada cuenta existente debe tener un ID.',
+            'accounts.*.id.integer' => 'El ID de cada cuenta debe ser un número.',
+            'accounts.*.name.required' => 'El nombre de la cuenta existente es obligatorio.',
+            'accounts.*.name.string' => 'El nombre de la cuenta existente debe ser texto.',
+            'accounts.*.name.max' => 'El nombre de la cuenta existente no puede exceder los 75 caracteres.',
+            'accounts.*.icon.required' => 'El icono de la cuenta existente es obligatorio.',
+            'accounts.*.icon.string' => 'El icono de la cuenta existente debe ser texto.',
+            'accounts.*.icon.max' => 'El icono de la cuenta existente no puede exceder los 75 caracteres.',
+
+            'news.array' => 'Las nuevas cuentas deben estar en formato de lista.',
+
+            'news.*.name.required_with' => 'El nombre de la nueva cuenta es obligatorio.',
+            'news.*.name.string' => 'El nombre de la nueva cuenta debe ser texto.',
+            'news.*.name.max' => 'El nombre de la nueva cuenta no puede exceder los 75 caracteres.',
+
+            'news.*.icon.required_with' => 'El icono de la nueva cuenta es obligatorio.',
+            'news.*.icon.string' => 'El icono de la nueva cuenta debe ser texto.',
+            'news.*.icon.max' => 'El icono de la nueva cuenta no puede exceder los 75 caracteres.',
+        ];
+    }
 
 
 }
