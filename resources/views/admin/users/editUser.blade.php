@@ -11,6 +11,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <link rel="stylesheet" href="{{ asset('css/admin/users/usersCommon.css') }}">
         <link rel="stylesheet" href="{{ asset('css/admin/users/baseCategories.css') }}">
+        <style>
+
+        </style>
     @endpush
 
     <main>
@@ -164,7 +167,7 @@
                                                 <i class="fa-solid fa-trash"></i>
                                             </button>
                                             <div class="mb-3">
-                                                <label class="form-label fw-medium text-muted">Nombre de la categoría</label>
+                                                <label class="form-label fw-medium text-muted">Nombre de la categoría <span class="text-danger">*</span></label>
                                                 <input type="text" name="categories[{{ $category['id'] }}][name]"
                                                     class="form-control rounded bg-light text-center fs-5 fw-semibold shadow-sm"
                                                     value="{{ old("categories.{$category['id']}.name", $category['name']) }}"
@@ -178,7 +181,7 @@
                                             
 
                                             <div class="mb-3">
-                                                <label class="form-label fw-medium text-muted">Seleccionar nuevo icono</label>
+                                                <label class="form-label fw-medium text-muted">Seleccionar nuevo icono <span class="text-danger">*</span></label>
                                                 <input type="hidden" name="categories[{{ $category['id'] }}][icon]"
                                                     id="icon_{{ $category['id'] }}" value="{{ $category['icon'] }}">
 
@@ -194,7 +197,24 @@
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            <div class="col-12">
+                                                <label class="form-label fw-medium text-muted">Tipo <span class="text-danger">*</span></label>
+                                                </label>
+                                                <div class="types d-flex justify-content-around p-1">
+                                                    <div>
+                                                        <input type="checkbox" name="types[]" value="1" class="type-checkbox-edit" id="type-income-edit">
+                                                        <label for="type-income-edit">Income</label>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox" name="types[]" value="2" class="type-checkbox-edit" id="type-expense-edit">
+                                                        <label for="type-expense-edit">Expense</label>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox" name="types[]" value="3" class="type-checkbox-edit" id="type-save-edit">
+                                                        <label for="type-save-edit">Save money</label>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -237,17 +257,17 @@
                                             </button>
 
                                             <div class="mb-3">
-                                                <label class="form-label fw-medium text-muted">Nombre de la cuenta</label>
+                                                <label class="form-label fw-medium text-muted">Nombre de la cuenta <span class="text-danger">*</span></label>
                                                 <input type="text" name="accounts[{{ $account->id }}][name]" class="form-control text-center" value="{{ $account->name }}">
                                             </div>
 
                                             <div class="mb-3">
-                                                <label class="form-label fw-medium text-muted">Saldo</label>
+                                                <label class="form-label fw-medium text-muted">Saldo <span class="text-danger">*</span></label>
                                                 <input type="number" step="0.01" name="accounts[{{ $account->id }}][balance]" class="form-control text-center" value="{{ $account->balance }}">
                                             </div>
 
                                             <div class="mb-3">
-                                                <label class="form-label fw-medium text-muted">Moneda</label>
+                                                <label class="form-label fw-medium text-muted">Moneda <span class="text-danger">*</span></label>
                                                 <input type="text" name="accounts[{{ $account->id }}][currency]" class="form-control text-center" value="{{ $account->currency }}">
                                             </div>
 
