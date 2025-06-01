@@ -1,3 +1,3 @@
-<div class="text-white p-2 px-2 mb-3 bg-custom rounded">
-    <h1 class="fw-bold fs-4 ms-2">{{ $title }}</h1>
+<div class="bg-gradient-primary text-white py-3 px-4 rounded shadow-sm d-flex align-items-center">
+    <h1 class="fw-semibold fs-4 mb-0">{{ $title }}</h1>
 </div>

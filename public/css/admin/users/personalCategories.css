@@ -1,0 +1,152 @@
+
+.icon-scroll-wrapper {
+    max-height: 180px;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+}
+
+.icon-scroll-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+.icon-scroll-wrapper::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 0.5rem;
+    justify-items: center;
+    align-items: center;
+}
+
+.icon-option {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    background-color: white;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.icon-option:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+}
+
+.icon-option.selected {
+    border: 2px solid #601990;
+    background-color: #e9f1ff;
+    color: #601990;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+}
+
+.type-checkbox, .type-checkbox-edit {
+    display: none;
+}
+
+.text-custom {
+    color: #6f42c1;
+    font-weight: bold;
+}
+
+.types label {
+    cursor: pointer;
+    padding: 8px 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    transition: background-color 0.2s, border-color 0.2s;
+    user-select: none;
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.types label:hover {
+    background-color: #e2eafc;
+    border-color: #b6d4fe;
+    color: #601990 !important;
+}
+
+#personalCategories .category-card .card {
+    border-left: 5px solid #6f42c1; 
+    background: linear-gradient(to bottom right, #f9f7fc, #ffffff);
+    transition: box-shadow 0.3s ease-in-out, transform 0.2s;
+}
+
+#personalCategories .category-card .card:hover {
+    box-shadow: 0 0 0 4px rgba(111, 66, 193, 0.1);
+    transform: scale(1.01);
+}
+
+#personalCategories input.form-control {
+    background-color: #f4f2fa;
+    border: 1px solid #d6cbed;
+    color: #333;
+    transition: border-color 0.2s ease-in-out;
+}
+#personalCategories input.form-control:focus {
+    border-color: #6f42c1;
+    box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25);
+}
+
+#personalCategories label.form-label {
+    color: #6c757d;
+}
+
+#personalCategories .delete-category-btn {
+    border-radius: 10%;
+    padding: 0.4rem 0.5rem;
+    font-size: 0.75rem;
+    border: none;
+    transition: background-color 0.2s;
+}
+#personalCategories .delete-category-btn:hover {
+    background-color: #ff0b1c;
+    color: rgb(0, 0, 0);
+}
+
+#personalCategories #addCustomCategoryBtn {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+}
+#personalCategories #addCustomCategoryBtn:hover {
+    background-color: #5a359e;
+    border-color: #5a359e;
+}
+
+#personalCategories .icon-scroll-wrapper {
+    background-color: #f0f0f8;
+    border: 1px solid #d6cbed;
+}
+
+#personalCategories .types label {
+    background-color: #f8f9fa;
+    border-color: #d6d6d6;
+    color: #343a40;
+}
+#personalCategories .types label:hover {
+    background-color: #ebe7fa;
+    border-color: #b9aee2;
+    color: #6f42c1;
+}
+#personalCategories .type-checkbox-edit:checked + label {
+    background-color: #dcd2f7;
+    border-color: #6f42c1;
+    color: #4b2e88;
+}
+
+#personalCategories .card .fs-2.text-primary {
+    text-shadow: 0 1px 2px rgba(111, 66, 193, 0.2);
+}
+
+
+

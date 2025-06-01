@@ -14,14 +14,15 @@
     @endpush
 
     <main>
-        <section class="container-custom-lg p-3 pb-5">
+        <section class="container-custom p-3 pb-5">
             <article class="rounded-article mt-4">
                 @include('templates.admin.title', ['title' => 'Preview del usuario: ' . $user->name])
 
                 <div class="row mt-4 gy-4">
-                    <div class="col-lg-8">
-                        <div class="card border-0 shadow-sm h-100">
-                            <div class="card-header bg-dark text-white fs-5">
+                    <!-- Información del Usuario -->
+                    <div class="col-lg-8  border-custom-blue p-3">
+                        <div class="card h-100">
+                            <div class="card-header">
                                 <i class="fas fa-user me-2"></i>Información del Usuario
                             </div>
                             <div class="card-body card-user-info">
@@ -39,13 +40,13 @@
                                         <p><strong>Rol:</strong> {{ $user->rol_id }}</p>
                                         <p>
                                             <strong>Estado:</strong>
-                                            <span class="badge bg-{{ $user->enabled ? 'success' : 'danger' }} badge-status">
+                                            <span class="badge-status bg-{{ $user->enabled ? 'success' : 'danger' }}">
                                                 {{ $user->enabled ? 'Activo' : 'Inactivo' }}
                                             </span>
                                         </p>
                                         <p>
                                             <strong>Usuario Nuevo:</strong>
-                                            <span class="badge bg-{{ $user->isNewUser ? 'info' : 'secondary' }} badge-status">
+                                            <span class="badge-status bg-{{ $user->isNewUser ? 'info' : 'secondary' }}">
                                                 {{ $user->isNewUser ? 'Sí' : 'No' }}
                                             </span>
                                         </p>
@@ -57,14 +58,14 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
-                        <div class="card border-0 shadow-sm h-100">
-                            <div class="card-header text-white bg-secondary fs-5">
+                    <div class="col-lg-4 border-custom-grey p-3">
+                        <div class="card h-100">
+                            <div class="card-header bg-secondary">
                                 <i class="fas fa-layer-group me-2"></i>Categorías Personales
                             </div>
                             <div class="card-body">
                                 @forelse($personalCategories as $category)
-                                    <div class="d-flex flex-column mb-3 category-item">
+                                    <div class="category-item">
                                         <div class="d-flex align-items-center">
                                             <span class="category-icon">{!! $category['icon'] !!}</span>
                                             <span class="fw-semibold">{{ $category['name'] }}</span>
@@ -90,19 +91,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-12">
-                        <div class="card border-0 shadow-sm h-100 mt-4">
-                            <div class="card-header bg-primary text-white">
+
+                    <div class="col-lg-12 border-custom">
+                        <div class="card mt-4">
+                            <div class="card-header bg-primary">
                                 <i class="fas fa-wallet me-2"></i>Cuentas del Usuario
                             </div>
                             <div class="card-body">
                                 <div class="row gy-4">
                                     @forelse($personalAccounts as $account)
                                         <div class="col-md-6 col-lg-4">
-                                            <div class="card border-0 shadow-sm h-100 account-card">
+                                            <div class="card account-card h-100">
                                                 <div class="card-body">
-                                                    <h5 class="card-title mb-2">
-                                                        <i class="fas fa-university me-2 text-primary"></i>{{ $account->name }}
+                                                    <h5 class="card-title mb-2 bg-custom text-white p-2 rounded">
+                                                        <i class="fas fa-university me-2 ms-1"></i>{{ $account->name }}
                                                     </h5>
                                                     <p class="mb-1"><strong>ID:</strong> {{ $account->id }}</p>
                                                     <p class="mb-1"><strong>Saldo:</strong> 
@@ -110,7 +112,7 @@
                                                     </p>
                                                     <p class="mb-1">
                                                         <strong>Estado:</strong>
-                                                        <span class="badge bg-{{ $account->enabled ? 'success' : 'danger' }}">
+                                                        <span class="badge-status bg-{{ $account->enabled ? 'success' : 'danger' }}">
                                                             {{ $account->enabled ? 'Activo' : 'Inactivo' }}
                                                         </span>
                                                     </p>
@@ -129,6 +131,8 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Botón Volver -->
                 <div class="text-end mt-5">
                     <a href="{{ route('users') }}" class="btn btn-danger btn-sm">
                         <i class="fa-solid fa-arrow-left"></i>
@@ -139,3 +143,4 @@
     </main>
 
 @endsection
+

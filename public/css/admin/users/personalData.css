@@ -1,0 +1,55 @@
+
+#personalData form {
+    border-left: 5px solid #6f42c1;
+    background: linear-gradient(to bottom right, #f9f7fc, #ffffff);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 6px rgba(111, 66, 193, 0.05);
+    transition: box-shadow 0.3s ease-in-out, transform 0.2s;
+}
+
+#personalData form:hover {
+    box-shadow: 0 0 0 4px rgba(111, 66, 193, 0.1);
+    transform: scale(1.01);
+}
+
+#personalData input.form-control,
+#personalData select.form-select {
+    background-color: #f4f2fa;
+    border: 1px solid #d6cbed;
+    color: #333;
+    transition: border-color 0.2s ease-in-out;
+}
+
+#personalData input.form-control:focus,
+#personalData select.form-select:focus {
+    border-color: #6f42c1;
+    box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25);
+}
+
+#personalData label.form-label {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+#personalData .input-group-text {
+    background-color: #f9f7fc;
+    border-color: #d6cbed;
+    color: #000000;
+}
+
+#personalData a.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#personalData a.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+#personalData .invalid-feedback {
+    font-size: 0.875rem;
+    color: #d63384;
+}
