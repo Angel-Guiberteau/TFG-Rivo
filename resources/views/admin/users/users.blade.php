@@ -35,26 +35,26 @@
                         <tbody>
                             @foreach ($users as $user)
                                 <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->last_name ?? '-' }}</td>
+                                    <td class="text-center">{{ $user->name }}</td>
+                                    <td class="text-center">{{ $user->last_name ?? '-' }}</td>
                                     <td class="text-center">{{ $user->birth_date ?? '—' }}</td>
                                     <td class="text-center">
                                         {{ $user->rol_id == 1 ? 'Admin' : ($user->rol_id == 2 ? 'User' : ($user->rol_id == 3 ? 'Premium' : 'Desconocido')) }}
                                     </td>
-                                    <td>{{ $user->google_id ?? '—' }}</td>
-                                    <td>{{ $user->email }}</td>
+                                    <td class="text-center">{{ $user->google_id ?? '—' }}</td>
+                                    <td class="text-center">{{ $user->email }}</td>
                                     <td  class="text-center">{{ $user->username ?? '—' }}</td>
-                                    <td class="text-center">
+                                    <td class="text-center align-middle">
                                         @include('admin.components.buttons.editButton', [
                                             'onclick' => 'editUser(' . $user->id . ')'
                                         ])                                       
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center align-middle">
                                         @include('admin.components.buttons.preViewButton', [
                                             'onclick' => "viewUser('" . $user->id . "')"
                                         ])
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center align-middle">
                                         @include('admin.components.buttons.deleteButton', [
                                             'data' => 'id="'. e($user->id) .'" onclick="deleteUser('. e($user->id) .')"'
                                         ])

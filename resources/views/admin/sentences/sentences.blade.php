@@ -32,19 +32,19 @@
                             <tr>
                                 <td class="text-center align-middle">{{ $sentence->id }}</td>
                                 <td>{{ $sentence->text }}</td>
-                                <td class="text-center">
+                                <td class="text-center align-middle">
                                     @include('admin.components.buttons.editButton', [
                                         'data' => 'data-id="' . e($sentence->id) . '" 
                                         data-name="' . e($sentence->text) . '" 
                                         data-bs-toggle="modal" data-bs-target="#editSentence"'
                                     ])
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center align-middle">
                                     @include('admin.components.buttons.preViewButton', [
                                         'onclick' => 'preViewSentence('.e(json_encode($sentence->text)).')',
                                     ])
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center align-middle">
                                     @include('admin.components.buttons.deleteButton', [
                                         'data' => 'id="'. e($sentence->id) .'" 
                                         onclick="deleteSentence('. e($sentence->id) .')"'
