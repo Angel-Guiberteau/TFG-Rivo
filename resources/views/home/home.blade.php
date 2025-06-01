@@ -57,17 +57,20 @@
                 const menuToggle = document.getElementById('menuToggle');
                 const sidebar = document.querySelector('aside.sidebar');
                 const backdrop = document.getElementById('sidebarBackdrop');
+                const body = document.body;
 
                 function toggleSidebar() {
-                const visible = sidebar.classList.contains('sidebar-visible');
-                sidebar.classList.toggle('sidebar-visible', !visible);
-                backdrop.classList.toggle('active', !visible);
+                    const isVisible = sidebar.classList.contains('sidebar-visible');
+                    sidebar.classList.toggle('sidebar-visible', !isVisible);
+                    backdrop.classList.toggle('active', !isVisible);
+                    body.classList.toggle('no-scroll', !isVisible);
                 }
 
                 menuToggle.addEventListener('click', toggleSidebar);
                 backdrop.addEventListener('click', toggleSidebar);
             });
         </script>
+
         {{-- MAIN CONTENT --}}
         <section class="w-100">
             <article class="balance-bg  w-100">
@@ -79,6 +82,7 @@
                         <i class="fas fa-bars fs-2" style="color: #fff; text-shadow: 0 0 1px #000;"></i>
                     </button>
                 </header>
+                
                 <div class="balance-info pt-3 pt-lg-5 pb-3 pb-lg-5 px-3 px-lg-5 text-center text-lg-start">
                     <h2 class="fs-1 fw-bold mb-4">Hola, {{ $user->username }}!</h2>
                     <p class="fs-4 fw-light mb-0">Balance disponible</p>

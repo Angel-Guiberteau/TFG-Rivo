@@ -1,5 +1,4 @@
 
-
 function initIconSelection() {
     document.querySelectorAll('.icon-option').forEach(icon => {
         icon.onclick = () => {
@@ -83,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     initIconSelection();
-    attachDeleteCategoryListeners(); // 👈 Se llama al cargar también por si ya hay existentes
+    attachDeleteCategoryListeners(); 
 
     let counter = 0;
     const addBtn = document.getElementById('addCustomCategoryBtn');
@@ -138,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             container.insertAdjacentHTML('beforeend', newCategoryHtml);
             initIconSelection();
-            attachDeleteCategoryListeners(); // 👈 Necesario para los nuevos botones
+            attachDeleteCategoryListeners();
         });
     }
 });
@@ -150,16 +149,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = categoryForm.querySelector('button[type="submit"]');
 
     function showSuccessMessage(input, message) {
-        removeSuccessMessage(input);
+        removeFeedbackMessages(input);
         const feedback = document.createElement('div');
         feedback.className = 'valid-feedback d-block small text-success';
         feedback.textContent = message;
         input.insertAdjacentElement('afterend', feedback);
     }
 
-    function removeSuccessMessage(input) {
-        const feedback = input.parentElement.querySelector('.valid-feedback');
-        if (feedback) feedback.remove();
+    function showErrorMessage(input, message) {
+        removeFeedbackMessages(input);
+        const feedback = document.createElement('div');
+        feedback.className = 'invalid-feedback d-block small';
+        feedback.textContent = message;
+        input.insertAdjacentElement('afterend', feedback);
+    }
+
+    function removeFeedbackMessages(input) {
+        const successFeedback = input.parentElement.querySelector('.valid-feedback');
+        if (successFeedback) successFeedback.remove();
+        const errorFeedback = input.parentElement.querySelector('.invalid-feedback');
+        if (errorFeedback) errorFeedback.remove();
     }
 
     function validateCategoryForm() {
@@ -175,22 +184,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!nameInput.value.trim()) {
                 nameInput.classList.add('is-invalid');
-                nameInput.classList.remove('border-success');
-                removeSuccessMessage(nameInput);
+                nameInput.classList.remove('is-valid');
+                showErrorMessage(nameInput, 'El nombre de la categoría es obligatorio.');
+                isValid = false;
+            } else if (nameInput.value.trim().length > 30) {
+                nameInput.classList.add('is-invalid');
+                nameInput.classList.remove('is-valid');
+                showErrorMessage(nameInput, 'El nombre no puede superar 30 caracteres.');
                 isValid = false;
             } else {
                 nameInput.classList.remove('is-invalid');
-                nameInput.classList.add('border-success');
-                showSuccessMessage(nameInput, 'Todo correcto');
+                nameInput.classList.add('is-valid');
+                showSuccessMessage(nameInput, 'Nombre válido');
             }
 
+            // Validar icono seleccionado
             if (!selectedIcon || !iconInput.value.trim()) {
-                iconWrapper.classList.add('border-danger');
+                iconWrapper.classList.add('border', 'border-danger');
                 iconWrapper.classList.remove('border-success');
                 isValid = false;
             } else {
                 iconWrapper.classList.remove('border-danger');
-                iconWrapper.classList.add('border-success');
+                iconWrapper.classList.add('border', 'border-success');
             }
         });
 
