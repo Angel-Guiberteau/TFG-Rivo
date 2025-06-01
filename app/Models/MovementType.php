@@ -11,4 +11,9 @@ class MovementType extends Model
         'name',
         'enabled',
     ];
+
+    public static function getEnabledMovementTypes()
+    {
+        return self::where('enabled', 1)->get();
+    }
 }

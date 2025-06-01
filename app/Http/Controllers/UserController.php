@@ -18,6 +18,7 @@ use Throwable;
 
 use App\Models\Account;
 use App\Models\Icon;
+use App\Models\MovementType;
 use App\Models\Objective;
 use App\Models\ObjectiveOperation;
 use App\Models\Operation;
@@ -146,10 +147,18 @@ class UserController extends Controller
         }
 
         $accounts = UserAccount::getAccountsByUserId($user->id);
-        // dd($accounts);
+        
         if ($accounts->isEmpty()) {
             return redirect()->back()
                 ->with('error', 'No hay cuentas asociadas al usuario.')
+                ->withInput();
+        }
+
+        $movementTypes = MovementType::getEnabledMovementTypes();
+
+        if ($movementTypes->isEmpty()) {
+            return redirect()->back()
+                ->with('error', 'No hay tipos de movimiento disponibles.')
                 ->withInput();
         }
 
@@ -157,7 +166,8 @@ class UserController extends Controller
             ->with('user', $user)
             ->with('personalCategories', $personalCategories)
             ->with('allIcons', $allIcons)
-            ->with('personalAccounts', $accounts);
+            ->with('personalAccounts', $accounts)
+            ->with('movementTypes', $movementTypes);
     }
 
     public static function updateUser(): RedirectResponse

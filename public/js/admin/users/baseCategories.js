@@ -1,4 +1,3 @@
-
 function initIconSelection() {
     document.querySelectorAll('.icon-option').forEach(icon => {
         icon.onclick = () => {
@@ -42,14 +41,12 @@ function attachDeleteCategoryListeners() {
                 const deletedInput = document.getElementById('deletedCategories');
                 let deletedArray = JSON.parse(deletedInput.value || '[]');
 
-                // Solo agregar si no está ya en la lista
                 if (!deletedArray.includes(categoryId)) {
                     deletedArray.push(categoryId);
                     deletedInput.value = JSON.stringify(deletedArray);
                 }
             }
 
-            // Eliminar visualmente la tarjeta
             const categoryCard = this.closest('.category-card');
             if (categoryCard) {
                 categoryCard.remove();
@@ -57,7 +54,6 @@ function attachDeleteCategoryListeners() {
         });
     });
 }
-
 
 document.addEventListener('DOMContentLoaded', function () {
     const steps = document.querySelectorAll('.progress-line-container .step');
@@ -82,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     initIconSelection();
-    attachDeleteCategoryListeners(); 
+    attachDeleteCategoryListeners();
 
     let counter = 0;
     const addBtn = document.getElementById('addCustomCategoryBtn');
@@ -99,13 +95,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             `).join('');
 
+            const movementTypesHtml = movementTypes.map(type => `
+                <div class="form-check me-3">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           name="news[${randomId}][movement_types][]"
+                           value="${type.id}">
+                    <label class="form-check-label">${type.name}</label>
+                </div>
+            `).join('');
+
             const newCategoryHtml = `
                 <div class="col-md-6 col-lg-4 mb-4 category-card">
                     <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
                         <div class="card-body d-flex flex-column p-4 bg-white">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <label class="form-label fw-medium text-muted mb-0">Nombre de la categoría</label>
-                                <!-- 🔽 BOTÓN DE ELIMINAR -->
                                 <button type="button" class="btn btn-sm btn-danger delete-category-btn" title="Eliminar categoría">
                                     <i class="fas fa-trash"></i>
                                 </button>
@@ -128,6 +133,13 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <div class="icon-grid">
                                         ${iconOptionsHtml}
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-medium text-muted">Tipos de movimiento <span class="text-danger">*</span></label>
+                                <div class="types d-flex justify-content-around p-1 flex-wrap gap-2">
+                                    ${movementTypesHtml}
                                 </div>
                             </div>
                         </div>
@@ -173,7 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function validateCategoryForm() {
         let isValid = true;
-
         const categoryCards = categoryForm.querySelectorAll('.category-card');
 
         categoryCards.forEach(card => {
@@ -198,7 +209,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 showSuccessMessage(nameInput, 'Nombre válido');
             }
 
-            // Validar icono seleccionado
             if (!selectedIcon || !iconInput.value.trim()) {
                 iconWrapper.classList.add('border', 'border-danger');
                 iconWrapper.classList.remove('border-success');

@@ -198,21 +198,18 @@
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                <label class="form-label fw-medium text-muted">Tipo <span class="text-danger">*</span></label>
-                                                </label>
-                                                <div class="types d-flex justify-content-around p-1">
-                                                    <div>
-                                                        <input type="checkbox" name="types[]" value="1" class="type-checkbox-edit" id="type-income-edit">
-                                                        <label for="type-income-edit">Income</label>
-                                                    </div>
-                                                    <div>
-                                                        <input type="checkbox" name="types[]" value="2" class="type-checkbox-edit" id="type-expense-edit">
-                                                        <label for="type-expense-edit">Expense</label>
-                                                    </div>
-                                                    <div>
-                                                        <input type="checkbox" name="types[]" value="3" class="type-checkbox-edit" id="type-save-edit">
-                                                        <label for="type-save-edit">Save money</label>
-                                                    </div>
+                                                <label class="form-label fw-medium text-muted">Tipos de movimiento <span class="text-danger">*</span></label>
+                                                <div class="types d-flex justify-content-around p-1 flex-wrap gap-2">
+                                                   @foreach ($movementTypes as $type)
+                                                        <div class="form-check me-3">
+                                                            <input class="form-check-input"
+                                                                type="checkbox"
+                                                                name="movement_types[{{ $category['id'] }}][]"
+                                                                value="{{ $type->id }}"
+                                                                @if(in_array($type->id, $category['movement_type_ids'])) checked @endif>
+                                                            <label class="form-check-label">{{ $type->name }}</label>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
@@ -307,6 +304,7 @@
         <script src="{{ asset('js/admin/users/baseCategories.js') }}"></script>
         <script src="{{ asset('js/admin/users/personalAccounts.js') }}"></script>
         <script>
+            const movementTypes = @json($movementTypes);
             const allIcons = @json($allIcons);
         </script>
     @endpush
