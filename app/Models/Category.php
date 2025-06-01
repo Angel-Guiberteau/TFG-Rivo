@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 
 class Category extends Model
@@ -16,16 +19,24 @@ class Category extends Model
     public static function getAllCategoriesEnabled(): Collection {
         $category = new self();
         
-        return $category->select('id', 'name')
+        return $category->select('id', 'name', 'icon_id')
                         ->get();
     }
 
-    public static function addCategory(string $text): bool {
+    public static function addCategory(string $text, int $iconId): array|false {
         $category = new self();
 
         $category->name = $text;
+        $category->icon_id = $iconId;
 
-        return $category->save();
+        if ($category->save()) {
+            return $data = [
+                'status' => true,
+                'categoryId' => $category->id,
+            ];
+        }
+
+        return false;
     }
 
     public static function editCategory(array $data): bool {
@@ -51,15 +62,21 @@ class Category extends Model
         return false;
     }
 
-    public function operations()
-    {
+    public function operations(): HasMany {
         return $this->hasMany(Operation::class);
     }
     
-    public function icon()
-    {
+    public function icon(): BelongsTo {
         return $this->belongsTo(Icon::class, 'icon_id');
     }
 
+    public function movementTypes(): BelongsToMany {
+        return $this->belongsToMany(
+            MovementType::class,
+            'movements_types_categories',
+            'category_id',
+            'movement_type_id'
+        );
+    }
 
 }

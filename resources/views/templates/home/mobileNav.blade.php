@@ -1,22 +1,3 @@
-{{-- <nav class="mobile-nav">
-    <button class="fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
-        <i class="fas fa-home fs-3 text-secondary"></i>
-        <span class="fs-6">Inicio</span>
-    </button>
-    <button class="fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
-        <i class="fas fa-plus fs-3 text-success"></i>
-        <span class="fs-6">Ingreso</span>
-    </button>
-    <button class="fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
-        <i class="fas fa-minus fs-3 text-danger" style="text-shadow: 0 0 1px currentColor;"></i>
-        <span class="fs-6">Gasto</span>
-    </button>
-    <button class="fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
-        <i class="fas fa-piggy-bank fs-3 text-warning"></i>
-        <span class="fs-6">Ahorro</span>
-    </button>
-</nav> --}}
-
 <nav class="mobile-nav">
     <div id="fab-container">
         <button id="fab-toggle" class="fab-option fab-active">

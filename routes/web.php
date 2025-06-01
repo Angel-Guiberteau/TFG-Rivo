@@ -1,8 +1,13 @@
 <?php
 
 use App\Enums\ValidationEnum;
+use App\Http\Controllers\BaseCategoryController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\IconController;
+use App\Models\BaseCategory;
+use App\Models\Icons;
+use App\Validations\BaseCategoriesValidator;
 use App\Validations\SentencesValidator;
 use App\Validations\CategoriesValidator;
 use Illuminate\Http\JsonResponse;
@@ -55,7 +60,6 @@ Route::get('/home', function (): View {
     $sixOperations = $operationController->getSixOperationsByAccountId($account->id);
     
     $thisMonthOperations = $operationController->thisMonthOperationsByAccountId($account->id);
-
     $incomes = $thisMonthOperations->filter(function ($op) {
         return $op['movement_type_id'] === 1;
     });
@@ -242,24 +246,32 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
     Route::group(['prefix' => 'categories'], function () {
         Route::get('/', function (): View {
-            return CategoryController::listCategories();
+            $baseCategories = BaseCategoryController::listAllBaseCategories();
+            $icons = IconController::getAllIcons();
+            return view('admin.categories.categories')
+                ->with('categories', $baseCategories)
+                ->with('icons', $icons);
         })->name('categories');
 
         Route::post('/add', function (): RedirectResponse {
             $data = [
-                'name' => request()->input('name')
+                'name' => request()->input('name'),
+                'types' => request()->input('types'),
+                'iconId' => request()->input('icon'),
             ];
-            $validate = CategoriesValidator::validate($data, ValidationEnum::ADD->value);
-            return CategoryController::addCategory($validate);
+            $validate = BaseCategoriesValidator::validate($data, ValidationEnum::ADD->value);
+            return BaseCategoryController::addBaseCategory($validate);
         })->name('addCategory');
 
         Route::put('/edit', function (): RedirectResponse {
             $data = [
                 'id' => request()->input('id'),
-                'name' => request()->input('name')
+                'name' => request()->input('name'),
+                'types' => request()->input('types'),
+                'iconId' => request()->input('icon'),
             ];
-            $validate = CategoriesValidator::validate($data, ValidationEnum::EDIT->value);
-            return CategoryController::editCategory($validate);
+            $validate = BaseCategoriesValidator::validate($data, ValidationEnum::EDIT->value);
+            return BaseCategoryController::editBaseCategory($validate);
         })->name('editCategory');
 
         Route::post('/delete', function (): JsonResponse {

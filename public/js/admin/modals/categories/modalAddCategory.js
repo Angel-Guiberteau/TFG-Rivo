@@ -4,6 +4,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const submitButton = document.getElementById("buttonSubmit");
     const addModal = document.getElementById("addCategory");
 
+    const typeCheckboxes = document.querySelectorAll(".type-checkbox");
+    const iconRadios = document.querySelectorAll(".icon-radio");
+
+    function isTypeSelected() {
+        return Array.from(typeCheckboxes).some(checkbox => checkbox.checked);
+    }
+
+    function isIconSelected() {
+        return Array.from(iconRadios).some(radio => radio.checked);
+    }
+
     function validateName() {
         const inputValue = nameInput.value.trim();
         const validPattern = /^[A-Za-z0-9ÁÉÍÓÚáéíóúÜüÑñ&().,\s]+$/;
@@ -11,28 +22,38 @@ document.addEventListener("DOMContentLoaded", function () {
         if (validPattern.test(inputValue) && inputValue.length > 0) {
             nameInput.classList.remove("is-invalid");
             nameInput.classList.add("is-valid");
-            submitButton.disabled = false;
+            return true;
         } else {
             nameInput.classList.remove("is-valid");
             nameInput.classList.add("is-invalid");
-            submitButton.disabled = true;
+            return false;
         }
     }
 
-    nameInput.addEventListener("input", validateName);
+    function validateForm() {
+        const nameValid = validateName();
+        const typeValid = isTypeSelected();
+        const iconValid = isIconSelected();
+
+        submitButton.disabled = !(nameValid && typeValid && iconValid);
+    }
+
+    nameInput.addEventListener("input", validateForm);
+    typeCheckboxes.forEach(checkbox => checkbox.addEventListener("change", validateForm));
+    iconRadios.forEach(radio => radio.addEventListener("change", validateForm));
 
     form.addEventListener("submit", function (event) {
-        if (!nameInput.classList.contains("is-valid")) {
+        if (submitButton.disabled) {
             event.preventDefault();
             event.stopPropagation();
-            nameInput.classList.add("is-invalid");
-            submitButton.disabled = true;
         }
     });
 
     addModal.addEventListener("show.bs.modal", function () {
         nameInput.classList.remove("is-valid", "is-invalid");
         nameInput.value = "";
+        typeCheckboxes.forEach(cb => cb.checked = false);
+        iconRadios.forEach(r => r.checked = false);
         submitButton.disabled = true;
     });
 });
