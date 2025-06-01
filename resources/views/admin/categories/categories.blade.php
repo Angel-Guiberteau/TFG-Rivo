@@ -8,7 +8,7 @@
     @include('templates.admin.navBar')
 
     <main>
-        <section class="container-custom p-3 pb-5">
+        <section class="container-custom-sm p-3 pb-5">
             <article class="bg-light p-3">
 
                 @include('templates.admin.title', ['title' => 'Categorías base'])
@@ -20,19 +20,18 @@
                     <table class="datatable table table-striped">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Icono</th>
-                                <th>Categoria</th>
-                                <th>Tipo</th>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Icono</th>
+                                <th class="text-center">Categoria</th>
+                                <th class="text-center">Tipo</th>
                                 <th class="text-center">Editar</th>
-                                <th class="text-center">Visualizar</th>
                                 <th class="text-center">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($categories as $category)
                             <tr>
-                                <td>{{ $category['id'] }}</td>
+                                <td class="text-start">{{ $category['id'] }}</td>
                                 <td>
                                     <label class="icons">
                                         {!! $category['icon_html'] !!}
@@ -40,7 +39,7 @@
                                 </td>
                                 <td>{{ $category['category_name'] }}</td>
                                 <td>{{ $category['movement_type_names'] }}</td>
-                                <td>
+                                <td class="text-center">
                                     @include('admin.components.buttons.editButton', [
                                         'data' =>
                                             'data-id="' . e($category['id']) . '" ' .
@@ -50,13 +49,7 @@
                                             '" data-bs-toggle="modal" data-bs-target="#editCategory"'
                                     ])
                                 </td>
-                                <td>
-                                    @include('admin.components.buttons.preViewButton', [
-                                        'data' => 'disabled',
-                                        'onclick' => 'preViewCategory('.e(json_encode($category['category_name'])).')'
-                                    ])
-                                </td>
-                                <td>   
+                                <td class="text-center">   
                                     @include('admin.components.buttons.deleteButton', [
                                         'data' => 'id="'. e($category['id']) .'"',
                                         'onclick' => 'deleteCategory('. e($category['id']) .')'
@@ -70,7 +63,8 @@
             </article>
         </section>
     </main>
-
+    
+    @include('sweetAlerts.swal')
     @include('admin.components.modals.categories.addCategory')
     @include('admin.components.modals.categories.editCategory')
 

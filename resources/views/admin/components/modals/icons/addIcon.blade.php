@@ -13,7 +13,7 @@
                     </label>
                     <div class="col-12">
                         <label class="form-label" for="name">Icono <span class="modal_required">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Ingrese la Categoria" required/>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Ej: fas fa-user" required/>
                         <div class="valid-feedback">¡Parece correcto!</div>
                         <div class="invalid-feedback">Por favor, introduce una icono correcta.</div>
                     </div>
