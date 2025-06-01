@@ -36,8 +36,8 @@
                                         {!! $icon['icon'] !!}
                                     </label>
                                 </td>
-                                <td>{{ $icon['icon'] }}</td>
-                                <td class="text-center">
+                                <td class="text-center">{{ $icon['icon'] }}</td>
+                                <td class="text-center align-middle">
                                     @include('admin.components.buttons.editButton', [
                                         'data' =>
                                             'data-id="' . e($icon['id']) . '" ' .
@@ -46,7 +46,7 @@
                                             'data-bs-toggle="modal" data-bs-target="#editIcon"'
                                     ])
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center align-middle">
                                     @include('admin.components.buttons.deleteButton', [
                                         'data' => 'id="'. e($icon['id']) .'"',
                                         'onclick' => 'deleteIcon('. e($icon['id']) .')'
