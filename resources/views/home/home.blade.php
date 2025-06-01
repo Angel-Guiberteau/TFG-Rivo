@@ -68,12 +68,6 @@
                 backdrop.addEventListener('click', toggleSidebar);
             });
         </script>
-
-
-
-
-
-
         {{-- MAIN CONTENT --}}
         <section class="w-100">
             <article class="balance-bg  w-100">
