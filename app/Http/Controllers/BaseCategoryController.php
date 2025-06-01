@@ -22,6 +22,7 @@ class BaseCategoryController extends Controller
                 ->back()
                 ->with('error', $data['error'] ?? 'Datos inválidos');
         }
+        
         $baseCategory = BaseCategory::addBaseCategory($data['data']);
 
         if (!$baseCategory) {
