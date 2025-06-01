@@ -11,6 +11,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <link rel="stylesheet" href="{{ asset('css/admin/users/usersCommon.css') }}">
         <link rel="stylesheet" href="{{ asset('css/admin/users/baseCategories.css') }}">
+        <style>
+
+        </style>
     @endpush
 
     <main>
@@ -164,7 +167,7 @@
                                                 <i class="fa-solid fa-trash"></i>
                                             </button>
                                             <div class="mb-3">
-                                                <label class="form-label fw-medium text-muted">Nombre de la categoría</label>
+                                                <label class="form-label fw-medium text-muted">Nombre de la categoría <span class="text-danger">*</span></label>
                                                 <input type="text" name="categories[{{ $category['id'] }}][name]"
                                                     class="form-control rounded bg-light text-center fs-5 fw-semibold shadow-sm"
                                                     value="{{ old("categories.{$category['id']}.name", $category['name']) }}"
@@ -178,7 +181,7 @@
                                             
 
                                             <div class="mb-3">
-                                                <label class="form-label fw-medium text-muted">Seleccionar nuevo icono</label>
+                                                <label class="form-label fw-medium text-muted">Seleccionar nuevo icono <span class="text-danger">*</span></label>
                                                 <input type="hidden" name="categories[{{ $category['id'] }}][icon]"
                                                     id="icon_{{ $category['id'] }}" value="{{ $category['icon'] }}">
 
@@ -194,7 +197,29 @@
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            <div class="col-12">
+                                                <label class="form-label fw-medium text-muted">Tipos de movimiento <span class="text-danger">*</span></label>
+                                                <div class="types d-flex flex-row flex-wrap mb-2 ">
+                                                    @foreach ($movementTypes as $type)
+                                                        <div class="form-check mb-2 me-2">
+                                                            <input
+                                                                class="form-check-input type-checkbox-edit"
+                                                                id="movement_type_{{ $category['id'] }}_{{ $type->id }}"
+                                                                type="checkbox"
+                                                                name="movement_types[{{ $category['id'] }}][]"
+                                                                value="{{ $type->id }}"
+                                                                @if(in_array($type->id, $category['movement_type_ids'])) checked @endif
+                                                            >
+                                                            <label
+                                                                class="form-check-label"
+                                                                for="movement_type_{{ $category['id'] }}_{{ $type->id }}"
+                                                            >
+                                                                {{ $type->name }}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -237,17 +262,17 @@
                                             </button>
 
                                             <div class="mb-3">
-                                                <label class="form-label fw-medium text-muted">Nombre de la cuenta</label>
+                                                <label class="form-label fw-medium text-muted">Nombre de la cuenta <span class="text-danger">*</span></label>
                                                 <input type="text" name="accounts[{{ $account->id }}][name]" class="form-control text-center" value="{{ $account->name }}">
                                             </div>
 
                                             <div class="mb-3">
-                                                <label class="form-label fw-medium text-muted">Saldo</label>
+                                                <label class="form-label fw-medium text-muted">Saldo <span class="text-danger">*</span></label>
                                                 <input type="number" step="0.01" name="accounts[{{ $account->id }}][balance]" class="form-control text-center" value="{{ $account->balance }}">
                                             </div>
 
                                             <div class="mb-3">
-                                                <label class="form-label fw-medium text-muted">Moneda</label>
+                                                <label class="form-label fw-medium text-muted">Moneda <span class="text-danger">*</span></label>
                                                 <input type="text" name="accounts[{{ $account->id }}][currency]" class="form-control text-center" value="{{ $account->currency }}">
                                             </div>
 
@@ -284,9 +309,10 @@
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
         <script src="{{ asset('js/admin/users/editUser.js') }}"></script>
-        <script src="{{ asset('js/admin/users/baseCategories.js') }}"></script>
+        <script src="{{ asset('js/admin/users/personalCategories.js') }}"></script>
         <script src="{{ asset('js/admin/users/personalAccounts.js') }}"></script>
         <script>
+            const movementTypes = @json($movementTypes);
             const allIcons = @json($allIcons);
         </script>
     @endpush
