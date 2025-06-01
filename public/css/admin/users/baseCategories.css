@@ -49,3 +49,31 @@
     color: #0d6efd;
     box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
 }
+
+.type-checkbox, .type-checkbox-edit {
+    display: none;
+}
+
+.types label {
+    cursor: pointer;
+    padding: 8px 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    transition: background-color 0.2s, border-color 0.2s;
+    user-select: none;
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.types label:hover {
+    background-color: #e2eafc;
+    border-color: #b6d4fe;
+    color: #0d6efd;
+}
+
+.type-checkbox:checked + label,
+.type-checkbox-edit:checked + label {
+    background-color: #cfe2ff;
+    border-color: #0d6efd;
+    color: #084298;
+}

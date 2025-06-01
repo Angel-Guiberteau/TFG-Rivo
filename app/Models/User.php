@@ -151,13 +151,14 @@ class User extends Authenticatable
     public static function getPersonalCategoriesByUserId($id)
     {
         return self::find($id)?->personalCategories()
-            ->with('icon')
+            ->with(['icon', 'movementTypes:id'])
             ->get()
             ->map(function ($category) {
                 return [
                     'id' => $category->id,
                     'name' => $category->name,
-                    'icon' => $category->icon?->icon 
+                    'icon' => $category->icon?->icon,
+                    'movement_type_ids' => $category->movementTypes->pluck('id')->toArray()
                 ];
             });
     }
@@ -181,6 +182,9 @@ class User extends Authenticatable
             $stillRelated = UserCategory::where('categories_id', $categoryId)->exists();
 
             if (!$stillRelated) {
+
+                MovementTypeCategories::where('category_id', $categoryId)->delete();
+
                 $deletedCategory = Category::where('id', $categoryId)->delete();
                 if (!$deletedCategory) {
                     DB::rollBack();
@@ -255,12 +259,11 @@ class User extends Authenticatable
         }
     }
 
-    public static function addPersonalCategory(int $userId, string $name, string $iconHtml): bool
+    public static function addPersonalCategory(int $userId, string $name, string $iconHtml): int|false
     {
         DB::beginTransaction();
 
         try {
-            
             $icon = Icon::where('icon', $iconHtml)->first();
             if (!$icon) {
                 DB::rollBack();
@@ -286,7 +289,7 @@ class User extends Authenticatable
             }
 
             DB::commit();
-            return true;
+            return $category->id;
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -298,4 +301,5 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Category::class, 'user_categories', 'user_id', 'categories_id');
     }
+
 }

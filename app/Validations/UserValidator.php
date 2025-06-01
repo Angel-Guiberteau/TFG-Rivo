@@ -152,6 +152,7 @@ class UserValidator extends Validator {
         return [
             'deleted' => 'required|string',
             'user_id' => 'required|integer',
+            'movement_types' => 'sometimes|array',
 
             'categories' => 'sometimes|array|min:1',
             'categories.*.id' => 'sometimes|integer',
@@ -161,6 +162,7 @@ class UserValidator extends Validator {
             'news' => 'sometimes|array',
             'news.*.name' => 'sometimes|string|max:75',
             'news.*.icon' => 'sometimes|string|max:75',
+            'news.*.movement_types' => 'sometimes|array',
         ];
     }
 
@@ -168,6 +170,8 @@ class UserValidator extends Validator {
         return [
             'deleted.required' => 'La lista de categorías eliminadas es obligatoria.',
             'deleted.string' => 'El formato de las categorías eliminadas no es válido.',
+
+            'movement_types.array' => 'Los tipos de movimiento deben estar en formato de lista.',
 
             'user_id.required' => 'El usuario es obligatorio.',
             'user_id.integer' => 'El identificador del usuario debe ser un número entero.',
@@ -191,6 +195,7 @@ class UserValidator extends Validator {
             'news.*.name.string' => 'El nombre de la nueva categoría debe ser texto.',
             'news.*.name.max' => 'El nombre de la nueva categoría no puede exceder los 75 caracteres.',
 
+            'news.*.movement_types.array' => 'Los tipos de movimiento de la nueva categoría deben estar en formato de lista.',
             'news.*.icon.required_with' => 'El icono de la nueva categoría es obligatorio.',
             'news.*.icon.string' => 'El icono de la nueva categoría debe ser texto.',
             'news.*.icon.max' => 'El icono de la nueva categoría no puede exceder los 75 caracteres.',
