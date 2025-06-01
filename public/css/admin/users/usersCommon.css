@@ -32,5 +32,4 @@ label.form-label {
 
 .progress-line-container .step.active {
     font-weight: bold;
-    text-decoration: underline;
 }
