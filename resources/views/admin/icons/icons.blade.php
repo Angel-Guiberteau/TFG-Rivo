@@ -8,7 +8,7 @@
     @include('templates.admin.navBar')
 
     <main>
-        <section class="container-custom-sm p-3 pb-4">
+        <section class="container-custom p-3 pb-4">
             <article class="bg-light p-3">
 
                 @include('templates.admin.title', ['title' => 'Iconos'])

@@ -1,0 +1,53 @@
+.card:hover {
+    transform: translateY(-3px);
+    transition: all 0.3s ease;
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1);
+}
+.card-custom {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border: none;
+    border-radius: 1.25rem;
+    color: white;
+}
+
+.card-custom:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.card-icon-circle {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.card-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.card-text {
+    font-size: 0.95rem;
+}
+
+/* Colores personalizados */
+.card-custom.bg-users {
+    background: linear-gradient(135deg, #1d3557d6, #457b9dca);
+}
+
+.card-custom.bg-icons {
+    background: linear-gradient(135deg, #264653ce, #2a9d90c2);
+}
+
+.card-custom.bg-categories {
+    background: linear-gradient(135deg, #e76f51b2, #f4a361c5);
+}
+
+.card-custom.bg-sentences {
+    background: linear-gradient(135deg, #2a9d90ba, #8ecae6bd);
+}
