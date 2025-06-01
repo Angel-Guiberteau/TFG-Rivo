@@ -31,8 +31,8 @@
                         <tbody>
                             @foreach ($categories as $category)
                             <tr>
-                                <td class="text-start">{{ $category['id'] }}</td>
-                                <td>
+                                <td class="text-center">{{ $category['id'] }}</td>
+                                <td  class="text-center">
                                     <label class="icons">
                                         {!! $category['icon_html'] !!}
                                     </label>

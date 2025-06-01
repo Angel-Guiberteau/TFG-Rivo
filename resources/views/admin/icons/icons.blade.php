@@ -30,8 +30,8 @@
                         <tbody>
                             @foreach ($icons as $icon)
                             <tr>
-                                <td class="text-start">{{ $icon['id'] }}</td>
-                                <td>
+                                <td class="text-center">{{ $icon['id'] }}</td>
+                                <td class="text-center">
                                     <label class="icons">
                                         {!! $icon['icon'] !!}
                                     </label>
