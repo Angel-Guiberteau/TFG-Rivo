@@ -13,13 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             card.remove();
+            checkFormValidity(); // Revalidar formulario
         });
     });
 
     let accountCounter = 1000;
+
     document.getElementById('addAccountBtn')?.addEventListener('click', () => {
         const container = document.getElementById('accountsContainer');
-        const index = `new_${accountCounter++}`; // unique ID for each new account
+        const index = `new_${accountCounter++}`;
 
         const newCard = document.createElement('div');
         newCard.className = 'col-md-6 col-lg-4 mb-4 account-card';
@@ -57,6 +59,73 @@ document.addEventListener('DOMContentLoaded', () => {
 
         newCard.querySelector('.delete-account-btn').addEventListener('click', () => {
             newCard.remove();
+            checkFormValidity();
         });
+
+        attachValidationListeners(newCard);
     });
+
+    function validateInput(input) {
+        const name = input.name;
+        const value = input.value.trim();
+        let valid = false;
+        let message = '';
+
+        if (name.includes('[name]')) {
+            valid = value.length > 0;
+            message = valid ? '' : 'El nombre no puede estar vacío.';
+        } else if (name.includes('[balance]')) {
+            valid = !isNaN(value) && value !== '';
+            message = valid ? '' : 'Introduce un saldo válido.';
+        } else if (name.includes('[currency]')) {
+            valid = value.length > 0 && value.length <= 3;
+            message = valid ? '' : 'La moneda debe tener máximo 3 caracteres.';
+        }
+
+        input.classList.remove('is-valid', 'is-invalid');
+
+        let feedback = input.parentElement.querySelector('.invalid-feedback');
+        if (!feedback) {
+            feedback = document.createElement('div');
+            feedback.className = 'invalid-feedback';
+            input.parentElement.appendChild(feedback);
+        }
+
+        if (valid) {
+            input.classList.add('is-valid');
+            feedback.textContent = '';
+        } else {
+            input.classList.add('is-invalid');
+            feedback.textContent = message;
+        }
+
+        checkFormValidity();
+    }
+
+    function checkFormValidity() {
+        const form = document.querySelector('#personalAccounts form');
+        const inputs = form.querySelectorAll('input[type="text"], input[type="number"]');
+        const submitBtn = document.getElementById('saveAccountsBtn');
+        let allValid = true;
+
+        inputs.forEach(input => {
+            const value = input.value.trim();
+            const isValid = input.classList.contains('is-valid');
+            if (!isValid || value === '') {
+                allValid = false;
+            }
+        });
+
+        submitBtn.disabled = !allValid;
+    }
+
+    function attachValidationListeners(container) {
+        const inputs = container.querySelectorAll('input[type="text"], input[type="number"]');
+        inputs.forEach(input => {
+            input.addEventListener('input', () => validateInput(input));
+            validateInput(input);
+        });
+    }
+
+    attachValidationListeners(document.getElementById('accountsContainer'));
 });

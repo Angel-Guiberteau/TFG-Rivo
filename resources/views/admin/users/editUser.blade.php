@@ -265,7 +265,7 @@
                             <button type="button" class="btn btn-success btn-sm" id="addAccountBtn">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
-                            <button type="submit" class="btn btn-primary btn-sm">
+                            <button type="submit" class="btn btn-primary btn-sm" id="saveAccountsBtn">
                                 <i class="fa-solid fa-floppy-disk"></i>
                             </button>
                             <a href="{{ route('users') }}" class="btn btn-danger btn-sm">
@@ -273,8 +273,6 @@
                             </a>
                         </div>
                     </form>
-
-
                 </div>
 
 
