@@ -10,5 +10,5 @@ enum ValidationEnum: string
     case INITIALSETUP = 'initialSetup';
     case UPDATE_PERSONAL_CATEGORIES = 'updatePersonalCategories';
     case UPDATE_PERSONAL_ACOUNTS = 'updatePersonalAccounts';
-    // case PREVIEW = 'preView';
+    case ADD_OPERATION_USER = 'addIncomeUser';
 }

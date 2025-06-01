@@ -261,6 +261,61 @@ class UserValidator extends Validator {
             'news.*.enabled.boolean' => 'El campo de habilitación de la nueva cuenta debe ser verdadero o falso.',
         ];
     }
+    
+    protected static function rulesAddOperationUser(): array {
+        return [
+
+            'account_id' => 'required|integer',
+            'category_id' => 'required|integer',
+            'movement_type' => 'required|string|in:income,expense,saveMoney',
+
+            'subject' => 'required|string|max:75',
+            'description' => 'required|string|max:255',
+
+            'action_date' => 'required|date',
+
+            'schedule' => 'sometimes|in:on',
+
+            'start_date'=> 'required_if:schedule,on|nullable|date',
+            'expiration_date'=> 'required_if:schedule,on|nullable|date',
+            'period' => 'required_if:schedule,on|string|max:1',
+
+            'amount' => 'required|numeric',
+        ];
+    }
+
+    protected static function messagesAddOperationUser(): array {
+        return [
+            'account_id.required' => 'La cuenta es obligatoria.',
+            'account_id.integer'  => 'La cuenta debe ser un número válido.',
+
+            'category_id.required' => 'La categoría es obligatoria.',
+            'category_id.integer'  => 'La categoría debe ser un número válido.',
+
+            'subject.required' => 'El asunto es obligatorio.',
+            'subject.string'   => 'El asunto debe ser un texto.',
+            'subject.max'      => 'El asunto no puede superar los 75 caracteres.',
+
+            'description.required' => 'La descripción es obligatoria.',
+            'description.string'   => 'La descripción debe ser un texto.',
+            'description.max'      => 'La descripción no puede superar los 255 caracteres.',
+
+            'action_date.required' => 'La fecha es obligatoria.',
+            'action_date.date'     => 'La fecha debe tener un formato válido.',
+
+            'schedule.in' => 'El valor del campo de programación no es válido.',
+
+            'expiration_date.required_if' => 'La fecha de expiración es obligatoria si se programa el ingreso.',
+            'expiration_date.date'        => 'La fecha de expiración debe ser una fecha válida.',
+
+            'period.required_if' => 'La recurrencia es obligatoria si se programa el ingreso.',
+            'period.string'      => 'La recurrencia debe ser un texto.',
+            'period.max'         => 'La recurrencia debe tener máximo un carácter.',
+
+            'amount.required' => 'La cantidad es obligatoria.',
+            'amount.numeric'  => 'La cantidad debe ser un número válido.',
+        ];
+    }
 
     
 

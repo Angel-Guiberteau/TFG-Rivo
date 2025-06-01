@@ -4,7 +4,7 @@
         @foreach ($sixOperations as $index => $operation)
             <div class="col-12 col-lg-6 {{ $index % 2 === 0 ? 'border-lg-end' : '' }}">
                 <div class="movement-row">
-                    <div class="d-flex align-items-center gap-3">
+                    <div class="movement-left d-flex align-items-center gap-3">
                         <div class="movement-icon">
                             {!! $operation->category->icon->icon !!}
                         </div>
@@ -23,10 +23,13 @@
                             <p class="movement-name mb-0">{{ $operation->category->name }}</p>
                         </div>
                     </div>
-                    <p class="movement-amount m-0 pe-2 fs-5 {{ $operation->movement_type_id == 2 ? 'negative' : 'positive' }}">
-                        {{ $operation->movement_type_id == 2 ? '-' : '+' }}{{ number_format($operation->amount, 2) }}€
-                    </p>
+                    <div class="movement-right">
+                        <p class="movement-amount m-0 fs-5 {{ $operation->movement_type_id == 2 ? 'negative' : 'positive' }}">
+                            {{ $operation->movement_type_id == 2 ? '-' : '+' }}{{ number_format($operation->amount, 2) }}€
+                        </p>
+                    </div>
                 </div>
+
             </div>
         @endforeach
     </div>
