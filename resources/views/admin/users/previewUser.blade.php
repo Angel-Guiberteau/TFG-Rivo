@@ -103,8 +103,8 @@
                                         <div class="col-md-6 col-lg-4">
                                             <div class="card account-card h-100">
                                                 <div class="card-body">
-                                                    <h5 class="card-title mb-2 bg-custom text-white p-2 rounded">
-                                                        <i class="fas fa-university me-2 ms-1"></i>{{ $account->name }}
+                                                    <h5 class="card-title mb-2 p-2 rounded">
+                                                        <i class="fas fa-university me-2"></i>{{ $account->name }}
                                                     </h5>
                                                     <p class="mb-1"><strong>ID:</strong> {{ $account->id }}</p>
                                                     <p class="mb-1"><strong>Saldo:</strong> 
