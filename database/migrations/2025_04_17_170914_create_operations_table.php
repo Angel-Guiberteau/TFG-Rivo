@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('operations', function (Blueprint $table) {
             $table->unsignedInteger('id')->autoIncrement()->primary();
-            $table->string('subject');
+            $table->string('subject', 75);
             $table->string('description', 255);
             $table->decimal('amount', 10, 2)->unsigned();
 

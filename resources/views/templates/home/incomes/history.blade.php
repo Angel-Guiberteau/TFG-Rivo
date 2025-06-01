@@ -57,9 +57,9 @@
         <div class="px-lg-4">
             <div class="row movement-block">
                 @foreach ($allIncomes as $index => $simpleIncome)
-                    <div class="col-12 col-lg-6 {{ $index % 2 === 0 ? 'border-lg-end' : '' }}">
+                    <div class="col-12 col-lg-6 movement-item {{ $index % 2 === 0 ? 'border-lg-end' : '' }}" style="{{ $index >= 6 ? 'display: none;' : '' }}">
                         <div class="movement-row">
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="movement-left d-flex align-items-center gap-3">
                                 <div class="movement-icon">
                                     {!! $simpleIncome->category->icon->icon !!}
                                 </div>
@@ -78,12 +78,17 @@
                                     <p class="movement-name mb-0">{{ $simpleIncome->category->name }}</p>
                                 </div>
                             </div>
-                            <p class="movement-amount m-0 pe-2 fs-5 {{ $simpleIncome->movement_type_id == 2 ? 'negative' : 'positive' }}">
-                                {{ $simpleIncome->movement_type_id == 2 ? '-' : '+' }}{{ number_format($simpleIncome->amount, 2) }}€
-                            </p>
+                            <div class="movement-right">
+                                <p class="movement-amount m-0 fs-5 {{ $simpleIncome->movement_type_id == 2 ? 'negative' : 'positive' }}">
+                                    {{ $simpleIncome->movement_type_id == 2 ? '-' : '+' }}{{ number_format($simpleIncome->amount, 2) }}€
+                                </p>
+                            </div>
                         </div>
                     </div>
                 @endforeach
+                <div class="text-center mt-3 mb-3 mb-lg-0">
+                    <button id="loadMoreBtn" class="rivo-btn">Ver más</button>
+                </div>
             </div>
         </div>
     </div>
@@ -120,7 +125,25 @@
         });
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const items = document.querySelectorAll('.movement-item');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        let visibleCount = 6;
 
+        loadMoreBtn.addEventListener('click', () => {
+            let nextVisible = visibleCount + 6;
+            for (let i = visibleCount; i < nextVisible && i < items.length; i++) {
+                items[i].style.display = 'block';
+            }
+            visibleCount = nextVisible;
+
+            if (visibleCount >= items.length) {
+                loadMoreBtn.style.display = 'none'; 
+            }
+        });
+    });
+</script>
 
 
 
