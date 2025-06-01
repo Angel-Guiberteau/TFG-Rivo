@@ -1,5 +1,5 @@
-<article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black income-article" id="income-section" style="display: none;">
-    <div class="col-12 col-lg-10 mx-auto mt-4">
+<article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black home-article show fade-section" id="income-section" style="display: none;">
+    <div class="col-12 col-lg-10 mx-auto w-100 mt-4">
         <div class="d-flex flex-row justify-content-between align-items-center">
             <h2 class="fw-bold fs-3">Historial de ingresos</h2>
             <button class="btn btn-primary fw-bold btn-sm fs-4 custom-gradient-btn w-25" id="incomeAddForm">
@@ -58,7 +58,7 @@
             <div class="row movement-block">
                 @foreach ($allIncomes as $index => $simpleIncome)
                     <div class="col-12 col-lg-6 movement-item {{ $index % 2 === 0 ? 'border-lg-end' : '' }}" style="{{ $index >= 6 ? 'display: none;' : '' }}">
-                        <div class="movement-row">
+                        <div class="movement-row" data-id="{{ $simpleIncome->id }}">
                             <div class="movement-left d-flex align-items-center gap-3">
                                 <div class="movement-icon">
                                     {!! $simpleIncome->category->icon->icon !!}

@@ -3,7 +3,7 @@
     <div class="row">
         @foreach ($sixOperations as $index => $operation)
             <div class="col-12 col-lg-6 {{ $index % 2 === 0 ? 'border-lg-end' : '' }}">
-                <div class="movement-row">
+                <div class="movement-row" data-id="{{ $operation->id }}">
                     <div class="movement-left d-flex align-items-center gap-3">
                         <div class="movement-icon">
                             {!! $operation->category->icon->icon !!}
