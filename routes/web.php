@@ -246,37 +246,30 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('sentences');
 
         Route::post('/add', function (): RedirectResponse {
-            $data = [
-                'text' => request()->input('name')
-            ];
+            $data = request()->toArray();
+
             $validate = SentencesValidator::validate($data, ValidationEnum::ADD->value);
             return SentenceController::addSentence($validate);
         })->name('addSentence');
 
         Route::put('/edit', function (): RedirectResponse {
-            $data = [
-                'id' => request()->input('id'),
-                'text' => request()->input('text')
-            ];
+            $data = request()->toArray();
+
             $validate = SentencesValidator::validate($data, ValidationEnum::EDIT->value);
             return SentenceController::editSentence($validate);
         })->name('editSentence');
 
         Route::post('/delete', function (): JsonResponse {
-            $data = [
-                'id' => request('id')
-            ];
+            $data = request()->toArray();
+
             $validate = SentencesValidator::validate($data, ValidationEnum::DELETE->value);
 
             return SentenceController::deleteSentence($validate);
         })->name('deleteSentence');
 
         Route::post('/preViewSentence', function (): View {
-            $data = [
-                'text' => request('text')
-            ];
-            // $validate = SentencesValidator::validate($data, ValidationEnum::PREVIEW->value);
-            // return view('admin.sentences.preViewSentence')->with('sentence', $validate['text']);
+            $data = request()->toArray();
+            
             return view('admin.sentences.preViewSentence')->with('sentence', $data['text']);
         })->name('preViewSentence');
 
@@ -300,30 +293,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('categories');
 
         Route::post('/add', function (): RedirectResponse {
-            $data = [
-                'name' => request()->input('name'),
-                'types' => request()->input('types'),
-                'iconId' => request()->input('icon'),
-            ];
+            $data = request()->toArray();
+            
             $validate = BaseCategoriesValidator::validate($data, ValidationEnum::ADD->value);
             return BaseCategoryController::addBaseCategory($validate);
         })->name('addCategory');
 
         Route::put('/edit', function (): RedirectResponse {
-            $data = [
-                'id' => request()->input('id'),
-                'name' => request()->input('name'),
-                'types' => request()->input('types'),
-                'iconId' => request()->input('icon'),
-            ];
+            $data = request()->toArray();
+
             $validate = BaseCategoriesValidator::validate($data, ValidationEnum::EDIT->value);
             return BaseCategoryController::editBaseCategory($validate);
         })->name('editCategory');
 
         Route::post('/delete', function (): JsonResponse {
-            $data = [
-                'id' => request('id')
-            ];
+            $data = request()->toArray();
+
             $validate = CategoriesValidator::validate($data, ValidationEnum::DELETE->value);
 
             return CategoryController::deleteCategory($validate);
@@ -342,28 +327,23 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('icons');
 
         Route::post('/add', function (): RedirectResponse {
+            $data = request()->toArray();
 
-            $data = [
-                'name' => request()->input('name'),
-            ];
             $validate = IconValidator::validate($data, ValidationEnum::ADD->value);
 
             return IconController::addIcon($validate);
         })->name('addIcon');
 
         Route::put('/edit', function (): RedirectResponse {
-            $data = [
-                'id' => request()->input('id'),
-                'name' => request()->input('name'),
-            ];
+            $data = request()->toArray();
+
             $validate = IconValidator::validate($data, ValidationEnum::EDIT->value);
             return IconController::editIcon($validate);
         })->name('editIcon');
 
         Route::post('/delete', function (): JsonResponse {
-            $data = [
-                'id' => request('id')
-            ];
+            $data = request()->toArray();
+            
             $validate = IconValidator::validate($data, ValidationEnum::DELETE->value);
 
             return IconController::deleteIcon($validate);

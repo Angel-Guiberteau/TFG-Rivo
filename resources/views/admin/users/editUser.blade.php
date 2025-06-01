@@ -10,10 +10,10 @@
     @push('styles')
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <link rel="stylesheet" href="{{ asset('css/admin/users/usersCommon.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/admin/users/personalData.css') }}">
         <link rel="stylesheet" href="{{ asset('css/admin/users/baseCategories.css') }}">
-        <style>
-
-        </style>
+        <link rel="stylesheet" href="{{ asset('css/admin/users/personalCategories.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/admin/users/personalAccounts.css') }}">
     @endpush
 
     <main>
@@ -25,7 +25,7 @@
 
                 <div id="personalData" class="mb-4">
 
-                    <form action="{{ route('updateUser') }}" method="POST">
+                    <form action="{{ route('updateUser') }}" method="POST" id="form-user-edit">
                         @csrf
                         @method('PUT')
 
@@ -176,7 +176,7 @@
 
                                             <div class="text-center mb-3">
                                                 <label class="form-label fw-medium text-muted">Icono actual</label>
-                                                <div class="fs-2 text-primary">{!! $category['icon'] !!}</div>
+                                                <div class="fs-2 text-custom">{!! $category['icon'] !!}</div>
                                             </div>
                                             
 

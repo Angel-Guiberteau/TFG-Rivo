@@ -8,7 +8,7 @@
     @include('templates.admin.navBar')
 
     <main>
-        <section class="container-custom-sm p-3 pb-4">
+        <section class="container-custom p-3 pb-4">
             <article class="bg-light p-3">
 
                 @include('templates.admin.title', ['title' => 'Iconos'])
@@ -30,14 +30,14 @@
                         <tbody>
                             @foreach ($icons as $icon)
                             <tr>
-                                <td class="text-start">{{ $icon['id'] }}</td>
-                                <td>
+                                <td class="text-center">{{ $icon['id'] }}</td>
+                                <td class="text-center">
                                     <label class="icons">
                                         {!! $icon['icon'] !!}
                                     </label>
                                 </td>
-                                <td>{{ $icon['icon'] }}</td>
-                                <td class="text-center">
+                                <td class="text-center">{{ $icon['icon'] }}</td>
+                                <td class="text-center align-middle">
                                     @include('admin.components.buttons.editButton', [
                                         'data' =>
                                             'data-id="' . e($icon['id']) . '" ' .
@@ -46,7 +46,7 @@
                                             'data-bs-toggle="modal" data-bs-target="#editIcon"'
                                     ])
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center align-middle">
                                     @include('admin.components.buttons.deleteButton', [
                                         'data' => 'id="'. e($icon['id']) .'"',
                                         'onclick' => 'deleteIcon('. e($icon['id']) .')'

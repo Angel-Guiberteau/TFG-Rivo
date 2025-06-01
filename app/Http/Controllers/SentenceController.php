@@ -23,7 +23,7 @@ class SentenceController extends Controller
                 ->with('error', $data['error']);
         }
         
-        if (!Sentence::addSentence($data['data']['text'])) {
+        if (!Sentence::addSentence($data['data']['name'])) {
             return redirect()
                 ->back()
                 ->with('error', 'Ha habido un error inesperado.');

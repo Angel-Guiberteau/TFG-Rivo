@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                             <div class="text-center mb-3">
                                 <label class="form-label fw-medium text-muted">Icono actual</label>
-                                <div class="fs-2 text-primary"><i class="fa-regular fa-circle-question"></i></div>
+                                <div class="fs-2 text-custom"><i class="fa-regular fa-circle-question"></i></div>
                             </div>
 
                             <div class="mb-3">

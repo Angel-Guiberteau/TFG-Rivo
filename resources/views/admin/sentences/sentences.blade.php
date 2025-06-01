@@ -8,7 +8,7 @@
     @include('templates.admin.navBar')
 
     <main>
-        <section class="container-custom-sm p-3 pb-5">
+        <section class="container-custom p-3 pb-5">
             <article class="bg-light p-3">
 
                 @include('templates.admin.title', ['title' => 'Frases'])
@@ -30,21 +30,24 @@
                         <tbody>
                             @foreach ($sentences as $sentence)
                             <tr>
-                                <td class="text-start">{{ $sentence->id }}</td>
+                                <td class="text-center align-middle">{{ $sentence->id }}</td>
                                 <td>{{ $sentence->text }}</td>
-                                <td class="text-center">
+                                <td class="text-center align-middle">
                                     @include('admin.components.buttons.editButton', [
-                                        'data' => 'data-id="' . e($sentence->id) . '" data-name="' . e($sentence->text) . '" data-bs-toggle="modal" data-bs-target="#editSentence"'
+                                        'data' => 'data-id="' . e($sentence->id) . '" 
+                                        data-name="' . e($sentence->text) . '" 
+                                        data-bs-toggle="modal" data-bs-target="#editSentence"'
                                     ])
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center align-middle">
                                     @include('admin.components.buttons.preViewButton', [
-                                        'data' => 'onclick=" preViewSentence('.e(json_encode($sentence->text)).')"'
+                                        'onclick' => 'preViewSentence('.e(json_encode($sentence->text)).')',
                                     ])
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center align-middle">
                                     @include('admin.components.buttons.deleteButton', [
-                                        'data' => 'id="'. e($sentence->id) .'" onclick="deleteSentence('. e($sentence->id) .')"'
+                                        'data' => 'id="'. e($sentence->id) .'" 
+                                        onclick="deleteSentence('. e($sentence->id) .')"'
                                     ])
                                 </td>
                             </tr>
