@@ -19,18 +19,12 @@
                     <div class="col-12">
                         <p>Tipo <span class="modal_required">*</span></p>
                         <div class="types d-flex justify-content-around p-1">
+                            @foreach ( $movementTypes as $movementType )
                             <div>
-                                <input type="checkbox" name="types[]" value="1" class="type-checkbox-edit" id="type-income-edit">
-                                <label for="type-income-edit">Income</label>
+                                <input type="checkbox" name="types[]" value="{{ $movementType['id'] }}" class="type-checkbox-edit" id="type-{{ $movementType['id'] }}-edit">
+                                <label for="type-{{ $movementType['id'] }}-edit">{{ $movementType['name'] }}</label>
                             </div>
-                            <div>
-                                <input type="checkbox" name="types[]" value="2" class="type-checkbox-edit" id="type-expense-edit">
-                                <label for="type-expense-edit">Expense</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" name="types[]" value="3" class="type-checkbox-edit" id="type-save-edit">
-                                <label for="type-save-edit">Save money</label>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="col-12 d-flex flex-column">

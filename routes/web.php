@@ -243,10 +243,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::get('/', function (): View {
             $baseCategories = BaseCategoryController::listAllBaseCategories();
             $icons = IconController::getAllIcons();
+            $movementTypes = CategoryController::getEnabledMovementTypes();
 
             return view('admin.categories.categories')
                 ->with('categories', $baseCategories)
-                ->with('icons', $icons);
+                ->with('icons', $icons)
+                ->with('movementTypes', $movementTypes);
         })->name('categories');
 
         Route::post('/add', function (): RedirectResponse {

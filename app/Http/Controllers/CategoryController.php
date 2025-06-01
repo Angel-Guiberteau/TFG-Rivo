@@ -26,7 +26,7 @@ class CategoryController extends Controller
         return response()->json(['success' => 'Caregoría borrada correctamente.']);
     }
 
-    public static function getAllMovementTypes(): array {
-        return MovementType::getAllMovementTypes()->toArray();
+    public static function getEnabledMovementTypes(): array {
+        return MovementType::getEnabledMovementTypes()->toArray();
     }
 }
