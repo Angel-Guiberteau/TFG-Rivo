@@ -31,13 +31,13 @@ class Icon extends Model
         return $icon->save();
     }
 
-    public static function editIcon(array $data): bool {
-        $icon = self::find($data['id']);
+    public static function editIcon( int $id, string $iconClass): bool {
+        $icon = self::find($id);
 
         if ($icon) {
             return $icon->update(
                 [
-                    'icon' => $data['name'],
+                    'icon' => $iconClass,
                 ]
             );
         }
