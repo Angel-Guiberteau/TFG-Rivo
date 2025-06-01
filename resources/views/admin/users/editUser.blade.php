@@ -199,15 +199,23 @@
                                             </div>
                                             <div class="col-12">
                                                 <label class="form-label fw-medium text-muted">Tipos de movimiento <span class="text-danger">*</span></label>
-                                                <div class="types d-flex justify-content-around p-1 flex-wrap gap-2">
-                                                   @foreach ($movementTypes as $type)
-                                                        <div class="form-check me-3">
-                                                            <input class="form-check-input"
+                                                <div class="types d-flex flex-row flex-wrap mb-2 ">
+                                                    @foreach ($movementTypes as $type)
+                                                        <div class="form-check mb-2 me-2">
+                                                            <input
+                                                                class="form-check-input type-checkbox-edit"
+                                                                id="movement_type_{{ $category['id'] }}_{{ $type->id }}"
                                                                 type="checkbox"
                                                                 name="movement_types[{{ $category['id'] }}][]"
                                                                 value="{{ $type->id }}"
-                                                                @if(in_array($type->id, $category['movement_type_ids'])) checked @endif>
-                                                            <label class="form-check-label">{{ $type->name }}</label>
+                                                                @if(in_array($type->id, $category['movement_type_ids'])) checked @endif
+                                                            >
+                                                            <label
+                                                                class="form-check-label"
+                                                                for="movement_type_{{ $category['id'] }}_{{ $type->id }}"
+                                                            >
+                                                                {{ $type->name }}
+                                                            </label>
                                                         </div>
                                                     @endforeach
                                                 </div>
@@ -301,7 +309,7 @@
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
         <script src="{{ asset('js/admin/users/editUser.js') }}"></script>
-        <script src="{{ asset('js/admin/users/baseCategories.js') }}"></script>
+        <script src="{{ asset('js/admin/users/personalCategories.js') }}"></script>
         <script src="{{ asset('js/admin/users/personalAccounts.js') }}"></script>
         <script>
             const movementTypes = @json($movementTypes);
