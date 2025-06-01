@@ -30,86 +30,6 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Js;
 
 
-/*
-|--------------------------------------------------------------------------
-| General Routes
-|--------------------------------------------------------------------------
-*/
-
-
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware('auth')
-    ->name('dashboard');
-
-Route::get('/', function () {
-    return view('auth.login_register');
-});
-
-Route::get('/home', function (): View {
-    
-    $userController = new UserController();
-    $user = $userController->getUser();
-
-    $accountController = new AccountController();
-    $account = $accountController->getAccountByUserId($user->id);
-
-    $objectiveController = new ObjectiveController();
-    $objective =$objectiveController->getObjectivesByAccountId($account->id);
-
-    $operationController = new OperationController();
-    $sixOperations = $operationController->getSixOperationsByAccountId($account->id);
-
-    $thisMonthOperations = $operationController->thisMonthOperationsByAccountId($account->id);
-    $incomes = $thisMonthOperations->filter(function ($op) {
-        return $op['movement_type_id'] === 1;
-    });
-
-    $expenses = $thisMonthOperations->filter(function ($op) {
-        return in_array($op['movement_type_id'], [2]);
-    });
-
-    $categoryController = new CategoryController();
-    $baseCategories = $categoryController->getAllBaseCategories();
-    $personalCategories = $categoryController->getPersonalCategoriesByUserId($user->id);
-    // dd([
-    //     'Categorias bases' => $baseCategories,
-    //     'Categorias personales' => $personalCategories
-    // ]);
-
-
-    $allIncomes = $operationController->getAllIncomesByAccountId($account->id);
-    $allExpenses = $operationController->getAllIncomesByAccountId($account->id);
-
-    return view('home.home')
-        ->with('user', $user)
-        ->with('account', $account)
-        ->with('sixOperations', $sixOperations)
-        ->with('thisMonthOperations', $thisMonthOperations)
-        ->with('thisMonthIncomes', $incomes)
-        ->with('thisMonthExpenses', $expenses)
-        ->with('allIncomes', $allIncomes)
-        ->with('allExpenses', $allExpenses)
-        ->with('baseCategories', $baseCategories)
-        ->with('personalCategories', $personalCategories)
-        ->with('objectives', $objective);
-
-})->middleware(['auth', 'role:user'])->name('home');
-
-Route::get('/initialSetup', function () {
-    return view('home.initialSetup');
-})->middleware(['auth', 'role:user'])->name('initialSetup');
-
-Route::post('/updateUserInfoFromInitialSetup', function () {
-
-    $request = Request()->all();
-
-    $validate = UserValidator::validate($request, ValidationEnum::INITIALSETUP->value);
-    $data = $validate['data'];
-    $controller = new UserController();
-
-    return  $controller->updateUserInfoFromInitialSetup($data);
-    
-})->middleware(['auth', 'role:user'])->name('updateUserInfoFromInitialSetup');
 
 
 /*
@@ -117,6 +37,9 @@ Route::post('/updateUserInfoFromInitialSetup', function () {
 | Google Login/Register Routes
 |--------------------------------------------------------------------------
 */
+Route::get('/', function () {
+    return view('auth.login_register');
+});
 
 Route::get('/auth/google', function () {
     return Socialite::driver('google')->redirect();
@@ -137,6 +60,105 @@ Route::post('/logout', function () {
 });
 
 
+Route::get('/dashboard', [DashboardController::class, 'index'])
+->middleware('auth')->name('dashboard');
+
+/*
+|--------------------------------------------------------------------------
+| General Routes
+|--------------------------------------------------------------------------
+*/
+
+
+
+
+Route::group(['middleware' => ['auth', 'role:user']], function () {
+    
+    Route::get('/home', function (): View {
+    
+        $userController = new UserController();
+        $user = $userController->getUser();
+
+        $accountController = new AccountController();
+        $account = $accountController->getAccountByUserId($user->id);
+
+        $objectiveController = new ObjectiveController();
+        $objective =$objectiveController->getObjectivesByAccountId($account->id);
+
+        $operationController = new OperationController();
+        $sixOperations = $operationController->getSixOperationsByAccountId($account->id);
+
+        $thisMonthOperations = $operationController->thisMonthOperationsByAccountId($account->id);
+        $incomes = $thisMonthOperations->filter(function ($op) {
+            return $op['movement_type_id'] === 1;
+        });
+
+        $expenses = $thisMonthOperations->filter(function ($op) {
+            return in_array($op['movement_type_id'], [2]);
+        });
+
+        $categoryController = new CategoryController();
+        $baseCategories = $categoryController->getAllBaseCategories();
+        $personalCategories = $categoryController->getPersonalCategoriesByUserId($user->id);
+        // dd([
+        //     'Categorias bases' => $baseCategories,
+        //     'Categorias personales' => $personalCategories
+        // ]);
+
+
+        $allIncomes = $operationController->getAllIncomesByAccountId($account->id);
+        $allExpenses = $operationController->getAllIncomesByAccountId($account->id);
+
+        return view('home.home')
+            ->with('user', $user)
+            ->with('account', $account)
+            ->with('sixOperations', $sixOperations)
+            ->with('thisMonthOperations', $thisMonthOperations)
+            ->with('thisMonthIncomes', $incomes)
+            ->with('thisMonthExpenses', $expenses)
+            ->with('allIncomes', $allIncomes)
+            ->with('allExpenses', $allExpenses)
+            ->with('baseCategories', $baseCategories)
+            ->with('personalCategories', $personalCategories)
+            ->with('objectives', $objective);
+
+    })->name('home');
+
+    Route::post('/updateUserInfoFromInitialSetup', function () {
+
+        $request = Request()->all();
+
+        $validate = UserValidator::validate($request, ValidationEnum::INITIALSETUP->value);
+        $data = $validate['data'];
+        $controller = new UserController();
+
+        return  $controller->updateUserInfoFromInitialSetup($data);
+        
+    })->name('updateUserInfoFromInitialSetup');
+
+    Route::get('/initialSetup', function () {
+        return view('home.initialSetup');
+    })->name('initialSetup');
+    
+    Route::post('/addOperationUser', function () {
+        $request = request()->toArray();
+        if (!isset($request['schedule']) || $request['schedule'] !== 'on') {
+            unset($request['expiration_date'], $request['recurrence']);
+        }
+        $validate = UserValidator::validate($request, ValidationEnum::ADD_OPERATION_USER->value);
+        $data = $validate['data'];
+
+        $operationController = new OperationController();
+        $operationController->setOperationType($data['movement_type']);
+        if(!$operationController->addOperationRequested($data)){
+            dd('fallido algo');
+        }
+        
+        return redirect('/home')->with('success', 'Operación añadida correctamente');
+
+
+    })->name('addOperationUser');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -149,7 +171,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         return view('admin.home.home');
     })->name('homeAdmin');
 
-                                // USERS
+    // USERS
 
     Route::group(['prefix' => 'users'], function () {
 

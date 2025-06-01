@@ -86,7 +86,7 @@
                 <div class="balance-info pt-3 pt-lg-5 pb-3 pb-lg-5 px-3 px-lg-5 text-center text-lg-start">
                     <h2 class="fs-1 fw-bold mb-4">Hola, {{ $user->username }}!</h2>
                     <p class="fs-4 fw-light mb-0">Balance disponible</p>
-                    <p class="fs-1 fw-bold mt-0 mb-lg-4">€ {{ $account->balance }}0</p>
+                    <p class="fs-1 fw-bold mt-0 mb-lg-4">{{ $account->balance }}€</p>
                     <div id="actionButtons-container" class="mx-auto bg-white d-flex flex-row justify-content-evenly align-items-center p-3">
                         <button id="showHome" class="action-button fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
                             <i class="fas fa-home fs-3 text-secondary"></i>
@@ -348,9 +348,22 @@
                     </div>
                 </form>
             </article>
-
         </section>
+        @include('templates.home.transactionInfo')
     </main>
+    @if (session('success'))
+        <div class="rivo-alert alert-success">
+            <span class="rivo-alert-icon"><i class="fas fa-check-circle"></i></span>
+            <span class="rivo-alert-text">{{ session('success') }}</span>
+            <button type="button" class="rivo-alert-close" onclick="this.parentElement.remove();">&times;</button>
+        </div>
+    @endif
+    <script>
+        setTimeout(() => {
+            const alert = document.querySelector('.rivo-alert');
+            if (alert) alert.remove();
+        }, 4000);
+    </script>
 
     @push('scripts')
         <script src="{{ asset('js/home/home.js') }}"></script>
