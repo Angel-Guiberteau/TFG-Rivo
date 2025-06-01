@@ -30,21 +30,24 @@
                         <tbody>
                             @foreach ($sentences as $sentence)
                             <tr>
-                                <td class="text-start">{{ $sentence->id }}</td>
+                                <td class="text-center align-middle">{{ $sentence->id }}</td>
                                 <td>{{ $sentence->text }}</td>
                                 <td class="text-center">
                                     @include('admin.components.buttons.editButton', [
-                                        'data' => 'data-id="' . e($sentence->id) . '" data-name="' . e($sentence->text) . '" data-bs-toggle="modal" data-bs-target="#editSentence"'
+                                        'data' => 'data-id="' . e($sentence->id) . '" 
+                                        data-name="' . e($sentence->text) . '" 
+                                        data-bs-toggle="modal" data-bs-target="#editSentence"'
                                     ])
                                 </td>
                                 <td class="text-center">
                                     @include('admin.components.buttons.preViewButton', [
-                                        'data' => 'onclick=" preViewSentence('.e(json_encode($sentence->text)).')"'
+                                        'onclick' => 'preViewSentence('.e(json_encode($sentence->text)).')',
                                     ])
                                 </td>
                                 <td class="text-center">
                                     @include('admin.components.buttons.deleteButton', [
-                                        'data' => 'id="'. e($sentence->id) .'" onclick="deleteSentence('. e($sentence->id) .')"'
+                                        'data' => 'id="'. e($sentence->id) .'" 
+                                        onclick="deleteSentence('. e($sentence->id) .')"'
                                     ])
                                 </td>
                             </tr>
