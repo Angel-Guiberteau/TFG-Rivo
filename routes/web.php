@@ -8,6 +8,7 @@ use App\Http\Controllers\IconController;
 use App\Models\BaseCategory;
 use App\Models\Icons;
 use App\Validations\BaseCategoriesValidator;
+use App\Validations\IconValidator;
 use App\Validations\SentencesValidator;
 use App\Validations\CategoriesValidator;
 use Illuminate\Http\JsonResponse;
@@ -58,7 +59,7 @@ Route::get('/home', function (): View {
 
     $operationController = new OperationController();
     $sixOperations = $operationController->getSixOperationsByAccountId($account->id);
-    
+
     $thisMonthOperations = $operationController->thisMonthOperationsByAccountId($account->id);
     $incomes = $thisMonthOperations->filter(function ($op) {
         return $op['movement_type_id'] === 1;
@@ -67,6 +68,15 @@ Route::get('/home', function (): View {
     $expenses = $thisMonthOperations->filter(function ($op) {
         return in_array($op['movement_type_id'], [2]);
     });
+
+    $categoryController = new CategoryController();
+    $baseCategories = $categoryController->getAllBaseCategories();
+    $personalCategories = $categoryController->getPersonalCategoriesByUserId($user->id);
+    // dd([
+    //     'Categorias bases' => $baseCategories,
+    //     'Categorias personales' => $personalCategories
+    // ]);
+
 
     $allIncomes = $operationController->getAllIncomesByAccountId($account->id);
     $allExpenses = $operationController->getAllIncomesByAccountId($account->id);
@@ -80,6 +90,8 @@ Route::get('/home', function (): View {
         ->with('thisMonthExpenses', $expenses)
         ->with('allIncomes', $allIncomes)
         ->with('allExpenses', $allExpenses)
+        ->with('baseCategories', $baseCategories)
+        ->with('personalCategories', $personalCategories)
         ->with('objectives', $objective);
 
 })->middleware(['auth', 'role:user'])->name('home');
@@ -254,9 +266,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::get('/', function (): View {
             $baseCategories = BaseCategoryController::listAllBaseCategories();
             $icons = IconController::getAllIcons();
+            $movementTypes = CategoryController::getEnabledMovementTypes();
+
             return view('admin.categories.categories')
                 ->with('categories', $baseCategories)
-                ->with('icons', $icons);
+                ->with('icons', $icons)
+                ->with('movementTypes', $movementTypes);
         })->name('categories');
 
         Route::post('/add', function (): RedirectResponse {
@@ -290,6 +305,45 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('deleteCategory');
     });
     
+                                // Icons
+
+    Route::group(['prefix' => 'icons'], function () {
+        Route::get('/', function (): View {
+            
+            $icons = IconController::getAllIcons();
+
+            return view('admin.icons.icons')
+                ->with('icons', $icons);
+        })->name('icons');
+
+        Route::post('/add', function (): RedirectResponse {
+
+            $data = [
+                'name' => request()->input('name'),
+            ];
+            $validate = IconValidator::validate($data, ValidationEnum::ADD->value);
+
+            return IconController::addIcon($validate);
+        })->name('addIcon');
+
+        Route::put('/edit', function (): RedirectResponse {
+            $data = [
+                'id' => request()->input('id'),
+                'name' => request()->input('name'),
+            ];
+            $validate = IconValidator::validate($data, ValidationEnum::EDIT->value);
+            return IconController::editIcon($validate);
+        })->name('editIcon');
+
+        Route::post('/delete', function (): JsonResponse {
+            $data = [
+                'id' => request('id')
+            ];
+            $validate = IconValidator::validate($data, ValidationEnum::DELETE->value);
+
+            return IconController::deleteIcon($validate);
+        })->name('deleteIcon');
+    });
 });
 
 

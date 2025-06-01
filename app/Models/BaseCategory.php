@@ -18,7 +18,7 @@ class BaseCategory extends Model
         ->get()
         ->map(function ($base) {
             return [
-                'id' => $base->id,
+                'id' => $base->categories_id,
                 'category_name' => $base->category->name,
                 'icon_id' => $base->category->icon?->id,
                 'icon_html' => $base->category->icon?->icon,
