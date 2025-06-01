@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\MovementType;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
@@ -22,6 +23,10 @@ class CategoryController extends Controller
             return response()->json(['error' => 'Ha habido un error inesperado.']);
         }
 
-        return response()->json(['success' => 'Frase borrada correctamente.']);
+        return response()->json(['success' => 'Caregoría borrada correctamente.']);
+    }
+
+    public static function getAllMovementTypes(): array {
+        return MovementType::getAllMovementTypes()->toArray();
     }
 }

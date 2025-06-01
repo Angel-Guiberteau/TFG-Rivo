@@ -11,7 +11,7 @@
                     
                     <div class="col-12">
                         <label class="form-label" for="name">Categoria <span class="modal_required">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Ingrese la Categoria" required maxlength="75"/>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Ingrese la Categoria" required maxlength="30"/>
                         <div class="valid-feedback">¡Parece correcto!</div>
                         <div class="invalid-feedback">Por favor, introduce una Categoria correcta.</div>
                     </div>

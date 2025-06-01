@@ -11,33 +11,34 @@ textarea {
 }
 
 .icon-picker-container {
-  overflow-x: auto;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+    overflow-x: auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
 }
 
 .icon-picker-scroll {
-  display: grid;
-  grid-template-rows: repeat(2, auto);
-  grid-auto-flow: column;
-  gap: 10px;
-  min-height: 100px;
-  width: max-content;
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    grid-auto-flow: column;
+    gap: 10px;
+    min-height: 100px;
+    width: max-content;
 }
 
 .icon-option > i {
-  font-size: 2rem;
-  cursor: pointer;
-  padding: 10px;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  transition: 0.2s;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 10px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: 0.2s;
 }
 
 input[type="radio"]:checked + .icon-option {
-  border-color: #007bff;
-  background-color: #e0f0ff;
+    border-color: #007bff;
+    background-color: #e0f0ff;
+    color: #084298;
 }
 
 .type-checkbox, .type-checkbox-edit {
@@ -66,4 +67,9 @@ input[type="radio"]:checked + .icon-option {
     background-color: #cfe2ff;
     border-color: #0d6efd;
     color: #084298;
+}
+
+#iconPreviewAdd, #iconPreviewEdit {
+    font-size: 2rem;
+    line-height: 1;
 }
