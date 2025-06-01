@@ -331,18 +331,18 @@ table.datatable tbody td .btn:hover {
     border-radius: 10%;
     font-weight: 500;
     text-decoration: none;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease;
     cursor: pointer;
     white-space: nowrap;
     border-bottom: 2px solid #646464;
 }
 
 .step.active {
-    background: #aaaaaa;
-    border-bottom: none;
+    border-top: 2px solid #646464;
+    border-bottom: 2px solid #646464;
     border-radius: 10px;
-    color: #ffffff;
-    box-shadow: 0 3px 10px rgba(42, 82, 152, 0.4);
+    color: #1A1A1A;
+    /* box-shadow: 0 3px 6px #a7a7a7; */
 }
 
 .step:hover:not(.active) {
