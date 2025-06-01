@@ -6,9 +6,9 @@ class BaseCategoriesValidator extends Validator {
 
     protected static function rulesAdd(): array {
         return [
-            'name' => 'required|string|max:75',
+            'name' => 'required|string|max:30',
             'types' => 'required|array',
-            'types.*' => 'required|integer', //esto
+            'types.*' => 'required|integer',
             'iconId' => 'required|integer',
         ];
     }
@@ -30,7 +30,7 @@ class BaseCategoriesValidator extends Validator {
     protected static function rulesEdit(): array {
         return [
             'id' => 'required|integer',
-            'name' => 'required|string|max:75',
+            'name' => 'required|string|max:30',
             'types' => 'required|array',
             'types.*' => 'required|integer',
             'iconId' => 'required|integer',

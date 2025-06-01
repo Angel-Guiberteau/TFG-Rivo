@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BaseCategory;
 use App\Models\Category;
+use App\Models\MovementType;
+use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 
 class CategoryController extends Controller
 {
@@ -22,6 +26,18 @@ class CategoryController extends Controller
             return response()->json(['error' => 'Ha habido un error inesperado.']);
         }
 
-        return response()->json(['success' => 'Frase borrada correctamente.']);
+        return response()->json(['success' => 'Caregoría borrada correctamente.']);
+    }
+
+    public static function getEnabledMovementTypes(): array {
+        return MovementType::getEnabledMovementTypes()->toArray();
+    }
+
+    public static function getAllBaseCategories(): ?Collection {
+        return BaseCategory::listAllBaseCategories();
+    }
+    
+    public static function getPersonalCategoriesByUserId(int $userId): ?Collection {
+        return Category::getPersonalCategoriesByUserId($userId);
     }
 }

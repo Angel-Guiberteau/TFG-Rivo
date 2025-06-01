@@ -11,6 +11,9 @@
                 <a class="nav-link {{ Route::currentRouteName() === 'users' ? 'active' : '' }}" href="{{ route('users') }}">Usuarios</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {{ Route::currentRouteName() === 'icons' ? 'active' : '' }}" href="{{ route('icons') }}">Iconos</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() === 'categories' ? 'active' : '' }}" href="{{ route('categories') }}">Categorias</a>
             </li>
             <li class="nav-item">
