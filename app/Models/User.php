@@ -187,6 +187,9 @@ class User extends Authenticatable
             $stillRelated = UserCategory::where('categories_id', $categoryId)->exists();
 
             if (!$stillRelated) {
+
+                MovementTypeCategories::where('category_id', $categoryId)->delete();
+
                 $deletedCategory = Category::where('id', $categoryId)->delete();
                 if (!$deletedCategory) {
                     DB::rollBack();
@@ -261,12 +264,11 @@ class User extends Authenticatable
         }
     }
 
-    public static function addPersonalCategory(int $userId, string $name, string $iconHtml): bool
+    public static function addPersonalCategory(int $userId, string $name, string $iconHtml): int|false
     {
         DB::beginTransaction();
 
         try {
-            
             $icon = Icon::where('icon', $iconHtml)->first();
             if (!$icon) {
                 DB::rollBack();
@@ -292,12 +294,15 @@ class User extends Authenticatable
             }
 
             DB::commit();
-            return true;
+            return $category->id;
 
         } catch (\Exception $e) {
             DB::rollBack();
             return false;
         }
     }
+
+    
+
 
 }

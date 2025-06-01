@@ -29,6 +29,7 @@ use App\Models\UserAccount;
 use Illuminate\Mail\Transport\ArrayTransport;
 use Illuminate\Support\Carbon;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Models\MovementTypeCategories;
 
 class UserController extends Controller
 {
@@ -38,6 +39,7 @@ class UserController extends Controller
     public Array $categories;
     public Array $news;
     public Array $accounts;
+    public Array $accountMovementsTypes;
 
 
     public static function listUsers()
@@ -485,7 +487,6 @@ class UserController extends Controller
 
     public static function updatePersonalCategories($data): RedirectResponse
     {
-
         $data = $data['data'] ?? [];
 
         $object = new UserController();
@@ -494,14 +495,11 @@ class UserController extends Controller
         $object->id = $data['user_id'] ?? null;
         $object->categories = $data['categories'] ?? [];
         $object->news = $data['news'] ?? [];
-
-         
+        $object->accountMovementsTypes = $data['movement_types'] ?? [];
 
         if (!User::getUserById($object->id)) {
             return Redirect::back()->with('error', 'El usuario no existe.');
         }
-
-        // dd($object);
         
         if (!empty($object->delete)) {
             foreach ($object->delete as $categoryId) {
@@ -514,39 +512,44 @@ class UserController extends Controller
         
         if (!empty($object->categories)) {
             foreach ($object->categories as $category) {
-
                 $categoryId = $category['id'] ?? null;
                 $categoryName = $category['name'] ?? null;
                 $categoryIcon = $category['icon'] ?? null;
+                $movementTypes = $object->accountMovementsTypes[$categoryId] ?? [];
 
                 if ($categoryId && $categoryName && $categoryIcon) {
-                    $updatedCategory = User::updatePersonalCategory($object->id, $categoryId, $categoryName, $categoryIcon);
-                    if (!$updatedCategory) {
+
+                    $updated = User::updatePersonalCategory($object->id, $categoryId, $categoryName, $categoryIcon);
+
+                    if (!$updated) {
                         return redirect()->route('users')->with('error', 'Error al actualizar la categoría personal.');
                     }
-                }
 
+                    MovementTypeCategories::syncTypesOfCategory($categoryId, $movementTypes);
+                }
             }
         }
 
         if (!empty($object->news)) {
             foreach ($object->news as $newCategory) {
-
                 $newCategoryName = $newCategory['name'] ?? null;
                 $newCategoryIcon = $newCategory['icon'] ?? null;
+                $movementTypes = $newCategory['movement_types'] ?? [];
 
                 if ($newCategoryName && $newCategoryIcon) {
-                    $addedCategory = User::addPersonalCategory($object->id, $newCategoryName, $newCategoryIcon);
-                    if (!$addedCategory) {
+                    $addedCategoryId = User::addPersonalCategory($object->id, $newCategoryName, $newCategoryIcon);
+                    if (!$addedCategoryId) {
                         return redirect()->route('users')->with('error', 'Error al añadir la categoría personal.');
                     }
-                }
 
+                    MovementTypeCategories::syncTypesOfCategory($addedCategoryId, $movementTypes);
+                }
             }
         }
 
         return redirect()->route('users')->with('success', 'Categorías personales actualizadas correctamente.');
     }
+
 
     public static function getFullUserbyId($data)
     {
@@ -581,13 +584,12 @@ class UserController extends Controller
         $data = $data['data'] ?? [];
 
         $object = new UserController();
-
+        
         $object->delete = json_decode($data['deleted'] ?? '[]', true);
         $object->id = $data['user_id'] ?? null;
         $object->accounts = $data['accounts'] ?? [];
         $object->news = $data['news'] ?? [];
 
-        // dd($object->accounts);
         if (!User::getUserById($object->id)) {
             return Redirect::back()->with('error', 'El usuario no existe.');
         }

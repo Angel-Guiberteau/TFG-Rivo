@@ -171,7 +171,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             $request = request()->toArray();    
             // dd($request);
             $validate = UserValidator::validate($request, ValidationEnum::UPDATE_PERSONAL_CATEGORIES->value);
-            dd($validate);
+            // dd($validate);
             return UserController::updatePersonalCategories($validate);
 
         })->name('updatePersonalCategories');
