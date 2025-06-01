@@ -572,11 +572,29 @@ class UserController extends Controller
                 ->with('error', 'Categorias personales no encontradas.');
         }
 
-        // dd($user, $personalCategories);
+        $accounts = UserAccount::getAccountsByUserId($user->id);
+        
+        if ($accounts->isEmpty()) {
+            return redirect()->back()
+                ->with('error', 'No hay cuentas asociadas al usuario.')
+                ->withInput();
+        }
 
+        $movementTypes = MovementType::getEnabledMovementTypes();
+
+        if ($movementTypes->isEmpty()) {
+            return redirect()->back()
+                ->with('error', 'No hay tipos de movimiento disponibles.')
+                ->withInput();
+        }
+
+        // dd($user, $personalCategories, $accounts, $movementTypes);
         return view('admin.users.previewUser')
             ->with('user', $user)
-            ->with('personalCategories', $personalCategories);
+            ->with('personalCategories', $personalCategories)
+            ->with('personalAccounts', $accounts)
+            ->with('movementTypes', $movementTypes);
+
     }
 
     public static function updatePersonalAccounts($data): RedirectResponse
