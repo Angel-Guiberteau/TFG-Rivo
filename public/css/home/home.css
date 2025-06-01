@@ -626,7 +626,7 @@ input[type="radio"]:checked + .category-option i {
 }
 
 .list-entry:hover {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(107, 0, 229, 0.1);
 }
 
 .entry-icon i {
@@ -905,102 +905,263 @@ canvas {
 }
 
 /* Transaction info */
-
-.transaction-panel {
-    position: fixed;
-    z-index: 1001;
-    background: #fff;
-    box-shadow: 0 0 25px rgba(0,0,0,0.1);
-    border-radius: 20px 20px 0 0;
-    border-left: 5px solid #6B00E5;
-    border-right: 5px solid #6B00E5;
-    width: 100%;
-    height: 100dvh;
-    bottom: 0;
-    left: 0;
-    transform: translateY(100%);
-    transition: transform 0.4s ease;
-    padding: 1.5rem;
+.transaction-panel-light {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  background-color: #F5F4FA;
+  padding: 3.3rem 1.5rem 0rem 1.5rem;
+  z-index: 9999;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  border-radius: 24px 24px 0 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.transaction-panel.show {
-    transform: translateY(0);
+.transaction-panel-light.show {
+  transform: translateY(0);
+}
+
+.transaction-light-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
 }
 
 @media (min-width: 992px) {
-  .transaction-panel {
-      top: 0;
-      right: 0;
-      left: auto;
-      width: 400px;
-      height: 100%;
-      border-radius: 0;
-      transform: translateX(100%);
-  }
-
-  .transaction-panel.show {
-      transform: translateX(0);
-  }
-}
-
-.panel-header {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.icon-container {
-    background: #f0e6ff;
-    color: #6B00E5;
-    font-size: 1.5rem;
-    padding: 12px;
-    border-radius: 50%;
-}
-
-.panel-body .detail-row {
-    display: flex;
-    justify-content: space-between;
-    margin: 0.8rem 0;
-    font-size: 1rem;
-}
-
-.panel-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 2rem;
-}
-
-.btn {
-    padding: 0.6rem 1rem;
-    font-weight: 600;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-edit {
-    background-color: #3A506B;
-    color: white;
-}
-
-.btn-delete {
-    background-color: #E63946;
-    color: white;
-}
-
-.btn-close {
-    background-color: #D4AF37;
-    color: white;
-}
-.panel-content {
-    background-color: #fff;
-    padding: 1.5rem;
-    border-radius: 20px 20px 0 0;
+  .transaction-panel-light {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: auto;
+    width: 700px;
     height: 100%;
-    display: flex;
+    border-radius: 0;
+    transform: translateX(100%);
+  }
+
+  .transaction-panel-light.show {
+    transform: translateX(0);
+  }
+}
+.transaction-light-header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background-color: #6B00E5;
+  padding: 1rem;
+  border-radius: 16px;
+}
+
+.icon-circle-light {
+  background: #f0e6ff;
+  color: #6B00E5;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+
+
+.badge-light {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.75rem;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.badge-light.income {
+  background-color: #D4AF37;
+  color: #fff;
+}
+
+.tx-title {
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: 700;
+  margin: 0;
+}
+
+.tx-section {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.tx-label {
+  color: #6B00E5;
+  font-size: 0.85rem;
+  margin: 0.2rem 0;
+  font-weight: 600;
+}
+
+.tx-value {
+  color: #2C3E50;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0.2rem 0 0;
+}
+
+.positive {
+  color: #00C897;
+}
+
+.tx-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+.tx-actions button{
+  flex-grow: 1;
+}
+
+.btn-light.close:hover {
+  background-color: #6B00E5;
+  color: #fff;
+}
+.tx-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.tx-grid > .tx-section,
+.tx-sub {
+  flex: 1;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 14px;
+}
+
+.tx-section.full {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 14px;
+}
+
+.tx-sub {
+  background-color: #F9F9FB;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 576px) {
+  .tx-grid {
     flex-direction: column;
-    justify-content: space-between;
+  }
+}
+
+.btn-icon {
+    background-color: #fff;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    padding: 0.6rem;
+    font-size: 1.1rem;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    cursor: pointer;
+}
+
+.tx-actions.horizontal {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.btn-full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  flex: 1;
+  min-width: 120px;
+}
+
+.btn-full i {
+  font-size: 1rem;
+}
+
+.btn-full.edit {
+  background-color: #6B00E5;
+  color: #fff;
+}
+
+.btn-full.edit:hover {
+  background-color: #4B0091;
+}
+
+.btn-full.delete {
+  background-color: #E63946;
+  color: #fff;
+}
+
+.btn-full.delete:hover {
+  background-color: #c72234;
+}
+
+.btn-icon:hover {
+  background-color: #f5f5f5;
+  transform: scale(1.05);
+}
+.btn-close-link {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: none;
+  border: none;
+  color: #6B00E5;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  margin: auto;
+  padding: 0.8rem;
+}
+
+.btn-close-link:hover {
+  color: #4B0091;
+}
+
+/* Nuevos estilos de transactionDetail */
+body.blur-active::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.2); /* opcional para oscurecer ligeramente */
+  z-index: 9998; /* justo debajo del panel */
 }

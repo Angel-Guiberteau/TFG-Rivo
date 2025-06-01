@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Operation;
 use App\Models\OperationPlanned;
 use App\Models\OperationUnschedule;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Collection;
 
 class OperationController extends Controller
@@ -32,6 +34,27 @@ class OperationController extends Controller
     public function setOperationType(string $movement_type): bool{
         $this->movement_type = $movement_type;
         return true;
+    }
+    
+    public function getOperationById(int $operationId): JsonResponse{
+        $operation = Operation::getOperationById($operationId);
+        return response()->json([
+            'id' => $operation->id,
+            'subject' => $operation->subject,
+            'description' => $operation->description,
+            'amount' => $operation->amount,
+            'movement_type_id' => $operation->movement_type_id,
+            'action_date' => $operation->action_date,
+            'category_name' => $operation->category->name ?? null,
+            'icon_html' => $operation->category->icon->icon ?? null,
+
+            'is_recurrent' => $operation->planned?->id ? true : false,
+            'start_date' => $operation->planned->start_date ?? null,
+            'expiration_date' => $operation->planned->expiration_date ?? null,
+            'recurrence' => $operation->planned->period ?? null,
+
+            'unscheduled_id' => $operation->unschedule?->id ?? null
+        ]);
     }
     
     public function addOperationRequested(array $data): bool{
