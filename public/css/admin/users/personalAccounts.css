@@ -1,0 +1,72 @@
+
+#personalAccounts .account-card .card {
+    border-left: 5px solid #6f42c1; 
+    background: linear-gradient(to bottom right, #f9f7fc, #ffffff);
+    transition: box-shadow 0.3s ease-in-out, transform 0.2s;
+}
+
+#personalAccounts .account-card .card:hover {
+    box-shadow: 0 0 0 4px rgba(111, 66, 193, 0.1);
+    transform: scale(1.01);
+}
+
+
+#personalAccounts input.form-control {
+    background-color: #f4f2fa;
+    border: 1px solid #d6cbed;
+    color: #333;
+    transition: border-color 0.2s ease-in-out;
+}
+
+#personalAccounts input.form-control:focus {
+    border-color: #6f42c1;
+    box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25);
+}
+
+
+#personalAccounts label.form-label {
+    color: #6c757d;
+}
+
+
+#personalAccounts .delete-account-btn {
+    border-radius: 10%;
+    padding: 0.4rem 0.5rem;
+    font-size: 0.75rem;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+#personalAccounts .delete-account-btn:hover {
+    background-color: #ff0b1c;
+    color: rgb(0, 0, 0);
+}
+
+
+#personalAccounts #addAccountBtn {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+    color: white;
+}
+
+#personalAccounts #addAccountBtn:hover {
+    background-color: #5a359e;
+    border-color: #5a359e;
+}
+
+
+#personalAccounts .form-check-input {
+    cursor: pointer;
+    background-color: #e6dfff;
+    border-color: #c7b8e6;
+}
+
+#personalAccounts .form-check-input:checked {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+}
+
+#personalAccounts .form-check-label {
+    color: #5a359e;
+    font-weight: 500;
+}

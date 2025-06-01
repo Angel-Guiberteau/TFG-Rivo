@@ -33,7 +33,7 @@ class BaseCategory extends Model
         try {
             $category = Category::firstOrCreate(
                 ['name' => $data['name']],
-                ['icon_id' => $data['iconId'] ?? null]
+                ['icon_id' => $data['icon'] ?? null]
             );
 
             if (!empty($data['types'])) {
@@ -65,7 +65,7 @@ class BaseCategory extends Model
 
             $category = Category::updateOrCreate(
                 ['id' => $baseCategory->categories_id],
-                ['name' => $data['name'], 'icon_id' => $data['iconId'] ?? null]
+                ['name' => $data['name'], 'icon_id' => $data['icon'] ?? null]
             );
 
             if (!empty($data['types'])) {

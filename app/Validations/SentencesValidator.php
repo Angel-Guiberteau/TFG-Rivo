@@ -6,15 +6,15 @@ class SentencesValidator extends Validator {
 
     protected static function rulesAdd(): array {
         return [
-            'text' => 'required|string|max:255'
+            'name' => 'required|string|max:255'
         ];
     }
 
     protected static function messagesAdd(): array {
         return [
-            'text.required' => 'No se ha recibido el texto.',
-            'text.string' => 'El tipo de dato no es correcto.',
-            'text.max' => 'El tamaño del texto no concuerda con el permitido.'
+            'name.required' => 'No se ha recibido el texto.',
+            'name.string' => 'El tipo de dato no es correcto.',
+            'name.max' => 'El tamaño del texto no concuerda con el permitido.'
         ];
     }
 

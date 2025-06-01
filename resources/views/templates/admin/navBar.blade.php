@@ -1,9 +1,6 @@
-@php
-    // array de rutas
-@endphp
-<nav class="navbar navbar-expand-lg below-navbar noPadding ps-2">
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm px-3">
     <div class="collapse navbar-collapse">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav me-auto">
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() === 'homeAdmin' ? 'active' : '' }}" href="{{ route('homeAdmin') }}">Inicio</a>
             </li>
@@ -14,17 +11,15 @@
                 <a class="nav-link {{ Route::currentRouteName() === 'icons' ? 'active' : '' }}" href="{{ route('icons') }}">Iconos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() === 'categories' ? 'active' : '' }}" href="{{ route('categories') }}">Categorias</a>
+                <a class="nav-link {{ Route::currentRouteName() === 'categories' ? 'active' : '' }}" href="{{ route('categories') }}">Categorías</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() === 'sentences' ? 'active' : '' }}" href="{{ route('sentences') }}">Frases</a>
             </li>
         </ul>
-    </div>
-     <div class="d-flex align-items-center me-3">
         <form action="/logout" method="POST" class="d-flex">
             @csrf
-            <button type="submit" class="btn btn-danger btn-sm">
+            <button type="submit" class="btn btn-danger-custom btn-sm">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
             </button>
         </form>
