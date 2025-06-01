@@ -9,7 +9,7 @@ class BaseCategoriesValidator extends Validator {
             'name' => 'required|string|max:30',
             'types' => 'required|array',
             'types.*' => 'required|integer',
-            'iconId' => 'required|integer',
+            'icon' => 'required|integer',
         ];
     }
 
@@ -22,8 +22,8 @@ class BaseCategoriesValidator extends Validator {
             'types.array' => 'Ha sucedido un error inesperado.',
             'types.*.required' => 'El tipo es necesario introducirlo.',
             'types.*.integer' => 'Ha sucedido un error inesperado.',
-            'iconId.required' => 'El icono es necesario seleccionarlo.',
-            'iconId.integer' => 'Ha sucedido un error inesperado.',
+            'icon.required' => 'El icono es necesario seleccionarlo.',
+            'icon.integer' => 'Ha sucedido un error inesperado.',
         ];
     }
 
@@ -33,7 +33,7 @@ class BaseCategoriesValidator extends Validator {
             'name' => 'required|string|max:30',
             'types' => 'required|array',
             'types.*' => 'required|integer',
-            'iconId' => 'required|integer',
+            'icon' => 'required|integer',
         ];
     }
 
@@ -48,8 +48,8 @@ class BaseCategoriesValidator extends Validator {
             'types.array' => 'Ha sucedido un error inesperado.',
             'types.*.required' => 'El tipo es necesario introducirlo.',
             'types.*.integer' => 'Ha sucedido un error inesperado.',
-            'iconId.required' => 'El icono es necesario seleccionarlo.',
-            'iconId.integer' => 'Ha sucedido un error inesperado.',
+            'icon.required' => 'El icono es necesario seleccionarlo.',
+            'icon.integer' => 'Ha sucedido un error inesperado.',
         ];
     }
 

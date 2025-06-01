@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const isChanged = currentValue !== originalValue;
         const structurallyValid = isValidFaClass(currentValue);
 
-        if (!isChanged || !structurallyValid) {
+        if (!structurallyValid) {
             iconPreview.innerHTML = '';
             updateValidationState(false);
             button.disabled = true;
@@ -68,7 +68,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const renderable = await renderAndCheckIcon(currentValue);
 
-        iconPreview.innerHTML = renderable ? `<i class="${currentValue}" style="font-size: 1.5rem;"></i>` : '';
+        if (renderable) {
+            iconPreview.innerHTML = `<i class="${currentValue}" style="font-size: 1.5rem;"></i>`;
+        } else {
+            iconPreview.innerHTML = '';
+        }
+
         updateValidationState(renderable);
         button.disabled = !(isChanged && renderable);
     });
