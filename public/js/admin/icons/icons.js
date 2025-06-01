@@ -1,7 +1,7 @@
-function deleteCategory(id) {
+function deleteIcon(id) {
     swal({
         title: "¿Estás seguro?",
-        text: "Estás a punto de eliminar esta Caregoría.",
+        text: "Estás a punto de eliminar esta icono.",
         icon: "warning",
         buttons: {
             cancel: {
@@ -23,7 +23,7 @@ function deleteCategory(id) {
         if (firstConfirmed) {
             swal({
                 title: "¡Confirmación final!",
-                text: "¿Realmente deseas eliminar esta Caregoría? Esta acción no se puede deshacer.",
+                text: "¿Realmente deseas eliminar esta icono? Esta acción no se puede deshacer.",
                 icon: "warning",
                 buttons: {
                     cancel: {
@@ -43,7 +43,7 @@ function deleteCategory(id) {
                 }
             }).then(function (secondConfirmed) {
                 if (secondConfirmed) {
-                    fetch('/admin/categories/delete', {
+                    fetch('/admin/icons/delete', {
                         method: "POST",
                         headers: {
                             'Content-Type': 'application/json',

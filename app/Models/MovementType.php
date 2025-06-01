@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class MovementType extends Model
 {
@@ -11,4 +12,8 @@ class MovementType extends Model
         'name',
         'enabled',
     ];
+
+    public static function getEnabledMovementTypes(): Collection {
+        return self::where('enabled', 1)->get();
+    }
 }
