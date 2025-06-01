@@ -2,11 +2,11 @@
 
 namespace App\Validations;
 
-class CategoriesValidator extends Validator {
+class IconValidator extends Validator {
 
     protected static function rulesAdd(): array {
         return [
-            'name' => 'required|string|max:30'
+            'name' => 'required|string',
         ];
     }
 
@@ -14,14 +14,13 @@ class CategoriesValidator extends Validator {
         return [
             'name.required' => 'No se ha recibido el texto.',
             'name.string' => 'El tipo de dato no es correcto.',
-            'name.max' => 'El tamaño del texto no concuerda con el permitido.'
         ];
     }
 
     protected static function rulesEdit(): array {
         return [
             'id' => 'required|integer',
-            'name' => 'required|string|max:30'
+            'name' => 'required|string',
         ];
     }
 
@@ -31,13 +30,12 @@ class CategoriesValidator extends Validator {
             'id.integer' => 'Ha sucedido un error inesperado.',
             'name.required' => 'No se ha recibido el texto.',
             'name.string' => 'El tipo de dato no es correcto.',
-            'name.max' => 'El tamaño del texto no concuerda con el permitido.'
         ];
     }
 
     protected static function rulesDelete(): array {
         return [
-            'id' => 'required|integer'
+            'id' => 'required|integer',
         ];
     }
 
@@ -45,20 +43,6 @@ class CategoriesValidator extends Validator {
         return [
             'id.required' => 'Ha sucedido un error inesperado.',
             'id.integer' => 'Ha sucedido un error inesperado.',
-        ];
-    }
-
-    protected static function rulesPreView(): array {
-        return [
-            'name' => 'required|string|max:30'
-        ];
-    }
-
-    protected static function messagesPreView(): array {
-        return [
-            'name.required' => 'No se ha recibido el texto.',
-            'name.string' => 'El tipo de dato no es correcto.',
-            'name.max' => 'El tamaño del texto no concuerda con el permitido.'
         ];
     }
 }

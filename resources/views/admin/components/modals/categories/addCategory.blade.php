@@ -11,25 +11,19 @@
                     
                     <div class="col-12">
                         <label class="form-label" for="name">Categoria <span class="modal_required">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Ingrese la Categoria" required maxlength="75"/>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Ingrese la Categoria" required maxlength="30"/>
                         <div class="valid-feedback">¡Parece correcto!</div>
                         <div class="invalid-feedback">Por favor, introduce una Categoria correcta.</div>
                     </div>
                     <div class="col-12">
                         <p>Tipo <span class="modal_required">*</span></p>
                         <div class="types d-flex justify-content-around p-1">
+                            @foreach ( $movementTypes as $movementType )
                             <div>
-                                <input type="checkbox" name="types[]" value="1" class="type-checkbox" id="type-income">
-                                <label for="type-income">Income</label>
+                                <input type="checkbox" name="types[]" value="{{ $movementType['id'] }}" class="type-checkbox" id="type-{{ $movementType['id'] }}">
+                                <label for="type-{{ $movementType['id'] }}">{{ $movementType['name'] }}</label>
                             </div>
-                            <div>
-                                <input type="checkbox" name="types[]" value="2" class="type-checkbox" id="type-expense">
-                                <label for="type-expense">Expense</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" name="types[]" value="3" class="type-checkbox" id="type-save">
-                                <label for="type-save">Save money</label>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="col-12 d-flex flex-column">
