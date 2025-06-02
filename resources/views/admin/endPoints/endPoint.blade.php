@@ -1,0 +1,78 @@
+@extends('admin.layoutAdmin')
+
+@section('title', 'Admin Rivo Finanzas')
+
+@section('content')
+
+    @include('templates.admin.logo')
+    @include('templates.admin.navBar')
+
+    <main>
+        <section class="container-custom p-3 pb-5">
+            <article class="bg-light p-3">
+                @include('templates.admin.breadCrum', [
+                    'breadcrumbs' => [
+                        ['name' => 'Inicio', 'url' => '/admin'],
+                        ['name' => 'Endpoints', 'url' => '/admin/endpoints'],
+                    ]
+                ])
+
+                @include('templates.admin.title', ['title' => 'Endpoints'])
+
+                <div>
+                    @include('admin.components.buttons.addButton', [
+                        'data' => 'data-bs-toggle="modal" data-bs-target="#addEndPoint"'
+                    ])
+                    <table class="datatable table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">URL</th>
+                                <th class="text-center">Metodo</th>
+                                <th class="text-center">Parametros</th>
+                                <th class="text-center">Retorno</th>
+                                <th class="text-center">Descripción</th>
+                                <th class="text-center">Editar</th>
+                                <th class="text-center">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($endPoints as $endPoint)
+                            <tr>
+                                <td class="text-center">{{ $endPoint['id'] }}</td>
+                                <td  class="text-center">{{ $endPoint['name'] }}</td>
+                                <td class="text-center">{{ $endPoint['url'] }}</td>
+                                <td class="text-center">{{ $endPoint['method'] }}</td>
+                                <td class="text-center">{{ $endPoint['parameters'] }}</td>
+                                <td class="text-center">{{ $endPoint['return'] }}</td>
+                                <td class="text-center">{{ $endPoint['description'] }}</td>
+                                <td class="text-center align-middle">
+                                    @include('admin.components.buttons.editButton')
+                                </td>
+                                <td class="text-center align-middle">   
+                                    @include('admin.components.buttons.deleteButton')
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+        </section>
+    </main>
+    
+    @include('sweetAlerts.swal')
+    {{-- @include('admin.components.modals.categories.addCategory')
+    @include('admin.components.modals.categories.editCategory')
+
+    @push('scripts')
+        <script src="{{ asset('js/admin/modals/categories/modalAddCategory.js') }}"></script>
+        <script src="{{ asset('js/admin/modals/categories/modalEditCategory.js') }}"></script>
+        <script src="{{ asset('js/admin/categories/categories.js') }}"></script>
+    @endpush
+
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('css/admin/modals/modal.css') }}">
+    @endpush --}}
+@endsection

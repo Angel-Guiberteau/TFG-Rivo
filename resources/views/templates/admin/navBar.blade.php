@@ -19,6 +19,9 @@
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() === 'sentences' ? 'active' : '' }}" href="{{ route('sentences') }}">Frases</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Route::currentRouteName() === 'endPoints' ? 'active' : '' }}" href="{{ route('endPoints') }}">Endpoints</a>
+            </li>
         </ul>
         <form action="/logout" method="POST" class="d-flex">
             @csrf
