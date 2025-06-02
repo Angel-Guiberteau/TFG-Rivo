@@ -175,8 +175,8 @@ table.datatable thead tr th {
     padding: 8px 12px;
     font-size: 0.9rem;
     text-align: center;
-
     box-shadow: none;
+    vertical-align: middle;
 }
 
 table.datatable thead tr th:first-child {
