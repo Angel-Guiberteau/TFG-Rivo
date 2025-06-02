@@ -1,4 +1,4 @@
-// transactionInfo.js
+import { fetchData } from './helpers/api.js';
 
 function getBadgeText(typeId) {
     switch (typeId) {
@@ -43,8 +43,8 @@ export async function openTransactionDetail(id) {
     if (!panel) return;
 
     try {
-        const res = await fetch(`/api/transaction/${id}`);
-        const data = await res.json();
+        const data = await fetchData(`/api/transaction/${id}`);
+        if (!data) return;
 
         document.querySelector('.icon-circle-light').innerHTML = data.icon_html;
         document.querySelector('.tx-title').textContent = data.subject;
@@ -98,8 +98,10 @@ export function closePanel() {
         panel.classList.add('hidden');
     }, 400);
 }
+
 window.closePanel = closePanel;
-document.addEventListener('DOMContentLoaded', function() {
+
+document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.movement-row').forEach(row => {
         row.addEventListener('click', () => {
             const id = row.dataset.id;

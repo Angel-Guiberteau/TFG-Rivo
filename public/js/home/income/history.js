@@ -4,43 +4,47 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const isMobile = window.innerWidth < 992;
 
-    if (isMobile) {
+    if (isMobile && container) {
         container.style.display = 'none';
         container.classList.remove('show');
     }
 
     let visible = false;
 
-    btn.addEventListener('click', () => {
-        if (!visible) {
-            container.style.display = 'flex';
-            requestAnimationFrame(() => {
-                container.classList.add('show');
-            });
-            btn.innerHTML = '<i class="fas fa-sliders-h me-1"></i> Ocultar filtros';
-        } else {
-            container.classList.remove('show');
-            setTimeout(() => {
-                container.style.display = 'none';
-            }, 150);
-            btn.innerHTML = '<i class="fas fa-sliders-h me-1"></i> Mostrar filtros';
-        }
-        visible = !visible;
-    });
+    if (btn && container) {
+        btn.addEventListener('click', () => {
+            if (!visible) {
+                container.style.display = 'flex';
+                requestAnimationFrame(() => {
+                    container.classList.add('show');
+                });
+                btn.innerHTML = '<i class="fas fa-sliders-h me-1"></i> Ocultar filtros';
+            } else {
+                container.classList.remove('show');
+                setTimeout(() => {
+                    container.style.display = 'none';
+                }, 150);
+                btn.innerHTML = '<i class="fas fa-sliders-h me-1"></i> Mostrar filtros';
+            }
+            visible = !visible;
+        });
+    }
 
     const items = document.querySelectorAll('.movement-item');
     const loadMoreBtn = document.getElementById('loadMoreBtn');
     let visibleCount = 6;
 
-    loadMoreBtn.addEventListener('click', () => {
-        let nextVisible = visibleCount + 6;
-        for (let i = visibleCount; i < nextVisible && i < items.length; i++) {
-            items[i].style.display = 'block';
-        }
-        visibleCount = nextVisible;
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            let nextVisible = visibleCount + 6;
+            for (let i = visibleCount; i < nextVisible && i < items.length; i++) {
+                items[i].style.display = 'block';
+            }
+            visibleCount = nextVisible;
 
-        if (visibleCount >= items.length) {
-            loadMoreBtn.style.display = 'none'; 
-        }
-    });
+            if (visibleCount >= items.length) {
+                loadMoreBtn.style.display = 'none';
+            }
+        });
+    }
 });

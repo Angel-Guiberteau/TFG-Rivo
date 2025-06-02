@@ -1,17 +1,35 @@
-import { fetchData } from './home.js';
+import { fetchData } from './helpers/api.js';
 import { openTransactionDetail } from './transactionInfo.js';
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Utilidades auxiliares
-    function formatDate(dateStr) {
-        if (!dateStr) return 'Sin fecha';
+    const homeSection = document.getElementById('home-section');
+    const showHomeButton = document.getElementById('showHome');
+
+    const showIncomeFormButton = document.getElementById('showIncomeForm');
+    const incomeSection = document.getElementById('income-section');
+    const incomeAddFormButton = document.getElementById('incomeAddForm');
+    const incomeAddFormSection = document.getElementById('incomeAddForm-section');
+    const backHistoryIncomeButton = document.getElementById('back-historyIncome');
+
+    const showEgressFormButton = document.getElementById('showEgressFrom');
+    const egressSection = document.getElementById('egress-section');
+    const egressAddFormButton = document.getElementById('egressAddForm');
+    const egressAddFormSection = document.getElementById('egressAddForm-section');
+    const backHistoryEgressButton = document.getElementById('back-historyEgress');
+
+    const contentSections = document.querySelectorAll(
+        'main > section > article.home-article, main > section > article.income-article, main > section > article.egress-article'
+    );
+
+    let incomeOffset = 0;
+    const incomeLimit = 6;
+    let allLoaded = false;
+
+    function formatShortDate(dateStr) {
         const date = new Date(dateStr);
         const day = date.getDate();
-        const month = date.toLocaleString('es-ES', { month: 'long' });
-        const year = date.getFullYear();
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
-        return `${day} ${month} ${year} - ${hours}:${minutes}`;
+        const month = date.toLocaleString('es-ES', { month: 'short' }).replace('.', '');
+        return `${day} ${month}.`;
     }
 
     function getBadgeClass(typeId) {
@@ -32,36 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Secciones y botones
-    const homeSection = document.getElementById('home-section');
-    const showHomeButton = document.getElementById('showHome');
-
-    const showIncomeFormButton = document.getElementById('showIncomeForm');
-    const incomeSection = document.getElementById('income-section');
-    const incomeAddFormButton = document.getElementById('incomeAddForm');
-    const incomeAddFormSection = document.getElementById('incomeAddForm-section');
-    const backHistoryIncomeButton = document.getElementById('back-historyIncome');
-
-    const showEgressFormButton = document.getElementById('showEgressFrom');
-    const egressSection = document.getElementById('egress-section');
-    const egressAddFormButton = document.getElementById('egressAddForm');
-    const egressAddFormSection = document.getElementById('egressAddForm-section');
-    const backHistoryEgressButton = document.getElementById('back-historyEgress');
-
-    const contentSections = document.querySelectorAll(
-        'main > section > article.home-article, main > section > article.income-article, main > section > article.egress-article'
-    );
-
-    // Variables de control
-    let incomeOffset = 0;
-    const incomeLimit = 6;
-    let allLoaded = false;
-    function formatShortDate(dateStr) {
-        const date = new Date(dateStr);
-        const day = date.getDate();
-        const month = date.toLocaleString('es-ES', { month: 'short' }).replace('.', '');
-        return `${day} ${month}.`;
-    }
     function hideContentSections() {
         contentSections.forEach(section => {
             section.classList.remove('show');
@@ -77,20 +65,20 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!container) return;
 
         operations.forEach((movement, index) => {
+            const isFirstLoad = offset === 0;
             const absoluteIndex = offset + index;
 
             const movementHTML = `
-                <div class="col-12 col-lg-6 movement-item ${absoluteIndex % 2 === 0 ? 'border-lg-end' : ''}" style="${absoluteIndex >= 6 ? 'display: none;' : ''}">
+                <div class="col-12 col-lg-6 movement-item ${absoluteIndex % 2 === 0 ? 'border-lg-end' : ''}"
+                    style="display: ${isFirstLoad && absoluteIndex >= 6 ? 'none' : 'block'};">
                     <div class="movement-row" data-id="${movement.id}">
                         <div class="movement-left d-flex align-items-center gap-3">
                             <div class="movement-icon">
                                 ${movement.category.icon.icon ?? ''}
                             </div>
                             <div class="movement-info">
-                                <p class="movement-date mb-0">
-                                    ${formatShortDate(movement.action_date)}
-                                </p>
-                                <p class="badge-${getBadgeClass(movement.movement_type_id)} mb-1 ">
+                                <p class="movement-date mb-0">${formatShortDate(movement.action_date)}</p>
+                                <p class="badge-${getBadgeClass(movement.movement_type_id)} mb-1">
                                     ${getMovementLabel(movement.movement_type_id)}
                                 </p>
                                 <p class="movement-name mb-0">${movement.category?.name ?? 'Sin categoría'}</p>
@@ -114,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+
     async function loadMoreIncomes() {
         const res = await fetchData(`/api/incomeOperations?offset=${incomeOffset}`);
         const loadMoreBtn = document.getElementById('loadMoreBtn');
@@ -133,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    
     function showSection(section) {
         if (!section) return;
 
@@ -154,7 +144,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Eventos de navegación
     if (showIncomeFormButton) {
         showIncomeFormButton.addEventListener('click', () => {
             hideContentSections();
@@ -204,7 +193,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Inicialización
     hideContentSections();
     showSection(homeSection);
+
+
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            if (!allLoaded) loadMoreIncomes();
+        });
+    }
 });

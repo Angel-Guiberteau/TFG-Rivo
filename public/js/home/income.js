@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-
     const scheduleIncomeCheckbox = document.getElementById("scheduleIncome");
     const recurrenceContainerIncome = document.querySelector(".recurrence-container-income");
 
@@ -17,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (scheduleIncomeCheckbox && recurrenceContainerIncome) {
-        scheduleIncomeCheckbox.addEventListener("change", function() {
+        scheduleIncomeCheckbox.addEventListener("change", function () {
             toggleRecurrenceContainer(scheduleIncomeCheckbox, recurrenceContainerIncome);
         });
 
@@ -25,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (scheduleEgressCheckbox && recurrenceContainerEgress) {
-        scheduleEgressCheckbox.addEventListener("change", function() {
+        scheduleEgressCheckbox.addEventListener("change", function () {
             toggleRecurrenceContainer(scheduleEgressCheckbox, recurrenceContainerEgress);
         });
 

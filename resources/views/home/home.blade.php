@@ -353,20 +353,15 @@
             <button type="button" class="rivo-alert-close" onclick="this.parentElement.remove();">&times;</button>
         </div>
     @endif
-    <script>
-        
-    </script>
-
     @push('scripts')
         <script src="{{ asset('js/chart/chart.umd.min.js') }}"></script>
-        <script type="module" src="{{ asset('js/home/home.js') }}"></script>
-        <script type="module" src="{{ asset('js/home/articleManager.js') }}"></script> 
         <script src="{{ asset('js/home/income.js') }}"></script>
         <script src="{{ asset('js/home/navMobile.js') }}"></script>
-
-        {{-- sections --}}
-        <script type="module" src="{{ asset('js/home/transactionInfo.js') }}"></script>
         <script src="{{ asset('js/home/income/history.js') }}"></script>
+
+        <script type="module" src="{{ asset('js/home/app.js') }}"></script>
     @endpush
+
+
 
 @endsection

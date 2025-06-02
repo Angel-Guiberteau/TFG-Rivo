@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         { id: "home", icon: "fas fa-home", color: "text-secondary", targetId: "showHome" },
         { id: "income", icon: "fas fa-plus", color: "text-success", targetId: "showIncomeForm" },
         { id: "expense", icon: "fas fa-minus", color: "text-danger", targetId: "showEgressFrom" },
-        { id: "save", icon: "fas fa-piggy-bank", color: "text-warning", targetId: "showSavingForm" },
+        { id: "save", icon: "fas fa-piggy-bank", color: "text-warning", targetId: "showSavingForm" }
     ];
 
     let isOpen = false;
