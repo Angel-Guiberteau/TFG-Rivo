@@ -10,14 +10,18 @@
                     @csrf
                     @method('PUT')
                     <input type="hidden" id="edit_id" name="id">
-                    <label class="icons">
-                        <span id="iconPreviewEdit"></span>
-                    </label>
                     <div class="col-12">
                         <label class="form-label" for="name">Icono <span class="modal_required">*</span></label>
-                        <input type="text" id="nameEdit" name="name" class="form-control" required>
-                        <div class="valid-feedback">¡Parece correcto!</div>
-                        <div class="invalid-feedback">Por favor, introduce una icono correcta.</div>
+                        <div class="d-flex align-items-start gap-2">
+                            <label class="icons">
+                                <span id="iconPreviewEdit"></span>
+                            </label>
+                            <div class="w-100">
+                                <input type="text" id="nameEdit" name="name" class="form-control" required>
+                                <div class="valid-feedback">¡Parece correcto!</div>
+                                <div class="invalid-feedback">Por favor, introduce una icono correcta.</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-12 d-flex flex-column align-items-end">
                         <button type="submit" class="btn btn-primary btn-sm" id="buttonSubmitEdit"> Editar </button>
