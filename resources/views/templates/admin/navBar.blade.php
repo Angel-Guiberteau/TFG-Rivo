@@ -1,3 +1,6 @@
+@php
+    $usersRoutes = ['users', 'addUser', 'editUser', 'previewUser'];
+@endphp
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm px-3">
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav me-auto">
@@ -5,7 +8,7 @@
                 <a class="nav-link {{ Route::currentRouteName() === 'homeAdmin' ? 'active' : '' }}" href="{{ route('homeAdmin') }}">Inicio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() === 'users' ? 'active' : '' }}" href="{{ route('users') }}">Usuarios</a>
+                <a class="nav-link {{ in_array(Route::currentRouteName(), $usersRoutes) ? 'active' : '' }}" href="{{ route('users') }}">Usuarios</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() === 'icons' ? 'active' : '' }}" href="{{ route('icons') }}">Iconos</a>

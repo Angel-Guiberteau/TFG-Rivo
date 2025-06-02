@@ -10,6 +10,12 @@
     <main>
         <section class="container-custom p-3 pb-5">
             <article class="bg-light p-3">
+                @include('templates.admin.breadCrum', [
+                    'breadcrumbs' => [
+                        ['name' => 'Inicio', 'url' => '/admin'],
+                        ['name' => 'Frases', 'url' => '/admin/sentences'],
+                    ]
+                ])
 
                 @include('templates.admin.title', ['title' => 'Frases'])
 
