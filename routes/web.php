@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IconController;
 use App\Models\BaseCategory;
 use App\Models\Icons;
+use App\Validations\ApiValidator;
 use App\Validations\BaseCategoriesValidator;
 use App\Validations\IconValidator;
 use App\Validations\SentencesValidator;
@@ -39,10 +40,9 @@ use Illuminate\Support\Js;
 | API
 |--------------------------------------------------------------------------
 */
-Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], function () {
+Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:admin|user']], function () {
     Route::get('/transaction/{id}', [OperationController::class, 'getOperationById']);
     Route::get('/incomeOperations', [OperationController::class, 'incomeOperations']);
-    
 });
 /*
 |--------------------------------------------------------------------------
