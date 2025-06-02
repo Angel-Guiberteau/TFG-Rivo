@@ -10,11 +10,6 @@
         <link rel="stylesheet" href="{{ asset('css/home/home.css') }}">
 
     @endpush
-    @push('scripts')
-
-        <script src="{{ asset('js/chart/chart.umd.min.js') }}"></script>
-
-    @endpush
 
     <div id="loader">
         <img src="{{ asset('img/logos/whiteRivoPng.png') }}" alt="Cargando Rivo" class="loader-logo" />
@@ -359,16 +354,19 @@
         </div>
     @endif
     <script>
-        setTimeout(() => {
-            const alert = document.querySelector('.rivo-alert');
-            if (alert) alert.remove();
-        }, 4000);
+        
     </script>
 
     @push('scripts')
-        <script src="{{ asset('js/home/home.js') }}"></script>
+        <script src="{{ asset('js/chart/chart.umd.min.js') }}"></script>
+        <script type="module" src="{{ asset('js/home/home.js') }}"></script>
+        <script type="module" src="{{ asset('js/home/articleManager.js') }}"></script> 
         <script src="{{ asset('js/home/income.js') }}"></script>
-        <script src="{{ asset('js/home/articleManager.js') }}"></script> 
+        <script src="{{ asset('js/home/navMobile.js') }}"></script>
+
+        {{-- sections --}}
+        <script type="module" src="{{ asset('js/home/transactionInfo.js') }}"></script>
+        <script src="{{ asset('js/home/income/history.js') }}"></script>
     @endpush
 
 @endsection

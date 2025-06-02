@@ -1,4 +1,38 @@
+import { fetchData } from './home.js';
+import { openTransactionDetail } from './transactionInfo.js';
+
 document.addEventListener('DOMContentLoaded', function () {
+    // Utilidades auxiliares
+    function formatDate(dateStr) {
+        if (!dateStr) return 'Sin fecha';
+        const date = new Date(dateStr);
+        const day = date.getDate();
+        const month = date.toLocaleString('es-ES', { month: 'long' });
+        const year = date.getFullYear();
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        return `${day} ${month} ${year} - ${hours}:${minutes}`;
+    }
+
+    function getBadgeClass(typeId) {
+        switch (typeId) {
+            case 1: return 'income';
+            case 2: return 'expense';
+            case 3: return 'saveMoney';
+            default: return '';
+        }
+    }
+
+    function getMovementLabel(typeId) {
+        switch (typeId) {
+            case 1: return 'Ingreso';
+            case 2: return 'Gasto';
+            case 3: return 'Ahorro';
+            default: return '';
+        }
+    }
+
+    // Secciones y botones
     const homeSection = document.getElementById('home-section');
     const showHomeButton = document.getElementById('showHome');
 
@@ -14,8 +48,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const egressAddFormSection = document.getElementById('egressAddForm-section');
     const backHistoryEgressButton = document.getElementById('back-historyEgress');
 
-    const contentSections = document.querySelectorAll('main > section > article.home-article, main > section > article.income-article, main > section > article.egress-article');
+    const contentSections = document.querySelectorAll(
+        'main > section > article.home-article, main > section > article.income-article, main > section > article.egress-article'
+    );
 
+    // Variables de control
+    let incomeOffset = 0;
+    const incomeLimit = 6;
+    let allLoaded = false;
+    function formatShortDate(dateStr) {
+        const date = new Date(dateStr);
+        const day = date.getDate();
+        const month = date.toLocaleString('es-ES', { month: 'short' }).replace('.', '');
+        return `${day} ${month}.`;
+    }
     function hideContentSections() {
         contentSections.forEach(section => {
             section.classList.remove('show');
@@ -26,65 +72,139 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    function renderIncomeMovements(operations, offset = 0) {
+        const container = document.getElementById('income-movements');
+        if (!container) return;
+
+        operations.forEach((movement, index) => {
+            const absoluteIndex = offset + index;
+
+            const movementHTML = `
+                <div class="col-12 col-lg-6 movement-item ${absoluteIndex % 2 === 0 ? 'border-lg-end' : ''}" style="${absoluteIndex >= 6 ? 'display: none;' : ''}">
+                    <div class="movement-row" data-id="${movement.id}">
+                        <div class="movement-left d-flex align-items-center gap-3">
+                            <div class="movement-icon">
+                                ${movement.category.icon.icon ?? ''}
+                            </div>
+                            <div class="movement-info">
+                                <p class="movement-date mb-0">
+                                    ${formatShortDate(movement.action_date)}
+                                </p>
+                                <p class="badge-${getBadgeClass(movement.movement_type_id)} mb-1 ">
+                                    ${getMovementLabel(movement.movement_type_id)}
+                                </p>
+                                <p class="movement-name mb-0">${movement.category?.name ?? 'Sin categoría'}</p>
+                            </div>
+                        </div>
+                        <div class="movement-right">
+                            <p class="movement-amount m-0 fs-5 ${movement.movement_type_id == 2 ? 'negative' : 'positive'}">
+                                ${movement.movement_type_id == 2 ? '-' : '+'}${Number(movement.amount).toFixed(2)}€
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('beforeend', movementHTML);
+
+            const newRow = container.querySelector(`.movement-row[data-id="${movement.id}"]`);
+            if (newRow) {
+                newRow.addEventListener('click', () => openTransactionDetail(movement.id));
+            }
+        });
+    }
+
+    async function loadMoreIncomes() {
+        const res = await fetchData(`/api/incomeOperations?offset=${incomeOffset}`);
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+        if (!res || res.length === 0) {
+            allLoaded = true;
+            if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+            return;
+        }
+
+        renderIncomeMovements(res, incomeOffset);
+        incomeOffset += incomeLimit;
+
+        if (res.length < incomeLimit && loadMoreBtn) {
+            allLoaded = true;
+            loadMoreBtn.style.display = 'none';
+        }
+    }
+
     function showSection(section) {
         if (!section) return;
 
         section.style.display = 'flex';
-        requestAnimationFrame(() => {
+        requestAnimationFrame(async () => {
             section.classList.add('show');
+
+            if (section.id === 'income-section') {
+                incomeOffset = 0;
+                allLoaded = false;
+                const container = document.getElementById('income-movements');
+                const loadMoreBtn = document.getElementById('loadMoreBtn');
+                if (container) container.innerHTML = '';
+                if (loadMoreBtn) loadMoreBtn.style.display = 'block';
+                await loadMoreIncomes();
+            }
+
             section.classList.remove('fade-section');
         });
     }
 
+    // Eventos de navegación
     if (showIncomeFormButton) {
-        showIncomeFormButton.addEventListener('click', function () {
+        showIncomeFormButton.addEventListener('click', () => {
             hideContentSections();
             showSection(incomeSection);
         });
     }
 
     if (incomeAddFormButton) {
-        incomeAddFormButton.addEventListener('click', function () {
+        incomeAddFormButton.addEventListener('click', () => {
             hideContentSections();
             showSection(incomeAddFormSection);
         });
     }
 
     if (backHistoryIncomeButton) {
-        backHistoryIncomeButton.addEventListener('click', function () {
+        backHistoryIncomeButton.addEventListener('click', () => {
             hideContentSections();
             showSection(incomeSection);
         });
     }
 
     if (showEgressFormButton) {
-        showEgressFormButton.addEventListener('click', function () {
+        showEgressFormButton.addEventListener('click', () => {
             hideContentSections();
             showSection(egressSection);
         });
     }
 
     if (egressAddFormButton) {
-        egressAddFormButton.addEventListener('click', function () {
+        egressAddFormButton.addEventListener('click', () => {
             hideContentSections();
             showSection(egressAddFormSection);
         });
     }
 
     if (backHistoryEgressButton) {
-        backHistoryEgressButton.addEventListener('click', function () {
+        backHistoryEgressButton.addEventListener('click', () => {
             hideContentSections();
             showSection(egressSection);
         });
     }
-    
+
     if (showHomeButton) {
-        showHomeButton.addEventListener('click', function () {
+        showHomeButton.addEventListener('click', () => {
             hideContentSections();
             showSection(homeSection);
         });
     }
 
+    // Inicialización
     hideContentSections();
     showSection(homeSection);
 });

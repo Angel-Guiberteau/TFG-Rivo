@@ -1153,7 +1153,6 @@ canvas {
   color: #4B0091;
 }
 
-/* Nuevos estilos de transactionDetail */
 body.blur-active::before {
   content: "";
   position: fixed;
@@ -1162,6 +1161,6 @@ body.blur-active::before {
   width: 100vw;
   height: 100vh;
   backdrop-filter: blur(6px);
-  background-color: rgba(0, 0, 0, 0.2); /* opcional para oscurecer ligeramente */
-  z-index: 9998; /* justo debajo del panel */
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 9998;
 }
