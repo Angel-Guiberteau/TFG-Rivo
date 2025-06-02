@@ -16,10 +16,12 @@
                             <label class="icons">
                                 <span id="iconPreviewEdit"></span>
                             </label>
-                            <div class="w-100">
+                            <div class="input-group w-100">
+                                <span class="input-group-text">&lt;i class="</span>
                                 <input type="text" id="nameEdit" name="name" class="form-control" required>
-                                <div class="valid-feedback">¡Parece correcto!</div>
-                                <div class="invalid-feedback">Por favor, introduce una icono correcta.</div>
+                                <span class="input-group-text">"&gt;&lt;/i&gt;</span>
+                                <div class="valid-feedback text-center">¡Parece correcto!</div>
+                                <div class="invalid-feedback text-center">Por favor, introduce una icono correcta.</div>
                             </div>
                         </div>
                     </div>
