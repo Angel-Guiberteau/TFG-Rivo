@@ -36,9 +36,9 @@ textarea {
 }
 
 input[type="radio"]:checked + .icon-option {
-    border-color: #007bff;
-    background-color: #e0f0ff;
-    color: #084298;
+    border: 2px solid #601990;;
+    background-color: #e9f1ff;
+    color: #601990;
 }
 
 .type-checkbox, .type-checkbox-edit {
@@ -57,16 +57,16 @@ input[type="radio"]:checked + .icon-option {
 }
 
 .types label:hover {
-    background-color: #e2eafc;
-    border-color: #b6d4fe;
-    color: #0d6efd;
+    background-color: #ebe7fa;
+    border-color: #b9aee2;
+    color: #6f42c1;
 }
 
 .type-checkbox:checked + label,
 .type-checkbox-edit:checked + label {
-    background-color: #cfe2ff;
-    border-color: #0d6efd;
-    color: #084298;
+    background-color: #dcd2f7;
+    border-color: #6f42c1;
+    color: #4b2e88;
 }
 
 #iconPreviewAdd, #iconPreviewEdit {
