@@ -28,11 +28,22 @@ use App\Http\Controllers\UserController;
 use App\Validations\UserValidator;
 use App\Validations\Validator;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Js;
 
 
 
 
+/*
+|--------------------------------------------------------------------------
+| API
+|--------------------------------------------------------------------------
+*/
+Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], function () {
+    Route::get('/transaction/{id}', [OperationController::class, 'getOperationById']);
+    Route::get('/incomeOperations', [OperationController::class, 'incomeOperations']);
+    
+});
 /*
 |--------------------------------------------------------------------------
 | Google Login/Register Routes
@@ -83,6 +94,8 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
         $accountController = new AccountController();
         $account = $accountController->getAccountByUserId($user->id);
 
+        Session::put('active_account_id', $account->id);
+
         $objectiveController = new ObjectiveController();
         $objective =$objectiveController->getObjectivesByAccountId($account->id);
 
@@ -101,10 +114,7 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
         $categoryController = new CategoryController();
         $baseCategories = $categoryController->getAllBaseCategories();
         $personalCategories = $categoryController->getPersonalCategoriesByUserId($user->id);
-        // dd([
-        //     'Categorias bases' => $baseCategories,
-        //     'Categorias personales' => $personalCategories
-        // ]);
+        
 
 
         $allIncomes = $operationController->getAllIncomesByAccountId($account->id);
@@ -160,9 +170,8 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 
     })->name('addOperationUser');
 
-    Route::get('/transaction/{id}', [OperationController::class, 'getOperationById']);
-
 });
+
 
 /*
 |--------------------------------------------------------------------------

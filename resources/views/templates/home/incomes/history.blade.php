@@ -55,95 +55,14 @@
             </div>
         </div>
         <div class="px-lg-4">
-            <div class="row movement-block">
-                @foreach ($allIncomes as $index => $simpleIncome)
-                    <div class="col-12 col-lg-6 movement-item {{ $index % 2 === 0 ? 'border-lg-end' : '' }}" style="{{ $index >= 6 ? 'display: none;' : '' }}">
-                        <div class="movement-row" data-id="{{ $simpleIncome->id }}">
-                            <div class="movement-left d-flex align-items-center gap-3">
-                                <div class="movement-icon">
-                                    {!! $simpleIncome->category->icon->icon !!}
-                                </div>
-                                <div class="movement-info">
-                                    <p class="movement-date mb-0">
-                                        {{ \Carbon\Carbon::parse($simpleIncome->action_date)->locale('es')->translatedFormat('j M') }}
-                                    </p>
-                                    <p class="badge mb-1 
-                                        {{ $simpleIncome->movement_type_id == 1 ? 'badge-income' : 
-                                        ($simpleIncome->movement_type_id == 2 ? 'badge-expense' : 
-                                        ($simpleIncome->movement_type_id == 3 ? 'badge-save' : '') ) }}">
-                                        {{ $simpleIncome->movement_type_id == 1 ? 'Ingreso' : 
-                                        ($simpleIncome->movement_type_id == 2 ? 'Gasto' : 
-                                        ($simpleIncome->movement_type_id == 3 ? 'Ahorro' : '') ) }}
-                                    </p>
-                                    <p class="movement-name mb-0">{{ $simpleIncome->category->name }}</p>
-                                </div>
-                            </div>
-                            <div class="movement-right">
-                                <p class="movement-amount m-0 fs-5 {{ $simpleIncome->movement_type_id == 2 ? 'negative' : 'positive' }}">
-                                    {{ $simpleIncome->movement_type_id == 2 ? '-' : '+' }}{{ number_format($simpleIncome->amount, 2) }}€
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-                <div class="text-center mt-3 mb-3 mb-lg-0">
-                    <button id="loadMoreBtn" class="rivo-btn">Ver más</button>
-                </div>
+            <div class="row movement-block" id="income-movements">
+                
+            </div>
+            <div class="text-center mt-3 w-100 d-flex flex-row justify-content-center align-items-center">
+                <button id="loadMoreBtn" class="rivo-btn">Ver más</button>
             </div>
         </div>
     </div>
 </article>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const btn = document.getElementById('toggleFiltrosBtn');
-        const container = document.getElementById('filter-container');
-
-        const isMobile = window.innerWidth < 992;
-
-        if (isMobile) {
-            container.style.display = 'none';
-            container.classList.remove('show');
-        }
-
-        let visible = false;
-
-        btn.addEventListener('click', () => {
-            if (!visible) {
-                container.style.display = 'flex';
-                requestAnimationFrame(() => {
-                    container.classList.add('show');
-                });
-                btn.innerHTML = '<i class="fas fa-sliders-h me-1"></i> Ocultar filtros';
-            } else {
-                container.classList.remove('show');
-                setTimeout(() => {
-                    container.style.display = 'none';
-                }, 150);
-                btn.innerHTML = '<i class="fas fa-sliders-h me-1"></i> Mostrar filtros';
-            }
-            visible = !visible;
-        });
-    });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const items = document.querySelectorAll('.movement-item');
-        const loadMoreBtn = document.getElementById('loadMoreBtn');
-        let visibleCount = 6;
-
-        loadMoreBtn.addEventListener('click', () => {
-            let nextVisible = visibleCount + 6;
-            for (let i = visibleCount; i < nextVisible && i < items.length; i++) {
-                items[i].style.display = 'block';
-            }
-            visibleCount = nextVisible;
-
-            if (visibleCount >= items.length) {
-                loadMoreBtn.style.display = 'none'; 
-            }
-        });
-    });
-</script>
-
 
 
