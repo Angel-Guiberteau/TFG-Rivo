@@ -35,6 +35,8 @@ abstract class Validator extends Controller
             'updatePersonalCategories' => static::rulesUpdatePersonalCategories(),
             'updatePersonalAccounts' => static::rulesUpdatePersonalAccounts(),
             'addIncomeUser' => static::rulesAddOperationUser(),
+            'getOperationById' => static::rulesGetOperationById(),
+            'incomeOperations' => static::rulesIncomeOperations(),
             default => [],
         };
     }
@@ -48,6 +50,8 @@ abstract class Validator extends Controller
             'updatePersonalCategories' => static::messagesUpdatePersonalCategories(),
             'updatePersonalAccounts' => static::messagesUpdatePersonalAccounts(),
             'addIncomeUser' => static::messagesAddOperationUser(),
+            'getOperationById' => static::messagesGetOperationById(),
+            'incomeOperations' => static::messagesIncomeOperations(),
             default => [],
         };
     }
@@ -66,6 +70,8 @@ abstract class Validator extends Controller
     protected static function messagesUpdatePersonalAccounts(): array { return []; }
     protected static function rulesAddOperationUser(): array { return []; }
     protected static function messagesAddOperationUser(): array { return []; }
-    // protected static function rulesPreView(): array { return []; }
-    // protected static function messagesPreView(): array { return []; }
+    protected static function rulesGetOperationById(): array { return []; }
+    protected static function messagesGetOperationById(): array { return []; }
+    protected static function rulesIncomeOperations(): array { return []; }
+    protected static function messagesIncomeOperations(): array { return []; }
 }
