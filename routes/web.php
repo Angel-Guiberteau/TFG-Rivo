@@ -40,10 +40,12 @@ use Illuminate\Support\Js;
 | API
 |--------------------------------------------------------------------------
 */
-Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:admin|user']], function () {
+
+Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], function () {
     Route::get('/transaction/{id}', [OperationController::class, 'getOperationById']);
     Route::get('/incomeOperations', [OperationController::class, 'incomeOperations']);
 });
+
 /*
 |--------------------------------------------------------------------------
 | Google Login/Register Routes
