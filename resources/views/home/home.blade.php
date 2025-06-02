@@ -355,6 +355,7 @@
     @endif
     @push('scripts')
         <script src="{{ asset('js/chart/chart.umd.min.js') }}"></script>
+        <script src="{{ asset('js/sweetalert/sweetalert.min.js') }}"></script>
         <script src="{{ asset('js/home/income.js') }}"></script>
         <script src="{{ asset('js/home/navMobile.js') }}"></script>
         <script src="{{ asset('js/home/income/history.js') }}"></script>

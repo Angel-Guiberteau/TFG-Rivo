@@ -73,7 +73,50 @@ export async function openTransactionDetail(id) {
         } else {
             recurrenteEl.style.display = 'none';
         }
+        const deleteBtn = document.querySelector('.btn-full.delete');
+        if (deleteBtn) {
+            deleteBtn.onclick = () => {
+                swal({
+                    title: "¿Eliminar transacción?",
+                    text: "Esta acción no se puede deshacer.",
+                    icon: "warning",
+                    buttons: ["Cancelar", "Sí, eliminar"],
+                    dangerMode: true
+                })
+                .then(async (willDelete) => {
+                    if (!willDelete) return;
 
+                    try {
+                        const res = await fetch(`/api/transaction/${id}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                                'Content-Type': 'application/json'
+                            }
+                        });
+
+                        if (!res.ok) throw new Error('Error al eliminar');
+
+                        const row = document.querySelector(`.movement-row[data-id="${id}"]`);
+                        if (row) row.closest('.movement-item').remove();
+
+                        closePanel();
+
+                        swal("Transacción eliminada correctamente", {
+                            icon: "success",
+                            timer: 2000,
+                            buttons: false
+                        });
+
+                    } catch (error) {
+                        console.error(error);
+                        swal("Error al eliminar la transacción", {
+                            icon: "error"
+                        });
+                    }
+                });
+            };
+        }
         openPanel();
 
     } catch (error) {
