@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name', 75)->default('Account');
             $table->decimal('balance', 12, 2)->default(0);
             $table->char('currency', 3)->default('EUR');
+            $table->boolean('is_main_account')->default(false);
             $table->boolean('enabled')->default(true);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

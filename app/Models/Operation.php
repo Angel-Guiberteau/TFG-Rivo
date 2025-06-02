@@ -94,6 +94,16 @@ class Operation extends Model
             ->orderByDesc('action_date')
             ->get();
     }
+    
+    public static function getIncomesWithLimitByAccountId(int $accountId, int $offset,int $limit): ?Collection{
+        return self::where('account_id', $accountId)
+            ->where('movement_type_id', MovementTypesEnum::INCOME->value)
+            ->with('category.icon')
+            ->orderBy('action_date', 'desc')
+            ->offset($offset)
+            ->limit($limit)
+            ->get();
+    }
 
     public function category()
     {

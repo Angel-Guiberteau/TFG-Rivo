@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\MovementTypesEnum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Operation;
 use App\Models\OperationPlanned;
@@ -34,6 +35,24 @@ class OperationController extends Controller
     public function setOperationType(string $movement_type): bool{
         $this->movement_type = $movement_type;
         return true;
+    }
+    
+    public function incomeOperations(Request $request): JsonResponse{
+        $user = Auth::user();
+        $accountId = session('active_account_id');
+        if (!$accountId) {
+            return response()->json(['error' => 'No hay cuenta activa'], 400);
+        }
+        
+        $offset = intval($request->query('offset', 0));
+        $limit = 6;
+        $incomes = Operation::getIncomesWithLimitByAccountId($accountId, $offset, $limit);
+        if(!$incomes){
+            return response()->json(['error' => 'No hay cuenta activa'], 400);
+        }
+
+        return response()->json($incomes);
+
     }
     
     public function getOperationById(int $operationId): JsonResponse{
