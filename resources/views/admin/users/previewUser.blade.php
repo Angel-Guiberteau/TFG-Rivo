@@ -16,6 +16,14 @@
     <main>
         <section class="container-custom p-3 pb-5">
             <article class="rounded-article mt-4">
+                @include('templates.admin.breadCrum', [
+                    'breadcrumbs' => [
+                        ['name' => 'Inicio', 'url' => '/admin'],
+                        ['name' => 'Usuarios', 'url' => '/admin/users'],
+                        ['name' => 'Editar Usuario', 'url' => '']
+                    ]
+                ])
+
                 @include('templates.admin.title', ['title' => 'Preview del usuario: ' . $user->name])
 
                 <div class="row mt-4 gy-4">
