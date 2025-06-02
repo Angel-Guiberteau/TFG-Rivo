@@ -19,6 +19,14 @@
     <main>
         <section class="container-custom p-3 pb-5">
             <article class="bg-light p-4 mt-4 shadow-sm rounded-3">
+                @include('templates.admin.breadCrum', [
+                    'breadcrumbs' => [
+                        ['name' => 'Inicio', 'url' => '/admin'],
+                        ['name' => 'Usuarios', 'url' => '/admin/users'],
+                        ['name' => 'Editar Usuario', 'url' => '']
+                    ]
+                ])
+
                 @include('templates.admin.title', ['title' => 'Editar Usuario'])
 
                 @include('admin.components.progressLine')
