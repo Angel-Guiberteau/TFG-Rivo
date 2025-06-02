@@ -40,6 +40,7 @@ class OperationController extends Controller
     public function incomeOperations(Request $request): JsonResponse{
         $user = Auth::user();
         $accountId = session('active_account_id');
+        
         if (!$accountId) {
             return response()->json(['error' => 'No hay cuenta activa'], 400);
         }

@@ -7,7 +7,18 @@ export function openPanel() {
     panel.classList.remove('hidden');
     document.body.classList.add('no-scroll', 'blur-active');
 }
+document.addEventListener('click', function (event) {
+    const panel = document.getElementById('transactionDetail');
 
+    if (
+        panel &&
+        panel.classList.contains('show') &&
+        !panel.contains(event.target) &&
+        !event.target.closest('.movement-row')
+    ) {
+        closePanel();
+    }
+});
 export function closePanel() {
     const panel = document.getElementById('transactionDetail');
     if (!panel) return;
