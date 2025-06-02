@@ -249,6 +249,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             $data = request()->toArray();
 
             $validate = SentencesValidator::validate($data, ValidationEnum::ADD->value);
+            
             return SentenceController::addSentence($validate);
         })->name('addSentence');
 
@@ -256,6 +257,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             $data = request()->toArray();
 
             $validate = SentencesValidator::validate($data, ValidationEnum::EDIT->value);
+
             return SentenceController::editSentence($validate);
         })->name('editSentence');
 
@@ -290,12 +292,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
                 ->with('categories', $baseCategories)
                 ->with('icons', $icons)
                 ->with('movementTypes', $movementTypes);
+
         })->name('categories');
 
         Route::post('/add', function (): RedirectResponse {
             $data = request()->toArray();
             
             $validate = BaseCategoriesValidator::validate($data, ValidationEnum::ADD->value);
+
             return BaseCategoryController::addBaseCategory($validate);
         })->name('addCategory');
 
@@ -303,6 +307,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             $data = request()->toArray();
 
             $validate = BaseCategoriesValidator::validate($data, ValidationEnum::EDIT->value);
+
             return BaseCategoryController::editBaseCategory($validate);
         })->name('editCategory');
 
@@ -338,6 +343,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             $data = request()->toArray();
 
             $validate = IconValidator::validate($data, ValidationEnum::EDIT->value);
+
             return IconController::editIcon($validate);
         })->name('editIcon');
 
