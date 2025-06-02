@@ -43,14 +43,14 @@
             </div>
             <div class="col-12 mb-3">
                 <label for="subject" class="fw-bold mb-0 fs-4">Asunto</label>
-                <input type="text" id="subject" name="subject" class="form-control mb-3" placeholder="Asunto" required>
-                <textarea id="description" name="description" class="form-control" rows="3" placeholder="Description"></textarea>
+                <input type="text" id="subject" name="subject" class="form-control mb-3 custom-input" placeholder="Asunto" required>
+                <textarea id="description" name="description" class="form-control custom-input" rows="3" placeholder="Description"></textarea>
             </div>
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3 flex-nowrap g-3">
                 <div class="d-flex align-items-center gap-4 mb-4 mb-lg-2">
                     <label for="date" class="fw-bold mb-0 fs-4">Fecha</label>
                     <input type="datetime-local" id="date" name="action_date"
-                    class="form-control px-2 py-0 bg-transparent text-muted text-center fs-6 max-w-200"
+                    class="form-control px-2 py-0 bg-transparent text-muted text-center fs-6 max-w-200 custom-datetime-input"
                     value="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}">
 
 
@@ -68,7 +68,7 @@
                 <div class="d-flex align-items-center justify-content-between gap-4">
                     <label for="recurrence" class="fw-bold mb-0 fs-4">Recurrencia</label>
                     <div class="custom-select-wrapper">
-                        <select id="period" name="period" class="form-select  bg-transparent">
+                        <select id="period" name="period" class="form-select  bg-transparent custom-input">
                             <option value="m">Mensual</option>
                             <option value="w">Semanal</option>
                             <option value="d">Diario</option>
@@ -80,19 +80,20 @@
                 <div class="col-12 d-flex align-items-center justify-content-between w-100 mt-3">
                     <label for="start_date" class="fw-bold mb-0 fs-4">Fecha de comienzo</label>
                     <input type="datetime-local" id="start_date" name="start_date" 
-                    class="form-control px-2 py-0  bg-transparent text-muted text-center max-w-200 fs-6"
+                    class="form-control px-2 py-0  bg-transparent text-muted text-center max-w-200 fs-6 custom-datetime-input"
                     value="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}">
                 </div>
                 <div class="col-12 d-flex align-items-center justify-content-between w-100 mt-3">
                     <label for="expiration_date" class="fw-bold mb-0 fs-4">Fecha de expiración</label>
                     <input type="datetime-local" id="expiration_date" name="expiration_date" 
-                    class="form-control px-2 py-0  bg-transparent text-muted text-center max-w-200 fs-6"
+                    class="form-control px-2 py-0  bg-transparent text-muted text-center max-w-200 fs-6 custom-datetime-input"
                     value="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}">
+                    
                 </div>
             </div>
             <div class="col-12">
                 <div class="input-group">
-                    <input type="number" class="form-control fs-5" id="amount" name="amount" placeholder="€ Cantidad" min="0" step="0.01">
+                    <input type="number" class="form-control fs-5 custom-input" id="amount" name="amount" placeholder="€ Cantidad" min="0" step="0.01">
                 </div>
             </div>
         </div>
