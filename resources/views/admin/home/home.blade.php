@@ -40,7 +40,6 @@
                             </a>
                         </div>
 
-                        {{-- Iconos --}}
                         <div class="col-md-6 col-lg-4">
                             <a href="{{ route('icons') }}" class="text-decoration-none">
                                 <div class="card card-custom bg-icons h-100 text-center p-4">
@@ -54,7 +53,6 @@
                             </a>
                         </div>
 
-                        {{-- Categorías --}}
                         <div class="col-md-6 col-lg-4">
                             <a href="{{ route('categories') }}" class="text-decoration-none">
                                 <div class="card card-custom bg-categories h-100 text-center p-4">
@@ -68,16 +66,15 @@
                             </a>
                         </div>
 
-                        {{-- Frases --}}
                         <div class="col-md-6 col-lg-4">
                             <a href="{{ route('sentences') }}" class="text-decoration-none">
                                 <div class="card card-custom bg-sentences h-100 text-center p-4">
                                     <div class="card-icon-circle mx-auto">
                                         <i class="fa-solid fa-quote-left fa-2x"></i>
                                     </div>
-                                    <h5 class="card-title">Frases Motivacionales</h5>
-                                    <p class="card-text">Edita las frases que se muestran al usuario en distintos momentos.</p>
-                                    <small><i class="fa-regular fa-comment me-1"></i>12 frases activas</small>
+                                    <h5 class="card-title">Frases LogIn</h5>
+                                    <p class="card-text">Edita las oraciones que se muestran al usuario en nuestro LogIn.</p>
+                                    <small><i class="fa-regular fa-comment me-1"></i>12 oraciones activas</small>
                                 </div>
                             </a>
                         </div>

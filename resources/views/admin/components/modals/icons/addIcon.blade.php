@@ -8,14 +8,18 @@
             <div class="modal-body">
                 <form id="form-addIcon" class="row g-3 needs-validation" action=" {{ route('addIcon') }} " method="post" accept-charset="UTF-8" enctype="multipart/form-data" novalidate>
                     @csrf
-                    <label class="icons">
-                        <span id="iconPreviewAdd"></span>
-                    </label>
                     <div class="col-12">
                         <label class="form-label" for="name">Icono <span class="modal_required">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Ej: fas fa-user" required/>
-                        <div class="valid-feedback">¡Parece correcto!</div>
-                        <div class="invalid-feedback">Por favor, introduce una icono correcta.</div>
+                        <div class="d-flex align-items-start gap-2">
+                            <label class="icons">
+                                <span id="iconPreviewAdd"></span>
+                            </label>
+                            <div class="w-100">
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Ej: fas fa-user" required/>
+                                <div class="valid-feedback">¡Parece correcto!</div>
+                                <div class="invalid-feedback">Por favor, introduce una icono correcta.</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-12 d-flex flex-column align-items-end"> 
                         <button type="submit" class="btn btn-primary btn-sm" id="buttonSubmit"> Añadir </button>
