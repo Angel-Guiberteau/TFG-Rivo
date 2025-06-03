@@ -52,7 +52,7 @@
                                 <input type="checkbox" id="rememberMe" name="remember"/>
                                 <label for="rememberMe" nam class="fs-6 m-0">Recordarme</label>
                             </div>
-                            <a href="#" class="fs-6 w-100 link-login text-center text-lg-end">¿Has olvidado tu contraseña?</a>
+                            <a href="{{ route('password.request') }}" class="fs-6 w-100 link-login text-center text-lg-end">¿Has olvidado tu contraseña?</a>
                             </div>
         
                         <div class="register mb-2">
