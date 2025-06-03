@@ -1,7 +1,15 @@
-function deleteCategory(id) {
+function addEndPoint() {
+    window.location.href = '/admin/endPoints/add';
+}
+
+function editEndPoint(id) {
+    window.location.href = `/admin/endPoints/edit/${id}`;
+}
+
+function deleteEndPoint(id) {
     swal({
         title: "¿Estás seguro?",
-        text: "Estás a punto de eliminar esta Categoría.",
+        text: "Estás a punto de eliminar este endpoint.",
         icon: "warning",
         buttons: {
             cancel: {
@@ -23,7 +31,7 @@ function deleteCategory(id) {
         if (firstConfirmed) {
             swal({
                 title: "¡Confirmación final!",
-                text: "¿Realmente deseas eliminar esta Categoría? Esta acción no se puede deshacer.",
+                text: "¿Realmente deseas eliminar este endpoint? Esta acción no se puede deshacer.",
                 icon: "warning",
                 buttons: {
                     cancel: {
@@ -43,7 +51,7 @@ function deleteCategory(id) {
                 }
             }).then(function (secondConfirmed) {
                 if (secondConfirmed) {
-                    fetch('/admin/categories/delete', {
+                    fetch('/admin/endPoints/delete', {
                         method: "POST",
                         headers: {
                             'Content-Type': 'application/json',
