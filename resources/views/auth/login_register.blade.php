@@ -19,11 +19,15 @@
                 <p class="w-100 fs-4 subtitle-mobile">
                     Start saving, organize your income and expenses, and reach your goals with Rivo.
                 </p>
+                @if (session('status'))
+                    <div class="alert alert-success">{{ session('status') }}</div>
+                @endif
+
                 @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger">{{ $error }}</div>
-                @endforeach
-            @endif
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger">{{ $error }}</div>
+                    @endforeach
+                @endif
             
             </article>
             
@@ -52,7 +56,7 @@
                                 <input type="checkbox" id="rememberMe" name="remember"/>
                                 <label for="rememberMe" nam class="fs-6 m-0">Recordarme</label>
                             </div>
-                            <a href="#" class="fs-6 w-100 link-login text-center text-lg-end">¿Has olvidado tu contraseña?</a>
+                            <a href="{{ route('password.request') }}" class="fs-6 w-100 link-login text-center text-lg-end">¿Has olvidado tu contraseña?</a>
                             </div>
         
                         <div class="register mb-2">
