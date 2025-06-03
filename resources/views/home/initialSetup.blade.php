@@ -64,6 +64,7 @@
         <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('js/home/initialSetUpValidations/fistStepValidations.js') }}"></script>
         <script src="{{ asset('js/home/initialSetUpValidations/secondStepValidations.js') }}"></script>
+        <script src="{{ asset('js/home/initialSetUpValidations/thirdYfourthStepValidations.js') }}"></script>
     @endpush
 @endsection
     
