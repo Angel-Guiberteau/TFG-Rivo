@@ -102,8 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const num = parseFloat(value);
         if (!isNaN(num) && num >= 0 && num <= 100) {
-            personalizePercentage.value = num.toFixed(2);
+            personalizePercentage.value = parseFloat(num.toFixed(2)).toString();
         }
     });
+
 
 });

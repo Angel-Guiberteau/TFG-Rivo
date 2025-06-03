@@ -7,7 +7,6 @@
 
     <p class="mb-2">Elijamos un objetivo</p>
 
-
     <div class="form-check custom-checkbox-container mb-4">
         <input class="custom-checkbox" type="radio" name="objective" onchange="clearPersonalizeObj()" id="objEmergency" value="1">
         <label class="form-check-label" for="objetivo_emergencia">
@@ -29,10 +28,13 @@
         </label>
     </div>
 
-    <div class="input-group mb-4">
-        <i class="fas fa-flag-checkered"></i>
-        <input type="text" id="objPersonalize" name="personalize_objective" placeholder="Otro objetivo" oninput="clearRadiosS6()"/>
+    <div class="field-group mb-4">
+        <div class="input-group">
+            <i class="fas fa-flag-checkered"></i>
+            <input type="text" id="objPersonalize" name="personalize_objective" placeholder="Otro objetivo" oninput="clearRadiosS6()" maxlength="75" />
+        </div>
+        <div class="invalid-feedback"></div>
     </div>
-    @include('home.initialSetup.buttonsContainer', ['step' => 6])
 
+    @include('home.initialSetup.buttonsContainer', ['step' => 6])
 </section>
