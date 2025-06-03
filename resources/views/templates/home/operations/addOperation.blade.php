@@ -1,11 +1,10 @@
-<article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black income-article" id="incomeAddForm-section" style="display: none;">
+<article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black income-article" id="operationAddForm-section" style="display: none;">
 
     <form class="col-12 col-lg-10 mx-auto mt-4" method="POST" action="{{ route('addOperationUser') }}">
         @csrf
-        <input type="hidden" name="account_id" value="{{ $account->id }}">
-        <input type="hidden" name="movement_type" value="income">
+        <input type="hidden" name="operation_id" id="operation_id"> 
         <div class="d-flex flex-row justify-content-between align-items-center">
-            <h2 class="fw-bold fs-3">Añadir ingreso</h2>
+            <h2 class="fw-bold fs-3">Añadir operación</h2>
             <button class="btn btn-primary fw-bold btn-sm fs-4 custom-gradient-btn w-25 " id="back-historyIncome">
                     <i class="fas fa-arrow-left"></i>
             </button>
@@ -15,34 +14,43 @@
 
         <div class="row justify-content-between align-items-center">
             <div class="col-12 d-flex flex-column mb-3">
-                <label class="fw-bold mb-0 fs-4">Categorías</label>
-                <div class="categories-grid mt-2">
+                <div class="col-12 mb-3">
+                    <p class="fw-bold mb-2 fs-4">Tipo de operación</p>
+                    <div class="categories-grid operation-types">
+                        <input type="radio" name="movement_type" value="income" id="op-income" class="type-radio">
+                        <label for="op-income">Ingreso</label>
+
+                        <input type="radio" name="movement_type" value="expense" id="op-expense" class="type-radio">
+                        <label for="op-expense">Gasto</label>
+
+                        <input type="radio" name="movement_type" value="save" id="op-save" class="type-radio">
+                        <label for="op-save">Ahorro</label>
+                    </div>
+                </div>
+                <p class="fw-bold mb-0 fs-4">Categorías</p>
+                <div class="categories-grid mt-2" id="categoryOptions">
                     @foreach ($baseCategories as $category)
-                        @if(in_array(1, $category['movement_type_ids']))
-                            <label class="d-block text-center">
-                                <input type="radio" name="category_id" value="{{ $category['id'] }}" class="d-none">
-                                <div class="category-option">
-                                    {!! $category['icon_html'] !!}
-                                    <span class="text-muted fw-semibold">{{ $category['category_name'] }}</span>
-                                </div>
-                            </label>
-                        @endif
+                        <label class="d-block text-center category-label" data-types="{{ implode(',', $category['movement_type_ids']) }}">
+                            <input type="radio" name="category_id" value="{{ $category['id'] }}" class="d-none">
+                            <div class="category-option">
+                                {!! $category['icon_html'] !!}
+                                <span class="text-muted fw-semibold">{{ $category['category_name'] }}</span>
+                            </div>
+                        </label>
                     @endforeach
                     @foreach ($personalCategories as $category)
-                        @if(in_array(1, $category['movement_type_ids']))
-                            <label class="d-block text-center">
-                                <input type="radio" name="category_id" value="{{ $category['id'] }}" class="d-none">
-                                <div class="category-option">
-                                    {!! $category['icon_html'] !!}
-                                    <span class="text-muted fw-semibold">{{ $category['category_name'] }}</span>
-                                </div>
-                            </label>
-                        @endif
+                        <label class="d-block text-center category-label" data-types="{{ implode(',', $category['movement_type_ids']) }}">
+                            <input type="radio" name="category_id" value="{{ $category['id'] }}" class="d-none">
+                            <div class="category-option">
+                                {!! $category['icon_html'] !!}
+                                <span class="text-muted fw-semibold">{{ $category['category_name'] }}</span>
+                            </div>
+                        </label>
                     @endforeach
                 </div>
             </div>
             <div class="col-12 mb-3">
-                <label for="subject" class="fw-bold mb-0 fs-4">Asunto</label>
+                <p for="subject" class="fw-bold mb-0 fs-4">Asunto</p>
                 <input type="text" id="subject" name="subject" class="form-control mb-3 custom-input" placeholder="Asunto" required>
                 <textarea id="description" name="description" class="form-control custom-input" rows="3" placeholder="Description"></textarea>
             </div>
@@ -56,7 +64,7 @@
 
                 </div>
                 <div class="d-flex align-items-center gap-2">
-                    <label for="schedule" class="fw-bold mb-0 fs-4">Programar</label>
+                    <p for="schedule" class="fw-bold mb-0 fs-4">Programar</p>
                     <label class="switch mb-0">
                         <input type="checkbox" id="scheduleIncome" name="schedule">
                         <span class="slider round"></span>
@@ -66,7 +74,7 @@
 
             <div class="col-12 recurrence-container-income mb-3 p-2" style="display: none;">
                 <div class="d-flex align-items-center justify-content-between gap-4">
-                    <label for="recurrence" class="fw-bold mb-0 fs-4">Recurrencia</label>
+                    <p for="recurrence" class="fw-bold mb-0 fs-4">Recurrencia</p>
                     <div class="custom-select-wrapper">
                         <select id="period" name="period" class="form-select  bg-transparent custom-input">
                             <option value="m">Mensual</option>
