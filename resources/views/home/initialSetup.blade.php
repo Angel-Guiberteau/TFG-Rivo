@@ -62,6 +62,7 @@
         <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
         <script src="{{ asset('js/home/initialSetup.js') }}"></script>
         <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('js/home/initialSetUpValidations/fistStepValidations.js') }}"></script>
     @endpush
 @endsection
     

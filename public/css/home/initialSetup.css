@@ -73,3 +73,35 @@ select{
   font-size: 16px;
   color: #333;
 }
+
+/* input.is-invalid {
+    border: 1px solid #e74c3c;
+    border-radius: 10px;
+    background-color: #fff5f5;
+} */
+
+input.is-valid {
+    padding-right: 2.5rem; /* espacio para el icono */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23028a0f' class='bi bi-check-circle' viewBox='0 0 16 16'%3E%3Cpath d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm3.354-8.354a.5.5 0 0 0-.708-.708L7.5 9.793 5.854 8.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l4-4z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.2rem 1.2rem;
+}
+
+
+.invalid-feedback {
+    color: #e74c3c;
+    font-size: 1rem;
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding-left: 0.5rem;
+    font-weight: 400;
+}
+
+
+input {
+    transition: all 0.3s ease;
+}
+
