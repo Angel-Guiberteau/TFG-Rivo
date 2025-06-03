@@ -19,11 +19,15 @@
                 <p class="w-100 fs-4 subtitle-mobile">
                     Start saving, organize your income and expenses, and reach your goals with Rivo.
                 </p>
+                @if (session('status'))
+                    <div class="alert alert-success">{{ session('status') }}</div>
+                @endif
+
                 @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger">{{ $error }}</div>
-                @endforeach
-            @endif
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger">{{ $error }}</div>
+                    @endforeach
+                @endif
             
             </article>
             
