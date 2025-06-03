@@ -1,6 +1,6 @@
 <section id="thirdStep" class="d-none">
 
-    <div id="expensesDisabledMsg" class="alert alert-warning d-none" role="alert">
+    <div id="expensesDisabledMsg" class="alert alert-warning fw-bold d-none" role="alert">
         ⚠️ Para introducir tus gastos, primero debes indicar al menos un ingreso fijo (paso anterior).
     </div>
 

@@ -1,6 +1,6 @@
 <section id="ninthStep" class="d-none">
 
-    <div id="noObjectiveAlert" class="alert alert-warning fw-bold d-none mb-3" role="alert">
+    <div id="noObjectiveAlert" class="alert alert-danger fw-bold d-none mb-3" role="alert">
         ⚠️ Al no elegir objetivo se guardará como operación y no progresará ningún objetivo.
     </div>
 

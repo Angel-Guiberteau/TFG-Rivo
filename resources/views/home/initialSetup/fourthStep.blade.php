@@ -1,7 +1,7 @@
 <section id="fourthStep" class="d-none">
 
-    <div id="otherExpensesDisabledMsg" class="alert alert-warning d-none" role="alert">
-        ⚠️ Para introducir tus gastos, primero debes indicar al menos un ingreso fijo (segundo paso).
+    <div id="otherExpensesDisabledMsg" class="alert alert-warning fw-bold d-none" role="alert">
+        ⚠️ Para introducir tus gastos, primero debes indicar al menos un ingreso fijo (2º paso).
     </div>
 
     <div id="otherExpensesSumErrorMsg" class="alert alert-warning d-none fs-5 fw-semibold text-center"></div>
