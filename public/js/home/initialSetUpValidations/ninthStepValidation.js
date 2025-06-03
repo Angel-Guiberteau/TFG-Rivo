@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function checkObjectiveSelected() {
-        // IMPORTANTE: buscar radios e input aunque estén ocultos (dentro de step6)
+        
         const radios = document.querySelectorAll('#sixthStep input[name="objective"]');
         const objPersonalize = document.querySelector('#sixthStep #objPersonalize');
 
@@ -68,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
         validateAhorroInput();
     });
 
-    // Añadir eventos a radios e input personalizados del step6
     const radios = document.querySelectorAll('#sixthStep input[name="objective"]');
     const objPersonalize = document.querySelector('#sixthStep #objPersonalize');
 
