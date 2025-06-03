@@ -1,4 +1,5 @@
 import { fetchData } from './helpers/api.js';
+import { refreshRecentOperations } from './helpers/api.js';
 
 function getBadgeText(typeId) {
     switch (typeId) {
@@ -43,7 +44,7 @@ export async function openTransactionDetail(id) {
     if (!panel) return;
 
     try {
-        const data = await fetchData(`/api/transaction/${id}`);
+        const data = await fetchData(`/api/operation/transaction/${id}`);
         if (!data) return;
 
         document.querySelector('.icon-circle-light').innerHTML = data.icon_html;
@@ -87,8 +88,8 @@ export async function openTransactionDetail(id) {
                     if (!willDelete) return;
 
                     try {
-                        const res = await fetch(`/api/transaction/${id}`, {
-                            method: 'DELETE',
+                        const res = await fetch(`/api/operation/deleteOperation/${id}`, {
+                            method: 'POST',
                             headers: {
                                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
                                 'Content-Type': 'application/json'
@@ -101,7 +102,7 @@ export async function openTransactionDetail(id) {
                         if (row) row.closest('.movement-item').remove();
 
                         closePanel();
-
+                        refreshRecentOperations();
                         swal("Transacción eliminada correctamente", {
                             icon: "success",
                             timer: 2000,

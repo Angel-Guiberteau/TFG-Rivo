@@ -6,6 +6,8 @@ use App\Enums\MovementTypesEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Operation extends Model
 {
@@ -103,6 +105,34 @@ class Operation extends Model
             ->offset($offset)
             ->limit($limit)
             ->get();
+    }
+    
+    public static function deleteOperation(int $id): bool {
+    
+        DB::beginTransaction();
+        try {
+            $operation = self::findOrFail($id);
+
+            if ($operation->planned) {
+                $operation->planned->delete();
+            }
+
+            if ($operation->unscheduled) {
+                $operation->unscheduled->delete();
+            }
+
+            $operation->delete();
+
+            DB::commit();
+            return true;
+
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            Log::error("Error al eliminar operación $id: " . $e->getMessage());
+            return false;
+        }
+        
+        return true;
     }
 
     public function category()

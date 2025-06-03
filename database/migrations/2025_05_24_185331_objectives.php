@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('objectives', function (Blueprint $table) {
             $table->unsignedInteger('id')->autoIncrement()->primary();
             
-            $table->string('name', 255);
+            $table->string('name', 75);
             $table->decimal('target_amount', 10, 2)->unsigned();
             $table->decimal('current_amount', 10, 2)->unsigned();
             $table->date('deadline')->nullable();

@@ -42,8 +42,19 @@ use Illuminate\Support\Js;
 */
 
 Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], function () {
-    Route::get('/transaction/{id}', [OperationController::class, 'getOperationById']);
-    Route::get('/incomeOperations', [OperationController::class, 'incomeOperations']);
+    // Operation
+    Route::group(['prefix' => 'operation', 'middleware' => ['auth', 'role:user']], function () {
+        Route::get('/transaction/{id}', [OperationController::class, 'getOperationById']);
+        Route::get('/incomeOperations', [OperationController::class, 'incomeOperations']);
+        Route::post('/deleteOperation/{id}', [OperationController::class, 'deleteOperation']);
+        Route::get('/refreshRecentOperations', function () {
+            $accountId = session('active_account_id');
+            $controller = new OperationController();
+            return $controller->getSixOperationsByAccountId($accountId);
+        });
+
+        Route::post('/refreshRecentOperations', [OperationController::class, 'thisMonthOperationsByAccountId']);
+    });
 });
 
 /*
