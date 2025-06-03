@@ -73,7 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (input === birthDateInput) return validateBirthDate();
     }
 
-    // Nueva función: validar sin mostrar errores, solo true/false
     function isFieldValid(input) {
         const value = input.value.trim();
 
@@ -100,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return age > 18 || (age === 18 && (monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0)));
         }
 
-        return false; // Por defecto inválido
+        return false;
     }
 
     function validateAllFields() {
@@ -113,7 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
         nextBtnStep1.disabled = !allValid;
     }
 
-    // Eventos: validar solo el campo y luego validar todo para botón
     nameInput.addEventListener("input", () => {
         validateField(nameInput);
         validateAllFields();

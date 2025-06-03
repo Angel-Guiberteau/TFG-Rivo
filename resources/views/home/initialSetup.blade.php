@@ -65,6 +65,7 @@
         <script src="{{ asset('js/home/initialSetUpValidations/fistStepValidations.js') }}"></script>
         <script src="{{ asset('js/home/initialSetUpValidations/secondStepValidations.js') }}"></script>
         <script src="{{ asset('js/home/initialSetUpValidations/thirdYfourthStepValidations.js') }}"></script>
+        <script src="{{ asset('js/home/initialSetUpValidations/fifthStepValidation.js') }}"></script>
     @endpush
 @endsection
     

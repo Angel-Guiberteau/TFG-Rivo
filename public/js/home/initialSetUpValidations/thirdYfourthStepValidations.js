@@ -127,7 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
             step3SumErrorMsg.classList.remove('d-none');
             step4SumErrorMsg.classList.remove('d-none');
 
-            // Limpiar campos (pero NO deshabilitarlos)
             [...step3Inputs, ...step4Inputs].forEach(input => {
                 input.value = '';
                 clearValidation(input);
@@ -175,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     });
 
-                    // Ocultar los mensajes de error
                     step3SumErrorMsg.classList.add('d-none');
                     step4SumErrorMsg.classList.add('d-none');
                 }
