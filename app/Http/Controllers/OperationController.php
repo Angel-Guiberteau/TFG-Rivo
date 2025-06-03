@@ -56,6 +56,12 @@ class OperationController extends Controller
 
     }
     
+    public function deleteOperation(int $id): JsonResponse{
+
+        return Operation::deleteOperation($id) ? response()->json(['success' => 'Operación borrada correctamente']) : response()->json(['error' => 'Error al eliminar la operacion. Póngase en contacto con el soporte'], 400);
+
+    }
+    
     public function getOperationById(int $operationId): JsonResponse{
         $operation = Operation::getOperationById($operationId);
         return response()->json([
