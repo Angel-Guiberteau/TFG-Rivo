@@ -10,6 +10,7 @@ use App\Models\BaseCategory;
 use App\Models\Icons;
 use App\Validations\ApiValidator;
 use App\Validations\BaseCategoriesValidator;
+use App\Validations\EndPointValidator;
 use App\Validations\IconValidator;
 use App\Validations\SentencesValidator;
 use App\Validations\CategoriesValidator;
@@ -379,28 +380,38 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return view('admin.endPoints.endPoint')->with('endPoints', $data);
         })->name('endPoints');
 
-        Route::post('/add', function (): RedirectResponse {
-            $data = request()->toArray();
-
-            $validate = SentencesValidator::validate($data, ValidationEnum::ADD->value);
-            
-            return SentenceController::addSentence($validate);
+        Route::get('/add', function (): View {
+            return view('admin.endPoints.addEndpoint');
         })->name('addEndPoints');
 
-        Route::put('/edit', function (): RedirectResponse {
+        Route::post('/safeEndpoint', function (): RedirectResponse {
             $data = request()->toArray();
 
-            $validate = SentencesValidator::validate($data, ValidationEnum::EDIT->value);
+            $validate = EndPointValidator::validate($data, ValidationEnum::ADD->value);
 
-            return SentenceController::editSentence($validate);
-        })->name('editEndPoints');
+            return EndPointController::addEndPoint($validate);
+        })->name('safeEndPoint');
+
+        Route::get('/edit/{id}', function ($id): View {
+            $data = EndPointController::getEndPointById($id);
+
+            return view('admin.endPoints.editEndpoint')->with('endPoint',$data);
+        })->name('editEndPoint');
+
+        Route::put('/safeEditedEndPoint', function (): RedirectResponse {
+            $data = request()->toArray();
+            
+            $validate = EndPointValidator::validate($data, ValidationEnum::EDIT->value);
+            
+            return EndPointController::editEndPoint($validate);
+        })->name('safeEditEndPoints');
 
         Route::post('/delete', function (): JsonResponse {
             $data = request()->toArray();
 
-            $validate = SentencesValidator::validate($data, ValidationEnum::DELETE->value);
+            $validate = EndPointValidator::validate($data, ValidationEnum::DELETE->value);
 
-            return SentenceController::deleteSentence($validate);
+            return EndPointController::deleteEndPoint($validate);
         })->name('deleteEndPoints');
     });
 });

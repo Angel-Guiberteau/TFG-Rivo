@@ -13,7 +13,7 @@
                 @include('templates.admin.breadCrum', [
                     'breadcrumbs' => [
                         ['name' => 'Inicio', 'url' => '/admin'],
-                        ['name' => 'Endpoints', 'url' => '/admin/endpoints'],
+                        ['name' => 'Endpoints', 'url' => '/admin/endPoints'],
                     ]
                 ])
 
@@ -21,7 +21,7 @@
 
                 <div>
                     @include('admin.components.buttons.addButton', [
-                        'data' => 'data-bs-toggle="modal" data-bs-target="#addEndPoint"'
+                        'onclick' => 'addEndPoint()'
                     ])
                     <table class="datatable table table-striped">
                         <thead>
@@ -48,10 +48,14 @@
                                 <td class="text-center">{{ $endPoint['return'] }}</td>
                                 <td class="text-center">{{ $endPoint['description'] }}</td>
                                 <td class="text-center align-middle">
-                                    @include('admin.components.buttons.editButton')
+                                    @include('admin.components.buttons.editButton', [
+                                        'onclick' => 'editEndPoint('. e($endPoint['id']) .')'
+                                    ])
                                 </td>
                                 <td class="text-center align-middle">   
-                                    @include('admin.components.buttons.deleteButton')
+                                    @include('admin.components.buttons.deleteButton', [
+                                        'onclick' => 'deleteEndPoint('. e($endPoint['id']) .')'
+                                    ])
                                 </td>
                             </tr>
                             @endforeach
@@ -63,16 +67,10 @@
     </main>
     
     @include('sweetAlerts.swal')
-    {{-- @include('admin.components.modals.categories.addCategory')
-    @include('admin.components.modals.categories.editCategory')
+    
 
     @push('scripts')
-        <script src="{{ asset('js/admin/modals/categories/modalAddCategory.js') }}"></script>
-        <script src="{{ asset('js/admin/modals/categories/modalEditCategory.js') }}"></script>
-        <script src="{{ asset('js/admin/categories/categories.js') }}"></script>
+        <script src="{{ asset('js/admin/endPoints/endPoints.js') }}"></script>
     @endpush
-
-    @push('styles')
-        <link rel="stylesheet" href="{{ asset('css/admin/modals/modal.css') }}">
-    @endpush --}}
+    
 @endsection

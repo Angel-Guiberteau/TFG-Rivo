@@ -1,5 +1,6 @@
 @php
     $usersRoutes = ['users', 'addUser', 'editUser', 'previewUser'];
+    $endPointRoutes = ['endPoints', 'addEndPoints', 'editEndPoint'];
 @endphp
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm px-3">
     <div class="collapse navbar-collapse">
@@ -20,7 +21,7 @@
                 <a class="nav-link {{ Route::currentRouteName() === 'sentences' ? 'active' : '' }}" href="{{ route('sentences') }}">Frases</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() === 'endPoints' ? 'active' : '' }}" href="{{ route('endPoints') }}">Endpoints</a>
+                <a class="nav-link {{ in_array(Route::currentRouteName(), $endPointRoutes) ? 'active' : '' }}" href="{{ route('endPoints') }}">Endpoints</a>
             </li>
         </ul>
         <form action="/logout" method="POST" class="d-flex">

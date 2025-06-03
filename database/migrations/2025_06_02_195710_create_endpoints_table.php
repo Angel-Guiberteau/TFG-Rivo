@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('method', 7);
             $table->string('parameters', 75)->nullable();;
             $table->string('return', 15);
-            $table->text('description')->nullable();
+            $table->string('description', 255)->nullable();
             $table->boolean('enabled')->default(true);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
