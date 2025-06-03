@@ -52,7 +52,7 @@
         <div class="tx-section full">
             <p class="tx-label mb-1">Acciones</p>
             <div class="tx-actions horizontal">
-                <button class="btn-full edit">
+                <button class="btn-full edit" id="editOperationButton">
                     <i class="fas fa-pen"></i>
                     Editar
                 </button>

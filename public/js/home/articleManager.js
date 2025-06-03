@@ -4,26 +4,47 @@ import { openTransactionDetail } from './transactionInfo.js';
 document.addEventListener('DOMContentLoaded', function () {
     const homeSection = document.getElementById('home-section');
     const showHomeButton = document.getElementById('showHome');
-
-    const showIncomeFormButton = document.getElementById('showIncomeForm');
-    const incomeSection = document.getElementById('income-section');
-    const incomeAddFormButton = document.getElementById('incomeAddForm');
-    const incomeAddFormSection = document.getElementById('incomeAddForm-section');
-    const backHistoryIncomeButton = document.getElementById('back-historyIncome');
-
-    const showEgressFormButton = document.getElementById('showEgressFrom');
-    const egressSection = document.getElementById('egress-section');
-    const egressAddFormButton = document.getElementById('egressAddForm');
-    const egressAddFormSection = document.getElementById('egressAddForm-section');
-    const backHistoryEgressButton = document.getElementById('back-historyEgress');
-
+    
     const contentSections = document.querySelectorAll(
         'main > section > article.home-article, main > section > article.income-article, main > section > article.egress-article'
     );
+function setupCategoryFilteringByType(initialType = null) {
+    const typeRadios = document.querySelectorAll('.type-radio');
+    const categoryLabels = document.querySelectorAll('#categoryOptions label[data-types]');
+    const TYPE_MAP = { income: '1', expense: '2', save: '3' };
 
-    let incomeOffset = 0;
-    const incomeLimit = 6;
-    let allLoaded = false;
+    const filter = (key) => {
+        const wanted = TYPE_MAP[key] || '';
+        categoryLabels.forEach(label => {
+            const types = label.dataset.types.split(',').map(v => v.trim());
+            const input = label.querySelector('input[type="radio"]');
+            if (types.includes(wanted)) {
+                label.classList.remove('hidden-category');
+            } else {
+                label.classList.add('hidden-category');
+                if (input) input.checked = false;
+            }
+        });
+    };
+
+    typeRadios.forEach(radio => {
+        radio.addEventListener('change', () => filter(radio.value));
+    });
+
+    const selectedRadio = document.querySelector('.type-radio:checked');
+    const startType = initialType || selectedRadio?.value || 'income';
+    filter(startType);
+}
+
+
+
+
+
+
+
+
+
+
 
     function formatShortDate(dateStr) {
         const date = new Date(dateStr);
@@ -50,6 +71,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
     function hideContentSections() {
         contentSections.forEach(section => {
             section.classList.remove('show');
@@ -60,40 +85,59 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function renderIncomeMovements(operations, offset = 0) {
-        const container = document.getElementById('income-movements');
-        if (!container) return;
-
-        operations.forEach((movement, index) => {
-            const isFirstLoad = offset === 0;
-            const absoluteIndex = offset + index;
-
-            const movementHTML = `
-                <div class="col-12 col-lg-6 movement-item ${absoluteIndex % 2 === 0 ? 'border-lg-end' : ''}"
-                    style="display: ${isFirstLoad && absoluteIndex >= 6 ? 'none' : 'block'};">
-                    <div class="movement-row" data-id="${movement.id}">
-                        <div class="movement-left d-flex align-items-center gap-3">
-                            <div class="movement-icon">
-                                ${movement.category.icon.icon ?? ''}
-                            </div>
-                            <div class="movement-info">
-                                <p class="movement-date mb-0">${formatShortDate(movement.action_date)}</p>
-                                <p class="badge-${getBadgeClass(movement.movement_type_id)} mb-1">
-                                    ${getMovementLabel(movement.movement_type_id)}
-                                </p>
-                                <p class="movement-name mb-0">${movement.category?.name ?? 'Sin categoría'}</p>
-                            </div>
+    function renderMovement(movement, index) {
+        const movementHTML = `
+            <div class="col-12 col-lg-6 movement-item ${index % 2 === 0 ? 'border-lg-end' : ''}">
+                <div class="movement-row" data-id="${movement.id}">
+                    <div class="movement-left d-flex align-items-center gap-3">
+                        <div class="movement-icon">
+                            ${movement.category?.icon?.icon ?? ''}
                         </div>
-                        <div class="movement-right">
-                            <p class="movement-amount m-0 fs-5 ${movement.movement_type_id == 2 ? 'negative' : 'positive'}">
-                                ${movement.movement_type_id == 2 ? '-' : '+'}${Number(movement.amount).toFixed(2)}€
+                        <div class="movement-info">
+                            <p class="movement-date mb-0">${formatShortDate(movement.action_date)}</p>
+                            <p class="badge-${getBadgeClass(movement.movement_type_id)} mb-1">
+                                ${getMovementLabel(movement.movement_type_id)}
                             </p>
+                            <p class="movement-name mb-0">${movement.category?.name ?? 'Sin categoría'}</p>
                         </div>
                     </div>
+                    <div class="movement-right">
+                        <p class="movement-amount m-0 fs-5 ${movement.movement_type_id == 2 ? 'negative' : 'positive'}">
+                            ${movement.movement_type_id == 2 ? '-' : '+'}${Number(movement.amount).toFixed(2)}€
+                        </p>
+                    </div>
                 </div>
-            `;
+            </div>
+        `;
+        return movementHTML;
+    }
 
-            container.insertAdjacentHTML('beforeend', movementHTML);
+    function showSection(section, onShow = null) {
+        if (!section) return;
+        section.style.display = 'flex';
+        requestAnimationFrame(async () => {
+            section.classList.add('show');
+            if (onShow && typeof onShow === 'function') {
+                await onShow();
+            }
+            section.classList.remove('fade-section');
+        });
+    }
+
+    async function refreshHistory(type) {
+        const container = document.getElementById(`${type}-movements`);
+        const loadMoreBtn = document.getElementById(`${type}-loadMoreBtn`);
+        if (!container) return;
+
+        container.innerHTML = '';
+        if (loadMoreBtn) loadMoreBtn.style.display = 'block';
+
+        const res = await fetchData(`/api/operation/${type}Operations?offset=0`);
+        if (!res || !Array.isArray(res)) return;
+
+        res.forEach((movement, i) => {
+            const html = renderMovement(movement, i);
+            container.insertAdjacentHTML('beforeend', html);
 
             const newRow = container.querySelector(`.movement-row[data-id="${movement.id}"]`);
             if (newRow) {
@@ -102,88 +146,89 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-
-    async function loadMoreIncomes() {
-        const res = await fetchData(`/api/operation/incomeOperations?offset=${incomeOffset}`);
-        const loadMoreBtn = document.getElementById('loadMoreBtn');
-
-        if (!res || res.length === 0) {
-            allLoaded = true;
-            if (loadMoreBtn) loadMoreBtn.style.display = 'none';
-            return;
-        }
-
-        renderIncomeMovements(res, incomeOffset);
-        incomeOffset += incomeLimit;
-
-        if (res.length < incomeLimit && loadMoreBtn) {
-            allLoaded = true;
-            loadMoreBtn.style.display = 'none';
+    window.refreshHistory = refreshHistory;
+    function setMovementType(type) {
+        const radio = document.querySelector(`.type-radio[value="${type}"]`);
+        if (radio) {
+            radio.checked = true;
+            radio.dispatchEvent(new Event('change'));
         }
     }
 
-    
-    function showSection(section) {
-        if (!section) return;
+    function setupHistory(type) {
+        const section = document.getElementById(`${type}-section`);
+        const formSection = document.getElementById(`operationAddForm-section`);
+        const showFormBtn = document.getElementById(`show${capitalize(type)}Form`);
+        const addFormBtn = document.getElementById(`${type}AddForm`);
+        const backHistoryBtn = document.getElementById(`back-history${capitalize(type)}`);
+        const movementsContainer = document.getElementById(`${type}-movements`);
+        const loadMoreBtn = document.getElementById(`${type}-loadMoreBtn`);
 
-        section.style.display = 'flex';
-        requestAnimationFrame(async () => {
-            section.classList.add('show');
+        let offset = 0;
+        const limit = 6;
+        let allLoaded = false;
 
-            if (section.id === 'income-section') {
-                incomeOffset = 0;
-                allLoaded = false;
-                const container = document.getElementById('income-movements');
-                const loadMoreBtn = document.getElementById('loadMoreBtn');
-                if (container) container.innerHTML = '';
-                if (loadMoreBtn) loadMoreBtn.style.display = 'block';
-                await loadMoreIncomes();
+        async function loadMore() {
+            const res = await fetchData(`/api/operation/${type}Operations?offset=${offset}`);
+            if (!res || res.length === 0) {
+                allLoaded = true;
+                if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+                return;
             }
 
-            section.classList.remove('fade-section');
-        });
-    }
+            res.forEach((movement, i) => {
+                const index = offset + i;
+                const html = renderMovement(movement, index);
+                movementsContainer.insertAdjacentHTML('beforeend', html);
 
-    if (showIncomeFormButton) {
-        showIncomeFormButton.addEventListener('click', () => {
-            hideContentSections();
-            showSection(incomeSection);
-        });
-    }
+                const newRow = movementsContainer.querySelector(`.movement-row[data-id="${movement.id}"]`);
+                if (newRow) {
+                    newRow.addEventListener('click', () => openTransactionDetail(movement.id));
+                }
+            });
 
-    if (incomeAddFormButton) {
-        incomeAddFormButton.addEventListener('click', () => {
-            hideContentSections();
-            showSection(incomeAddFormSection);
-        });
-    }
+            offset += limit;
+            if (res.length < limit && loadMoreBtn) loadMoreBtn.style.display = 'none';
+        }
 
-    if (backHistoryIncomeButton) {
-        backHistoryIncomeButton.addEventListener('click', () => {
-            hideContentSections();
-            showSection(incomeSection);
-        });
-    }
+        if (showFormBtn) {
+            showFormBtn.addEventListener('click', () => {
+                hideContentSections();
+                showSection(section, async () => {
+                    offset = 0;
+                    allLoaded = false;
+                    movementsContainer.innerHTML = '';
+                    if (loadMoreBtn) loadMoreBtn.style.display = 'block';
+                    await loadMore();
+                });
+            });
+        }
 
-    if (showEgressFormButton) {
-        showEgressFormButton.addEventListener('click', () => {
-            hideContentSections();
-            showSection(egressSection);
-        });
-    }
+        if (addFormBtn) {
+            addFormBtn.addEventListener('click', () => {
+                hideContentSections();
+                showSection(formSection, () => {
+                    setMovementType(type); 
+                    setupCategoryFilteringByType(type);  
+                });
+            });
+        }
 
-    if (egressAddFormButton) {
-        egressAddFormButton.addEventListener('click', () => {
-            hideContentSections();
-            showSection(egressAddFormSection);
-        });
-    }
 
-    if (backHistoryEgressButton) {
-        backHistoryEgressButton.addEventListener('click', () => {
-            hideContentSections();
-            showSection(egressSection);
-        });
+
+        if (backHistoryBtn) {
+            backHistoryBtn.addEventListener('click', () => {
+                hideContentSections();
+                showSection(section);
+            });
+        }
+
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', () => {
+                if (!allLoaded) loadMore();
+            });
+        }
+        
     }
 
     if (showHomeButton) {
@@ -193,14 +238,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    setupHistory('income');
+    setupHistory('expense');
+
     hideContentSections();
     showSection(homeSection);
-
-
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', () => {
-            if (!allLoaded) loadMoreIncomes();
-        });
-    }
+    setupCategoryFilteringByType();
 });
