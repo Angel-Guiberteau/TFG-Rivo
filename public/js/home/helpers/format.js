@@ -42,3 +42,12 @@ export function getRecurrenceText(code) {
         default: return 'Otro';
     }
 }
+export function getMovementLabel(typeId) {
+    switch (typeId) {
+        case 1: return 'Ingreso';
+        case 2: return 'Gasto';
+        case 3: return 'Ahorro';
+        default: return '';
+    }
+}
+

@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     async function loadMoreIncomes() {
-        const res = await fetchData(`/api/incomeOperations?offset=${incomeOffset}`);
+        const res = await fetchData(`/api/operation/incomeOperations?offset=${incomeOffset}`);
         const loadMoreBtn = document.getElementById('loadMoreBtn');
 
         if (!res || res.length === 0) {
