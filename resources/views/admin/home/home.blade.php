@@ -14,16 +14,11 @@
     <main>
         <section class="container-custom p-3 pb-5">
             <article class="bg-light p-3">
-                @include('templates.admin.breadCrum', [
-                    'breadcrumbs' => [
-                        ['name' => 'Inicio', 'url' => '/admin'],
-                    ]
-                ])
 
                 @include('templates.admin.title', ['title' => 'Panel de Administración de Rivo Finanzas'])
 
                 {{-- Contenedor central con Flexbox --}}
-                <div class="container d-flex flex-column justify-content-center" style="min-height: calc(70vh - 4rem);">
+                <div class="container d-flex flex-column justify-content-center mt-3" style="min-height: calc(70vh - 4rem);">
                     <div class="row g-4 justify-content-center">
 
                         {{-- Tarjeta horizontal: Usuarios --}}
@@ -83,8 +78,26 @@
                                 </div>
                             </a>
                         </div>
-
                     </div>
+                    <div class="col-12 mt-4">
+                        {{-- Tarjeta horizontal: Endpoints --}}
+                        <a href="{{ route('endPoints') }}" class="text-decoration-none">
+                            <div class="card card-custom bg-endpoints d-flex flex-row align-items-center p-4">
+                                <div class="card-icon-circle me-4">
+                                    <i class="fa-solid fa-plug fa-2x"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h4 class="card-title mb-1">Gestión de Endpoints</h4>
+                                    <p class="card-text mb-1">Administra los endpoints de la API de Rivo Finanzas: rutas, acceso y documentación.</p>
+                                    <small><i class="fa-solid fa-server me-1"></i>Última actualización: hoy</small>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-light text-dark">API-Rivo v1</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
                 </div>
 
             </article>
