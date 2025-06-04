@@ -27,8 +27,10 @@
                         <label for="op-save">Ahorro</label>
                     </div>
                 </div>
-                <p class="fw-bold mb-0 fs-4">Categorías</p>
-                <div class="categories-grid mt-2" id="categoryOptions">
+            </div>
+            <div class="col-12 mb-3">
+                <p class="fw-bold mb-2 fs-4">Categorías</p>
+                <div class="categories-grid" id="categoryOptions">
                     @foreach ($baseCategories as $category)
                         <label class="d-block text-center category-label" data-types="{{ implode(',', $category['movement_type_ids']) }}">
                             <input type="radio" name="category_id" value="{{ $category['id'] }}" class="d-none">
@@ -50,7 +52,18 @@
                 </div>
             </div>
             <div class="col-12 mb-3">
-                <p for="subject" class="fw-bold mb-0 fs-4">Asunto</p>
+                <div id="goalSelector" class="mt-3 d-none">
+                    <p class="fw-bold mb-2 fs-4">Objetivo</p>
+                    <select id="goal" name="objectiveId" class="form-select custom-select-input">
+                        <option value="">Ninguno</option>
+                        @foreach ($objectives as $objective)
+                            <option value="{{ $objective->id }}">{{ $objective->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="col-12 mb-3">
+                <p for="subject" class="fw-bold mb-2 fs-4">Información</p>
                 <input type="text" id="subject" name="subject" class="form-control mb-3 custom-input" placeholder="Asunto" required>
                 <textarea id="description" name="description" class="form-control custom-input" rows="3" placeholder="Description"></textarea>
             </div>

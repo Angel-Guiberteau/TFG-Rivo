@@ -17,6 +17,10 @@ class CategoryController extends Controller
         return Category::getAllCategoriesEnabled()->toArray();
     }
 
+    public static function numberOfCategories(): int {
+        return Category::numberOfCategories();
+    }
+
     public static function deleteCategory(array $data): JsonResponse {
         if (!$data['status']) {
             return response()->json(['error' => $data['error']]);

@@ -18,6 +18,11 @@ class Sentence extends Model
                         ->get();
     }
 
+    public static function numberOfSentences(): int {
+        return self::where('enabled', 1)
+                    ->count();
+    }
+
     public static function addSentence(string $text): bool {
         $sentence = new self();
 

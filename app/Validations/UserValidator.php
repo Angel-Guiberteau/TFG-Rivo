@@ -268,6 +268,7 @@ class UserValidator extends Validator {
             'operation_id' => 'nullable|integer',
             'category_id' => 'required|integer',
             'movement_type' => 'required|string|in:income,expense,save',
+            'objectiveId' => 'integer|nullable',
 
             'subject' => 'required|string|max:75',
             'description' => 'required|string|max:255',
@@ -286,8 +287,9 @@ class UserValidator extends Validator {
 
     protected static function messagesAddOperationUser(): array {
         return [
-            'operation_id.integer'  => 'La operacion debe ser un número válido.',
-
+            'movement_type.required'  => 'El tipo de operación es obligatorio.',
+            'movement_type.required'  => 'El tipo de operación es obligatorio.',
+            
             'category_id.required' => 'La categoría es obligatoria.',
             'category_id.integer'  => 'La categoría debe ser un número válido.',
 

@@ -23,19 +23,22 @@
                 <img id="asideLogo" src="{{ asset('img/logos/whiteRivoPng.png') }}" alt="">
                 <h1 class="fs-2 mb-0 align-self-end">Rivo</h1>
             </div>
-            <nav class="d-flex flex-column justify-content-start align-items-center gap-3" aria-label="Menú lateral">
-                <a class="w-100 d-flex align-items-center gap-2" href="#">
+            <nav class="asideNav d-flex flex-column justify-content-center align-items-center gap-2" aria-label="Menú lateral">
+                <button id="showObjectiveButton" class="w-100 d-flex align-items-center gap-2" href="#">
+                    <i class="fas fa-bullseye"></i> Objetivos
+                </button>
+                <button class="w-100 d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-user-friends"></i> Amigos
-                </a>
-                <a class="w-100 d-flex align-items-center gap-2" href="#">
+                </button>
+                <button class="w-100 d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-clipboard-list"></i> Historial
-                </a>
-                <a class="w-100 d-flex align-items-center gap-2" href="#">
+                </button>
+                <button class="w-100 d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-chart-bar"></i> Estadísticas
-                </a>
-                <a class="w-100 d-flex align-items-center gap-2" href="#">
+                </button>
+                <button id="showSettingsButton" class="w-100 d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-cog"></i> Ajustes
-                </a>
+                </button>
                 <form action="/logout" method="POST" class="d-flex align-items-center gap-2">
                     @csrf
                     <button type="submit" class="bg-transparent border-0 text-white d-flex align-items-center gap-2">
@@ -126,6 +129,8 @@
             @include('templates.home.operations.history', ['type' => 'income', 'title' => 'ingresos'])
             @include('templates.home.operations.history', ['type' => 'expense', 'title' => 'egresos'])
             @include('templates.home.operations.history', ['type' => 'save', 'title' => 'ahorro'])
+            @include('templates.home.createObjective')
+            @include('templates.home.settings')
 
             @include('templates.home.operations.addOperation')
         </section>

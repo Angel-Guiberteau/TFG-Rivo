@@ -23,6 +23,10 @@ class Category extends Model
                         ->get();
     }
 
+    public static function numberOfCategories(): int {
+        return self::count();
+    }
+
     public static function addCategory(string $text, int $iconId): array|false {
         $category = new self();
 

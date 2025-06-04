@@ -13,6 +13,10 @@ class IconController extends Controller
         return Icon::getAllIconsEnabled()->toArray();
     }
 
+    public static function numberOfIcons(): int {
+        return Icon::numberOfIcons();
+    }
+
     public static function addIcon(array $data): RedirectResponse {
 
         if (empty($data['status']) || !$data['status']) { 

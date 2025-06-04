@@ -34,6 +34,11 @@ aside.sidebar.sidebar-visible {
   visibility: visible;
   display: flex;
 }
+aside .asideNav > button{
+  color: #fff;
+  background: transparent;
+  border: none;
+}
 
 
 .sidebar-backdrop {
@@ -468,7 +473,7 @@ input[type="radio"]:checked + .category-option i {
 
 .categories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(80px, max-content));
+  grid-template-columns: repeat(auto-fill, minmax(90px, max-content));
   gap: 0.75rem;
   justify-content: center;
 }
@@ -1017,6 +1022,14 @@ canvas {
   background-color: #D4AF37;
   color: #fff;
 }
+.badge-light.save {
+  background-color: #3A506B;
+  color: #fff;
+}
+.badge-light.expense {
+  background-color: #E63946;
+  color: #fff;
+}
 
 .tx-title {
   font-size: 1.2rem;
@@ -1209,16 +1222,53 @@ body.blur-active::before {
   transition: all 0.3s ease;
 }
 
-.custom-datetime-input:hover {
+.custom-select-input{
+  background-color: #fff;
+  color: #1a1a1a;
+  border: 2px solid #d2d2d2;
+  border-left: 4px solid #6b00e5;
+  border-radius: 10px;
+  box-shadow: 0 6px 4px rgba(107, 0, 229, 0.1);
+  transition: all 0.3s ease;
+}
+
+.custom-datetime-input:hover, .custom-select-input:hover {
   border-color: #6b00e5;
   box-shadow: 0 6px 6px rrgba(107, 0, 229, 0.421)
 }
 
-.custom-datetime-input:focus {
+.custom-datetime-input:focus, .custom-select-input:focus {
   outline: none;
   border-color: #a15bff;
   box-shadow: 0 0 0 3px rgba(161, 91, 255, 0.3);
 }
+
+.custom-select-input {
+  appearance: none;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  background-image: url("data:image/svg+xml,%3Csvg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2rem;
+  cursor: pointer;
+}
+
+.custom-select-input option {
+  background-color: #ffffff;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+.custom-select-input option::focus {
+  background-color: #251041;
+}
+
+.custom-select-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 
 .custom-datetime-input::-webkit-calendar-picker-indicator {
   filter: invert(25%);
@@ -1285,5 +1335,8 @@ body.blur-active::before {
   background-color: #dcd2f7;
   border-color: #6f42c1;
   color: #4b2e88;
+}
+#goalSelector {
+    transition: all 0.3s ease;
 }
 
