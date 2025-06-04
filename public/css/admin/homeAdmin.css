@@ -51,3 +51,21 @@
 .card-custom.bg-sentences {
     background: linear-gradient(135deg, #2a9d90ba, #8ecae6bd);
 }
+
+.card-icon-circle {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.card-custom.d-flex .card-icon-circle {
+    margin-bottom: 0;
+}
+
+.card-custom.bg-endpoints {
+    background: linear-gradient(135deg, #694c93c0, #9d4eddbd);
+}
