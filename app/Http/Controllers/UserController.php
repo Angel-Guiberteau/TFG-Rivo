@@ -36,6 +36,13 @@ class UserController extends Controller
 
     public Array $delete;
     public int $id;
+    public string $name;
+    public string $last_name;
+    public string $birth_date;
+    public string $rol_id;
+    public string $email;
+    public string $username;
+    public string $password;
     public Array $categories;
     public Array $news;
     public Array $accounts;
@@ -54,35 +61,21 @@ class UserController extends Controller
         return User::numberOfUsers();
     }
 
-    public static function storeUser(): RedirectResponse
+    public static function storeUser($array): RedirectResponse
     {
-        $request = request();
+        $data = $array['data'] ?? [];
 
-        $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'last_name' => ['nullable', 'string', 'max:100', 'unique:users,last_name'],
-            'birth_date' => ['nullable', 'date'],
-            'rol_id' => ['required', 'exists:roles,id'],
-            'email' => ['required', 'email', 'max:255', 'unique:users,email'],
-            'username' => ['nullable', 'string', 'max:75', 'unique:users,username'],
-            'password' => ['required', 'string', 'min:8'],
-        ], [
-            'email.unique' => 'El correo electrónico ya está registrado.',
-            'username.unique' => 'El nombre de usuario ya existe.',
-            'last_name.unique' => 'Este apellido ya pertenece a otro usuario.',
-            'rol_id.exists' => 'El rol seleccionado no es válido.',
-            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
-        ]);
+        $controller = new UserController();
 
-        if ($validator->fails()) {
-            $mensajes = implode(' ', $validator->errors()->all());
+        $controller->name = $data['name'] ?? '';
+        $controller->last_name = $data['last_name'] ?? '';
+        $controller->birth_date = $data['birth_date'] ?? '';
+        $controller->rol_id = $data['rol_id'] ?? '';
+        $controller->email = $data['email'] ?? '';
+        $controller->username = $data['username'] ?? '';
+        $controller->password = bcrypt($data['password'] ?? '');
 
-            return redirect()->back()
-                ->with('error', $mensajes)
-                ->withInput();
-        }
-
-        $created = User::storeUser($validator->validated());
+        $created = User::storeUser($controller);
 
         if (!$created) {
             return redirect()->back()
@@ -93,26 +86,24 @@ class UserController extends Controller
         return redirect()->route('users')->with('success', 'Usuario creado correctamente.');
     }
 
-    public static function deleteUser(): JsonResponse
+    public static function deleteUser(array $data): RedirectResponse
     {
-        $request = request();
-
-        $validator = Validator::make($request->all(), [
-            'id' => ['required', 'exists:users,id'],
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['error' => 'El usuario no existe.']);
+        if (!isset($data['id']) || empty($data['id'])) {
+            return redirect()->back()->with('error', 'ID de usuario no proporcionado.');
         }
 
-        $deleted = User::deleteUser($validator->validated()['id']);
+        $controller = new UserController();
+        $controller->id = $data['id'];
+
+        $deleted = User::deleteUser($controller->id);
 
         if (!$deleted) {
-            return response()->json(['error' => 'Ha ocurrido un error al eliminar el usuario.']);
+            return redirect()->back()->with('error', 'Ha ocurrido un error al eliminar el usuario.');
         }
 
-        return response()->json(['success' => 'Usuario borrado correctamente.']);
+        return redirect()->back()->with('success', 'Usuario borrado correctamente.');
     }
+
 
     public static function getUserbyId($id)
     {

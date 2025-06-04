@@ -283,11 +283,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('addUser');
 
         Route::post('/storeUser', function (): RedirectResponse {
-            return UserController::storeUser();
+            
+            $request = request()->toArray();
+            // dd($request);
+            $validate = UserValidator::validate($request, ValidationEnum::ADD->value);
+            // dd($validate);
+            return UserController::storeUser($validate);
+            
         })->name('storeUser');
 
-        Route::post('/deleteUser', function (): JsonResponse {
-            return UserController::deleteUser();
+        Route::post('/deleteUser', function (): RedirectResponse {
+            $request = request()->toArray();
+            // dd($request);
+            $validate = UserValidator::validate($request, ValidationEnum::DELETE->value);
+            // dd($validate);
+            return UserController::deleteUser($validate['data']);
         })->name('deleteUser');
 
         Route::get('/editUser/{id}', function ($id): RedirectResponse|View {
