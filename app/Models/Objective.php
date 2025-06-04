@@ -41,4 +41,11 @@ class Objective extends Model
             ->where('enabled', 1)
             ->get();
     }
+
+    public static function updateCurrentAmount(int $objectiveId, float $operationAmount): bool{
+        $objective = self::find($objectiveId);
+
+        $objective->current_amount += $operationAmount;
+        return $objective->save();
+    }
 }

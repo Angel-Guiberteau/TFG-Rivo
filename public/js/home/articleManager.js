@@ -6,16 +6,18 @@ document.addEventListener('DOMContentLoaded', function () {
     const showHomeButton = document.getElementById('showHome');
     
     const contentSections = document.querySelectorAll(
-        'main > section > article.home-article, main > section > article.income-article, main > section > article.egress-article'
+        'main > section > article.home-article, main > section > article.income-article, main > section > article.egress-article, main > section > article.objective-article, main > section > article.settings-article'
     );
 
     function setupCategoryFilteringByType(initialType = null) {
         const typeRadios = document.querySelectorAll('.type-radio');
         const categoryLabels = document.querySelectorAll('#categoryOptions label[data-types]');
         const TYPE_MAP = { income: '1', expense: '2', save: '3' };
-
+        const goalSection = document.getElementById('goalSelector');
+                
         const filter = (key) => {
             const wanted = TYPE_MAP[key] || '';
+
             categoryLabels.forEach(label => {
                 const types = label.dataset.types.split(',').map(v => v.trim());
                 const input = label.querySelector('input[type="radio"]');
@@ -26,6 +28,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (input) input.checked = false;
                 }
             });
+
+            if (goalSection) {
+                if (key === 'save') {                    
+                    goalSection.classList.remove('d-none');
+                    goalSection.style.display = 'block';
+                } else {
+                    goalSection.style.display = 'none';
+                }
+            }
         };
 
         typeRadios.forEach(radio => {
@@ -36,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const startType = initialType || selectedRadio?.value || 'income';
         filter(startType);
     }
+
 
     function formatShortDate(dateStr) {
         const date = new Date(dateStr);
@@ -104,9 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showSection(section, onShow = null) {
-        if (!section) return;
-        console.log(section);
-        
+        if (!section) return;        
         section.style.display = 'flex';
         requestAnimationFrame(async () => {
             section.classList.add('show');
@@ -231,11 +241,37 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+
     setupHistory('income');
     setupHistory('expense');
     setupHistory('save');
 
 
+    
+
+    const showObjectiveBtn = document.getElementById('showObjectiveButton');
+    const objectiveSection = document.getElementById('objectiveAdd-section');
+
+    if (showObjectiveBtn && objectiveSection) {
+        showObjectiveBtn.addEventListener('click', () => {
+            hideContentSections();
+            showSection(objectiveSection);
+            setFabIcon('custom');
+        });
+    }
+    
+    const showSettingsBtn = document.getElementById('showSettingsButton');
+    const settingsSection = document.getElementById('settings-section');
+
+        if (showSettingsBtn && settingsSection) {
+        showSettingsBtn.addEventListener('click', () => {
+            hideContentSections();
+            showSection(settingsSection);
+            setFabIcon('custom');
+        });
+    }
+
+    
     hideContentSections();
     showSection(homeSection);
     setupCategoryFilteringByType();

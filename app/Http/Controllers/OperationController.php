@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enums\MovementTypesEnum;
+use App\Models\Objective;
+use App\Models\ObjectiveOperation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -151,9 +153,19 @@ class OperationController extends Controller
                     $operation = Operation::addOperation($data);
                     if($operation){
                         if(isset($data['schedule'])){
-                            OperationPlanned::addPlannedOperation($operation->id, $data);
+                            if(!OperationPlanned::addPlannedOperation($operation->id, $data)){
+                                return false;
+                            }
                         }else{
                             if(!OperationUnschedule::addUnscheduleOperation($operation->id)){
+                                return false;
+                            }
+                        }
+                        if(isset($data['objectiveId'])){
+                            if(!ObjectiveOperation::addObjectiveOperation($data['objectiveId'], $operation->id)){
+                                return false;
+                            }
+                            if(!Objective::updateCurrentAmount($data['objectiveId'], $operation->amount)){
                                 return false;
                             }
                         }
