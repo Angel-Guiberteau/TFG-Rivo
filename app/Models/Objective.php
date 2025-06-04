@@ -23,8 +23,8 @@ class Objective extends Model
 
         $objective->name = $data['name'];
         $objective->target_amount = $data['target_amount'];
-        $objective->current_amount = $data['current_amount'];
-        $objective->deadline = $data['deadline'];
+        $objective->current_amount = $data['current_amount'] ?? 0;
+        $objective->deadline = $data['deadline'] ?? null;
         $objective->account_id = $data['account_id'];
 
         return $objective->save() ? $objective : false;
