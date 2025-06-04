@@ -427,6 +427,16 @@ input:checked + .slider:before {
   border-radius: 8px;
   background-color: #fff;
 }
+#addCategoryButton{
+  border: none;
+  border-radius: 8px;
+}
+#addCategoryButton > .category-option:hover{
+  border-color: #6f42c1;
+  box-shadow: 0 0 0 4px rgba(111, 66, 193, 0.2);
+  background-color: #f8f2ff;
+  color: #6f42c1;
+}
 
 .category-option i {
   font-size: 1rem;
@@ -1287,6 +1297,8 @@ body.blur-active::before {
   }
 }
 
+
+
 .custom-input {
   background-color: #fff;
   color: #1a1a1a;
@@ -1308,7 +1320,7 @@ body.blur-active::before {
   box-shadow: 0 0 0 3px rgba(161, 91, 255, 0.3);
 }
 
-.operation-types input[type="radio"] {
+.operation-types input[type="radio"], .operation-types input[type="checkbox"]{
   display: none;
 }
 
@@ -1331,12 +1343,54 @@ body.blur-active::before {
   color: #6f42c1;
 }
 
-.operation-types input[type="radio"]:checked + label {
+.operation-types input[type="radio"]:checked + label,  .operation-types input[type="checkbox"]:checked + label{
   background-color: #dcd2f7;
   border-color: #6f42c1;
   color: #4b2e88;
 }
 #goalSelector {
     transition: all 0.3s ease;
+}
+
+
+/* Categories add form */
+.icon-scroll-wrapper {
+    max-height: 220px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0;
+    margin-top: 0.5rem;
+    border-radius: 12px;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain; 
+}
+
+
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  gap: 1rem;
+}
+
+.icon-option {
+  font-size: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.5rem;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.icon-option:hover {
+  transform: scale(1.1);
+  background-color: #ececec;
+}
+
+.icon-option.selected {
+  outline: 2px solid #6b00e5;
+  outline-offset: -2px;
+  background-color: #f1e8ff;
+  box-shadow: 0 0 8px rgba(107, 0, 229, 0.2);
 }
 

@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\BaseCategory;
 use App\Models\Category;
 use App\Models\MovementType;
-use App\Models\User;
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Collection;
+use App\Models\MovementTypeCategories;
+use App\Models\UserCategory;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -31,6 +33,37 @@ class CategoryController extends Controller
         }
 
         return response()->json(['success' => 'Caregoría borrada correctamente.']);
+    }
+    
+    public static function addUserCategory(array $data): bool {
+        DB::beginTransaction();
+        $category = Category::addUserCategory($data);
+        if (!$category) {
+            DB::rollBack();
+            return false;
+        }
+        $data['user_id'] = Auth::user()->id;
+        $data['category_id'] = $category->id;
+        $userCategory = UserCategory::addUserCategory($data);
+        if(!$userCategory) {
+            DB::rollBack();
+            return false;
+        }
+        foreach ($data['types'] as $key => $value) {
+            $data['movement_type_id'] = $value;
+            $movementCategory = MovementTypeCategories::addMovementTypeCategory($data);
+            if (!$movementCategory) {
+                DB::rollBack();
+                return false;
+            }
+        }
+
+        if (!$movementCategory) {
+            DB::rollBack();
+            return false;
+        }
+
+        return true;
     }
 
     public static function getEnabledMovementTypes(): array {
