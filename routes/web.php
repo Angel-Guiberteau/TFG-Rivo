@@ -211,9 +211,10 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
         if (!isset($request['schedule']) || $request['schedule'] !== 'on') {
             unset($request['expiration_date'], $request['recurrence']);
         }
+        
         $validate = UserValidator::validate($request, ValidationEnum::ADD_OPERATION_USER->value);
         if(!$validate['status']){
-            return redirect('/home')->with('error', 'Error al hacer la operación');
+            return redirect('/home')->with('error', 'Error al hacer la operación. Póngase en contacto con el soporte.');
         }
         
         $data = $validate['data'];
@@ -221,7 +222,7 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
         $operationController = new OperationController();
         $operationController->movement_type = $data['movement_type'];
         if(!$operationController->addOperationRequested($data)){
-            dd('fallido algo');
+            return redirect('/home')->with('error', 'Error al hacer la operación. Póngase en contacto con el soporte.');
         }
         
         return redirect('/home')->with('success', 'Operación añadida correctamente');

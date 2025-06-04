@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         { id: "home", icon: "fas fa-home", color: "text-secondary", targetId: "showHome" },
         { id: "income", icon: "fas fa-plus", color: "text-success", targetId: "showIncomeForm" },
         { id: "expense", icon: "fas fa-minus", color: "text-danger", targetId: "showExpenseForm" },
-        { id: "save", icon: "fas fa-piggy-bank", color: "text-warning", targetId: "showSAveForm" }
+        { id: "save", icon: "fas fa-piggy-bank", color: "text-warning", targetId: "showSaveForm" }
     ];
 
     let isOpen = false;
@@ -51,4 +51,16 @@ document.addEventListener("DOMContentLoaded", () => {
             fabMenu.classList.remove("open");
         }
     });
+    window.setFabIcon = function (id) {
+        const option = options.find(opt => opt.id === id);
+        const fabIcon = document.getElementById("fab-icon");
+        if (option && fabIcon) {
+            fabIcon.className = `${option.icon}`;
+            fabIcon.setAttribute("data-id", id);
+        } else if (fabIcon) {
+            // Si es una vista fuera del FAB, por ejemplo "objective"
+            fabIcon.className = "fas fa-dot-circle"; // o cualquier icono neutral
+            fabIcon.setAttribute("data-id", "custom");
+        }
+    };
 });
