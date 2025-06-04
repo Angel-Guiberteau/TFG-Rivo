@@ -86,26 +86,24 @@ class UserController extends Controller
         return redirect()->route('users')->with('success', 'Usuario creado correctamente.');
     }
 
-    public static function deleteUser(): JsonResponse
+    public static function deleteUser(array $data): RedirectResponse
     {
-        $request = request();
-
-        $validator = Validator::make($request->all(), [
-            'id' => ['required', 'exists:users,id'],
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['error' => 'El usuario no existe.']);
+        if (!isset($data['id']) || empty($data['id'])) {
+            return redirect()->back()->with('error', 'ID de usuario no proporcionado.');
         }
 
-        $deleted = User::deleteUser($validator->validated()['id']);
+        $controller = new UserController();
+        $controller->id = $data['id'];
+
+        $deleted = User::deleteUser($controller->id);
 
         if (!$deleted) {
-            return response()->json(['error' => 'Ha ocurrido un error al eliminar el usuario.']);
+            return redirect()->back()->with('error', 'Ha ocurrido un error al eliminar el usuario.');
         }
 
-        return response()->json(['success' => 'Usuario borrado correctamente.']);
+        return redirect()->back()->with('success', 'Usuario borrado correctamente.');
     }
+
 
     public static function getUserbyId($id)
     {

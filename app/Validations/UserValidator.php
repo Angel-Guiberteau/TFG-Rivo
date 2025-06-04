@@ -66,7 +66,7 @@ class UserValidator extends Validator {
 
     protected static function rulesDelete(): array {
         return [
-            'id' => 'required|integer'
+            'id' => 'required|integer|exists:users,id'
         ];
     }
 
@@ -74,6 +74,7 @@ class UserValidator extends Validator {
         return [
             'id.required' => 'Ha sucedido un error inesperado.',
             'id.integer' => 'Ha sucedido un error inesperado.',
+            'id.exists' => 'El usuario no existe o ha sido eliminado.'
         ];
     }
 

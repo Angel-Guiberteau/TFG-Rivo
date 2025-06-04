@@ -91,7 +91,7 @@ class User extends Authenticatable
     public static function storeUser(UserController  $data): bool
     {
         $user = new self();
-        
+
         $user->name = $data->name;
         $user->last_name = $data->last_name ?? null;
         $user->birth_date = $data->birth_date ?? null;
@@ -107,12 +107,13 @@ class User extends Authenticatable
     {
         $user = self::find($id);
 
-        if ($user) {
-            $user->enabled = 0;
-            return $user->save();
+        if (!$user) {
+            return false;
         }
 
-        return false;
+        $user->enabled = 0;
+
+        return $user->save();
     }
 
     public static function getUserById(int $id): ?self
