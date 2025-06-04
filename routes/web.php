@@ -240,7 +240,17 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
     
     Route::get('/', function (): View {
-        return view('admin.home.home');
+
+        $numUsers = UserController::numberOfUsers();
+        $numSentences = SentenceController::numberOfSentences();
+        $numIcons = IconController::numberOfIcons();
+        $numCategory = CategoryController::numberOfCategories();
+
+        return view('admin.home.home')
+            ->with('numUsers', $numUsers)
+            ->with('numSentences', $numSentences)
+            ->with('numIcons', $numIcons)
+            ->with('numCategory', $numCategory);
     })->name('homeAdmin');
 
     // USERS
@@ -248,6 +258,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     Route::group(['prefix' => 'users'], function () {
 
         Route::get('/', function (): View {
+
             return UserController::listUsers();
         })->name('users');
 

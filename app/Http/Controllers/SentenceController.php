@@ -16,6 +16,10 @@ class SentenceController extends Controller
         return view('admin.sentences.sentences')->with('sentences', $data);
     }
 
+    public static function numberOfSentences(): int {
+        return Sentence::numberOfSentences();
+    }
+
     public static function addSentence(array $data): RedirectResponse {
         if (!$data['status']) { 
             return redirect()

@@ -70,6 +70,10 @@ class User extends Authenticatable
         ]);
     }
 
+    public static function numberOfUsers(): int {
+        return self::count();
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class, 'rol_id');

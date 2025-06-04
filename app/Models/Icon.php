@@ -22,6 +22,11 @@ class Icon extends Model
             ->get();
     }
 
+    public static function numberOfIcons(): int {
+        return self::where('enabled', 1)
+                    ->count();
+    }
+
     public static function addIcon( string $name ): bool {
         $icon = new self();
 

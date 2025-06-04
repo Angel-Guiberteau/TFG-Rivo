@@ -34,7 +34,7 @@
                                         <small><i class="fa-regular fa-clock me-1"></i>Última actualización: hoy</small>
                                     </div>
                                     <div class="text-end">
-                                        <span class="badge bg-light text-dark">+52 usuarios</span>
+                                        <span class="badge bg-light text-dark">+{{ $numUsers }} usuarios</span>
                                     </div>
                                 </div>
                             </a>
@@ -48,7 +48,7 @@
                                     </div>
                                     <h5 class="card-title">Iconos</h5>
                                     <p class="card-text">Gestiona la biblioteca de iconos que se usa en todo el sistema.</p>
-                                    <small><i class="fa-solid fa-layer-group me-1"></i>32 iconos disponibles</small>
+                                    <small><i class="fa-solid fa-layer-group me-1"></i>{{ $numIcons }} iconos disponibles</small>
                                 </div>
                             </a>
                         </div>
@@ -61,7 +61,7 @@
                                     </div>
                                     <h5 class="card-title">Categorías</h5>
                                     <p class="card-text">Crea y organiza categorías para ingresos, gastos y más.</p>
-                                    <small><i class="fa-solid fa-bookmark me-1"></i>15 categorías en uso</small>
+                                    <small><i class="fa-solid fa-bookmark me-1"></i>{{ $numCategory }} categorías en uso</small>
                                 </div>
                             </a>
                         </div>
@@ -74,7 +74,7 @@
                                     </div>
                                     <h5 class="card-title">Frases LogIn</h5>
                                     <p class="card-text">Edita las oraciones que se muestran al usuario en nuestro LogIn.</p>
-                                    <small><i class="fa-regular fa-comment me-1"></i>12 oraciones activas</small>
+                                    <small><i class="fa-regular fa-comment me-1"></i>{{ $numSentences }} oraciones activas</small>
                                 </div>
                             </a>
                         </div>
