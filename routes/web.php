@@ -229,6 +229,21 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 
 
     })->name('addOperationUser');
+    
+    Route::post('/addObjective', function () {
+        //Le llega el nombre del objetivo y el dinero objetivo.
+        $request = request()->toArray();
+        
+        $request['account_id'] = session('active_account_id');
+        $objectiveController = new ObjectiveController();
+        if(!$objectiveController->addObjective($request)){
+            return redirect('/home')->with('error', 'Error al añadir el objetivo. Póngase en contacto con el soporte.');
+        }
+        
+        return redirect('/home')->with('success', 'Operación añadida correctamente');
+
+
+    })->name('addObjective');
 
 });
 

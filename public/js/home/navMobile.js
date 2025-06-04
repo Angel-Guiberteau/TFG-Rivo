@@ -58,8 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
             fabIcon.className = `${option.icon}`;
             fabIcon.setAttribute("data-id", id);
         } else if (fabIcon) {
-            // Si es una vista fuera del FAB, por ejemplo "objective"
-            fabIcon.className = "fas fa-dot-circle"; // o cualquier icono neutral
+            
+            fabIcon.className = "fas fa-dot-circle";
             fabIcon.setAttribute("data-id", "custom");
         }
     };
