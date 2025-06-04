@@ -14,6 +14,7 @@ class EndPoint extends Model
         'method',
         'parameters',
         'return',
+        'return_data',
         'enabled',
     ];
 
@@ -25,7 +26,7 @@ class EndPoint extends Model
     }
 
     public static function getEndPointById(int $id): ?EndPoint {
-        return self::select('id', 'name', 'url', 'method', 'parameters', 'return')
+        return self::select('id', 'name', 'url', 'method', 'parameters', 'return', 'return_data')
                     ->where('id', $id)
                     ->where('enabled', 1)
                     ->first();
@@ -39,6 +40,7 @@ class EndPoint extends Model
         $endPoint->method = $data['method'];
         $endPoint->parameters = $data['parameters'];
         $endPoint->return = $data['return'];
+        $endPoint->return_data = $data['returnData'];
         $endPoint->description = $data['description'];
 
         return $endPoint->save();
@@ -76,6 +78,12 @@ class EndPoint extends Model
             if ($endPoint->return = $data['return']) {
                 
                 $endPoint->return = $data['return'];
+                $change = true;
+            }
+
+            if ($endPoint->return_data = $data['returnData']) {
+                
+                $endPoint->return_data = $data['returnData'];
                 $change = true;
             }
             
