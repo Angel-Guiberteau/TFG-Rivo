@@ -32,5 +32,15 @@ class MovementTypeCategories extends Model
             ]);
         }
     }
+    
+    public static function addMovementTypeCategory(array $data): bool | self
+    {
+        $movementTypeCategory = new self;
+
+        $movementTypeCategory->movement_type_id = $data['movement_type_id'];
+        $movementTypeCategory->category_id = $data['category_id'];
+
+        return $movementTypeCategory->save() ? $movementTypeCategory : false;
+    }
 
 }

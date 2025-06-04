@@ -131,6 +131,7 @@
             @include('templates.home.operations.history', ['type' => 'save', 'title' => 'ahorro'])
             @include('templates.home.createObjective')
             @include('templates.home.settings')
+            @include('templates.home.createCategory')
 
             @include('templates.home.operations.addOperation')
         </section>

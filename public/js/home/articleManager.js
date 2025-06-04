@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const showHomeButton = document.getElementById('showHome');
     
     const contentSections = document.querySelectorAll(
-        'main > section > article.home-article, main > section > article.income-article, main > section > article.egress-article, main > section > article.objective-article, main > section > article.settings-article'
+        'main > section > article.home-article, main > section > article.income-article, main > section > article.egress-article, main > section > article.objective-article, main > section > article.settings-article, main > section > article.category-article'
     );
 
     function setupCategoryFilteringByType(initialType = null) {
@@ -151,12 +151,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.refreshHistory = refreshHistory;
     function setMovementType(type) {
-        const radio = document.querySelector(`.type-radio[value="${type}"]`);
+        const form = document.getElementById('operationAddForm-section');
+        const radio = form.querySelector(`.type-radio[value="${type}"]`);
         if (radio) {
             radio.checked = true;
             radio.dispatchEvent(new Event('change'));
         }
     }
+
 
     function setupHistory(type) {
         const section = document.getElementById(`${type}-section`);
@@ -270,7 +272,43 @@ document.addEventListener('DOMContentLoaded', function () {
             setFabIcon('custom');
         });
     }
+    
+    const showCategoryFormButton = document.getElementById('addCategoryButton');
+    const categorySection = document.getElementById('categoryAdd-section');
+    const iconGrid = categorySection.querySelector('.icon-grid');
+    const hiddenIconInput = categorySection.querySelector('input[name="icon"]');
 
+    if (showCategoryFormButton && categorySection) {
+        showCategoryFormButton.addEventListener('click', async () => {
+            hideContentSections();
+            showSection(categorySection);
+            setFabIcon('custom');
+
+            if (iconGrid && iconGrid.children.length === 0) {
+                try {
+                    const res = await fetch('/api/icon/getAllIcons');
+                    const icons = await res.json();
+
+                    icons.forEach(icon => {
+                        const div = document.createElement('div');
+                        div.classList.add('icon-option');
+                        div.dataset.icon = icon.icon;
+                        div.innerHTML = icon.icon;
+
+                        div.addEventListener('click', () => {
+                            iconGrid.querySelectorAll('.icon-option').forEach(opt => opt.classList.remove('selected'));
+                            div.classList.add('selected');
+                            hiddenIconInput.value = icon.id;
+                        });
+
+                        iconGrid.appendChild(div);
+                    });
+                } catch (error) {
+                    console.error('Error cargando iconos:', error);
+                }
+            }
+        });
+    }
     
     hideContentSections();
     showSection(homeSection);
