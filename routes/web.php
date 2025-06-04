@@ -74,7 +74,9 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
             return $operation->deleteOperation($validate['data']['id']);
         });
 
-        Route::get('/refreshRecentOperations', function (): ?Collection {
+        Route::get('/expenseOperations', [OperationController::class, 'expenseOperations']);
+        
+        Route::get('/refreshRecentOperations', function () {
             $accountId = session('active_account_id');
             $controller = new OperationController();
             return $controller->getSixOperationsByAccountId($accountId);
@@ -201,10 +203,14 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
             unset($request['expiration_date'], $request['recurrence']);
         }
         $validate = UserValidator::validate($request, ValidationEnum::ADD_OPERATION_USER->value);
+        if(!$validate['status']){
+            return redirect('/home')->with('error', 'Error al hacer la operación');
+        }
+        
         $data = $validate['data'];
-
+        $data['account_id'] = session('active_account_id');
         $operationController = new OperationController();
-        $operationController->setOperationType($data['movement_type']);
+        $operationController->movement_type = $data['movement_type'];
         if(!$operationController->addOperationRequested($data)){
             dd('fallido algo');
         }

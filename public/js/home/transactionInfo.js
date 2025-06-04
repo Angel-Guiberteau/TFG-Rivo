@@ -83,8 +83,7 @@ export async function openTransactionDetail(id) {
                     icon: "warning",
                     buttons: ["Cancelar", "Sí, eliminar"],
                     dangerMode: true
-                })
-                .then(async (willDelete) => {
+                }).then(async (willDelete) => {
                     if (!willDelete) return;
 
                     try {
@@ -103,6 +102,13 @@ export async function openTransactionDetail(id) {
 
                         closePanel();
                         refreshRecentOperations();
+
+                        const visibleSection = document.querySelector('article.show');
+                        if (visibleSection?.id?.includes('section')) {
+                            const sectionType = visibleSection.id.replace('-section', '');
+                            refreshHistory(sectionType);
+                        }
+
                         swal("Transacción eliminada correctamente", {
                             icon: "success",
                             timer: 2000,
@@ -116,6 +122,22 @@ export async function openTransactionDetail(id) {
                         });
                     }
                 });
+            };
+
+        }
+
+        const editOperationButton = document.getElementById('editOperationButton');
+        if (editOperationButton) {
+            editOperationButton.onclick = () => {
+                closePanel();
+
+                if (data.movement_type_id === 1) {
+                    document.getElementById('showIncomeForm')?.click();
+                } else if (data.movement_type_id === 2) {
+                    document.getElementById('showEgressFrom')?.click();
+                }
+
+                setTimeout(() => fillEditForm(data), 300);
             };
         }
         openPanel();

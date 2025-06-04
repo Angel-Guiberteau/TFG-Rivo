@@ -265,9 +265,9 @@ class UserValidator extends Validator {
     protected static function rulesAddOperationUser(): array {
         return [
 
-            'account_id' => 'required|integer',
+            'operation_id' => 'nullable|integer',
             'category_id' => 'required|integer',
-            'movement_type' => 'required|string|in:income,expense,saveMoney',
+            'movement_type' => 'required|string|in:income,expense,save',
 
             'subject' => 'required|string|max:75',
             'description' => 'required|string|max:255',
@@ -286,8 +286,7 @@ class UserValidator extends Validator {
 
     protected static function messagesAddOperationUser(): array {
         return [
-            'account_id.required' => 'La cuenta es obligatoria.',
-            'account_id.integer'  => 'La cuenta debe ser un número válido.',
+            'operation_id.integer'  => 'La operacion debe ser un número válido.',
 
             'category_id.required' => 'La categoría es obligatoria.',
             'category_id.integer'  => 'La categoría debe ser un número válido.',

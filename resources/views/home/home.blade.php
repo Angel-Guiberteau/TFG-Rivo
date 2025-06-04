@@ -91,7 +91,7 @@
                             <i class="fas fa-plus fs-3 text-success"></i>
                             <span class="fs-6">Ingreso</span>
                         </button>
-                        <button id="showEgressFrom" class="action-button fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
+                        <button id="showExpenseForm" class="action-button fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
                             <i class="fas fa-minus fs-3 text-danger" style="text-shadow: 0 0 1px currentColor;"></i>
                             <span class="fs-6">Gasto</span>
                         </button>
@@ -123,7 +123,10 @@
 
             </article>
 
-            @include('templates.home.incomes')
+            @include('templates.home.operations.history', ['type' => 'income', 'title' => 'ingresos'])
+            @include('templates.home.operations.history', ['type' => 'expense', 'title' => 'egresos'])
+
+            @include('templates.home.operations.addOperation')
 
             {{-- EGRESS SECTION --}}
 
@@ -348,10 +351,18 @@
     </main>
     @if (session('success'))
         <div class="rivo-alert alert-success">
-            <span class="rivo-alert-icon"><i class="fas fa-check-circle"></i></span>
+            <span class="rivo-alert-icon succes"><i class="fas fa-check-circle"></i></span>
             <span class="rivo-alert-text">{{ session('success') }}</span>
             <button type="button" class="rivo-alert-close" onclick="this.parentElement.remove();">&times;</button>
         </div>
+    @else
+        @if (session('error'))
+            <div class="rivo-alert alert-error">
+                <span class="rivo-alert-icon error"><i class="fas fa-times-circle"></i></span>
+                <span class="rivo-alert-text">{{ session('error') }}</span>
+                <button type="button" class="rivo-alert-close" onclick="this.parentElement.remove();">&times;</button>
+            </div>
+        @endif
     @endif
     @push('scripts')
         <script src="{{ asset('js/chart/chart.umd.min.js') }}"></script>

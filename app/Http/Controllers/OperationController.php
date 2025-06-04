@@ -15,7 +15,8 @@ use Illuminate\Support\Collection;
 
 class OperationController extends Controller
 {
-    private string $movement_type;
+    public string $movement_type;
+
     public function getSixOperationsByAccountId(int $accountId): ?Collection{
         return Operation::getSixOperationsByAccountId($accountId);
     }
@@ -32,11 +33,6 @@ class OperationController extends Controller
         return Operation::getAllExpensesByAccountId($accountId);
     }
     
-    public function setOperationType(string $movement_type): bool{
-        $this->movement_type = $movement_type;
-        return true;
-    }
-    
     public function incomeOperations(array $data): JsonResponse{
         $user = Auth::user();
         $accountId = session('active_account_id');
@@ -49,10 +45,29 @@ class OperationController extends Controller
         $limit = 6;
         $incomes = Operation::getIncomesWithLimitByAccountId($accountId, $offset, $limit);
         if(!$incomes){
-            return response()->json(['error' => 'No hay cuenta activa'], 400);
+            return response()->json(['error' => 'Ha habido un error'], 400);
         }
 
         return response()->json($incomes);
+
+    }
+    
+    public function expenseOperations(Request $request): JsonResponse{
+        $user = Auth::user();
+        $accountId = session('active_account_id');
+        
+        if (!$accountId) {
+            return response()->json(['error' => 'No hay cuenta activa'], 400);
+        }
+        
+        $offset = intval($request->query('offset', 0));
+        $limit = 6;
+        $expenses = Operation::getExpensesWithLimitByAccountId($accountId, $offset, $limit);
+        if(!$expenses){
+            return response()->json(['error' => 'Ha habido un error'], 400);
+        }
+
+        return response()->json($expenses);
 
     }
     
@@ -112,8 +127,18 @@ class OperationController extends Controller
                     }
                 }
             }else{
-                if($this->movement_type == 'saveMoney'){
+                if($this->movement_type == 'save'){
                     $data['movement_type_id'] = MovementTypesEnum::SAVEMONEY->value;
+                    $operation = Operation::addOperation($data);
+                    if($operation){
+                        if(isset($data['schedule'])){
+                            OperationPlanned::addPlannedOperation($operation->id, $data);
+                        }else{
+                            if(!OperationUnschedule::addUnscheduleOperation($operation->id)){
+                                return false;
+                            }
+                        }
+                    }
                 }
             }
         }

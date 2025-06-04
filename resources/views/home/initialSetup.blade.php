@@ -62,6 +62,14 @@
         <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
         <script src="{{ asset('js/home/initialSetup.js') }}"></script>
         <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('js/home/initialSetUpValidations/fistStepValidations.js') }}"></script>
+        <script src="{{ asset('js/home/initialSetUpValidations/secondStepValidations.js') }}"></script>
+        <script src="{{ asset('js/home/initialSetUpValidations/thirdYfourthStepValidations.js') }}"></script>
+        <script src="{{ asset('js/home/initialSetUpValidations/fifthStepValidation.js') }}"></script>
+        <script src="{{ asset('js/home/initialSetUpValidations/sixthStepValidation.js') }}"></script>
+        <script src="{{ asset('js/home/initialSetUpValidations/seventhYeighthStepValidation.js') }}"></script>
+        <script src="{{ asset('js/home/initialSetUpValidations/ninthStepValidation.js') }}"></script>
+        <script src="{{ asset('js/home/initialSetUpValidations/tenthStepValidation.js') }}"></script>
     @endpush
 @endsection
     
