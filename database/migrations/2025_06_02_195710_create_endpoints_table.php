@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('method', 7);
             $table->string('parameters', 75)->nullable();;
             $table->string('return', 15);
+            $table->string('return_data', 255);
             $table->string('description', 255)->nullable();
             $table->boolean('enabled')->default(true);
             $table->timestamp('created_at')->useCurrent();
@@ -29,16 +30,9 @@ return new class extends Migration
                 'name' => 'GetOperationById',
                 'url' => '/api/operation/transaction/{id}',
                 'method' => 'GET',
-                'parameters' => 'id:int',
+                'parameters' => "[id : int]",
                 'return' => 'JsonResponse',
-                'enabled' => true,
-            ],
-            [
-                'name' => 'IncomeOperations',
-                'url' => '/api/operation/incomeOperations',
-                'method' => 'GET',
-                'parameters' => 'offset:int',
-                'return' => 'JsonResponse',
+                'return_data' => "['id' int]",
                 'enabled' => true,
             ],
         ]);

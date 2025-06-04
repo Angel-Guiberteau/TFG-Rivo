@@ -119,3 +119,32 @@ function deleteEndPoint(id) {
         }
     });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const message = sessionStorage.getItem('swalMessage');
+    if (message) {
+        const swalBox = document.createElement('div');
+        swalBox.textContent = message;
+        swalBox.style.position = 'fixed';
+        swalBox.style.bottom = '1rem';
+        swalBox.style.right = '1rem';
+        swalBox.style.minWidth = '300px';
+        swalBox.style.maxWidth = '90%';
+        swalBox.style.textAlign = 'center';
+        swalBox.style.padding = '0.8rem 1.5rem';
+        swalBox.style.borderRadius = '8px';
+        swalBox.style.fontSize = '0.9rem';
+        swalBox.style.zIndex = 9999;
+        swalBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
+        swalBox.style.backgroundColor = '#dff0d8';
+        swalBox.style.color = '#3c763d';
+        swalBox.style.border = '1px solid #d6e9c6';
+        document.body.appendChild(swalBox);
+
+        setTimeout(() => {
+            swalBox.remove();
+        }, 2500);
+
+        sessionStorage.removeItem('swalMessage');
+    }
+});

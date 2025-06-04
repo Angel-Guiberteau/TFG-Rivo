@@ -20,44 +20,54 @@ class EndPointController extends Controller
                 ->back()
                 ->with('errors', 'Ha habido un error inesperado.');
         }
-        
-        return $endPoint->toArray();
+
+        $data = $endPoint->toArray();
+
+        $returnData = $data['return_data'] ?? '';
+        $returnData = trim($returnData, '[]');
+        $parts = explode('|', $returnData);
+
+        $nombres = [];
+        $tipos = [];
+
+        foreach ($parts as $part) {
+            $part = trim($part);
+
+            if (preg_match("/^'(.*?)'\s+(\w+)$/", $part, $matches)) {
+                $nombres[] = $matches[1];
+                $tipos[] = $matches[2];
+            }
+        }
+
+        $data['return_data_name'] = $nombres;
+        $data['return_data_types'] = $tipos;
+
+        return $data;
     }
 
-    public static function addEndPoint( array $data ): RedirectResponse {
+
+    public static function addEndPoint( array $data ): JsonResponse {
         if (!$data['status']) { 
-            return redirect()
-                ->back()
-                ->with('error', $data['error']);
+            return response()->json(['error' => $data['error']]);
         }
 
         if (!EndPoint::addEndPoint($data['data'])) {
-            return redirect()
-                ->back()
-                ->with('error', 'Ha habido un error inesperado.');
+            return response()->json(['error' => 'Ha habido un error inesperado.']);
         }
 
-        return redirect()
-                ->route('endPoints')
-                ->with('success', 'Endpoint añadido correctamente.');
+        return response()->json(['success' => 'Endpoint añadido correctamente.']);
     }
 
-    public static function editEndPoint( array $data ): RedirectResponse {
+    public static function editEndPoint( array $data ): JsonResponse{
         if (!$data['status']) { 
-            return redirect()
-                ->back()
-                ->with('error', $data['error']);
+            return response()->json(['error' => $data['error']]);
         }
 
         if (!EndPoint::editEndPoint($data['data'])) {
-            return redirect()
-                ->back()
-                ->with('error', 'Ha habido un error inesperado.');
+            return response()->json(['error' => 'Ha habido un error inesperado.']);
         }
 
-        return redirect()
-                ->route('endPoints')
-                ->with('success', 'Endpoint modificado correctamente.');
+        return response()->json(['success' => 'Endpoint modificado correctamente.']);
     }
 
     public static function deleteEndPoint( array $data ): JsonResponse {

@@ -37,6 +37,7 @@ abstract class Validator extends Controller
             'addIncomeUser' => static::rulesAddOperationUser(),
             'getOperationById' => static::rulesGetOperationById(),
             'incomeOperations' => static::rulesIncomeOperations(),
+            'deleteOperation' => static::rulesDeleteOperation(),
             default => [],
         };
     }
@@ -52,6 +53,7 @@ abstract class Validator extends Controller
             'addIncomeUser' => static::messagesAddOperationUser(),
             'getOperationById' => static::messagesGetOperationById(),
             'incomeOperations' => static::messagesIncomeOperations(),
+            'deleteOperation' => static::messagesDeleteOperation(),
             default => [],
         };
     }
@@ -74,4 +76,6 @@ abstract class Validator extends Controller
     protected static function messagesGetOperationById(): array { return []; }
     protected static function rulesIncomeOperations(): array { return []; }
     protected static function messagesIncomeOperations(): array { return []; }
+    protected static function rulesDeleteOperation(): array { return []; }
+    protected static function messagesDeleteOperation(): array { return []; }
 }
