@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\UserController;
 use App\Models\UserCategory;
 use App\Models\Category;
 
@@ -87,17 +88,17 @@ class User extends Authenticatable
                     ->get();
     }
 
-    public static function storeUser(array $data): bool
+    public static function storeUser(UserController  $data): bool
     {
         $user = new self();
-
-        $user->name = $data['name'];
-        $user->last_name = $data['last_name'] ?? null;
-        $user->birth_date = $data['birth_date'] ?? null;
-        $user->rol_id = $data['rol_id'];
-        $user->email = $data['email'];
-        $user->username = $data['username'] ?? null;
-        $user->password = bcrypt($data['password']);
+        
+        $user->name = $data->name;
+        $user->last_name = $data->last_name ?? null;
+        $user->birth_date = $data->birth_date ?? null;
+        $user->rol_id = $data->rol_id;
+        $user->email = $data->email;
+        $user->username = $data->username ?? null;
+        $user->password = $data->password ?? null;
 
         return $user->save();
     }
