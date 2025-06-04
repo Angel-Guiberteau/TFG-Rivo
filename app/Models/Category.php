@@ -55,6 +55,15 @@ class Category extends Model
 
         return false;
     }
+    
+    public static function addUserCategory(array $data): bool | self {
+        $category = new self;
+
+        $category->name = $data['name'];
+        $category->icon_id = $data['icon'];
+
+        return $category->save() ? $category : false;
+    }
 
     public static function deleteCategory(int $id): bool {
         $category = self::find($id);

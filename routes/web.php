@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\MovementTypesEnum;
 use App\Enums\ValidationEnum;
 use App\Http\Controllers\BaseCategoryController;
 use App\Http\Controllers\AccountController;
@@ -95,6 +96,13 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
             $accountId = session('active_account_id');
             $controller = new OperationController();
             return $controller->getSixOperationsByAccountId($accountId);
+        });
+    });
+    Route::group(['prefix' => 'icon', 'middleware' => ['auth', 'role:user']], function () {
+
+        Route::get('/getAllIcons', function () {
+            $controller = new IconController();
+            return $controller->getAllIcons();
         });
     });
 });
@@ -244,6 +252,32 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 
 
     })->name('addObjective');
+
+    Route::post('/addCategoryUser', function (): RedirectResponse {
+        $data = request()->toArray();
+        if(isset($data['types'])){
+            foreach ($data['types'] as $index => $value) {
+                if($value == 'income')
+                    $data['types'][$index] = MovementTypesEnum::INCOME->value;
+                else
+                    if($value == 'expense')
+                        $data['types'][$index] = MovementTypesEnum::EXPENSE->value;
+                    else
+                        if($value == 'save')
+                            $data['types'][$index] = MovementTypesEnum::SAVEMONEY->value;
+            }
+        }
+        $validate = BaseCategoriesValidator::validate($data, ValidationEnum::ADD->value);
+        if(!$validate['status']){
+            return redirect('/home')->with('error', 'Error al añadir el objetivo. Póngase en contacto con el soporte.');
+        }
+        $controller = new CategoryController();
+        if(!$controller->addUserCategory($validate['data'])){
+            return redirect('/home')->with('error', 'Error al añadir el objetivo. Póngase en contacto con el soporte.');
+        }
+        return redirect('/home')->with('success', 'Operación añadida correctamente');
+
+    })->name('addCategoryUser');
 
 });
 

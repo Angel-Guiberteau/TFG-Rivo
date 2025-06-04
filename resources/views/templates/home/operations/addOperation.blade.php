@@ -17,14 +17,15 @@
                 <div class="col-12 mb-3">
                     <p class="fw-bold mb-2 fs-4">Tipo de operación</p>
                     <div class="categories-grid operation-types">
-                        <input type="radio" name="movement_type" value="income" id="op-income" class="type-radio">
-                        <label for="op-income">Ingreso</label>
+                        <input type="radio" name="movement_type" value="income" id="op-income" class="type-radio" />
+                        <label for="op-income" class="type-radio-label">Ingreso</label>
 
-                        <input type="radio" name="movement_type" value="expense" id="op-expense" class="type-radio">
-                        <label for="op-expense">Gasto</label>
+                        <input type="radio" name="movement_type" value="expense" id="op-expense" class="type-radio" />
+                        <label for="op-expense" class="type-radio-label">Gasto</label>
 
-                        <input type="radio" name="movement_type" value="save" id="op-save" class="type-radio">
-                        <label for="op-save">Ahorro</label>
+                        <input type="radio" name="movement_type" value="save" id="op-save" class="type-radio" />
+                        <label for="op-save" class="type-radio-label">Ahorro</label>
+
                     </div>
                 </div>
             </div>
@@ -49,6 +50,12 @@
                             </div>
                         </label>
                     @endforeach
+                    <button type="button" class="d-block text-center" id="addCategoryButton">
+                        <div class="category-option">
+                            <i class="fas fa-plus"></i>
+                            <span class="text-muted fw-semibold">Añadir categoría</span>
+                        </div>
+                    </button>
                 </div>
             </div>
             <div class="col-12 mb-3">
