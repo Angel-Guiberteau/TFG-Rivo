@@ -13,4 +13,5 @@ enum ValidationEnum: string
     case ADD_OPERATION_USER = 'addIncomeUser';
     case GET_OPERATION_BY_ID = 'getOperationById';
     case INCOME_OPERATIONS = 'incomeOperations';
+    case DELETE_OPERATION = 'deleteOperation';
 }

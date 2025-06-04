@@ -37,7 +37,7 @@ class OperationController extends Controller
         return true;
     }
     
-    public function incomeOperations(Request $request): JsonResponse{
+    public function incomeOperations(array $data): JsonResponse{
         $user = Auth::user();
         $accountId = session('active_account_id');
         
@@ -45,7 +45,7 @@ class OperationController extends Controller
             return response()->json(['error' => 'No hay cuenta activa'], 400);
         }
         
-        $offset = intval($request->query('offset', 0));
+        $offset = $data['offset'];
         $limit = 6;
         $incomes = Operation::getIncomesWithLimitByAccountId($accountId, $offset, $limit);
         if(!$incomes){

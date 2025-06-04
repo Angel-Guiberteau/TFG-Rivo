@@ -10,7 +10,7 @@
 @push('style')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 @endpush
-
+@section('content')
 <main>
     <section class="container-custom p-3 pb-5">
         <article class="bg-light p-3 endPoint">
@@ -25,38 +25,59 @@
 
             @include('templates.admin.title', ['title' => 'Añadir Endpoints'])
 
-            <form action="{{ route('safeEndPoint') }}" method="POST">
+            <form action="{{ route('safeEndPoint') }}" method="POST" id="form-safeEndPoint">
                 @csrf
 
                 <div class="row g-3 p-3">
-                    <div class="col-md-6">
-                        <label for="name" class="form-label">Nombre <span class="text-danger">*</span></label>
-                        <input type="text" name="name" id="name" class="form-control" maxlength="75" required>
-                    </div>
+                    <div class="col">
+                        <div class="col">
+                            <label for="name" class="form-label">Nombre <span class="text-danger">*</span></label>
+                            <input type="text" name="name" id="name" class="form-control" maxlength="75" required>
+                        </div>
 
-                    <div class="col-md-6">
-                        <label for="url" class="form-label">URL <span class="text-danger">*</span></label>
-                        <input type="text" name="url" id="url" class="form-control" maxlength="255" required>
-                    </div>
+                        <div class="col">
+                            <label for="url" class="form-label">URL <span class="text-danger">*</span></label>
+                            <input type="text" name="url" id="url" class="form-control" maxlength="255" required>
+                        </div>
 
-                    <div class="col-md-6">
-                        <label for="method" class="form-label">Método <span class="text-danger">*</span></label>
-                        <input type="text" name="method" id="method" class="form-control" maxlength="7" required>
-                    </div>
+                        <div class="col">
+                            <label for="method" class="form-label">Método <span class="text-danger">*</span></label>
+                            <input type="text" name="method" id="method" class="form-control" maxlength="7" required>
+                        </div>
 
-                    <div class="col-md-6">
-                        <label for="parameters" class="form-label">Parámetros</label>
-                        <input type="text" name="parameters" id="parameters" class="form-control" maxlength="75">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="return" class="form-label">Retorno <span class="text-danger">*</span></label>
-                        <input type="text" name="return" id="return" class="form-control mb-3" maxlength="15" required>
+                        <div class="col">
+                            <label for="description" class="form-label">Descripción</label>
+                            <textarea name="description" id="description" class="form-control" maxlength="255"></textarea>
+                        </div>
                     </div>
 
                     <div class="col">
-                        <label for="description" class="form-label">Descripción</label>
-                        <textarea name="description" id="description" class="form-control" maxlength="255"></textarea>
+                        <div class="col">
+                            <label for="parameters" class="form-label">Parámetros</label>
+                            <input type="text" name="parameters" id="parameters" class="form-control" maxlength="75">
+                        </div>
+
+                        <div class="col">
+                            <label for="return" class="form-label">Retorno <span class="text-danger">*</span></label>
+                            <input type="text" name="return" id="return" class="form-control mb-3" maxlength="15" required>
+                        </div>
+
+                        <div class="col" id="return-container">
+                            <label class="form-label">Datos de retorno <span class="text-danger">*</span></label>
+
+                            <div class="return-row row g-2 mb-2">
+                                <div class="col-6">
+                                    <input type="text" name="returnName[]" class="form-control return-data" placeholder="Dato (ej. usuario_id)" maxlength="15" required>
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" name="type[]" class="form-control return-type" placeholder="Tipo (ej. integer)" maxlength="15" required>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-success btn-sm" id="add-return-row">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 

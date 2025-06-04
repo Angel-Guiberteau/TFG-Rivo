@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\DashboardController;
@@ -46,16 +47,44 @@ use Illuminate\Support\Js;
 Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], function () {
     // Operation
     Route::group(['prefix' => 'operation', 'middleware' => ['auth', 'role:user']], function () {
-        Route::get('/transaction/{id}', [OperationController::class, 'getOperationById']);
-        Route::get('/incomeOperations', [OperationController::class, 'incomeOperations']);
-        Route::post('/deleteOperation/{id}', [OperationController::class, 'deleteOperation']);
-        Route::get('/refreshRecentOperations', function () {
+        Route::get('/transaction/{id}', function ($id): JsonResponse {
+            $operation = new OperationController();
+            $data = [
+                'id' => $id,
+            ];
+            $validate = ApiValidator::validate($data, ValidationEnum::GET_OPERATION_BY_ID->value);
+
+            return $operation->getOperationById($validate['data']['id']);
+        });
+        Route::get('/incomeOperations', function(): JsonResponse {
+            $data = request()->toArray();
+            $operation = new OperationController();
+            $validate = ApiValidator::validate($data, ValidationEnum::INCOME_OPERATIONS->value);
+
+            return $operation->incomeOperations($validate['data']);
+        });
+
+        Route::post('/deleteOperation/{id}', function($id): JsonResponse {
+            $operation = new OperationController();
+            $data = [
+                'id' => $id,
+            ];
+            $validate = ApiValidator::validate($data, ValidationEnum::DELETE_OPERATION->value);
+
+            return $operation->deleteOperation($validate['data']['id']);
+        });
+
+        Route::get('/refreshRecentOperations', function (): ?Collection {
             $accountId = session('active_account_id');
             $controller = new OperationController();
             return $controller->getSixOperationsByAccountId($accountId);
         });
 
-        Route::post('/refreshRecentOperations', [OperationController::class, 'thisMonthOperationsByAccountId']);
+        Route::post('/refreshRecentOperations', function(): ?Collection {
+            $accountId = session('active_account_id');
+            $operation = new OperationController();
+            return $operation->thisMonthOperationsByAccountId($accountId);
+        });
     });
 });
 
@@ -392,7 +421,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return view('admin.endPoints.addEndpoint');
         })->name('addEndPoints');
 
-        Route::post('/safeEndpoint', function (): RedirectResponse {
+        Route::post('/safeEndpoint', function (): JsonResponse {
             $data = request()->toArray();
 
             $validate = EndPointValidator::validate($data, ValidationEnum::ADD->value);
@@ -406,7 +435,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return view('admin.endPoints.editEndpoint')->with('endPoint',$data);
         })->name('editEndPoint');
 
-        Route::put('/safeEditedEndPoint', function (): RedirectResponse {
+        Route::put('/safeEditeEndPoint', function (): JsonResponse {
             $data = request()->toArray();
             
             $validate = EndPointValidator::validate($data, ValidationEnum::EDIT->value);
@@ -421,6 +450,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
             return EndPointController::deleteEndPoint($validate);
         })->name('deleteEndPoints');
+        
     });
 });
 
