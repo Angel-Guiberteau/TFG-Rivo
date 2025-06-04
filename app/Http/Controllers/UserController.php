@@ -227,10 +227,11 @@ class UserController extends Controller
 
     public function updateUserInfoFromInitialSetup($data) : RedirectResponse
     {
+        
         try{
             DB::beginTransaction();
             $user = User::updateUserInfoFromInitialSetup($data);
-            
+                
             if(!$user){
                 throw new \Exception('Error al actualizar el usuario');
             }
@@ -242,43 +243,47 @@ class UserController extends Controller
             if(!$userAccount){
                 throw new \Exception('Error al crear la cuenta del usuario');
             }
+            
             //FixedIncomes
+            
             $fixedIncomes = $this->setFixedIncomes($data, $account);
-
+            
             if(!empty($fixedIncomes)){
-
+                
                 foreach ($fixedIncomes as $key => $value) {
                     $operation = Operation::addOperation($value);
                     if(!$operation){
                         throw new \Exception('Error al añadir los ingresos');
                     }
                     
-
                     $plannedOperation = OperationPlanned::addPlannedOperation($operation->id, $value);
                     
                     if(!$plannedOperation){
                         throw new \Exception('Error al añadir los ingresos planeados');
                     }
                 }
-            }
-            $fixedExpenses = $this->setfixedExpenses($data, $account);
+                
+                $fixedExpenses = $this->setfixedExpenses($data, $account);
+            
+                if(!empty($fixedExpenses)){
+                    foreach ($fixedExpenses as $key => $value) {
+                        $operation = Operation::addOperation($value);
 
-            if(!empty($fixedExpenses)){
-                foreach ($fixedExpenses as $key => $value) {
-                    $operation = Operation::addOperation($value);
+                        if(!$operation){
+                            throw new \Exception('Error al añadir los gastos');
+                        }
 
-                    if(!$operation){
-                        throw new \Exception('Error al añadir los gastos');
-                    }
+                        $plannedOperation = OperationPlanned::addPlannedOperation($operation->id, $value);
 
-                    $plannedOperation = OperationPlanned::addPlannedOperation($operation->id, $value);
-
-                    if(!$plannedOperation){
-                        throw new \Exception('Error al añadir los gastos planeados');
+                        if(!$plannedOperation){
+                            throw new \Exception('Error al añadir los gastos planeados');
+                        }
                     }
                 }
             }
 
+
+            
             $savedMoneyOperation = null;
             if($data['actually_save'] > 0){
                 $savedMoney = $this->setSavedMoneyOperation($data, $account);
@@ -296,6 +301,7 @@ class UserController extends Controller
                     }
                 }
             }
+           
             if(isset($data['objective']) || isset($data['personalize_objective'])){
                 if(is_null($savedMoneyOperation)){
                     $savedMoneyAmount = 0;
@@ -342,7 +348,7 @@ class UserController extends Controller
             }
 
             DB::commit();
-
+            
             return redirect()->action([DashboardController::class, 'index']);
         } catch (Throwable $e){
             DB::rollback();
@@ -360,11 +366,12 @@ class UserController extends Controller
                 'amount' => $data['salary'],
                 'subject' => 'Salario',
                 'description' => 'Ingreso mensual por trabajo',
-                'action_date' => Carbon::now()->toDateString(),
+                'action_date' => Carbon::now()->toDateTimeString(),
                 'movement_type_id' => 1,
                 'account_id' => $account->id,
-                'start_date' => Carbon::now()->startOfMonth()->toDateString(),
+                'start_date' => Carbon::now()->startOfMonth()->toDateTimeString(),
                 'period' => 'm',
+                'category_id' => 1, 
             ];
         }
 
@@ -373,11 +380,12 @@ class UserController extends Controller
                 'amount' => $data['familyHelp'],
                 'subject' => 'Ayuda familiar',
                 'description' => 'Ayuda de la familia mensualmente',
-                'action_date' => Carbon::now()->toDateString(),
+                'action_date' => Carbon::now()->toDateTimeString(),
                 'movement_type_id' => 1,
                 'account_id' => $account->id,
-                'start_date' => Carbon::now()->startOfMonth()->toDateString(),
+                'start_date' => Carbon::now()->startOfMonth()->toDateTimeString(),
                 'period' => 'm',
+                'category_id' => 2, 
             ];
         }
         
@@ -386,11 +394,12 @@ class UserController extends Controller
                 'amount' => $data['stateHelp'],
                 'subject' => 'Ayudas del estado',
                 'description' => 'Ayuda del estado mensual',
-                'action_date' => Carbon::now()->toDateString(),
+                'action_date' => Carbon::now()->toDateTimeString(),
                 'movement_type_id' => 1,
                 'account_id' => $account->id,
-                'start_date' => Carbon::now()->startOfMonth()->toDateString(),
+                'start_date' => Carbon::now()->startOfMonth()->toDateTimeString(),
                 'period' => 'm',
+                'category_id' => 3, 
             ];
         }
 
@@ -404,41 +413,114 @@ class UserController extends Controller
             $savedMoney['amount'] = $data['actually_save'];
             $savedMoney['subject'] = 'Ahorro';
             $savedMoney['description'] = 'Ahorro antes de usar Rivo';
-            $savedMoney['action_date'] = Carbon::now()->toDateString();
+            $savedMoney['action_date'] = Carbon::now()->toDateTimeString();
             $savedMoney['movement_type_id'] = 3;
             $savedMoney['account_id'] = $account->id;
+            $savedMoney['category_id'] = 12; 
         }
 
         return $savedMoney;
     }
     
     private function setFixedExpenses(Array $data, Account $account): Array{
-        
+
         $fixedExpensesKeys = [
-            'homeExpenses' => 'Casa',
-            'servicesHomeExpenses' => 'Luz, agua, gas...',
-            'feedingExpenses' => 'Alimentación',
-            'transportationExpenses' => 'Transporte',
-            'healthExpenses' => 'Salud',
-            'telephoneExpenses' => 'Telefonía',
-            'educationExpenses' => 'Educación',
-            'otherExpenses' => 'Otros gastos fijos'
+            'homeExpenses' => [
+                'amount' => $data['homeExpenses'],
+                'subject' => 'Gastos del hogar',
+                'description' => 'Gastos del hogar mensuales',
+                'action_date' => Carbon::now()->toDateTimeString(),
+                'movement_type_id' => 2,
+                'account_id' => $account->id,
+                'start_date' => Carbon::now()->startOfMonth()->toDateTimeString(),
+                'period' => 'm',
+                'category_id' => 4,
+            ],
+            'servicesHomeExpenses' => [
+                'amount' => $data['servicesHomeExpenses'],
+                'subject' => 'Servicios del hogar',
+                'description' => 'Servicios del hogar mensuales',
+                'action_date' => Carbon::now()->toDateTimeString(),
+                'movement_type_id' => 2,
+                'account_id' => $account->id,
+                'start_date' => Carbon::now()->startOfMonth()->toDateTimeString(),
+                'period' => 'm',
+                'category_id' => 5,
+            ],
+            'feedingExpenses' => [
+                'amount' => $data['feedingExpenses'],
+                'subject' => 'Alimentación',
+                'description' => 'Gastos de alimentación mensuales',
+                'action_date' => Carbon::now()->toDateTimeString(),
+                'movement_type_id' => 2,
+                'account_id' => $account->id,
+                'start_date' => Carbon::now()->startOfMonth()->toDateTimeString(),
+                'period' => 'm',
+                'category_id' => 6,
+            ],
+            'transportationExpenses' => [
+                'amount' => $data['transportationExpenses'],
+                'subject' => 'Transporte',
+                'description' => 'Gastos de transporte mensuales',
+                'action_date' => Carbon::now()->toDateTimeString(),
+                'movement_type_id' => 2,
+                'account_id' => $account->id,
+                'start_date' => Carbon::now()->startOfMonth()->toDateTimeString(),
+                'period' => 'm',
+                'category_id' => 7,
+            ],
+            'healthExpenses' => [
+                'amount' => $data['healthExpenses'],
+                'subject' => 'Salud',
+                'description' => 'Gastos de salud mensuales',
+                'action_date' => Carbon::now()->toDateTimeString(),
+                'movement_type_id' => 2,
+                'account_id' => $account->id,
+                'start_date' => Carbon::now()->startOfMonth()->toDateTimeString(),
+                'period' => 'm',
+                'category_id' => 8,
+            ],
+            'telephoneExpenses' => [
+                'amount' => $data['telephoneExpenses'],
+                'subject' => 'Teléfono',
+                'description' => 'Gastos de teléfono mensuales',
+                'action_date' => Carbon::now()->toDateTimeString(),
+                'movement_type_id' => 2,
+                'account_id' => $account->id,
+                'start_date' => Carbon::now()->startOfMonth()->toDateTimeString(),
+                'period' => 'm',
+                'category_id' => 9,
+            ],
+            'educationExpenses' => [
+                'amount' => $data['educationExpenses'],
+                'subject' => 'Educación',
+                'description' => 'Gastos de educación mensuales',
+                'action_date' => Carbon::now()->toDateTimeString(),
+                'movement_type_id' => 2,
+                'account_id' => $account->id,
+                'start_date' => Carbon::now()->startOfMonth()->toDateTimeString(),
+                'period' => 'm',
+                'category_id' => 10,
+            ],
+            'otherExpenses' => [
+                'amount' => $data['otherExpenses'],
+                'subject' => 'Otros gastos',
+                'description' => 'Otros gastos mensuales',
+                'action_date' => Carbon::now()->toDateTimeString(),
+                'movement_type_id' => 2,
+                'account_id' => $account->id,
+                'start_date' => Carbon::now()->startOfMonth()->toDateTimeString(),
+                'period' => 'm',
+                'category_id' => 11,
+            ],
 
         ];
         $fixedExpenses = [];
 
-        foreach ($fixedExpensesKeys as $key => $value) {
-            if (isset($data[$key]) && !is_null($data[$key])){
-                $fixedExpenses[$key] = [
-                    'amount' => $data[$key],
-                    'subject' => $value,
-                    'description' => 'Ingreso mensual por trabajo',
-                    'action_date' => Carbon::now()->toDateString(),
-                    'movement_type_id' => 2,
-                    'account_id' => $account->id,
-                    'start_date' => Carbon::now()->startOfMonth()->toDateString(),
-                    'period' => 'm',
-                ];
+        foreach ($fixedExpensesKeys as $key => $expenseData) {
+            if (isset($data[$key]) && !is_null($data[$key])) {
+                $expenseData['amount'] = $data[$key];
+                $fixedExpenses[$key] = $expenseData;
             }
         }
 

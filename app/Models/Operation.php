@@ -34,10 +34,10 @@ class Operation extends Model
         $operation->account_id = $data['account_id'];
         $operation->movement_type_id = $data['movement_type_id'];
         $operation->category_id = $data['category_id'];
-        
+
         if(!$operation->save())
             return false;
-
+        
         return $operation;
     }
     
