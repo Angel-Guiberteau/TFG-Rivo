@@ -8,43 +8,34 @@ document.addEventListener('DOMContentLoaded', function () {
     const contentSections = document.querySelectorAll(
         'main > section > article.home-article, main > section > article.income-article, main > section > article.egress-article'
     );
-function setupCategoryFilteringByType(initialType = null) {
-    const typeRadios = document.querySelectorAll('.type-radio');
-    const categoryLabels = document.querySelectorAll('#categoryOptions label[data-types]');
-    const TYPE_MAP = { income: '1', expense: '2', save: '3' };
 
-    const filter = (key) => {
-        const wanted = TYPE_MAP[key] || '';
-        categoryLabels.forEach(label => {
-            const types = label.dataset.types.split(',').map(v => v.trim());
-            const input = label.querySelector('input[type="radio"]');
-            if (types.includes(wanted)) {
-                label.classList.remove('hidden-category');
-            } else {
-                label.classList.add('hidden-category');
-                if (input) input.checked = false;
-            }
+    function setupCategoryFilteringByType(initialType = null) {
+        const typeRadios = document.querySelectorAll('.type-radio');
+        const categoryLabels = document.querySelectorAll('#categoryOptions label[data-types]');
+        const TYPE_MAP = { income: '1', expense: '2', save: '3' };
+
+        const filter = (key) => {
+            const wanted = TYPE_MAP[key] || '';
+            categoryLabels.forEach(label => {
+                const types = label.dataset.types.split(',').map(v => v.trim());
+                const input = label.querySelector('input[type="radio"]');
+                if (types.includes(wanted)) {
+                    label.classList.remove('hidden-category');
+                } else {
+                    label.classList.add('hidden-category');
+                    if (input) input.checked = false;
+                }
+            });
+        };
+
+        typeRadios.forEach(radio => {
+            radio.addEventListener('change', () => filter(radio.value));
         });
-    };
 
-    typeRadios.forEach(radio => {
-        radio.addEventListener('change', () => filter(radio.value));
-    });
-
-    const selectedRadio = document.querySelector('.type-radio:checked');
-    const startType = initialType || selectedRadio?.value || 'income';
-    filter(startType);
-}
-
-
-
-
-
-
-
-
-
-
+        const selectedRadio = document.querySelector('.type-radio:checked');
+        const startType = initialType || selectedRadio?.value || 'income';
+        filter(startType);
+    }
 
     function formatShortDate(dateStr) {
         const date = new Date(dateStr);
@@ -114,6 +105,8 @@ function setupCategoryFilteringByType(initialType = null) {
 
     function showSection(section, onShow = null) {
         if (!section) return;
+        console.log(section);
+        
         section.style.display = 'flex';
         requestAnimationFrame(async () => {
             section.classList.add('show');
@@ -240,6 +233,8 @@ function setupCategoryFilteringByType(initialType = null) {
 
     setupHistory('income');
     setupHistory('expense');
+    setupHistory('save');
+
 
     hideContentSections();
     showSection(homeSection);
