@@ -117,6 +117,16 @@ class Operation extends Model
             ->get();
     }
     
+    public static function getSaveWithLimitByAccountId(int $accountId, int $offset,int $limit): ?Collection{
+        return self::where('account_id', $accountId)
+            ->where('movement_type_id', MovementTypesEnum::SAVEMONEY->value)
+            ->with('category.icon')
+            ->orderBy('action_date', 'desc')
+            ->offset($offset)
+            ->limit($limit)
+            ->get();
+    }
+    
     public static function deleteOperation(int $id): bool {
     
         DB::beginTransaction();
