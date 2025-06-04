@@ -52,7 +52,7 @@ class OperationController extends Controller
 
     }
     
-    public function expenseOperations(Request $request): JsonResponse{
+    public function expenseOperations(array $data): JsonResponse{
         $user = Auth::user();
         $accountId = session('active_account_id');
         
@@ -60,9 +60,28 @@ class OperationController extends Controller
             return response()->json(['error' => 'No hay cuenta activa'], 400);
         }
         
-        $offset = intval($request->query('offset', 0));
+        $offset = $data['offset'];
         $limit = 6;
         $expenses = Operation::getExpensesWithLimitByAccountId($accountId, $offset, $limit);
+        if(!$expenses){
+            return response()->json(['error' => 'Ha habido un error'], 400);
+        }
+
+        return response()->json($expenses);
+
+    }
+    
+    public function saveOperations(array $data): JsonResponse{
+        $user = Auth::user();
+        $accountId = session('active_account_id');
+        
+        if (!$accountId) {
+            return response()->json(['error' => 'No hay cuenta activa'], 400);
+        }
+        
+        $offset = $data['offset'];
+        $limit = 6;
+        $expenses = Operation::getSaveWithLimitByAccountId($accountId, $offset, $limit);
         if(!$expenses){
             return response()->json(['error' => 'Ha habido un error'], 400);
         }

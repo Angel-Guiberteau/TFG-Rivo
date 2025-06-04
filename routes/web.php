@@ -56,6 +56,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
 
             return $operation->getOperationById($validate['data']['id']);
         });
+
         Route::get('/incomeOperations', function(): JsonResponse {
             $data = request()->toArray();
             $operation = new OperationController();
@@ -64,6 +65,22 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
             return $operation->incomeOperations($validate['data']);
         });
 
+        Route::get('/expenseOperations', function(): JsonResponse {
+            $data = request()->toArray();
+            $operation = new OperationController();
+            $validate = ApiValidator::validate($data, ValidationEnum::GET_OPERATIONS_OFFSET->value);
+
+            return $operation->expenseOperations($validate['data']);
+        });
+
+        Route::get('/saveOperations', function(): JsonResponse {
+            $data = request()->toArray();
+            $operation = new OperationController();
+            $validate = ApiValidator::validate($data, ValidationEnum::GET_OPERATIONS_OFFSET->value);
+
+            return $operation->saveOperations($validate['data']);
+        });
+        
         Route::post('/deleteOperation/{id}', function($id): JsonResponse {
             $operation = new OperationController();
             $data = [
@@ -74,18 +91,10 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
             return $operation->deleteOperation($validate['data']['id']);
         });
 
-        Route::get('/expenseOperations', [OperationController::class, 'expenseOperations']);
-
         Route::get('/refreshRecentOperations', function () {
             $accountId = session('active_account_id');
             $controller = new OperationController();
             return $controller->getSixOperationsByAccountId($accountId);
-        });
-
-        Route::post('/refreshRecentOperations', function(): ?Collection {
-            $accountId = session('active_account_id');
-            $operation = new OperationController();
-            return $operation->thisMonthOperationsByAccountId($accountId);
         });
     });
 });
