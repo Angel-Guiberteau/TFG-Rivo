@@ -50,6 +50,10 @@ class UserController extends Controller
             ->with('users', $users);
     }
 
+    public static function numberOfUsers(): int {
+        return User::numberOfUsers();
+    }
+
     public static function storeUser(): RedirectResponse
     {
         $request = request();
