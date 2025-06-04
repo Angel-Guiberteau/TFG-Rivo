@@ -59,7 +59,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
         Route::get('/incomeOperations', function(): JsonResponse {
             $data = request()->toArray();
             $operation = new OperationController();
-            $validate = ApiValidator::validate($data, ValidationEnum::INCOME_OPERATIONS->value);
+            $validate = ApiValidator::validate($data, ValidationEnum::GET_OPERATIONS_OFFSET->value);
 
             return $operation->incomeOperations($validate['data']);
         });
@@ -75,7 +75,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
         });
 
         Route::get('/expenseOperations', [OperationController::class, 'expenseOperations']);
-        
+
         Route::get('/refreshRecentOperations', function () {
             $accountId = session('active_account_id');
             $controller = new OperationController();
