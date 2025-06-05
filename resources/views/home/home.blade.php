@@ -9,13 +9,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
         <link rel="stylesheet" href="{{ asset('css/home/home.css') }}">
     <style>
-        .is-invalid-radio {
-            border: 2px solid #dc3545;
-            border-radius: 8px;
-            padding: 10px;
-            background-color: rgba(220, 53, 69, 0.05);
-        }
-
+        
     </style>
     @endpush
 

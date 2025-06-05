@@ -2,6 +2,7 @@ import { fetchData } from './helpers/api.js';
 import { openTransactionDetail } from './transactionInfo.js';
 import { setupFormValidation } from './homeValidations/addOperationValidations.js';
 import { setObjetiveValidation } from './homeValidations/objetiveValidation.js';
+import { setSettingsValidation } from './homeValidations/settingsValidations.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     const homeSection = document.getElementById('home-section');
@@ -273,14 +274,16 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    
     const showSettingsBtn = document.getElementById('showSettingsButton');
     const settingsSection = document.getElementById('settings-section');
 
-        if (showSettingsBtn && settingsSection) {
+    if (showSettingsBtn && settingsSection) {
         showSettingsBtn.addEventListener('click', () => {
             hideContentSections();
             showSection(settingsSection);
             setFabIcon('custom');
+            setSettingsValidation(); 
         });
     }
 
