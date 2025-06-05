@@ -1,5 +1,6 @@
 import { fetchData } from './helpers/api.js';
 import { openTransactionDetail } from './transactionInfo.js';
+import { setupFormValidation } from './homeValidations/addOperationValidations.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     const homeSection = document.getElementById('home-section');
@@ -215,6 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 showSection(formSection, () => {
                     setMovementType(type); 
                     setupCategoryFilteringByType(type);  
+                    setupFormValidation(type);
                 });
             });
         }
