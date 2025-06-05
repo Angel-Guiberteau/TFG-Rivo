@@ -46,9 +46,10 @@ class CategoryController extends Controller
 
     public static function updateCategory(array $data): bool {
 
-        if (!Category::updateCategory($data['id'])) {
+        if (!Category::updateCategory($data)) {
             return false;
         }
+
 
         return true;
     }

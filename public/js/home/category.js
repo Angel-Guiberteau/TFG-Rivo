@@ -1,4 +1,23 @@
 document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('resetCategoryButton').addEventListener('click', () => {
+        document.querySelector('input[name="category_id"]').value = '';
+        document.querySelector('input[name="name"]').value = '';
+        document.querySelector('input[name="icon"]').value = '';
+
+        document.querySelectorAll('.icon-option').forEach(icon => icon.classList.remove('selected'));
+
+        document.querySelectorAll('.operation-types input[type="checkbox"]').forEach(chk => chk.checked = false);
+
+        document.querySelector('#categoryName').value = '';
+        
+        document.getElementById('submitCategories').textContent = 'Añadir categoría';
+
+        document.getElementById('categoryAdd-section').scrollIntoView({ behavior: 'smooth' });
+
+        document.getElementById('resetCategoryButton').classList.add('d-none');
+    });
+
+
     const successMessage = sessionStorage.getItem('success');
     if (successMessage) {
         swal(successMessage, {
@@ -61,25 +80,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 const category = await response.json();
                 console.log(category);
 
-                document.querySelector('input[name="category_id"]').value = category.id;
+                document.querySelector('input[name="id"]').value = category.id;
+
                 document.querySelector('#categoryName').value = category.name;
                 document.querySelector('input[name="icon"]').value = category.icon_id;
 
-                // Activar los checkboxes correspondientes
-                const typeNames = category.movement_types.map(t => t.name.toLowerCase());
+                const typeIds = category.movement_types.map(t => t.id);
                 document.querySelectorAll('.operation-types input[type="checkbox"]').forEach(chk => {
-                    chk.checked = typeNames.includes(chk.value.toLowerCase());
+                    const map = { income: 1, expense: 2, save: 3 };
+                    chk.checked = typeIds.includes(map[chk.value]);
                 });
 
-                // Marcar el icono correspondiente
                 document.querySelectorAll('.icon-option').forEach(icon => {
                     icon.classList.toggle('selected', icon.dataset.id == category.icon_id);
                 });
 
-                // Cambiar el texto del botón
+                document.getElementById('resetCategoryButton').classList.remove('d-none');
+
                 document.querySelector('#submitCategories').textContent = 'Actualizar categoría';
 
-                // Hacer scroll al formulario
                 document.getElementById('categoryAdd-section').scrollIntoView({ behavior: 'smooth' });
 
             } catch (error) {
