@@ -111,6 +111,23 @@ function initObjectiveValidation() {
             }
         });
 
+        const resetBtn = form.querySelector('#resetObjectiveForm');
+
+        resetBtn.addEventListener('click', () => {
+            form.reset();
+
+            nameInput.classList.remove('is-valid', 'is-invalid');
+            amountInput.classList.remove('is-valid', 'is-invalid');
+
+            nameInput.nextElementSibling.textContent = '';
+            amountInput.nextElementSibling.textContent = '';
+
+            resetBtn.classList.add('d-none');
+
+            submitBtn.disabled = true;
+        });
+
+
         updateSubmitState();
     };
 
