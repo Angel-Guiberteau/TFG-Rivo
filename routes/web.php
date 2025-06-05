@@ -81,7 +81,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
 
             return $operation->saveOperations($validate['data']);
         });
-        
+
         Route::post('/deleteOperation/{id}', function($id): JsonResponse {
             $operation = new OperationController();
             $data = [
@@ -105,6 +105,21 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
             return $controller->getAllIcons();
         });
     });
+
+    Route::group(['prefix' => 'objective', 'middleware' => ['auth', 'role:user']], function () {
+
+        Route::post('/deleteObjective/{id}', function ($id) {
+            //Añadir validación del id
+            $controller = new ObjectiveController();
+            return $controller->deleteObjective($id);
+        });
+
+        Route::get('/getObjective/{id}', function ($id) {
+            //Añadir validación del id
+            $controller = new ObjectiveController();
+            return $controller->getObjective($id);
+        });
+    });
 });
 
 /*
@@ -119,7 +134,7 @@ Route::get('/', function () {
 Route::get('/auth/google', function () {
     return Socialite::driver('google')->redirect();
 })->name('google.login');
-    
+
 Route::get('/auth/google/callback', function () {
 
     $controller = new GoogleController();
@@ -148,9 +163,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 
 
 Route::group(['middleware' => ['auth', 'role:user']], function () {
-    
+
     Route::get('/home', function (): View {
-    
+
         $userController = new UserController();
         $user = $userController->getUser();
 
@@ -177,7 +192,7 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
         $categoryController = new CategoryController();
         $baseCategories = $categoryController->getAllBaseCategories();
         $personalCategories = $categoryController->getPersonalCategoriesByUserId($user->id);
-        
+
 
 
         $allIncomes = $operationController->getAllIncomesByAccountId($account->id);
@@ -207,24 +222,24 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
         $controller = new UserController();
 
         return  $controller->updateUserInfoFromInitialSetup($data);
-        
+
     })->name('updateUserInfoFromInitialSetup');
 
     Route::get('/initialSetup', function () {
         return view('home.initialSetup');
     })->name('initialSetup');
-    
+
     Route::post('/addOperationUser', function () {
         $request = request()->toArray();
         if (!isset($request['schedule']) || $request['schedule'] !== 'on') {
             unset($request['expiration_date'], $request['recurrence']);
         }
-        
+
         $validate = UserValidator::validate($request, ValidationEnum::ADD_OPERATION_USER->value);
         if(!$validate['status']){
             return redirect('/home')->with('error', 'Error al hacer la operación. Póngase en contacto con el soporte.');
         }
-        
+
         $data = $validate['data'];
         $data['account_id'] = session('active_account_id');
         $operationController = new OperationController();
@@ -232,26 +247,33 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
         if(!$operationController->addOperationRequested($data)){
             return redirect('/home')->with('error', 'Error al hacer la operación. Póngase en contacto con el soporte.');
         }
-        
+
         return redirect('/home')->with('success', 'Operación añadida correctamente');
 
 
     })->name('addOperationUser');
-    
-    Route::post('/addObjective', function () {
-        //Le llega el nombre del objetivo y el dinero objetivo.
+
+    Route::post('/addOrEditObjective', function (): RedirectResponse {
+        //Le llega el nombre del objetivo, el dinero objetivo y el id en null o relleno si es editar
         $request = request()->toArray();
-        
-        $request['account_id'] = session('active_account_id');
+
         $objectiveController = new ObjectiveController();
-        if(!$objectiveController->addObjective($request)){
-            return redirect('/home')->with('error', 'Error al añadir el objetivo. Póngase en contacto con el soporte.');
+        if(is_null($request['objective_id'])){
+            $request['account_id'] = session('active_account_id');
+            if(!$objectiveController->addObjective($request)){
+                return redirect('/home')->with('error', 'Error al añadir el objetivo. Póngase en contacto con el soporte.');
+            }
+            return redirect('/home')->with('success', 'Objetivo añadido correctamente');
+        }else{
+            if(!$objectiveController->updateObjective($request)){
+                return redirect('/home')->with('error', 'Error al editar el objetivo. Póngase en contacto con el soporte.');
+            }
+            return redirect('/home')->with('success', 'Objetivo editado correctamente');
         }
-        
-        return redirect('/home')->with('success', 'Operación añadida correctamente');
 
 
-    })->name('addObjective');
+
+    })->name('addOrEditObjective');
 
     Route::post('/addCategoryUser', function (): RedirectResponse {
         $data = request()->toArray();
@@ -288,7 +310,7 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 |--------------------------------------------------------------------------
 */
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
-    
+
     Route::get('/', function (): View {
 
         $numUsers = UserController::numberOfUsers();
@@ -317,13 +339,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('addUser');
 
         Route::post('/storeUser', function (): RedirectResponse {
-            
+
             $request = request()->toArray();
             // dd($request);
             $validate = UserValidator::validate($request, ValidationEnum::ADD->value);
             // dd($validate);
             return UserController::storeUser($validate);
-            
+
         })->name('storeUser');
 
         Route::post('/deleteUser', function (): RedirectResponse {
@@ -343,8 +365,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('updateUser');
 
         Route::put('/updatePersonalCategories', function () {
-            
-            $request = request()->toArray();    
+
+            $request = request()->toArray();
             // dd($request);
             $validate = UserValidator::validate($request, ValidationEnum::UPDATE_PERSONAL_CATEGORIES->value);
             // dd($validate);
@@ -361,16 +383,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             $validate = UserValidator::validate($request, ValidationEnum::UPDATE_PERSONAL_ACOUNTS->value);
 
             return UserController::updatePersonalAccounts($validate);
-            
+
         })->name('updatePersonalAccounts');
 
         Route::get('/previewUser/{id}', function (Request $request, $id) {
 
-            
+
             $request = array_merge($request->all(), ['id' => $id]);
-            
+
             $validate = UserValidator::validate($request, ValidationEnum::DELETE->value);
-            
+
             return UserController::getFullUserbyId($validate );
 
         })->name('previewUser');
@@ -388,7 +410,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             $data = request()->toArray();
 
             $validate = SentencesValidator::validate($data, ValidationEnum::ADD->value);
-            
+
             return SentenceController::addSentence($validate);
         })->name('addSentence');
 
@@ -410,7 +432,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
         Route::post('/preViewSentence', function (): View {
             $data = request()->toArray();
-            
+
             return view('admin.sentences.preViewSentence')->with('sentence', $data['text']);
         })->name('preViewSentence');
 
@@ -418,7 +440,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return view('admin.mockups.adminSentences');
         })->name('sentenceMockups');
     });
-    
+
                                 // CATEGORIES
 
     Route::group(['prefix' => 'categories'], function () {
@@ -436,7 +458,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
         Route::post('/add', function (): RedirectResponse {
             $data = request()->toArray();
-            
+
             $validate = BaseCategoriesValidator::validate($data, ValidationEnum::ADD->value);
 
             return BaseCategoryController::addBaseCategory($validate);
@@ -458,12 +480,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return CategoryController::deleteCategory($validate);
         })->name('deleteCategory');
     });
-    
+
                                 // Icons
 
     Route::group(['prefix' => 'icons'], function () {
         Route::get('/', function (): View {
-            
+
             $icons = IconController::getAllIcons();
 
             return view('admin.icons.icons')
@@ -488,7 +510,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
         Route::post('/delete', function (): JsonResponse {
             $data = request()->toArray();
-            
+
             $validate = IconValidator::validate($data, ValidationEnum::DELETE->value);
 
             return IconController::deleteIcon($validate);
@@ -523,9 +545,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
         Route::put('/safeEditeEndPoint', function (): JsonResponse {
             $data = request()->toArray();
-            
+
             $validate = EndPointValidator::validate($data, ValidationEnum::EDIT->value);
-            
+
             return EndPointController::editEndPoint($validate);
         })->name('safeEditEndPoints');
 
@@ -536,7 +558,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
             return EndPointController::deleteEndPoint($validate);
         })->name('deleteEndPoints');
-        
+
     });
 });
 
