@@ -45,7 +45,15 @@ function formatDate(dateStr) {
     const minutes = date.getMinutes().toString().padStart(2, '0');
     return `${day} ${month} ${year} - ${hours}:${minutes}`;
 }
-
+function reorganizeMovementLayout(container) {
+    const wrappers = container.querySelectorAll('.col-12.col-lg-6');
+    wrappers.forEach((wrapper, index) => {
+        wrapper.classList.remove('border-lg-end');
+        if (index % 2 === 0) {
+            wrapper.classList.add('border-lg-end');
+        }
+    });
+}
 export async function openTransactionDetail(id) {
     const panel = document.getElementById('transactionDetail');
     if (!panel) return;
@@ -104,8 +112,16 @@ export async function openTransactionDetail(id) {
 
                         if (!res.ok) throw new Error('Error al eliminar');
 
-                        const row = document.querySelector(`.movement-row[data-id="${id}"]`);
-                        if (row) row.closest('.movement-item').remove();
+                        document.querySelectorAll('.movement-block').forEach(container => {
+                            const target = container.querySelector(`.movement-row[data-id="${id}"]`);
+                            if (target) {
+                                const wrapper = target.closest('.col-12.col-lg-6');
+                                if (wrapper) wrapper.remove();
+                                reorganizeMovementLayout(container);
+                            }
+                        });
+
+
 
                         closePanel();
                         refreshRecentOperations();

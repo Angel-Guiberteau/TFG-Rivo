@@ -37,15 +37,15 @@ class Operation extends Model
 
         if(!$operation->save())
             return false;
-        
+
         return $operation;
     }
-    
+
     public static function getAllOperationsByAccountId(int $accountId): ?Collection {
         return self::where('account_id', $accountId)
             ->get();
     }
-    
+
     public static function thisMonthOperationsByAccountId(int $accountId): ?Collection {
         $operations = self::with('category.icon')
             ->where('account_id', $accountId)
@@ -66,9 +66,8 @@ class Operation extends Model
         })->values();
     }
 
-    
     public static function getSixOperationsByAccountId(int $accountId): ?Collection{
-        
+
         return self::with('category.icon')
             ->where('account_id', $accountId)
             ->orderByDesc('action_date')
@@ -83,12 +82,12 @@ class Operation extends Model
             ->orderByDesc('action_date')
             ->get();
     }
-    
+
     public static function getOperationById(int $operationId): ?self{
         return Operation::with(['category.icon', 'planned', 'unschedule'])
             ->findOrFail($operationId);
     }
-    
+
     public static function getAllExpensesByAccountId(int $accountId): ?Collection{
         return self::with('category.icon')
             ->where('account_id', $accountId)
@@ -96,7 +95,7 @@ class Operation extends Model
             ->orderByDesc('action_date')
             ->get();
     }
-    
+
     public static function getIncomesWithLimitByAccountId(int $accountId, int $offset,int $limit): ?Collection{
         return self::where('account_id', $accountId)
             ->where('movement_type_id', MovementTypesEnum::INCOME->value)
@@ -116,7 +115,7 @@ class Operation extends Model
             ->limit($limit)
             ->get();
     }
-    
+
     public static function getSaveWithLimitByAccountId(int $accountId, int $offset,int $limit): ?Collection{
         return self::where('account_id', $accountId)
             ->where('movement_type_id', MovementTypesEnum::SAVEMONEY->value)
@@ -126,9 +125,19 @@ class Operation extends Model
             ->limit($limit)
             ->get();
     }
-    
+
+    public static function getAllOperationsWithLimitByAccountId(int $accountId, int $offset,int $limit): ?Collection{
+
+        return self::where('account_id', $accountId)
+            ->with('category.icon')
+            ->orderBy('action_date', 'desc')
+            ->offset($offset)
+            ->limit($limit)
+            ->get();
+    }
+
     public static function deleteOperation(int $id): bool {
-    
+
         DB::beginTransaction();
         try {
             $operation = self::findOrFail($id);
@@ -151,7 +160,7 @@ class Operation extends Model
             Log::error("Error al eliminar operación $id: " . $e->getMessage());
             return false;
         }
-        
+
         return true;
     }
 
