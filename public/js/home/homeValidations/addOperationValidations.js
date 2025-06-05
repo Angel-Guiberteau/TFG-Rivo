@@ -1,11 +1,18 @@
+let formValidationInitialized = false;
+
 function initializeFormValidation() {
+    if (formValidationInitialized) return;
+    formValidationInitialized = true;
+
     const tryInit = () => {
         const form = document.querySelector('#operationAddForm-section form');
-        const submitBtn = form?.querySelector('button[type="submit"]');
+        const submitBtn = form.querySelector('button[type="submit"]');
         if (!form || !submitBtn) {
             setTimeout(tryInit, 100);
             return;
         }
+
+        submitBtn.disabled = true;
 
         const typeInputs = form.querySelectorAll('input[name="movement_type"]');
         const categoryInputs = form.querySelectorAll('input[name="category_id"]');
@@ -18,22 +25,12 @@ function initializeFormValidation() {
         const startDateInput = form.querySelector('#start_date');
         const expirationDateInput = form.querySelector('#expiration_date');
 
-        
+        const touchedFields = new Set();
+
         amountInput.addEventListener('keydown', (e) => {
-            const allowedKeys = [
-                'Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete', 'Home', 'End',
-                '.', 
-            ];
-           
+            const allowedKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete', 'Home', 'End', '.'];
             if (e.ctrlKey && ['a', 'c', 'v', 'x'].includes(e.key.toLowerCase())) return;
-
-            if (
-                allowedKeys.includes(e.key) ||
-                (e.key >= '0' && e.key <= '9')
-            ) {
-                return; 
-            }
-
+            if (allowedKeys.includes(e.key) || (e.key >= '0' && e.key <= '9')) return;
             e.preventDefault();
         });
 
@@ -129,12 +126,10 @@ function initializeFormValidation() {
 
         function validateAmount() {
             const value = amountInput.value.trim();
-
             if (!value) {
                 showFeedback(amountInput, '⚠️ La cantidad es obligatoria.');
                 return false;
             }
-
             if (!/^\d{1,10}(\.\d{1,2})?$/.test(value)) {
                 if (/[a-zA-Z]/.test(value)) {
                     showFeedback(amountInput, '⚠️ Solo se permiten números. No se permiten letras.');
@@ -143,16 +138,13 @@ function initializeFormValidation() {
                 }
                 return false;
             }
-
             if (parseFloat(value) < 0) {
                 showFeedback(amountInput, '⚠️ No se permiten cantidades negativas.');
                 return false;
             }
-
             clearFeedback(amountInput);
             return true;
         }
-
 
         function validateRecurrenceFields() {
             let valid = true;
@@ -166,8 +158,7 @@ function initializeFormValidation() {
 
                 valid &= validateDate(startDateInput, false);
                 if (expirationDateInput.value) {
-                    const expValid = validateDate(expirationDateInput, true);
-                    valid &= expValid;
+                    valid &= validateDate(expirationDateInput, true);
                 } else {
                     clearFeedback(expirationDateInput);
                 }
@@ -177,42 +168,97 @@ function initializeFormValidation() {
             return valid;
         }
 
-        function validateAll() {
-            const valid =
-                validateRadioGroup(typeInputs, '.validation-group-type', '⚠️ Selecciona un tipo.') &
-                validateRadioGroup(categoryInputs, '.validation-group-category', '⚠️ Selecciona una categoría.') &
-                validateSubject() &
-                validateDescription() &
-                validateDate(dateInput, false) &
-                validateAmount() &
+        function updateSubmitState() {
+            const allValid =
+                validateRadioGroup(typeInputs, '.validation-group-type', '⚠️ Selecciona un tipo.') &&
+                validateRadioGroup(categoryInputs, '.validation-group-category', '⚠️ Selecciona una categoría.') &&
+                validateSubject() &&
+                validateDescription() &&
+                validateDate(dateInput, false) &&
+                validateAmount() &&
                 validateRecurrenceFields();
 
-            submitBtn.disabled = !valid;
+            submitBtn.disabled = !allValid;
         }
 
-        [
-            subjectInput,
-            descriptionInput,
-            dateInput,
-            amountInput,
-            recurrenceSelect,
-            startDateInput,
-            expirationDateInput,
-        ].forEach(input => {
-            if (!input) return;
-            input.addEventListener('input', validateAll);
-            input.addEventListener('change', validateAll);
+
+        // Eventos individuales marcando como "tocado"
+        subjectInput?.addEventListener('input', () => {
+            touchedFields.add('subject');
+            validateSubject();
+            updateSubmitState();
         });
 
-        [...typeInputs, ...categoryInputs, scheduleCheckbox].forEach(input => {
-            if (!input) return;
-            input.addEventListener('change', validateAll);
+        descriptionInput?.addEventListener('input', () => {
+            touchedFields.add('description');
+            validateDescription();
+            updateSubmitState();
+        });
+
+        amountInput?.addEventListener('input', () => {
+            touchedFields.add('amount');
+            validateAmount();
+            updateSubmitState();
+        });
+
+        dateInput?.addEventListener('change', () => {
+            validateDate(dateInput, false); // se valida siempre
+            updateSubmitState();
+        });
+
+        recurrenceSelect?.addEventListener('change', () => {
+            touchedFields.add('recurrence');
+            validateRecurrenceFields();
+            updateSubmitState();
+        });
+
+        startDateInput?.addEventListener('change', () => {
+            touchedFields.add('recurrence');
+            validateRecurrenceFields();
+            updateSubmitState();
+        });
+
+        expirationDateInput?.addEventListener('change', () => {
+            touchedFields.add('recurrence');
+            validateRecurrenceFields();
+            updateSubmitState();
+        });
+
+        [...typeInputs].forEach(input => {
+            input.addEventListener('change', () => {
+                validateRadioGroup(typeInputs, '.validation-group-type', '⚠️ Selecciona un tipo.');
+                updateSubmitState();
+            });
+        });
+
+        [...categoryInputs].forEach(input => {
+            input.addEventListener('change', () => {
+                validateRadioGroup(categoryInputs, '.validation-group-category', '⚠️ Selecciona una categoría.');
+                updateSubmitState();
+            });
+        });
+
+        scheduleCheckbox.addEventListener('change', () => {
+            touchedFields.add('recurrence');
+            validateRecurrenceFields();
+            updateSubmitState();
         });
 
         form.addEventListener('submit', e => {
-            validateAll();
-            if (submitBtn.disabled) {
+            const allValid =
+                validateRadioGroup(typeInputs, '.validation-group-type', '⚠️ Selecciona un tipo.') &&
+                validateRadioGroup(categoryInputs, '.validation-group-category', '⚠️ Selecciona una categoría.') &&
+                validateSubject() &&
+                validateDescription() &&
+                validateDate(dateInput, false) &&
+                validateAmount() &&
+                validateRecurrenceFields();
+
+
+
+            if (!valid) {
                 e.preventDefault();
+                submitBtn.disabled = true;
                 Swal.fire({
                     icon: 'warning',
                     title: 'Campos obligatorios',
@@ -222,12 +268,11 @@ function initializeFormValidation() {
             }
         });
 
-        validateAll(); 
+        updateSubmitState();
     };
 
     tryInit();
 }
-
 
 function setupAddFormAutoReset() {
     const formSection = document.getElementById('operationAddForm-section');
@@ -239,7 +284,6 @@ function setupAddFormAutoReset() {
         if (formSection.classList.contains('show')) {
             form.querySelectorAll('.is-invalid, .is-valid, .is-invalid-radio, .is-valid-radio')
                 .forEach(el => el.classList.remove('is-invalid', 'is-valid', 'is-invalid-radio', 'is-valid-radio'));
-
             form.querySelectorAll('.invalid-feedback').forEach(f => f.textContent = '');
         }
     });
@@ -251,5 +295,3 @@ export function setupFormValidation() {
     initializeFormValidation();
     setupAddFormAutoReset();
 }
-
-setupFormValidation();

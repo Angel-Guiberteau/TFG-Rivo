@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\MovementType;
 use App\Models\MovementTypeCategories;
 use App\Models\UserCategory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
@@ -23,6 +24,14 @@ class CategoryController extends Controller
         return Category::numberOfCategories();
     }
 
+    public static function deleteCategoryUser(int $id): JsonResponse {
+        if (!Category::deleteCategory($id)) {
+            return response()->json(['error' => 'No se ha podido borrar la categoría. Póngase en contacto con el equipo soporte.']);
+        }
+
+        return response()->json(['success' => 'Categoría borrada correctamente.']);
+    }
+
     public static function deleteCategory(array $data): JsonResponse {
         if (!$data['status']) {
             return response()->json(['error' => $data['error']]);
@@ -32,9 +41,19 @@ class CategoryController extends Controller
             return response()->json(['error' => 'Ha habido un error inesperado.']);
         }
 
-        return response()->json(['success' => 'Caregoría borrada correctamente.']);
+        return response()->json(['success' => 'Categoría borrada correctamente.']);
     }
-    
+
+    public static function updateCategory(array $data): bool {
+
+        if (!Category::updateCategory($data)) {
+            return false;
+        }
+
+
+        return true;
+    }
+
     public static function addUserCategory(array $data): bool {
         DB::beginTransaction();
         $category = Category::addUserCategory($data);
@@ -45,10 +64,12 @@ class CategoryController extends Controller
         $data['user_id'] = Auth::user()->id;
         $data['category_id'] = $category->id;
         $userCategory = UserCategory::addUserCategory($data);
+
         if(!$userCategory) {
             DB::rollBack();
             return false;
         }
+        $movementCategory = null;
         foreach ($data['types'] as $key => $value) {
             $data['movement_type_id'] = $value;
             $movementCategory = MovementTypeCategories::addMovementTypeCategory($data);
@@ -62,8 +83,12 @@ class CategoryController extends Controller
             DB::rollBack();
             return false;
         }
-
+        DB::commit();
         return true;
+    }
+
+    public static function getCategory(int $categoryId): Category {
+        return Category::getCategory($categoryId);
     }
 
     public static function getEnabledMovementTypes(): array {
@@ -73,7 +98,7 @@ class CategoryController extends Controller
     public static function getAllBaseCategories(): ?Collection {
         return BaseCategory::listAllBaseCategories();
     }
-    
+
     public static function getPersonalCategoriesByUserId(int $userId): ?Collection {
         return Category::getPersonalCategoriesByUserId($userId);
     }

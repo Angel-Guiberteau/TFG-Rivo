@@ -11,14 +11,14 @@ use Illuminate\Support\Collection;
 class Category extends Model
 {
     protected $table = 'categories';
-    protected $fillable = [ 
+    protected $fillable = [
         'name',
         'icon_id'
     ];
 
     public static function getAllCategoriesEnabled(): Collection {
         $category = new self();
-        
+
         return $category->select('id', 'name', 'icon_id')
                         ->get();
     }
@@ -43,19 +43,33 @@ class Category extends Model
         return false;
     }
 
-    public static function editCategory(array $data): bool {
-        $category = self::find($data['id']);
-        if ($category) {
-            return $category->update(
-                [
-                    'name' => $data['name'],
-                ]
-            );
+    public static function updateCategory(array $data): bool {
+        $category = self::with('movementTypes')->find($data['id']);
+
+        if (!$category) {
+            return false;
         }
 
-        return false;
+        if (isset($data['name'])) {
+            $category->name = $data['name'];
+        }
+
+        if (isset($data['icon'])) {
+            $category->icon_id = $data['icon'];
+        }
+
+        if (!$category->save()) {
+            return false;
+        }
+
+        if (isset($data['types'])) {
+            $category->movementTypes()->sync($data['types']);
+        }
+
+        return true;
     }
-    
+
+
     public static function addUserCategory(array $data): bool | self {
         $category = new self;
 
@@ -64,6 +78,11 @@ class Category extends Model
 
         return $category->save() ? $category : false;
     }
+
+    public static function getCategory(int $categoryId): self|null {
+        return self::with('movementTypes')->find($categoryId);
+    }
+
 
     public static function deleteCategory(int $id): bool {
         $category = self::find($id);
@@ -74,7 +93,7 @@ class Category extends Model
 
         return false;
     }
-    
+
     public static function getPersonalCategoriesByUserId(int $userId): ?Collection {
         $user = User::with('personalCategories.icon', 'personalCategories.movementTypes')->find($userId);
 
@@ -94,18 +113,16 @@ class Category extends Model
     public function operations(): HasMany {
         return $this->hasMany(Operation::class);
     }
-    
+
     public function icon(): BelongsTo {
         return $this->belongsTo(Icon::class, 'icon_id');
     }
 
-    public function movementTypes(): BelongsToMany {
-        return $this->belongsToMany(
-            MovementType::class,
-            'movements_types_categories',
-            'category_id',
-            'movement_type_id'
-        );
+    public function movementTypes()
+    {
+        return $this->belongsToMany(MovementType::class, 'movements_types_categories', 'category_id', 'movement_type_id');
     }
+
+
 
 }

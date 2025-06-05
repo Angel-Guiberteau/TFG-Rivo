@@ -32,6 +32,9 @@
                 <h1 class="fs-2 mb-0 align-self-end">Rivo</h1>
             </div>
             <nav class="asideNav d-flex flex-column justify-content-center align-items-center gap-2" aria-label="Menú lateral">
+                <button class="addCategoryButton w-100 d-flex align-items-center gap-2" href="#">
+                    <i class="fas fa-layer-group"></i> Categorías
+                </button>
                 <button class="showObjectiveButton w-100 d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-bullseye"></i> Objetivos
                 </button>
@@ -167,6 +170,7 @@
         <script src="{{ asset('js/home/navMobile.js') }}"></script>
         <script src="{{ asset('js/home/income/history.js') }}"></script>
         <script src="{{ asset('js/home/objectives.js') }}"></script>
+        <script src="{{ asset('js/home/category.js') }}"></script>
 
         <script type="module" src="{{ asset('js/home/homeValidations/addOperationValidations.js') }}"></script>
         

@@ -206,9 +206,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     movementsContainer.innerHTML = '';
                     if (loadMoreBtn) loadMoreBtn.style.display = 'block';
                     await loadMore();
+                    
+                    
+                    setupFormValidation();
                 });
             });
         }
+
 
         if (addFormBtn) {
             addFormBtn.addEventListener('click', () => {
@@ -276,41 +280,45 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    const showCategoryFormButton = document.getElementById('addCategoryButton');
+    const showCategoryFormButton = document.querySelectorAll('.addCategoryButton');
     const categorySection = document.getElementById('categoryAdd-section');
     const iconGrid = categorySection.querySelector('.icon-grid');
     const hiddenIconInput = categorySection.querySelector('input[name="icon"]');
 
     if (showCategoryFormButton && categorySection) {
-        showCategoryFormButton.addEventListener('click', async () => {
-            hideContentSections();
-            showSection(categorySection);
-            setFabIcon('custom');
+        showCategoryFormButton.forEach(btn => {
+            btn.addEventListener('click', async () => {
+                hideContentSections();
+                showSection(categorySection);
+                setFabIcon('custom');
 
-            if (iconGrid && iconGrid.children.length === 0) {
-                try {
-                    const res = await fetch('/api/icon/getAllIcons');
-                    const icons = await res.json();
+                if (iconGrid && iconGrid.children.length === 0) {
+                    try {
+                        const res = await fetch('/api/icon/getAllIcons');
+                        const icons = await res.json();
 
-                    icons.forEach(icon => {
-                        const div = document.createElement('div');
-                        div.classList.add('icon-option');
-                        div.dataset.icon = icon.icon;
-                        div.innerHTML = icon.icon;
+                        icons.forEach(icon => {
+                            const div = document.createElement('div');
+                            div.classList.add('icon-option');
+                            div.dataset.icon = icon.icon;
+                            div.dataset.id = icon.id;
+                            div.innerHTML = icon.icon;
 
-                        div.addEventListener('click', () => {
-                            iconGrid.querySelectorAll('.icon-option').forEach(opt => opt.classList.remove('selected'));
-                            div.classList.add('selected');
-                            hiddenIconInput.value = icon.id;
+                            div.addEventListener('click', () => {
+                                iconGrid.querySelectorAll('.icon-option').forEach(opt => opt.classList.remove('selected'));
+                                div.classList.add('selected');
+                                hiddenIconInput.value = icon.id;
+                            });
+
+                            iconGrid.appendChild(div);
                         });
-
-                        iconGrid.appendChild(div);
-                    });
-                } catch (error) {
-                    console.error('Error cargando iconos:', error);
+                    } catch (error) {
+                        console.error('Error cargando iconos:', error);
+                    }
                 }
-            }
+            });
         });
+
     }
 
     hideContentSections();

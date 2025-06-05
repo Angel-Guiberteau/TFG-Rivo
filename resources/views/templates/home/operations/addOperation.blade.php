@@ -2,10 +2,10 @@
 
     <form class="col-12 col-lg-10 mx-auto mt-4" method="POST" action="{{ route('addOperationUser') }}">
         @csrf
-        <input type="hidden" name="operation_id" id="operation_id"> 
+        <input type="hidden" name="operation_id" id="operation_id">
         <div class="d-flex flex-row justify-content-between align-items-center">
             <h2 class="fw-bold fs-3">Añadir operación</h2>
-            <button class="btn btn-primary fw-bold btn-sm fs-4 custom-gradient-btn w-25 " id="back-historyIncome">
+            <button type="button" class="btn btn-primary fw-bold btn-sm fs-4 custom-gradient-btn w-25 " id="back-historyIncome">
                     <i class="fas fa-arrow-left"></i>
             </button>
         </div>
@@ -50,7 +50,7 @@
                             </div>
                         </label>
                     @endforeach
-                    <button type="button" class="d-block text-center" id="addCategoryButton">
+                    <button type="button" class="addCategoryButton d-block text-center">
                         <div class="category-option">
                             <i class="fas fa-plus"></i>
                             <span class="text-muted fw-semibold">Añadir categoría</span>
@@ -110,18 +110,22 @@
                     </div>
                 </div>
 
-                <div class="col-12 d-flex align-items-center justify-content-between w-100 mt-3">
-                    <label for="start_date" class="fw-bold mb-0 fs-4">Fecha de comienzo</label>
-                    <input type="datetime-local" id="start_date" name="start_date" 
-                    class="form-control px-2 py-0  bg-transparent text-muted text-center max-w-200 fs-6 custom-datetime-input"
-                    value="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}">
+                <div class="col-12 mt-3">
+                    <div class="d-flex align-items-center justify-content-between w-100">
+                        <label for="start_date" class="fw-bold mb-0 fs-4">Fecha de comienzo</label>
+                        <input type="datetime-local" id="start_date" name="start_date"
+                            class="form-control px-2 py-0 bg-transparent text-muted text-center max-w-200 fs-6 custom-datetime-input"
+                            value="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}">
+                    </div>
                     <div class="invalid-feedback"></div>
                 </div>
-                <div class="col-12 d-flex align-items-center justify-content-between w-100 mt-3">
-                    <label for="expiration_date" class="fw-bold mb-0 fs-4">Fecha de expiración</label>
-                    <input type="datetime-local" id="expiration_date" name="expiration_date" 
-                    class="form-control px-2 py-0  bg-transparent text-muted text-center max-w-200 fs-6 custom-datetime-input"
-                    value="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}">
+                <div class="col-12 mt-3">
+                    <div class="d-flex align-items-center justify-content-between w-100">
+                        <label for="expiration_date" class="fw-bold mb-0 fs-4">Fecha de expiración</label>
+                        <input type="datetime-local" id="expiration_date" name="expiration_date"
+                            class="form-control px-2 py-0 bg-transparent text-muted text-center max-w-200 fs-6 custom-datetime-input"
+                            value="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}">
+                    </div>
                     <div class="invalid-feedback"></div>
                 </div>
             </div>
