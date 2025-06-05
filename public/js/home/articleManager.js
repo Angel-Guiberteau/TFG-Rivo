@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const showHomeButton = document.getElementById('showHome');
 
     const contentSections = document.querySelectorAll(
-        'main > section > article.home-article, main > section > article.income-article, main > section > article.egress-article, main > section > article.objective-article, main > section > article.settings-article, main > section > article.category-article'
+        'main > section > article.home-article, main > section > article.income-article, main > section > article.egress-article, main > section > article.objective-article, main > section > article.settings-article, main > section > article.category-article, main > section > article.allHistory-section'
     );
 
     function setupCategoryFilteringByType(initialType = null) {
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const loadMoreBtn = document.getElementById(`${type}-loadMoreBtn`);
 
         let offset = 0;
-        const limit = 6;
+        const limit = 12;
         let allLoaded = false;
 
         async function loadMore() {
@@ -209,8 +209,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     movementsContainer.innerHTML = '';
                     if (loadMoreBtn) loadMoreBtn.style.display = 'block';
                     await loadMore();
-                    
-                    
+
+
                     setupFormValidation();
                 });
             });
@@ -221,8 +221,8 @@ document.addEventListener('DOMContentLoaded', function () {
             addFormBtn.addEventListener('click', () => {
                 hideContentSections();
                 showSection(formSection, () => {
-                    setMovementType(type); 
-                    setupCategoryFilteringByType(type);  
+                    setMovementType(type);
+                    setupCategoryFilteringByType(type);
                     setupFormValidation(type);
                 });
             });
@@ -257,6 +257,96 @@ document.addEventListener('DOMContentLoaded', function () {
     setupHistory('expense');
     setupHistory('save');
 
+
+    async function loadAllHistory() {
+        const container = document.querySelector('#allHistory-movements');
+        const loadMoreBtn = document.getElementById('allHistory-loadMoreBtn');
+        if (!container) return;
+
+        if (allHistoryAllLoaded) return;
+
+        const operations = await fetchData(`/api/operation/getAllOperations?offset=${allHistoryOffset}&limit=${allHistoryLimit}`);
+        if (!operations || operations.length === 0) {
+            allHistoryAllLoaded = true;
+            if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+            return;
+        }
+
+        operations.forEach((op, index) => {
+            const movementHTML = `
+                <div class="col-12 col-lg-6 ${index % 2 === 0 ? 'border-lg-end' : ''}">
+                    <div class="movement-item">
+                        <div class="movement-row" data-id="${op.id}">
+                            <div class="movement-left d-flex align-items-center gap-3">
+                                <div class="movement-icon">${op.category?.icon?.icon || ''}</div>
+                                <div class="movement-info">
+                                    <p class="movement-date mb-0">${formatShortDate(op.action_date)}</p>
+                                    <p class="badge-${getBadgeClass(op.movement_type_id)} mb-1">
+                                        ${getMovementLabel(op.movement_type_id)}
+                                    </p>
+                                    <p class="movement-name mb-0">${op.category?.name || 'Sin categoría'}</p>
+                                </div>
+                            </div>
+                            <div class="movement-right">
+                                <p class="movement-amount m-0 fs-5 ${op.movement_type_id == 2 ? 'negative' : 'positive'}">
+                                    ${op.movement_type_id == 2 ? '-' : '+'}${Number(op.amount).toFixed(2)}€
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', movementHTML);
+
+            const newRow = container.querySelector(`.movement-row[data-id="${op.id}"]`);
+            if (newRow) {
+                newRow.addEventListener('click', () => openTransactionDetail(op.id));
+            }
+        });
+
+
+        allHistoryOffset += allHistoryLimit;
+
+        if (operations.length < allHistoryLimit && loadMoreBtn) {
+            allHistoryAllLoaded = true;
+            loadMoreBtn.style.display = 'none';
+        }
+    }
+
+
+    let allHistoryOffset = 0;
+    const allHistoryLimit = 10;
+    let allHistoryAllLoaded = false;
+
+    const loadMoreBtn = document.getElementById('allHistory-loadMoreBtn');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            loadAllHistory();
+        });
+    }
+
+    const showAllHistory = document.querySelectorAll('.showAllHistoryButton');
+    const allHistorySection = document.querySelector('.allHistory-section');
+
+    if (showAllHistory && allHistorySection) {
+        showAllHistory.forEach(btn => {
+            btn.addEventListener('click', async () => {
+                allHistoryOffset = 0;
+                allHistoryAllLoaded = false;
+
+                const container = document.querySelector('#allHistory-movements');
+                const loadMoreBtn = document.getElementById('allHistory-loadMoreBtn');
+                if (container) container.innerHTML = '';
+                if (loadMoreBtn) loadMoreBtn.style.display = 'block';
+
+                hideContentSections();
+                showSection(allHistorySection);
+                setFabIcon('custom');
+
+                await loadAllHistory();
+            });
+        });
+    }
 
 
 

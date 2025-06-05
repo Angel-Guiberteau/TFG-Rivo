@@ -32,15 +32,15 @@
                 <button class="showObjectiveButton w-100 d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-bullseye"></i> Objetivos
                 </button>
-                <button class="w-100 d-flex align-items-center gap-2" href="#">
+                {{-- <button class="w-100 d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-user-friends"></i> Amigos
-                </button>
-                <button class="w-100 d-flex align-items-center gap-2" href="#">
+                </button> --}}
+                <button class="showAllHistoryButton w-100 d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-clipboard-list"></i> Historial
                 </button>
-                <button class="w-100 d-flex align-items-center gap-2" href="#">
+                {{-- <button class="w-100 d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-chart-bar"></i> Estadísticas
-                </button>
+                </button> --}}
                 <button id="showSettingsButton" class="w-100 d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-cog"></i> Ajustes
                 </button>
@@ -137,6 +137,7 @@
             @include('templates.home.createObjective')
             @include('templates.home.settings')
             @include('templates.home.createCategory')
+            @include('templates.home.allHistory')
 
             @include('templates.home.operations.addOperation')
         </section>
@@ -165,9 +166,10 @@
         <script src="{{ asset('js/home/income/history.js') }}"></script>
         <script src="{{ asset('js/home/objectives.js') }}"></script>
         <script src="{{ asset('js/home/category.js') }}"></script>
+        <script src="{{ asset('js/home/allHistory.js') }}"></script>
 
         <script type="module" src="{{ asset('js/home/homeValidations/addOperationValidations.js') }}"></script>
-        
+
         <script type="module" src="{{ asset('js/home/app.js') }}"></script>
     @endpush
 

@@ -20,6 +20,7 @@ class ApiValidator extends Validator {
     protected static function rulesIncomeOperations(): array {
         return [
             'offset' => 'required|integer',
+            'limit' => 'sometimes|integer',
         ];
     }
 
