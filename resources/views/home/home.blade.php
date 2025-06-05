@@ -30,9 +30,9 @@
                 <button class="showObjectiveButton w-100 d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-bullseye"></i> Objetivos
                 </button>
-                <button class="w-100 d-flex align-items-center gap-2" href="#">
+                {{-- <button class="w-100 d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-user-friends"></i> Amigos
-                </button>
+                </button> --}}
                 <button class="w-100 d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-clipboard-list"></i> Historial
                 </button>
