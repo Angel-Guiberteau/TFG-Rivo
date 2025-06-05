@@ -44,24 +44,6 @@ export function setSettingsValidation() {
         }
     };
 
-    const validateField = (fieldKey) => {
-        const { input, validate, message } = fields[fieldKey];
-        const feedback = input.parentElement.querySelector('.invalid-feedback') || createFeedback(input);
-
-        if (validate(input.value.trim())) {
-            input.classList.remove('is-invalid');
-            input.classList.add('is-valid');
-            feedback.style.display = 'none';
-            return true;
-        } else {
-            input.classList.remove('is-valid');
-            input.classList.add('is-invalid');
-            feedback.textContent = message;
-            feedback.style.display = 'block';
-            return false;
-        }
-    };
-
     const createFeedback = (input) => {
         const feedback = document.createElement('div');
         feedback.className = 'invalid-feedback';
@@ -70,15 +52,48 @@ export function setSettingsValidation() {
         return feedback;
     };
 
+    const validateField = (fieldKey) => {
+        const { input, validate, message } = fields[fieldKey];
+        const value = input.value.trim();
+        const feedback = input.parentElement.querySelector('.invalid-feedback') || createFeedback(input);
+
+        const isValid = validate(value);
+
+        if (fieldKey === 'password') {
+            // No mostrar is-valid si está vacío
+            if (value === '') {
+                input.classList.remove('is-valid', 'is-invalid');
+                feedback.style.display = 'none';
+                return true;
+            }
+        }
+
+        if (isValid) {
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+            feedback.style.display = 'none';
+        } else {
+            input.classList.remove('is-valid');
+            input.classList.add('is-invalid');
+            feedback.textContent = message;
+            feedback.style.display = 'block';
+        }
+
+        return isValid;
+    };
+
     const validateForm = () => {
-        const allValid = Object.entries(fields).every(([key, { input }]) => {
-            
-            return key === 'password' ? fields[key].validate(input.value.trim()) : validateField(key);
+        const allValid = Object.entries(fields).every(([key, { input, validate }]) => {
+            const value = input.value.trim();
+            return key === 'password'
+                ? validate(value) 
+                : validateField(key); 
         });
+
         submitButton.disabled = !allValid;
     };
 
-    // Validación en cada cambio
+
     Object.keys(fields).forEach(fieldKey => {
         const input = fields[fieldKey].input;
         input.addEventListener('input', () => {
@@ -87,7 +102,6 @@ export function setSettingsValidation() {
         });
     });
 
-    // Validación inicial
-    Object.keys(fields).forEach(fieldKey => validateField(fieldKey));
+    Object.keys(fields).forEach(validateField);
     validateForm();
 }

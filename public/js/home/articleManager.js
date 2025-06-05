@@ -3,6 +3,7 @@ import { openTransactionDetail } from './transactionInfo.js';
 import { setupFormValidation } from './homeValidations/addOperationValidations.js';
 import { setObjetiveValidation } from './homeValidations/objetiveValidation.js';
 import { setSettingsValidation } from './homeValidations/settingsValidations.js';
+import { initCategoryValidation } from './homeValidations/categoriesValidations.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     const homeSection = document.getElementById('home-section');
@@ -287,46 +288,52 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    const showCategoryFormButton = document.querySelectorAll('.addCategoryButton');
-    const categorySection = document.getElementById('categoryAdd-section');
-    const iconGrid = categorySection.querySelector('.icon-grid');
-    const hiddenIconInput = categorySection.querySelector('input[name="icon"]');
 
-    if (showCategoryFormButton && categorySection) {
-        showCategoryFormButton.forEach(btn => {
-            btn.addEventListener('click', async () => {
-                hideContentSections();
-                showSection(categorySection);
-                setFabIcon('custom');
 
-                if (iconGrid && iconGrid.children.length === 0) {
-                    try {
-                        const res = await fetch('/api/icon/getAllIcons');
-                        const icons = await res.json();
+const showCategoryFormButton = document.querySelectorAll('.addCategoryButton');
+const categorySection = document.getElementById('categoryAdd-section');
+const iconGrid = categorySection.querySelector('.icon-grid');
+const hiddenIconInput = categorySection.querySelector('input[name="icon"]');
 
-                        icons.forEach(icon => {
-                            const div = document.createElement('div');
-                            div.classList.add('icon-option');
-                            div.dataset.icon = icon.icon;
-                            div.dataset.id = icon.id;
-                            div.innerHTML = icon.icon;
+if (showCategoryFormButton.length > 0 && categorySection) {
+    showCategoryFormButton.forEach(btn => {
+        btn.addEventListener('click', async () => {
+            hideContentSections();
+            showSection(categorySection);
+            setFabIcon('custom');
 
-                            div.addEventListener('click', () => {
-                                iconGrid.querySelectorAll('.icon-option').forEach(opt => opt.classList.remove('selected'));
-                                div.classList.add('selected');
-                                hiddenIconInput.value = icon.id;
-                            });
+            // Cargar iconos solo la primera vez que se abre el formulario
+            if (iconGrid && iconGrid.children.length === 0) {
+                try {
+                    const res = await fetch('/api/icon/getAllIcons');
+                    const icons = await res.json();
 
-                            iconGrid.appendChild(div);
+                    icons.forEach(icon => {
+                        const div = document.createElement('div');
+                        div.classList.add('icon-option');
+                        div.dataset.icon = icon.icon;
+                        div.dataset.id = icon.id;
+                        div.innerHTML = icon.icon;
+
+                        div.addEventListener('click', () => {
+                            iconGrid.querySelectorAll('.icon-option').forEach(opt => opt.classList.remove('selected'));
+                            div.classList.add('selected');
+                            hiddenIconInput.value = icon.id;
                         });
-                    } catch (error) {
-                        console.error('Error cargando iconos:', error);
-                    }
-                }
-            });
-        });
 
-    }
+                        iconGrid.appendChild(div);
+                    });
+                } catch (error) {
+                    console.error('Error cargando iconos:', error);
+                }
+            }
+
+            // Inicializa la validación de categorías al mostrar el formulario
+            initCategoryValidation();
+        });
+    });
+}
+
 
     hideContentSections();
     showSection(homeSection);

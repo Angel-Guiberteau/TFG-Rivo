@@ -42,11 +42,13 @@
                     <div class="icon-scroll-wrapper border rounded-4 p-3 bg-white shadow-sm">
                         <div class="icon-grid"></div>
                     </div>
+                    <div id="icon-feedback" class="invalid-feedback d-none mt-1">⚠️ Debes seleccionar un icono.</div>
                 </div>
 
                 <div class="col-12 mb-3">
                     <p for="subject" class="fw-bold mb-2 fs-4">Nombre de la categoría <span class="text-danger">*</span></p>
                     <input type="text" id="categoryName" name="name" class="form-control mb-3 custom-input" placeholder="Nombre del objetivo" required>
+                    <div class="invalid-feedback d-none">⚠️ No se permiten caracteres especiales ni más de 30 caracteres.</div>
                 </div>
                 <div class="col-12 mb-3">
                     <p class="fw-bold mb-2 fs-4">Tipo de operación <span class="text-danger">*</span></p>
@@ -59,8 +61,9 @@
 
                         <input type="checkbox" name="types[]" value="save" id="cat-op-save" class="type-radio">
                         <label for="cat-op-save">Ahorro</label>
-
+                        
                     </div>
+                    <div id="types-feedback" class="invalid-feedback d-none mt-1">⚠️ Debes seleccionar al menos un tipo de operación.</div>
                 </div>
             </div>
             <div class="d-flex justify-content-center mb-4">
