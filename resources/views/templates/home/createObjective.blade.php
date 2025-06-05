@@ -20,10 +20,12 @@
             <div class="col-12 mb-3">
                 <p for="subject" class="fw-bold mb-2 fs-4">Nombre del objetivo</p>
                 <input type="text" id="objectiveName" name="name" class="form-control mb-3 custom-input" placeholder="Nombre del objetivo" required>
+                <div class="invalid-feedback"></div>
             </div>
             <div class="col-12 mb-3">
                 <p for="subject" class="fw-bold mb-2 fs-4">Dinero objetivo</p>
-                <input type="number" id="" name="target_amount" class="form-control mb-3 custom-input" placeholder="Dinero objetivo" required>
+                <input type="number" id="objectiveAmount" name="target_amount" class="form-control mb-3 custom-input" placeholder="Dinero objetivo" required>
+                <div class="invalid-feedback"></div>
             </div>
         </div>
         <div class="d-flex justify-content-center mb-4">
