@@ -1,5 +1,7 @@
 import { fetchData } from './helpers/api.js';
 import { openTransactionDetail } from './transactionInfo.js';
+import { setupFormValidation } from './homeValidations/addOperationValidations.js';
+import { setObjetiveValidation } from './homeValidations/objetiveValidation.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     const homeSection = document.getElementById('home-section');
@@ -205,16 +207,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     movementsContainer.innerHTML = '';
                     if (loadMoreBtn) loadMoreBtn.style.display = 'block';
                     await loadMore();
+                    
+                    
+                    setupFormValidation();
                 });
             });
         }
+
 
         if (addFormBtn) {
             addFormBtn.addEventListener('click', () => {
                 hideContentSections();
                 showSection(formSection, () => {
-                    setMovementType(type);
-                    setupCategoryFilteringByType(type);
+                    setMovementType(type); 
+                    setupCategoryFilteringByType(type);  
+                    setupFormValidation(type);
                 });
             });
         }
@@ -253,12 +260,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const showObjectiveBtn = document.querySelectorAll('.showObjectiveButton');
     const objectiveSection = document.getElementById('objectiveAdd-section');
+
     if (showObjectiveBtn && objectiveSection) {
         showObjectiveBtn.forEach(btn => {
             btn.addEventListener('click', () => {
                 hideContentSections();
                 showSection(objectiveSection);
                 setFabIcon('custom');
+
+                setObjetiveValidation();
             });
         });
     }
