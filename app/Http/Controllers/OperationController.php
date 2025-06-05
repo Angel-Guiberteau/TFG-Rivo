@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\MovementTypesEnum;
+use App\Models\Account;
 use App\Models\Objective;
 use App\Models\ObjectiveOperation;
 use Illuminate\Http\Request;
@@ -92,6 +93,22 @@ class OperationController extends Controller
 
     }
 
+    public function getAllOperations(array $data): JsonResponse {
+        $accountId = session('active_account_id');
+
+        if (!$accountId) {
+            return response()->json(['error' => 'No hay cuenta activa'], 400);
+        }
+
+        $offset = $data['offset'] ?? 0;
+        $limit  = $data['limit'] ?? 10;
+
+        $operations = Operation::getAllOperationsWithLimitByAccountId($accountId, $offset, $limit);
+
+        return response()->json($operations);
+    }
+
+
     public function deleteOperation(int $id): JsonResponse{
 
         return Operation::deleteOperation($id) ? response()->json(['success' => 'Operación borrada correctamente']) : response()->json(['error' => 'Error al eliminar la operacion. Póngase en contacto con el soporte'], 400);
@@ -125,6 +142,8 @@ class OperationController extends Controller
             $data['movement_type_id'] = MovementTypesEnum::INCOME->value;
             $operation = Operation::addOperation($data);
             if($operation){
+                if(!Account::addIncomeToBalance($operation->account_id, $operation->amount))
+                    return false;
                 if(isset($data['schedule'])){
                     OperationPlanned::addPlannedOperation($operation->id, $data);
                 }else{
@@ -140,6 +159,8 @@ class OperationController extends Controller
                 $data['movement_type_id'] = MovementTypesEnum::EXPENSE->value;
                 $operation = Operation::addOperation($data);
                 if($operation){
+                    if(!Account::addExpenseToBalance($operation->account_id, $operation->amount))
+                        return false;
                     if(isset($data['schedule'])){
                         OperationPlanned::addPlannedOperation($operation->id, $data);
                     }else{
@@ -153,6 +174,8 @@ class OperationController extends Controller
                     $data['movement_type_id'] = MovementTypesEnum::SAVEMONEY->value;
                     $operation = Operation::addOperation($data);
                     if($operation){
+                        if(!Account::addSaveToTotalSave($operation->account_id, $operation->amount))
+                        return false;
                         if(isset($data['schedule'])){
                             if(!OperationPlanned::addPlannedOperation($operation->id, $data)){
                                 return false;

@@ -82,6 +82,14 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
             return $operation->saveOperations($validate['data']);
         });
 
+        Route::get('/getAllOperations', function(): JsonResponse {
+            $data = request()->query();
+            $operation = new OperationController();
+            $validate = ApiValidator::validate($data, ValidationEnum::GET_OPERATIONS_OFFSET->value);
+
+            return $operation->getAllOperations($validate['data']);
+        });
+
         Route::post('/deleteOperation/{id}', function($id): JsonResponse {
             $operation = new OperationController();
             $data = [
