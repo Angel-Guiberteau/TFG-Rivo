@@ -1,4 +1,4 @@
-<div class="col-12 col-lg-6 mt-2 mt-lg-4">
+<div class="col-12 col-lg-6 mt-2 mt-lg-4 objective-item" data-id="{{ $objective->id }}">
     <div class="w-100 info-container py-4 px-3">
         <div class="d-flex flex-row justify-content-start align-items-center">
             <img src="{{ asset('img/logos/purpleRivo.png') }}" alt="">
@@ -16,5 +16,17 @@
                 height: 100%;">
             </div>
         </div>
+        @if (isset($modifiable))
+            <div class="d-flex flex-row w-100 justify-content-end gap-2 mt-3">
+                <button class="btn-objective edit" data-id="{{ $objective->id }}">
+                    <i class="fas fa-pen"></i>
+                    Editar
+                </button>
+                <button class="btn-objective delete" data-id="{{ $objective->id }}">
+                    <i class="fas fa-trash"></i>
+                    Eliminar
+                </button>
+            </div>
+        @endif
     </div>
 </div>
