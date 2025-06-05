@@ -44,26 +44,31 @@ class Category extends Model
     }
 
     public static function updateCategory(array $data): bool {
-        $category = self::with('movementTypes')->find($data['category_id']);
+        $category = self::with('movementTypes')->find($data['id']);
 
-        if(!$category) {
+        if (!$category) {
             return false;
         }
 
-        if(isset($data['name'])) {
+        if (isset($data['name'])) {
             $category->name = $data['name'];
         }
-        if(isset($data['icon_id'])) {
-            $category->icon_id = $data['icon_id'];
+
+        if (isset($data['icon'])) {
+            $category->icon_id = $data['icon'];
         }
-        if(isset($data['movement_type_ids'])) {
-            $category->movementTypes()->sync($data['movement_type_ids']);
-        }
-        if(!$category->save()) {
+
+        if (!$category->save()) {
             return false;
         }
+
+        if (isset($data['types'])) {
+            $category->movementTypes()->sync($data['types']);
+        }
+
         return true;
     }
+
 
     public static function addUserCategory(array $data): bool | self {
         $category = new self;
@@ -113,13 +118,11 @@ class Category extends Model
         return $this->belongsTo(Icon::class, 'icon_id');
     }
 
-    public function movementTypes(): BelongsToMany {
-        return $this->belongsToMany(
-            MovementType::class,
-            'movements_types_categories',
-            'category_id',
-            'movement_type_id'
-        );
+    public function movementTypes()
+    {
+        return $this->belongsToMany(MovementType::class, 'movements_types_categories', 'category_id', 'movement_type_id');
     }
+
+
 
 }

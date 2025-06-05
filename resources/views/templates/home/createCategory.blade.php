@@ -5,7 +5,7 @@
         <div class="scroll-wrapper categories-grid mb-2">
             @foreach ($personalCategories as $category)
                 <div class="position-relative category-label-personal d-flex flex-column align-items-center text-center p-2 border rounded" data-id="{{ $category['id'] }}">
-                    <input type="radio" name="category_id" value="{{ $category['id'] }}" disabled class="d-none">
+                    <input type="radio" value="{{ $category['id'] }}" disabled class="d-none">
                     <div class="category-option mb-2">
                         {!! $category['icon_html'] !!}
                         <span class="text-muted fw-semibold d-block">{{ $category['category_name'] }}</span>
@@ -25,12 +25,13 @@
     @endif
 
 
-    <form class="col-12 col-lg-10 mx-auto mt-4" method="POST" action="{{ route('addOrEditObjective') }}">
+    <form class="col-12 col-lg-10 mx-auto mt-4" method="POST" action="{{ route('addOrEditCategory') }}">
         @csrf
-        <input type="hidden" name="category_id" id="category_id">
+        <input type="hidden" name="id">
         <div class="d-flex flex-row justify-content-between align-items-center">
             <h2 class="fw-bold fs-3">Añadir categoría</h2>
         </div>
+
         <hr class="separator">
 
         <div class="row justify-content-between align-items-center">
@@ -62,9 +63,14 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center mb-4">
                 <button id="submitCategories" type="submit" class="btn btn-primary w-100 py-2 mt-3 fw-semibold fs-5 custom-gradient-btn">
                     Añadir categoría
+                </button>
+            </div>
+            <div class="d-flex justify-content-center mb-4">
+                <button type="button" id="resetCategoryButton" class="d-none btn btn-secondary w-100 py-2 fw-semibold fs-5">
+                    Nueva categoría
                 </button>
             </div>
         </div>

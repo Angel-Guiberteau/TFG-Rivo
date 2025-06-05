@@ -292,6 +292,7 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 
     Route::post('/addOrEditCategoryUser', function (): RedirectResponse {
         $data = request()->toArray();
+
         if(isset($data['types'])){
             foreach ($data['types'] as $index => $value) {
                 if($value == 'income')
@@ -304,26 +305,32 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
                             $data['types'][$index] = MovementTypesEnum::SAVEMONEY->value;
             }
         }
-        $validate = BaseCategoriesValidator::validate($data, ValidationEnum::ADD->value);
-        if(!$validate['status']){
-            return redirect('/home')->with('error', 'Error al añadir la categoría. Póngase en contacto con el soporte.');
-        }
+
 
         $controller = new CategoryController();
 
-        if(!isset($data['category_id']) || !is_null($data['category_id'])) {
-            if(!$controller->addUserCategory($validate['data'])){
-                return redirect('/home')->with('error', 'Error al añadir la categoría . Póngase en contacto con el soporte.');
+        if (is_null($data['id'])) {
+            $validate = BaseCategoriesValidator::validate($data, ValidationEnum::ADD->value);
+            if(!$validate['status']){
+                return redirect('/home')->with('error', 'Error al añadir la categoría. Póngase en contacto con el soporte.');
             }
-        }else{
-            if(!$controller->updateCategory($validate['data'])){
+                if (!$controller->addUserCategory($validate['data'])) {
+                return redirect('/home')->with('error', 'Error al añadir la categoría. Póngase en contacto con el soporte.');
+            }
+        } else {
+            $validate = BaseCategoriesValidator::validate($data, ValidationEnum::EDIT->value);
+            if(!$validate['status']){
+                return redirect('/home')->with('error', 'Error al añadir la categoría. Póngase en contacto con el soporte.');
+            }
+            $validate['data']['category_id'] = $validate['data']['id'];
+            if (!$controller->updateCategory($validate['data'])) {
                 return redirect('/home')->with('error', 'Error al editar la categoría. Póngase en contacto con el soporte.');
             }
         }
 
         return redirect('/home')->with('success', 'Categoría modificada correctamente');
 
-    })->name('addOrEditObjective');
+    })->name('addOrEditCategory');
 
 });
 

@@ -436,11 +436,11 @@ input:checked + .slider:before {
   border-radius: 8px;
   background-color: #fff;
 }
-#addCategoryButton{
+.addCategoryButton{
   border: none;
   border-radius: 8px;
 }
-#addCategoryButton > .category-option:hover{
+.addCategoryButton > .category-option:hover{
   border-color: #6f42c1;
   box-shadow: 0 0 0 4px rgba(111, 66, 193, 0.2);
   background-color: #f8f2ff;
