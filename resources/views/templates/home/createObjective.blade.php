@@ -2,14 +2,14 @@
     @if (isset($objectives))
         <h2 class="mt-4 fw-bold">Objetivos Actuales</h2>
         @foreach ($objectives as $objective)
-            @include('templates.home.objective')
+            @include('templates.home.objective', ['modifiable' => true])
         @endforeach
 
         <hr class=" mt-4 separator">
     @endif
-    <form class="col-12 col-lg-10 mx-auto mt-4" method="POST" action="{{ route('addObjective') }}">
+    <form class="objective-form col-12 col-lg-10 mx-auto mt-4" method="POST" action="{{ route('addOrEditObjective') }}">
         @csrf
-        <input type="hidden" name="objective_id" id="objective_id"> 
+        <input type="hidden" name="objective_id" id="objective_id">
         <div class="d-flex flex-row justify-content-between align-items-center">
             <h2 class="fw-bold fs-3">Añadir objetivo</h2>
         </div>

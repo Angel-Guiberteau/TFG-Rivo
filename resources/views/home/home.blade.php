@@ -16,7 +16,7 @@
     </div>
 
     <main>
-        
+
         @include('templates.home.mobileNav')
         <aside class="sidebar d-flex flex-column align-items-center justify-content-between" role="complementary">
             <div class="d-flex flex-row justify-content-center align-items-center">
@@ -24,7 +24,7 @@
                 <h1 class="fs-2 mb-0 align-self-end">Rivo</h1>
             </div>
             <nav class="asideNav d-flex flex-column justify-content-center align-items-center gap-2" aria-label="Menú lateral">
-                <button id="showObjectiveButton" class="w-100 d-flex align-items-center gap-2" href="#">
+                <button class="showObjectiveButton w-100 d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-bullseye"></i> Objetivos
                 </button>
                 <button class="w-100 d-flex align-items-center gap-2" href="#">
@@ -80,7 +80,7 @@
                         <i class="fas fa-bars fs-2" style="color: #fff; text-shadow: 0 0 1px #000;"></i>
                     </button>
                 </header>
-                
+
                 <div class="balance-info pt-3 pt-lg-5 pb-3 pb-lg-5 px-3 px-lg-5 text-center text-lg-start">
                     <h2 class="fs-1 fw-bold mb-4">Hola, {{ $user->username }}!</h2>
                     <p class="fs-4 fw-light mb-0">Balance disponible</p>
@@ -105,7 +105,7 @@
                     </div>
                 </div>
             </article>
-            
+
             {{-- HOME SECTION --}}
             <article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black home-article" id="home-section">
                 @if (isset($objectives))
@@ -158,6 +158,7 @@
         <script src="{{ asset('js/home/income.js') }}"></script>
         <script src="{{ asset('js/home/navMobile.js') }}"></script>
         <script src="{{ asset('js/home/income/history.js') }}"></script>
+        <script src="{{ asset('js/home/objectives.js') }}"></script>
 
         <script type="module" src="{{ asset('js/home/app.js') }}"></script>
     @endpush
