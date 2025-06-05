@@ -1,13 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('resetObjectiveForm').addEventListener('click', () => {
+        const form = document.querySelector('.objective-form');
 
+        form.reset();
+
+        form.querySelector('input[name="objective_id"]').value = '';
+
+        document.querySelector('.objective-form h2').textContent = 'Añadir objetivo';
+        form.querySelector('button[type="submit"]').textContent = 'Añadir objetivo';
+        document.getElementById('resetObjectiveForm').classList.add('d-none');
+    });
 document.querySelectorAll('.btn-objective.edit').forEach(button => {
     button.addEventListener('click', async () => {
         const id = button.dataset.id;
         try {
             const res = await fetch(`/api/objective/getObjective/${id}`);
             const objective = await res.json();
-            console.log(objective);
 
+            document.getElementById('resetObjectiveForm').classList.remove('d-none');
 
             document.querySelector('input[name="objective_id"]').value = objective.id;
             document.querySelector('input[name="name"]').value = objective.name;

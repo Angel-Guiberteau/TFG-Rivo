@@ -159,6 +159,7 @@
         <script src="{{ asset('js/home/navMobile.js') }}"></script>
         <script src="{{ asset('js/home/income/history.js') }}"></script>
         <script src="{{ asset('js/home/objectives.js') }}"></script>
+        <script src="{{ asset('js/home/category.js') }}"></script>
 
         <script type="module" src="{{ asset('js/home/app.js') }}"></script>
     @endpush

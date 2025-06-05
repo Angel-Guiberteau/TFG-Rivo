@@ -26,9 +26,14 @@
                 <input type="number" id="" name="target_amount" class="form-control mb-3 custom-input" placeholder="Dinero objetivo" required>
             </div>
         </div>
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center mb-4">
             <button type="submit" class="btn btn-primary w-100 py-2 mt-3 fw-semibold fs-5 custom-gradient-btn">
                 Añadir objetivo
+            </button>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="button" id="resetObjectiveForm" class="d-none btn btn-secondary w-100 py-2 fw-semibold fs-5">
+                Nuevo objetivo
             </button>
         </div>
     </form>

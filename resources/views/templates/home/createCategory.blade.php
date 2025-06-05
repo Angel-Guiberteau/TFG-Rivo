@@ -1,25 +1,33 @@
 <article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black category-article" id="categoryAdd-section" style="display: none;">
 
-    @if (isset($personalCategories))
-        <h2 class="mt-4 fw-bold mb-4">Categorias personales actuales</h2>
-        <div class="categories-grid mb-2">
+    @if (isset($personalCategories) && count($personalCategories))
+        <h2 class="mt-4 fw-bold mb-4">Categorías personales actuales</h2>
+        <div class="scroll-wrapper categories-grid mb-2">
             @foreach ($personalCategories as $category)
-                <label class="d-block text-center category-label">
+                <div class="position-relative category-label-personal d-flex flex-column align-items-center text-center p-2 border rounded" data-id="{{ $category['id'] }}">
                     <input type="radio" name="category_id" value="{{ $category['id'] }}" disabled class="d-none">
-                    <div class="category-option">
+                    <div class="category-option mb-2">
                         {!! $category['icon_html'] !!}
-                        <span class="text-muted fw-semibold">{{ $category['category_name'] }}</span>
+                        <span class="text-muted fw-semibold d-block">{{ $category['category_name'] }}</span>
                     </div>
-                </label>
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-sm btn-outline-primary btn-edit-category" data-id="{{ $category['id'] }}">
+                            <i class="fas fa-pen"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger btn-delete-category" data-id="{{ $category['id'] }}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
             @endforeach
         </div>
-        
-
         <hr class="mt-4 separator">
-    @endif    
+    @endif
+
+
     <form class="col-12 col-lg-10 mx-auto mt-4" method="POST" action="{{ route('addCategoryUser') }}">
         @csrf
-        <input type="hidden" name="operation_id" id="operation_id"> 
+        <input type="hidden" name="operation_id" id="operation_id">
         <div class="d-flex flex-row justify-content-between align-items-center">
             <h2 class="fw-bold fs-3">Añadir categoría</h2>
         </div>

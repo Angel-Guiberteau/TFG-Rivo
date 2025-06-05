@@ -120,6 +120,21 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
             return $controller->getObjective($id);
         });
     });
+
+    Route::group(['prefix' => 'category', 'middleware' => ['auth', 'role:user']], function () {
+
+        Route::post('/delete/{id}', function ($id) {
+            //Añadir validación del id
+            $controller = new CategoryController();
+            return $controller->deleteCategoryUser($id);
+        });
+
+        Route::get('/getCategory/{id}', function ($id) {
+            //Añadir validación del id
+            $controller = new ObjectiveController();
+            return $controller->getObjective($id);
+        });
+    });
 });
 
 /*
@@ -291,13 +306,13 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
         }
         $validate = BaseCategoriesValidator::validate($data, ValidationEnum::ADD->value);
         if(!$validate['status']){
-            return redirect('/home')->with('error', 'Error al añadir el objetivo. Póngase en contacto con el soporte.');
+            return redirect('/home')->with('error', 'Error al añadir la categoría. Póngase en contacto con el soporte.');
         }
         $controller = new CategoryController();
         if(!$controller->addUserCategory($validate['data'])){
-            return redirect('/home')->with('error', 'Error al añadir el objetivo. Póngase en contacto con el soporte.');
+            return redirect('/home')->with('error', 'Error al añadir la categoría . Póngase en contacto con el soporte.');
         }
-        return redirect('/home')->with('success', 'Operación añadida correctamente');
+        return redirect('/home')->with('success', 'Categoría añadida correctamente');
 
     })->name('addCategoryUser');
 
