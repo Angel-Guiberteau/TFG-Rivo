@@ -1,5 +1,6 @@
 import { fetchData } from './helpers/api.js';
 import { openTransactionDetail } from './transactionInfo.js';
+import { setupFormValidation } from './homeValidations/addOperationValidations.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     const homeSection = document.getElementById('home-section');
@@ -205,16 +206,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     movementsContainer.innerHTML = '';
                     if (loadMoreBtn) loadMoreBtn.style.display = 'block';
                     await loadMore();
+                    
+                    
+                    setupFormValidation();
                 });
             });
         }
+
 
         if (addFormBtn) {
             addFormBtn.addEventListener('click', () => {
                 hideContentSections();
                 showSection(formSection, () => {
-                    setMovementType(type);
-                    setupCategoryFilteringByType(type);
+                    setMovementType(type); 
+                    setupCategoryFilteringByType(type);  
+                    setupFormValidation(type);
                 });
             });
         }
