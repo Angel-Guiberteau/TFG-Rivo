@@ -68,9 +68,9 @@
                             <option value="{{ $objective->id }}">{{ $objective->name }}</option>
                         @endforeach
                     </select>
-                    <div class="invalid-feedback"></div>
                 </div>
             </div>
+            <div class="invalid-feedback"></div>
             <div class="col-12 mb-3">
                 <p for="subject" class="fw-bold mb-2 fs-4">Información</p>
                 <input type="text" id="subject" name="subject" class="form-control mb-3 custom-input" placeholder="Asunto" required>

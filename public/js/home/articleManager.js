@@ -5,7 +5,7 @@ import { setupFormValidation } from './homeValidations/addOperationValidations.j
 document.addEventListener('DOMContentLoaded', function () {
     const homeSection = document.getElementById('home-section');
     const showHomeButton = document.getElementById('showHome');
-    
+
     const contentSections = document.querySelectorAll(
         'main > section > article.home-article, main > section > article.income-article, main > section > article.egress-article, main > section > article.objective-article, main > section > article.settings-article, main > section > article.category-article'
     );
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const categoryLabels = document.querySelectorAll('#categoryOptions label[data-types]');
         const TYPE_MAP = { income: '1', expense: '2', save: '3' };
         const goalSection = document.getElementById('goalSelector');
-                
+
         const filter = (key) => {
             const wanted = TYPE_MAP[key] || '';
 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             if (goalSection) {
-                if (key === 'save') {                    
+                if (key === 'save') {
                     goalSection.classList.remove('d-none');
                     goalSection.style.display = 'block';
                 } else {
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showSection(section, onShow = null) {
-        if (!section) return;        
+        if (!section) return;
         section.style.display = 'flex';
         requestAnimationFrame(async () => {
             section.classList.add('show');
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!allLoaded) loadMore();
             });
         }
-        
+
     }
 
     if (showHomeButton) {
@@ -251,19 +251,20 @@ document.addEventListener('DOMContentLoaded', function () {
     setupHistory('save');
 
 
-    
 
-    const showObjectiveBtn = document.getElementById('showObjectiveButton');
+
+    const showObjectiveBtn = document.querySelectorAll('.showObjectiveButton');
     const objectiveSection = document.getElementById('objectiveAdd-section');
-
     if (showObjectiveBtn && objectiveSection) {
-        showObjectiveBtn.addEventListener('click', () => {
-            hideContentSections();
-            showSection(objectiveSection);
-            setFabIcon('custom');
+        showObjectiveBtn.forEach(btn => {
+            btn.addEventListener('click', () => {
+                hideContentSections();
+                showSection(objectiveSection);
+                setFabIcon('custom');
+            });
         });
     }
-    
+
     const showSettingsBtn = document.getElementById('showSettingsButton');
     const settingsSection = document.getElementById('settings-section');
 
@@ -274,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function () {
             setFabIcon('custom');
         });
     }
-    
+
     const showCategoryFormButton = document.getElementById('addCategoryButton');
     const categorySection = document.getElementById('categoryAdd-section');
     const iconGrid = categorySection.querySelector('.icon-grid');
@@ -311,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-    
+
     hideContentSections();
     showSection(homeSection);
     setupCategoryFilteringByType();
