@@ -130,6 +130,7 @@ function resetObjectiveFormVisualState() {
             form.querySelectorAll('.invalid-feedback').forEach(f => f.textContent = '');
         }
     });
+
     observer.observe(section, { attributes: true });
 }
 
