@@ -27,16 +27,17 @@ class ObjectiveController extends Controller
         return Objective::updateObjective($data) ? true : false;
     }
 
-    public function deleteObjective(int $id): JsonResponse | RedirectResponse{
+    public function deleteObjective(int $id): JsonResponse{
         if(!Objective::deleteObjective($id)){
             return response()->json([
                 'status' => 'error',
                 'message' => 'Objetivo no encontrado o no eliminado.'
             ], 404);
         };
-
-        return redirect('/home')->with('success', 'Objetivo eliminado correctamente.');
-
+        
+        return response()->json([
+            'success' => 'Objetivo eliminado correctamente.',
+        ]);
     }
 
     public function getObjectivesByAccountId(int $accountId){
