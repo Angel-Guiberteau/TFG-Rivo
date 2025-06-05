@@ -5,7 +5,7 @@
         <input type="hidden" name="operation_id" id="operation_id">
         <div class="d-flex flex-row justify-content-between align-items-center">
             <h2 class="fw-bold fs-3">Añadir operación</h2>
-            <button class="btn btn-primary fw-bold btn-sm fs-4 custom-gradient-btn w-25 " id="back-historyIncome">
+            <button type="button" class="btn btn-primary fw-bold btn-sm fs-4 custom-gradient-btn w-25 " id="back-historyIncome">
                     <i class="fas fa-arrow-left"></i>
             </button>
         </div>
@@ -16,7 +16,7 @@
             <div class="col-12 d-flex flex-column mb-3">
                 <div class="col-12 mb-3">
                     <p class="fw-bold mb-2 fs-4">Tipo de operación</p>
-                    <div class="categories-grid operation-types">
+                    <div class="categories-grid operation-types validation-group-type">
                         <input type="radio" name="movement_type" value="income" id="op-income" class="type-radio" />
                         <label for="op-income" class="type-radio-label">Ingreso</label>
 
@@ -25,13 +25,13 @@
 
                         <input type="radio" name="movement_type" value="save" id="op-save" class="type-radio" />
                         <label for="op-save" class="type-radio-label">Ahorro</label>
-
+                        <div class="invalid-feedback d-block mt-1"></div>
                     </div>
                 </div>
             </div>
             <div class="col-12 mb-3">
                 <p class="fw-bold mb-2 fs-4">Categorías</p>
-                <div class="categories-grid" id="categoryOptions">
+                <div class="categories-grid validation-group-category" id="categoryOptions">
                     @foreach ($baseCategories as $category)
                         <label class="d-block text-center category-label" data-types="{{ implode(',', $category['movement_type_ids']) }}">
                             <input type="radio" name="category_id" value="{{ $category['id'] }}" class="d-none">
@@ -56,6 +56,7 @@
                             <span class="text-muted fw-semibold">Añadir categoría</span>
                         </div>
                     </button>
+                    <div class="invalid-feedback d-block mt-1"></div>
                 </div>
             </div>
             <div class="col-12 mb-3">
@@ -69,10 +70,13 @@
                     </select>
                 </div>
             </div>
+            <div class="invalid-feedback"></div>
             <div class="col-12 mb-3">
                 <p for="subject" class="fw-bold mb-2 fs-4">Información</p>
-                <input type="text" id="subject" name="subject" class="form-control mb-3 custom-input" placeholder="Asunto" required>
+                <input type="text" id="subject" name="subject" class="form-control mb-2 custom-input" placeholder="Asunto" required>
+                <div class="invalid-feedback mb-2"></div>
                 <textarea id="description" name="description" class="form-control custom-input" rows="3" placeholder="Description"></textarea>
+                <div class="invalid-feedback mb-2"></div>
             </div>
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3 flex-nowrap g-3">
                 <div class="d-flex align-items-center gap-4 mb-4 mb-lg-2">
@@ -80,7 +84,7 @@
                     <input type="datetime-local" id="date" name="action_date"
                     class="form-control px-2 py-0 bg-transparent text-muted text-center fs-6 max-w-200 custom-datetime-input"
                     value="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}">
-
+                    <div class="invalid-feedback"></div>
 
                 </div>
                 <div class="d-flex align-items-center gap-2">
@@ -89,6 +93,7 @@
                         <input type="checkbox" id="scheduleIncome" name="schedule">
                         <span class="slider round"></span>
                     </label>
+                    <div class="invalid-feedback"></div>
                 </div>
             </div>
 
@@ -105,28 +110,34 @@
                     </div>
                 </div>
 
-                <div class="col-12 d-flex align-items-center justify-content-between w-100 mt-3">
-                    <label for="start_date" class="fw-bold mb-0 fs-4">Fecha de comienzo</label>
-                    <input type="datetime-local" id="start_date" name="start_date"
-                    class="form-control px-2 py-0  bg-transparent text-muted text-center max-w-200 fs-6 custom-datetime-input"
-                    value="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}">
+                <div class="col-12 mt-3">
+                    <div class="d-flex align-items-center justify-content-between w-100">
+                        <label for="start_date" class="fw-bold mb-0 fs-4">Fecha de comienzo</label>
+                        <input type="datetime-local" id="start_date" name="start_date"
+                            class="form-control px-2 py-0 bg-transparent text-muted text-center max-w-200 fs-6 custom-datetime-input"
+                            value="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}">
+                    </div>
+                    <div class="invalid-feedback"></div>
                 </div>
-                <div class="col-12 d-flex align-items-center justify-content-between w-100 mt-3">
-                    <label for="expiration_date" class="fw-bold mb-0 fs-4">Fecha de expiración</label>
-                    <input type="datetime-local" id="expiration_date" name="expiration_date"
-                    class="form-control px-2 py-0  bg-transparent text-muted text-center max-w-200 fs-6 custom-datetime-input"
-                    value="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}">
-
+                <div class="col-12 mt-3">
+                    <div class="d-flex align-items-center justify-content-between w-100">
+                        <label for="expiration_date" class="fw-bold mb-0 fs-4">Fecha de expiración</label>
+                        <input type="datetime-local" id="expiration_date" name="expiration_date"
+                            class="form-control px-2 py-0 bg-transparent text-muted text-center max-w-200 fs-6 custom-datetime-input"
+                            value="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}">
+                    </div>
+                    <div class="invalid-feedback"></div>
                 </div>
             </div>
             <div class="col-12">
                 <div class="input-group">
                     <input type="number" class="form-control fs-5 custom-input" id="amount" name="amount" placeholder="€ Cantidad" min="0" step="0.01">
+                    <div class="invalid-feedback"></div>
                 </div>
             </div>
         </div>
         <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary w-100 py-2 mt-3 fw-semibold fs-5 custom-gradient-btn">
+            <button type="submit" id="addOperation" class="btn btn-primary w-100 py-2 mt-3 fw-semibold fs-5 custom-gradient-btn">
                 Añadir ingreso
             </button>
         </div>
