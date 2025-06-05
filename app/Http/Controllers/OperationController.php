@@ -22,27 +22,27 @@ class OperationController extends Controller
     public function getSixOperationsByAccountId(int $accountId): ?Collection{
         return Operation::getSixOperationsByAccountId($accountId);
     }
-    
+
     public function thisMonthOperationsByAccountId(int $accountId): ?Collection{
         return Operation::thisMonthOperationsByAccountId($accountId);
     }
-    
+
     public function getAllIncomesByAccountId(int $accountId): ?Collection{
         return Operation::getAllIncomesByAccountId($accountId);
     }
-    
+
     public function getAllExpensesByAccountId(int $accountId): ?Collection{
         return Operation::getAllExpensesByAccountId($accountId);
     }
-    
+
     public function incomeOperations(array $data): JsonResponse{
         $user = Auth::user();
         $accountId = session('active_account_id');
-        
+
         if (!$accountId) {
             return response()->json(['error' => 'No hay cuenta activa'], 400);
         }
-        
+
         $offset = $data['offset'];
         $limit = 6;
         $incomes = Operation::getIncomesWithLimitByAccountId($accountId, $offset, $limit);
@@ -53,15 +53,15 @@ class OperationController extends Controller
         return response()->json($incomes);
 
     }
-    
+
     public function expenseOperations(array $data): JsonResponse{
         $user = Auth::user();
         $accountId = session('active_account_id');
-        
+
         if (!$accountId) {
             return response()->json(['error' => 'No hay cuenta activa'], 400);
         }
-        
+
         $offset = $data['offset'];
         $limit = 6;
         $expenses = Operation::getExpensesWithLimitByAccountId($accountId, $offset, $limit);
@@ -72,15 +72,15 @@ class OperationController extends Controller
         return response()->json($expenses);
 
     }
-    
+
     public function saveOperations(array $data): JsonResponse{
         $user = Auth::user();
         $accountId = session('active_account_id');
-        
+
         if (!$accountId) {
             return response()->json(['error' => 'No hay cuenta activa'], 400);
         }
-        
+
         $offset = $data['offset'];
         $limit = 6;
         $expenses = Operation::getSaveWithLimitByAccountId($accountId, $offset, $limit);
@@ -91,13 +91,13 @@ class OperationController extends Controller
         return response()->json($expenses);
 
     }
-    
+
     public function deleteOperation(int $id): JsonResponse{
 
         return Operation::deleteOperation($id) ? response()->json(['success' => 'Operación borrada correctamente']) : response()->json(['error' => 'Error al eliminar la operacion. Póngase en contacto con el soporte'], 400);
 
     }
-    
+
     public function getOperationById(int $operationId): JsonResponse{
         $operation = Operation::getOperationById($operationId);
         return response()->json([
@@ -107,6 +107,7 @@ class OperationController extends Controller
             'amount' => $operation->amount,
             'movement_type_id' => $operation->movement_type_id,
             'action_date' => $operation->action_date,
+            'category_id' => $operation->category->id ?? null,
             'category_name' => $operation->category->name ?? null,
             'icon_html' => $operation->category->icon->icon ?? null,
 
@@ -118,7 +119,7 @@ class OperationController extends Controller
             'unscheduled_id' => $operation->unschedule?->id ?? null
         ]);
     }
-    
+
     public function addOperationRequested(array $data): bool{
         if($this->movement_type == 'income'){
             $data['movement_type_id'] = MovementTypesEnum::INCOME->value;
