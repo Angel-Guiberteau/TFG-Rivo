@@ -73,10 +73,10 @@
             <div class="invalid-feedback"></div>
             <div class="col-12 mb-3">
                 <p for="subject" class="fw-bold mb-2 fs-4">Información</p>
-                <input type="text" id="subject" name="subject" class="form-control mb-3 custom-input" placeholder="Asunto" required>
-                <div class="invalid-feedback"></div>
+                <input type="text" id="subject" name="subject" class="form-control mb-2 custom-input" placeholder="Asunto" required>
+                <div class="invalid-feedback mb-2"></div>
                 <textarea id="description" name="description" class="form-control custom-input" rows="3" placeholder="Description"></textarea>
-                <div class="invalid-feedback"></div>
+                <div class="invalid-feedback mb-2"></div>
             </div>
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3 flex-nowrap g-3">
                 <div class="d-flex align-items-center gap-4 mb-4 mb-lg-2">
@@ -128,8 +128,8 @@
             <div class="col-12">
                 <div class="input-group">
                     <input type="number" class="form-control fs-5 custom-input" id="amount" name="amount" placeholder="€ Cantidad" min="0" step="0.01">
+                    <div class="invalid-feedback"></div>
                 </div>
-                <div class="invalid-feedback"></div>
             </div>
         </div>
         <div class="d-flex justify-content-center">

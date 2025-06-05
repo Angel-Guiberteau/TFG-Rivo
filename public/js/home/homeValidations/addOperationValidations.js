@@ -18,6 +18,25 @@ function initializeFormValidation() {
         const startDateInput = form.querySelector('#start_date');
         const expirationDateInput = form.querySelector('#expiration_date');
 
+        
+        amountInput.addEventListener('keydown', (e) => {
+            const allowedKeys = [
+                'Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete', 'Home', 'End',
+                '.', 
+            ];
+           
+            if (e.ctrlKey && ['a', 'c', 'v', 'x'].includes(e.key.toLowerCase())) return;
+
+            if (
+                allowedKeys.includes(e.key) ||
+                (e.key >= '0' && e.key <= '9')
+            ) {
+                return; 
+            }
+
+            e.preventDefault();
+        });
+
         function showFeedback(input, message) {
             input.classList.remove('is-valid');
             input.classList.add('is-invalid');
@@ -110,21 +129,30 @@ function initializeFormValidation() {
 
         function validateAmount() {
             const value = amountInput.value.trim();
+
             if (!value) {
                 showFeedback(amountInput, '⚠️ La cantidad es obligatoria.');
                 return false;
             }
+
             if (!/^\d{1,10}(\.\d{1,2})?$/.test(value)) {
-                showFeedback(amountInput, '⚠️ Máximo 10 dígitos y 2 decimales.');
+                if (/[a-zA-Z]/.test(value)) {
+                    showFeedback(amountInput, '⚠️ Solo se permiten números. No se permiten letras.');
+                } else {
+                    showFeedback(amountInput, '⚠️ Máximo 10 dígitos enteros y 2 decimales.');
+                }
                 return false;
             }
+
             if (parseFloat(value) < 0) {
                 showFeedback(amountInput, '⚠️ No se permiten cantidades negativas.');
                 return false;
             }
+
             clearFeedback(amountInput);
             return true;
         }
+
 
         function validateRecurrenceFields() {
             let valid = true;
