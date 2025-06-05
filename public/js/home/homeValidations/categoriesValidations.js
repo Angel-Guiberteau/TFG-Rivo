@@ -155,6 +155,15 @@ export function initCategoryValidation() {
             clearValidationState();
             submitBtn.disabled = true;
         });
+
+        let lastNameValue = nameInput.value;
+        setInterval(() => {
+            if (nameInput.value !== lastNameValue) {
+                lastNameValue = nameInput.value;
+                validateName();
+                updateSubmitState();
+            }
+        }, 200);
     };
 
     tryInit();
