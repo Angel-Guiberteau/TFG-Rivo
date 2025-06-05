@@ -294,6 +294,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         const div = document.createElement('div');
                         div.classList.add('icon-option');
                         div.dataset.icon = icon.icon;
+                        div.dataset.id = icon.id;
                         div.innerHTML = icon.icon;
 
                         div.addEventListener('click', () => {

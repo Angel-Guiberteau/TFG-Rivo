@@ -6,7 +6,9 @@ use App\Models\Objective;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ObjectiveController extends Controller
 {
@@ -25,16 +27,16 @@ class ObjectiveController extends Controller
         return Objective::updateObjective($data) ? true : false;
     }
 
-    public function deleteObjective(int $id): JsonResponse{
+    public function deleteObjective(int $id): JsonResponse | RedirectResponse{
         if(!Objective::deleteObjective($id)){
             return response()->json([
                 'status' => 'error',
                 'message' => 'Objetivo no encontrado o no eliminado.'
             ], 404);
         };
-        return response()->json([
-            'success' => 'Objective deleted successfully.'
-        ], 200);
+
+        return redirect('/home')->with('success', 'Objetivo eliminado correctamente.');
+
     }
 
     public function getObjectivesByAccountId(int $accountId){
