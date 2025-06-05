@@ -1,6 +1,13 @@
 import { fetchData } from './helpers/api.js';
 import { refreshRecentOperations } from './helpers/api.js';
-
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.movement-row').forEach(row => {
+        row.addEventListener('click', () => {
+            const id = row.dataset.id;
+            if (id) openTransactionDetail(id);
+        });
+    });
+});
 function getBadgeText(typeId) {
     switch (typeId) {
         case 1: return 'Ingreso';
@@ -131,13 +138,21 @@ export async function openTransactionDetail(id) {
             editOperationButton.onclick = () => {
                 closePanel();
 
+                document.querySelectorAll('article').forEach(section => section.classList.remove('show'));
+
+                const formSection = document.getElementById('operationAddForm-section');
+                formSection?.classList.add('show');
+                formSection?.scrollIntoView({ behavior: 'smooth' });
+
                 if (data.movement_type_id === 1) {
-                    document.getElementById('showIncomeForm')?.click();
+                    document.getElementById('op-income')?.click();
                 } else if (data.movement_type_id === 2) {
-                    document.getElementById('showEgressFrom')?.click();
+                    document.getElementById('op-expense')?.click();
+                } else if (data.movement_type_id === 3) {
+                    document.getElementById('op-save')?.click();
                 }
 
-                setTimeout(() => fillEditForm(data), 300);
+                setTimeout(() => fillEditForm(data), 100);
             };
         }
         openPanel();
@@ -167,11 +182,4 @@ export function closePanel() {
 
 window.closePanel = closePanel;
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.movement-row').forEach(row => {
-        row.addEventListener('click', () => {
-            const id = row.dataset.id;
-            if (id) openTransactionDetail(id);
-        });
-    });
-});
+

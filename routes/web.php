@@ -317,6 +317,8 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
                 if (!$controller->addUserCategory($validate['data'])) {
                 return redirect('/home')->with('error', 'Error al añadir la categoría. Póngase en contacto con el soporte.');
             }
+            return redirect('/home')->with('success', 'Categoría añadida correctamente');
+
         } else {
             $validate = BaseCategoriesValidator::validate($data, ValidationEnum::EDIT->value);
             if(!$validate['status']){
@@ -326,9 +328,10 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
             if (!$controller->updateCategory($validate['data'])) {
                 return redirect('/home')->with('error', 'Error al editar la categoría. Póngase en contacto con el soporte.');
             }
+            return redirect('/home')->with('success', 'Categoría modificada correctamente');
         }
 
-        return redirect('/home')->with('success', 'Categoría modificada correctamente');
+
 
     })->name('addOrEditCategory');
 

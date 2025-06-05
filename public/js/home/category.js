@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('resetCategoryButton').addEventListener('click', () => {
-        document.querySelector('input[name="category_id"]').value = '';
+        document.querySelector('input[name="id"]').value = '';
         document.querySelector('input[name="name"]').value = '';
         document.querySelector('input[name="icon"]').value = '';
 
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.operation-types input[type="checkbox"]').forEach(chk => chk.checked = false);
 
         document.querySelector('#categoryName').value = '';
-        
+
         document.getElementById('submitCategories').textContent = 'Añadir categoría';
 
         document.getElementById('categoryAdd-section').scrollIntoView({ behavior: 'smooth' });
@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
                 const response = await data.json();
-                console.log(response);
 
                 if (!response.success) throw new Error('Error al eliminar');
 
