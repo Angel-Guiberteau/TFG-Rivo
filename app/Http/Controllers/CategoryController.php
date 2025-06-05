@@ -31,6 +31,7 @@ class CategoryController extends Controller
 
         return response()->json(['success' => 'Categoría borrada correctamente.']);
     }
+
     public static function deleteCategory(array $data): JsonResponse {
         if (!$data['status']) {
             return response()->json(['error' => $data['error']]);
@@ -41,6 +42,15 @@ class CategoryController extends Controller
         }
 
         return response()->json(['success' => 'Categoría borrada correctamente.']);
+    }
+
+    public static function updateCategory(array $data): bool {
+
+        if (!Category::updateCategory($data['id'])) {
+            return false;
+        }
+
+        return true;
     }
 
     public static function addUserCategory(array $data): bool {
@@ -74,6 +84,10 @@ class CategoryController extends Controller
         }
         DB::commit();
         return true;
+    }
+
+    public static function getCategory(int $categoryId): Category {
+        return Category::getCategory($categoryId);
     }
 
     public static function getEnabledMovementTypes(): array {

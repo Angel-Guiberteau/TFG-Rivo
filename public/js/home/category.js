@@ -57,29 +57,39 @@ document.addEventListener('DOMContentLoaded', function() {
             const id = button.dataset.id;
 
             try {
-                const res = await fetch(`/api/category/${id}`);
-                const category = await res.json();
+                const response = await fetch(`/api/category/getCategory/${id}`);
+                const category = await response.json();
+                console.log(category);
 
-                document.querySelector('input[name="operation_id"]').value = category.id;
-                document.querySelector('input[name="name"]').value = category.category_name;
+                document.querySelector('input[name="category_id"]').value = category.id;
+                document.querySelector('#categoryName').value = category.name;
                 document.querySelector('input[name="icon"]').value = category.icon_id;
 
+                // Activar los checkboxes correspondientes
+                const typeNames = category.movement_types.map(t => t.name.toLowerCase());
                 document.querySelectorAll('.operation-types input[type="checkbox"]').forEach(chk => {
-                    chk.checked = category.movement_type_names.includes(chk.value);
+                    chk.checked = typeNames.includes(chk.value.toLowerCase());
                 });
 
+                // Marcar el icono correspondiente
                 document.querySelectorAll('.icon-option').forEach(icon => {
-                    icon.classList.toggle('selected', icon.dataset.icon == category.icon_html);
+                    icon.classList.toggle('selected', icon.dataset.id == category.icon_id);
                 });
 
+                // Cambiar el texto del botón
                 document.querySelector('#submitCategories').textContent = 'Actualizar categoría';
 
+                // Hacer scroll al formulario
                 document.getElementById('categoryAdd-section').scrollIntoView({ behavior: 'smooth' });
 
             } catch (error) {
                 console.error('Error cargando categoría', error);
+                swal("Error al cargar la categoría", { icon: "error" });
             }
+
+
         });
     });
+
 
 });

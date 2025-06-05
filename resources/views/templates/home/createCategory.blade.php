@@ -25,9 +25,9 @@
     @endif
 
 
-    <form class="col-12 col-lg-10 mx-auto mt-4" method="POST" action="{{ route('addCategoryUser') }}">
+    <form class="col-12 col-lg-10 mx-auto mt-4" method="POST" action="{{ route('addOrEditObjective') }}">
         @csrf
-        <input type="hidden" name="operation_id" id="operation_id">
+        <input type="hidden" name="category_id" id="category_id">
         <div class="d-flex flex-row justify-content-between align-items-center">
             <h2 class="fw-bold fs-3">Añadir categoría</h2>
         </div>
@@ -45,7 +45,7 @@
 
                 <div class="col-12 mb-3">
                     <p for="subject" class="fw-bold mb-2 fs-4">Nombre de la categoría <span class="text-danger">*</span></p>
-                    <input type="text" id="objectiveName" name="name" class="form-control mb-3 custom-input" placeholder="Nombre del objetivo" required>
+                    <input type="text" id="categoryName" name="name" class="form-control mb-3 custom-input" placeholder="Nombre del objetivo" required>
                 </div>
                 <div class="col-12 mb-3">
                     <p class="fw-bold mb-2 fs-4">Tipo de operación <span class="text-danger">*</span></p>
