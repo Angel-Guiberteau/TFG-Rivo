@@ -243,7 +243,7 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
         $validate = UserValidator::validate($request, ValidationEnum::INITIALSETUP->value);
         $data = $validate['data'];
         $controller = new UserController();
-
+        // dd($data);
         return  $controller->updateUserInfoFromInitialSetup($data);
 
     })->name('updateUserInfoFromInitialSetup');
