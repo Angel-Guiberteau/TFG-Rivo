@@ -158,15 +158,16 @@ class User extends Authenticatable
     public static function getPersonalCategoriesByUserId($id)
     {
         return self::find($id)?->personalCategories()
+            ->where('categories.enabled', 1)
             ->with(['icon', 'movementTypes:id'])
             ->get()
             ->map(function ($category) {
-                return [
-                    'id' => $category->id,
-                    'name' => $category->name,
-                    'icon' => $category->icon?->icon,
-                    'movement_type_ids' => $category->movementTypes->pluck('id')->toArray()
-                ];
+            return [
+                'id' => $category->id,
+                'name' => $category->name,
+                'icon' => $category->icon?->icon,
+                'movement_type_ids' => $category->movementTypes->pluck('id')->toArray()
+            ];
             });
     }
 

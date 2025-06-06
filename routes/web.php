@@ -428,7 +428,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
                 return redirect()->back()->with('error', $validate['error'] ?? 'Error al editar el obtener los datos del usuario. Póngase en contacto con el soporte.');
             }
 
-            $si = UserController::getFullUserbyId(['id' => $id]);
+            $si = UserController::getUserbyId(['id' => $id]);
             dd($si);
         })->name('editUser');
 
