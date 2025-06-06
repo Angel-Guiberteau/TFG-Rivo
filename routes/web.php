@@ -427,7 +427,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::put('/updateUser', function (): RedirectResponse {
 
             $request = request()->toArray();
-
+            
             $validate = UserValidator::validate($request, ValidationEnum::EDIT->value);
 
             if(!$validate['status']){

@@ -176,7 +176,7 @@ class UserController extends Controller
 
         foreach (['name', 'last_name', 'birth_date', 'email', 'username'] as $field) {
             if ($user->$field != $data[$field]) {
-            $updates[$field] = $data[$field];
+                $updates[$field] = $data[$field];
             }
         }
 
@@ -188,21 +188,25 @@ class UserController extends Controller
             $updates['password'] = bcrypt($data['password']);
         }
 
+        $isNewUser = array_key_exists('is_new_user', $data) ? 1 : 0;
+        if ($user->isNewUser != $isNewUser) {
+            $updates['isNewUser'] = $isNewUser;
+        }
+
         if (!empty($updates)) {
             $user->update($updates);
-            if(Auth::user()->rol_id == 2)
-            {
+            if (Auth::user()->rol_id == 2) {
                 return redirect()->route('home')->with('success', 'Usuario actualizado correctamente.');
             }
             return redirect()->route('users')->with('success', 'Usuario actualizado correctamente.');
         }
 
-        if(Auth::user()->rol_id == 2)
-        {
+        if (Auth::user()->rol_id == 2) {
             return redirect()->route('home')->with('success', 'No se realizaron cambios.');
         }
         return redirect()->route('users')->with('success', 'No se realizaron cambios.');
     }
+
 
     public function getUser(): ?Authenticatable
     {
