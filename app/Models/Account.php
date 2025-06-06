@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rules\Numeric;
 
 class Account extends Model
 {
@@ -94,6 +95,16 @@ class Account extends Model
         $account->total_saved += $amount;
 
         return $account->save();
+    }
+
+    public static function getTotalSavedByAccountId(int $accountId): Numeric | bool{
+        $account = self::find($accountId);
+
+        if (!$account) {
+            return false;
+        }
+
+        return $account->total_saved;
     }
 
     public function users()
