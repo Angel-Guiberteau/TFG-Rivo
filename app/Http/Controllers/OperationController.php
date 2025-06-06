@@ -119,19 +119,17 @@ class OperationController extends Controller
         }
         if($operation->movement_type_id == MovementTypesEnum::SAVEMONEY->value){
             $objectiveOperation = ObjectiveOperation::getObjectiveOperationByOperationId($id);
-            if(!$objectiveOperation){
-                DB::rollBack();
-                return response()->json(['error' => 'Operación no asociada a un objetivo'], 404);
+            if($objectiveOperation){
+                $objective = Objective::getObjective($objectiveOperation->objective_id);
+                if($objective){
+                    if(!Objective::updateCurrentAmount($objective->id, $operation->amount, true)){
+                        DB::rollBack();
+                        return response()->json(['error' => 'Error al actualizar el objetivo'], 400);
+                    }
+                }
             }
-            $objective = Objective::getObjective($objectiveOperation->objective_id);
-            if(!$objective){
-                DB::rollBack();
-                return response()->json(['error' => 'Objetivo no encontrado'], 404);
-            }
-            if(!Objective::updateCurrentAmount($objective->id, $operation->amount, true)){
-                DB::rollBack();
-                return response()->json(['error' => 'Error al actualizar el objetivo'], 400);
-            }
+
+
             $accountId = session('active_account_id');
             if(!$accountId){
                 DB::rollBack();
@@ -156,6 +154,7 @@ class OperationController extends Controller
                 }
             }
         }
+        DB::commit();
         return Operation::deleteOperation($id) ? response()->json(['success' => 'Operación borrada correctamente']) : response()->json(['error' => 'Error al eliminar la operacion. Póngase en contacto con el soporte'], 400);
     }
 
