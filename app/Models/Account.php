@@ -20,9 +20,9 @@ class Account extends Model
     public static function addAccount(Array $data): bool | self{
 
         $account = new self;
-
+        
         $account->name = $data['account_name'];
-
+        
         return $account->save() ? $account : false;
     }
 
@@ -30,15 +30,6 @@ class Account extends Model
         return self::whereHas('users', function ($query) use ($userId) {
             $query->where('users.id', $userId);
         })->first();
-    }
-
-    public static function updateBalance(int $accountId, float $total): bool {
-        $account = self::where('id', $accountId)
-            ->first();
-
-        $account->balance = round($total, 2);
-
-        return $account->save();
     }
 
     public static function updateAccountBalance(int $accountId, float $amount, bool $negative = false): bool {
