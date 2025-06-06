@@ -134,11 +134,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    form.addEventListener('submit', (e) => {
+        let allValid = true;
+        form.querySelectorAll('input, textarea').forEach(inp => {
+            const valid = validateField(inp);
+            if (valid === false) {
+                allValid = false;
+            }
+        });
 
-        const allValid = checkAllFieldsValid();
-        if (!allValid || !hasAnyChange()) return;
+        if (!allValid) {
+            e.preventDefault(); // detener si hay errores
+            return;
+        }
 
         const returnInputs = Array.from(form.querySelectorAll('input[name="returnName[]"]'));
         const typeInputs   = Array.from(form.querySelectorAll('input[name="type[]"]'));
@@ -151,102 +159,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const formattedReturn = `[${pairs.join(' | ')}]`;
 
-        const formData = new FormData(form);
-        formData.append('returnData', formattedReturn);
-
-        try {
-            const response = await fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                }
-            });
-
-            const swalBox = document.createElement('div');
-            swalBox.style.position = 'fixed';
-            swalBox.style.bottom = '1rem';
-            swalBox.style.right = '1rem';
-            swalBox.style.minWidth = '300px';
-            swalBox.style.maxWidth = '90%';
-            swalBox.style.textAlign = 'center';
-            swalBox.style.padding = '0.8rem 1.5rem';
-            swalBox.style.borderRadius = '8px';
-            swalBox.style.fontSize = '0.9rem';
-            swalBox.style.zIndex = 9999;
-            swalBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
-
-            if (response.ok) {
-                const data = await response.json();
-
-                const swalBox = document.createElement('div');
-                swalBox.textContent = data.success || data.error || "Respuesta inesperada";
-                swalBox.style.position = 'fixed';
-                swalBox.style.bottom = '1rem';
-                swalBox.style.right = '1rem';
-                swalBox.style.minWidth = '300px';
-                swalBox.style.maxWidth = '90%';
-                swalBox.style.textAlign = 'center';
-                swalBox.style.padding = '0.8rem 1.5rem';
-                swalBox.style.borderRadius = '8px';
-                swalBox.style.fontSize = '0.9rem';
-                swalBox.style.zIndex = 9999;
-                swalBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
-
-                if (data.success) {
-                    sessionStorage.setItem('swalMessage', data.success);
-                    setTimeout(() => {
-                        window.location.href = '/admin/endPoints';
-                    });
-                } else {
-                    swalBox.style.backgroundColor = '#f2dede';
-                    swalBox.style.color = '#a94442';
-                    swalBox.style.border = '1px solid #ebccd1';
-                    document.body.appendChild(swalBox);
-
-                    setTimeout(() => swalBox.remove(), 3000);
-                }
-            } else {
-                const swalBox = document.createElement('div');
-                swalBox.textContent = "Hubo un problema en el servidor.";
-                swalBox.style.position = 'fixed';
-                swalBox.style.bottom = '1rem';
-                swalBox.style.right = '1rem';
-                swalBox.style.minWidth = '300px';
-                swalBox.style.maxWidth = '90%';
-                swalBox.style.textAlign = 'center';
-                swalBox.style.padding = '0.8rem 1.5rem';
-                swalBox.style.backgroundColor = '#f2dede'; 
-                swalBox.style.color = '#a94442';
-                swalBox.style.border = '1px solid #ebccd1';
-                swalBox.style.borderRadius = '8px';
-                swalBox.style.fontSize = '0.9rem';
-                swalBox.style.zIndex = 9999;
-                swalBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
-                document.body.appendChild(swalBox);
-                setTimeout(() => swalBox.remove(), 3000);
-            }
-        } catch (error) {
-            console.error("Error al procesar la solicitud:", error);
-            const swalBox = document.createElement('div');
-            swalBox.textContent = "Hubo un problema en el servidor.";
-            swalBox.style.position = 'fixed';
-            swalBox.style.bottom = '1rem';
-            swalBox.style.right = '1rem';
-            swalBox.style.minWidth = '300px';
-            swalBox.style.maxWidth = '90%';
-            swalBox.style.textAlign = 'center';
-            swalBox.style.padding = '0.8rem 1.5rem';
-            swalBox.style.backgroundColor = '#f2dede'; 
-            swalBox.style.color = '#a94442';
-            swalBox.style.border = '1px solid #ebccd1';
-            swalBox.style.borderRadius = '8px';
-            swalBox.style.fontSize = '0.9rem';
-            swalBox.style.zIndex = 9999;
-            swalBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
-            document.body.appendChild(swalBox);
-            setTimeout(() => location.reload(), 2000);
+        let hidden = form.querySelector('input[name="returnData"]');
+        if (!hidden) {
+            hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = 'returnData';
+            form.appendChild(hidden);
         }
+        hidden.value = formattedReturn;
     });
 
     updateSubmitState();

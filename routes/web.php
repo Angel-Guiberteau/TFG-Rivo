@@ -453,7 +453,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return SentenceController::editSentence($validate);
         })->name('editSentence');
 
-        Route::post('/delete', function (): JsonResponse {
+        Route::post('/delete', function (): RedirectResponse {
             $data = request()->toArray();
 
             $validate = SentencesValidator::validate($data, ValidationEnum::DELETE->value);
@@ -503,7 +503,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return BaseCategoryController::editBaseCategory($validate);
         })->name('editCategory');
 
-        Route::post('/delete', function (): JsonResponse {
+        Route::post('/delete', function (): RedirectResponse {
             $data = request()->toArray();
 
             $validate = CategoriesValidator::validate($data, ValidationEnum::DELETE->value);
@@ -539,7 +539,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return IconController::editIcon($validate);
         })->name('editIcon');
 
-        Route::post('/delete', function (): JsonResponse {
+        Route::post('/delete', function (): RedirectResponse {
             $data = request()->toArray();
 
             $validate = IconValidator::validate($data, ValidationEnum::DELETE->value);
@@ -560,7 +560,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return view('admin.endPoints.addEndpoint');
         })->name('addEndPoints');
 
-        Route::post('/safeEndpoint', function (): JsonResponse {
+        Route::post('/safeEndpoint', function (): RedirectResponse {
             $data = request()->toArray();
 
             $validate = EndPointValidator::validate($data, ValidationEnum::ADD->value);
@@ -574,7 +574,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return view('admin.endPoints.editEndpoint')->with('endPoint',$data);
         })->name('editEndPoint');
 
-        Route::put('/safeEditeEndPoint', function (): JsonResponse {
+        Route::put('/safeEditeEndPoint', function (): RedirectResponse {
             $data = request()->toArray();
 
             $validate = EndPointValidator::validate($data, ValidationEnum::EDIT->value);
@@ -582,7 +582,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return EndPointController::editEndPoint($validate);
         })->name('safeEditEndPoints');
 
-        Route::post('/delete', function (): JsonResponse {
+        Route::post('/delete', function (): RedirectResponse {
             $data = request()->toArray();
 
             $validate = EndPointValidator::validate($data, ValidationEnum::DELETE->value);
