@@ -13,6 +13,7 @@ class UserValidator extends Validator {
             'email' => 'required|email|max:255',
             'username' => 'required|string|max:75',
             'password' => 'required|string|min:8|max:255',
+            'is_new_user' => 'sometimes|boolean',
         ];
     }
 
@@ -44,13 +45,21 @@ class UserValidator extends Validator {
             'password.string' => 'La contraseña debe ser una cadena de texto.',
             'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
             'password.max' => 'La contraseña no puede tener más de 255 caracteres.',
+
+            'is_new_user.boolean' => 'El campo de nuevo usuario debe ser verdadero o falso.',
         ];
     }
 
     protected static function rulesEdit(): array {
         return [
-            'id' => 'required|integer',
-            'text' => 'required|string|max:255'
+            'id' => 'required|integer|exists:users,id',
+            'name' => 'required|string|max:75',
+            'last_name' => 'required|string|max:75',
+            'birth_date' => 'required|date',
+            'rol_id' => 'sometimes|integer',
+            'email' => 'required|email|max:255',
+            'username' => 'required|string|max:75',
+            'password' => 'nullable|string|min:8|max:255',
         ];
     }
 
@@ -58,9 +67,32 @@ class UserValidator extends Validator {
         return [
             'id.required' => 'Ha sucedido un error inesperado.',
             'id.integer' => 'Ha sucedido un error inesperado.',
-            'text.required' => 'No se ha recibido el texto.',
-            'text.string' => 'El tipo de dato no es correcto.',
-            'text.max' => 'El tamaño del texto no concuerda con el permitido.'
+            'id.exists' => 'El usuario no existe o ha sido eliminado.',
+
+            'name.required' => 'El nombre es obligatorio.',
+            'name.string' => 'El nombre debe ser una cadena de texto.',
+            'name.max' => 'El nombre no puede tener más de 75 caracteres.',
+
+            'last_name.required' => 'Los apellidos son obligatorios.',
+            'last_name.string' => 'Los apellidos deben ser una cadena de texto.',
+            'last_name.max' => 'Los apellidos no pueden tener más de 75 caracteres.',
+
+            'birth_date.required' => 'La fecha de nacimiento es obligatoria.',
+            'birth_date.date' => 'La fecha de nacimiento no es válida.',
+
+            'rol_id.integer' => 'El identificador del rol debe ser un número entero.',
+
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El correo electrónico no es válido.',
+            'email.max' => 'El correo electrónico no puede tener más de 255 caracteres.',
+
+            'username.required' => 'El nombre de usuario es obligatorio.',
+            'username.string' => 'El nombre de usuario debe ser una cadena de texto.',
+            'username.max' => 'El nombre de usuario no puede tener más de 75 caracteres.',
+
+            'password.string' => 'La contraseña debe ser una cadena de texto.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'password.max' => 'La contraseña no puede tener más de 255 caracteres.',
         ];
     }
 

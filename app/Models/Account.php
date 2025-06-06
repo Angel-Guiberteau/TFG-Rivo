@@ -19,9 +19,9 @@ class Account extends Model
     public static function addAccount(Array $data): bool | self{
 
         $account = new self;
-
+        
         $account->name = $data['account_name'];
-
+        
         return $account->save() ? $account : false;
     }
 
@@ -31,15 +31,21 @@ class Account extends Model
         })->first();
     }
 
-    public static function updateBalance(int $accountId, float $total): bool {
-        $account = self::where('id', $accountId)
-            ->first();
+    public static function updateAccountBalance(int $accountId, float $amount, bool $negative = false): bool {
+        $account = self::find($accountId);
 
-        $account->balance = round($total, 2);
+        if (!$account) {
+            return false;
+        }
+        if ($negative) {
+            $account->balance -= $amount;
+        } else {
+            $account->balance += $amount;
+        }
+
 
         return $account->save();
     }
-
     public static function addIncomeToBalance(int $accountId, float $amount): bool {
         $account = self::find($accountId);
 
@@ -60,6 +66,20 @@ class Account extends Model
         }
 
         $account->balance -= $amount;
+
+        return $account->save();
+    }
+
+    public static function updateSaveToTotalSave(int $accountId, float $amount, bool $negative = false): bool {
+        $account = self::find($accountId);
+
+        if (!$account) {
+            return false;
+        }
+        if(!$negative)
+            $account->total_saved += $amount;
+        else
+            $account->total_saved -= $amount;
 
         return $account->save();
     }

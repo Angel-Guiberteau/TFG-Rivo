@@ -30,6 +30,7 @@ use Illuminate\Mail\Transport\ArrayTransport;
 use Illuminate\Support\Carbon;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Models\MovementTypeCategories;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -47,6 +48,7 @@ class UserController extends Controller
     public Array $news;
     public Array $accounts;
     public Array $accountMovementsTypes;
+    public bool $newUser = false;
 
 
     public static function listUsers()
@@ -66,7 +68,7 @@ class UserController extends Controller
         $data = $array['data'] ?? [];
 
         $controller = new UserController();
-
+        
         $controller->name = $data['name'] ?? '';
         $controller->last_name = $data['last_name'] ?? '';
         $controller->birth_date = $data['birth_date'] ?? '';
@@ -74,6 +76,7 @@ class UserController extends Controller
         $controller->email = $data['email'] ?? '';
         $controller->username = $data['username'] ?? '';
         $controller->password = bcrypt($data['password'] ?? '');
+        $controller->newUser = isset($data['is_new_user']) ? $data['is_new_user'] : 0;
 
         $created = User::storeUser($controller);
 
@@ -144,12 +147,6 @@ class UserController extends Controller
         }
 
         $accounts = UserAccount::getAccountsByUserId($user->id);
-        
-        if ($accounts->isEmpty()) {
-            return redirect()->back()
-                ->with('error', 'No hay cuentas asociadas al usuario.')
-                ->withInput();
-        }
 
         $movementTypes = MovementType::getEnabledMovementTypes();
 
@@ -167,28 +164,8 @@ class UserController extends Controller
             ->with('movementTypes', $movementTypes);
     }
 
-    public static function updateUser(): RedirectResponse
+    public static function updateUser(array $data): RedirectResponse
     {
-        $request = request();
-
-        $validator = Validator::make($request->all(), [
-            'id' => ['required', 'exists:users,id'],
-            'name' => ['required', 'string', 'max:255'],
-            'last_name' => ['nullable', 'string', 'max:100'],
-            'birth_date' => ['nullable', 'date'],
-            'rol_id' => ['required', 'exists:roles,id'],
-            'email' => ['required', 'email', 'max:255'],
-            'username' => ['nullable', 'string', 'max:75'],
-            'password' => ['nullable', 'string', 'min:8'],
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->route('users')
-                ->with('error', $validator->errors()->first())
-                ->withInput();
-        }
-
-        $data = $validator->validated();
         $user = User::getUserById($data['id']);
 
         if (!$user) {
@@ -197,10 +174,14 @@ class UserController extends Controller
 
         $updates = [];
 
-        foreach (['name', 'last_name', 'birth_date', 'rol_id', 'email', 'username'] as $field) {
+        foreach (['name', 'last_name', 'birth_date', 'email', 'username'] as $field) {
             if ($user->$field != $data[$field]) {
-                $updates[$field] = $data[$field];
+            $updates[$field] = $data[$field];
             }
+        }
+
+        if (array_key_exists('rol_id', $data) && $user->rol_id != $data['rol_id']) {
+            $updates['rol_id'] = $data['rol_id'];
         }
 
         if (!empty($data['password']) && !Hash::check($data['password'], $user->password)) {
@@ -209,9 +190,17 @@ class UserController extends Controller
 
         if (!empty($updates)) {
             $user->update($updates);
+            if(Auth::user()->rol_id == 2)
+            {
+                return redirect()->route('home')->with('success', 'Usuario actualizado correctamente.');
+            }
             return redirect()->route('users')->with('success', 'Usuario actualizado correctamente.');
         }
 
+        if(Auth::user()->rol_id == 2)
+        {
+            return redirect()->route('home')->with('success', 'No se realizaron cambios.');
+        }
         return redirect()->route('users')->with('success', 'No se realizaron cambios.');
     }
 
@@ -226,19 +215,24 @@ class UserController extends Controller
         try{
             DB::beginTransaction();
             $user = User::updateUserInfoFromInitialSetup($data);
-                
+
             if(!$user){
                 throw new \Exception('Error al actualizar el usuario');
             }
+
+            
             $account = Account::addAccount($data);
+            
             if(!$account){
+                
                 throw new \Exception('Error al crear la cuenta del usuario');
             }
+           
             $userAccount = UserAccount::addUserAccount($user->id, $account->id);
             if(!$userAccount){
                 throw new \Exception('Error al crear la cuenta del usuario');
             }
-            
+
             //FixedIncomes
             
             $fixedIncomes = $this->setFixedIncomes($data, $account);
@@ -250,12 +244,13 @@ class UserController extends Controller
                     if(!$operation){
                         throw new \Exception('Error al añadir los ingresos');
                     }
-                    
+
                     $plannedOperation = OperationPlanned::addPlannedOperation($operation->id, $value);
                     
                     if(!$plannedOperation){
                         throw new \Exception('Error al añadir los ingresos planeados');
                     }
+
                 }
                 
                 $fixedExpenses = $this->setfixedExpenses($data, $account);
@@ -273,10 +268,10 @@ class UserController extends Controller
                         if(!$plannedOperation){
                             throw new \Exception('Error al añadir los gastos planeados');
                         }
+ 
                     }
                 }
             }
-
 
             
             $savedMoneyOperation = null;
@@ -289,54 +284,64 @@ class UserController extends Controller
                     if(!$savedMoneyOperation){
                         throw new \Exception('Error al añadir los ahorros');
                     }
+
                     $unscheduleOperation = OperationUnschedule::addUnscheduleOperation($savedMoneyOperation->id);
                     
                     if(!$unscheduleOperation){
                         throw new \Exception('Error al añadir los ahorros');
                     }
+
+                    if(!Account::updateSaveToTotalSave($account->id, $savedMoneyOperation->amount)){
+                        throw new \Exception('Error al añadir los ahorros a la cuenta');
+                    } 
                 }
             }
-           
+
             if(isset($data['objective']) || isset($data['personalize_objective'])){
                 if(is_null($savedMoneyOperation)){
                     $savedMoneyAmount = 0;
                 } else{
                     $savedMoneyAmount = $savedMoneyOperation->amount;
                 }
-                
+
                 $objective = $this->setObjective($data, $account, $savedMoneyAmount);
-                
+
                 if(!empty($objective)){
                     $savedObjective = Objective::addObjective($objective);
-                    
+
                     if(!$savedObjective){
                         throw new \Exception('Error al añadir los ahorros');
                     }
+
                     if($savedMoneyAmount > 0){
                         $objectiveOperation =  ObjectiveOperation::addObjectiveOperation($savedObjective->id, $savedMoneyOperation->id);
+
                         if(!$objectiveOperation){
                             throw new \Exception('Error al añadir los ahorros');
                         }
                     }
+
                 }
             }
             
-
             $allOperations = Operation::getAllOperationsByAccountId($account->id);
             if(!is_null($allOperations)){
                 $total = 0;
+
                 foreach ($allOperations as $value) {
                     $amount = (float) $value->amount;
 
-                    if($value->movement_type_id === 1 || $value->movement_type_id === 3){
+                    if($value->movement_type_id === 1){
                         $total += $amount;
                     }elseif($value->movement_type_id === 2){
                         $total-= $amount;
                     }
+
                 }
-                if(!Account::updateBalance($account->id, $total)){
+                if(!Account::updateAccountBalance($account->id, $total)){
                     throw new \Exception('Error al editar el balance de la cuenta actual');
                 }
+
             }
             if(!User::updateNewUser($user)){
                 throw new \Exception('Error al cambiar el estado de nuevo usuario');
@@ -650,12 +655,6 @@ class UserController extends Controller
         }
 
         $accounts = UserAccount::getAccountsByUserId($user->id);
-        
-        if ($accounts->isEmpty()) {
-            return redirect()->back()
-                ->with('error', 'No hay cuentas asociadas al usuario.')
-                ->withInput();
-        }
 
         $movementTypes = MovementType::getEnabledMovementTypes();
 

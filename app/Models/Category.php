@@ -13,15 +13,9 @@ class Category extends Model
     protected $table = 'categories';
     protected $fillable = [
         'name',
-        'icon_id'
+        'icon_id',
+        'enabled',
     ];
-
-    public static function getAllCategoriesEnabled(): Collection {
-        $category = new self();
-
-        return $category->select('id', 'name', 'icon_id')
-                        ->get();
-    }
 
     public static function numberOfCategories(): int {
         return self::count();
@@ -80,7 +74,9 @@ class Category extends Model
     }
 
     public static function getCategory(int $categoryId): self|null {
-        return self::with('movementTypes')->find($categoryId);
+        return self::with('movementTypes')
+            ->where('enabled', 1)
+            ->find($categoryId);
     }
 
 
@@ -88,23 +84,32 @@ class Category extends Model
         $category = self::find($id);
 
         if ($category) {
-            return $category->delete();
+            $category->enabled = 0;
+            return $category->save();
         }
 
         return false;
     }
 
     public static function getPersonalCategoriesByUserId(int $userId): ?Collection {
-        $user = User::with('personalCategories.icon', 'personalCategories.movementTypes')->find($userId);
+
+        $user = User::with(['personalCategories' => function ($query) {
+            $query->where('enabled', 1);
+        }, 'personalCategories.icon', 'personalCategories.movementTypes'])->find($userId);
+
+        if (!$user) {
+            return collect();
+        }
+
 
         $categories = $user->personalCategories->map(function ($category) {
             return [
-                'id' => $category->id,
-                'category_name' => $category->name,
-                'icon_id' => $category->icon?->id,
-                'icon_html' => $category->icon?->icon,
-                'movement_type_ids' => $category->movementTypes->pluck('id')->toArray(),
-                'movement_type_names' => $category->movementTypes->pluck('name')->implode(', '),
+            'id' => $category->id,
+            'category_name' => $category->name,
+            'icon_id' => $category->icon?->id,
+            'icon_html' => $category->icon?->icon,
+            'movement_type_ids' => $category->movementTypes->pluck('id')->toArray(),
+            'movement_type_names' => $category->movementTypes->pluck('name')->implode(', '),
             ];
         });
         return $categories;

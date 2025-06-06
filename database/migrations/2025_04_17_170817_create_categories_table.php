@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->unsignedInteger('id')->autoIncrement()->primary();
             $table->string('name', 30);
-
+            $table->boolean('enabled')->default(true);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

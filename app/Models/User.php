@@ -32,7 +32,7 @@ class User extends Authenticatable
         'username',
         'birth_date',
         'rol_id',
-        'is_new_user',
+        'isNewUser',
         'enabled',
     ];
 
@@ -83,7 +83,7 @@ class User extends Authenticatable
     public static function getAllUsers()
     {   
         return self::with('accounts')
-                    ->select('id','name', 'last_name', 'email', 'rol_id', 'google_id', 'birth_date', 'username')
+                    ->select('id','name', 'last_name', 'email', 'rol_id', 'google_id', 'birth_date', 'username', 'isNewUser')
                     ->where('enabled', 1)
                     ->get();
     }
@@ -99,7 +99,8 @@ class User extends Authenticatable
         $user->email = $data->email;
         $user->username = $data->username ?? null;
         $user->password = $data->password ?? null;
-
+        $user->isNewUser = $data->newUser;
+        
         return $user->save();
     }
 
@@ -176,26 +177,11 @@ class User extends Authenticatable
 
         try {
 
-            $deletedRelation = UserCategory::where('user_id', $userId)
-                ->where('categories_id', $categoryId)
-                ->delete();
-
-            if (!$deletedRelation) {
+            $deletedCategory = Category::where('id', $categoryId)
+                ->update(['enabled' => 0]);
+            if (!$deletedCategory) {
                 DB::rollBack();
                 return false;
-            }
-
-            $stillRelated = UserCategory::where('categories_id', $categoryId)->exists();
-
-            if (!$stillRelated) {
-
-                MovementTypeCategories::where('category_id', $categoryId)->delete();
-
-                $deletedCategory = Category::where('id', $categoryId)->delete();
-                if (!$deletedCategory) {
-                    DB::rollBack();
-                    return false;
-                }
             }
 
             DB::commit();
