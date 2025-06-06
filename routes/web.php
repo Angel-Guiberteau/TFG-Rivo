@@ -82,6 +82,14 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
             return $operation->saveOperations($validate['data']);
         });
 
+        Route::get('/getAllOperations', function(): JsonResponse {
+            $data = request()->query();
+            $operation = new OperationController();
+            $validate = ApiValidator::validate($data, ValidationEnum::GET_OPERATIONS_OFFSET->value);
+
+            return $operation->getAllOperations($validate['data']);
+        });
+
         Route::post('/deleteOperation/{id}', function($id): JsonResponse {
             $operation = new OperationController();
             $data = [
@@ -317,6 +325,8 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
                 if (!$controller->addUserCategory($validate['data'])) {
                 return redirect('/home')->with('error', 'Error al añadir la categoría. Póngase en contacto con el soporte.');
             }
+            return redirect('/home')->with('success', 'Categoría añadida correctamente');
+
         } else {
             $validate = BaseCategoriesValidator::validate($data, ValidationEnum::EDIT->value);
             if(!$validate['status']){
@@ -326,9 +336,10 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
             if (!$controller->updateCategory($validate['data'])) {
                 return redirect('/home')->with('error', 'Error al editar la categoría. Póngase en contacto con el soporte.');
             }
+            return redirect('/home')->with('success', 'Categoría modificada correctamente');
         }
 
-        return redirect('/home')->with('success', 'Categoría modificada correctamente');
+
 
     })->name('addOrEditCategory');
 

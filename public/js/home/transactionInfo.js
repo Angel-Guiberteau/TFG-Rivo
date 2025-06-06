@@ -1,6 +1,13 @@
 import { fetchData } from './helpers/api.js';
 import { refreshRecentOperations } from './helpers/api.js';
-
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.movement-row').forEach(row => {
+        row.addEventListener('click', () => {
+            const id = row.dataset.id;
+            if (id) openTransactionDetail(id);
+        });
+    });
+});
 function getBadgeText(typeId) {
     switch (typeId) {
         case 1: return 'Ingreso';
@@ -38,7 +45,15 @@ function formatDate(dateStr) {
     const minutes = date.getMinutes().toString().padStart(2, '0');
     return `${day} ${month} ${year} - ${hours}:${minutes}`;
 }
-
+function reorganizeMovementLayout(container) {
+    const wrappers = container.querySelectorAll('.col-12.col-lg-6');
+    wrappers.forEach((wrapper, index) => {
+        wrapper.classList.remove('border-lg-end');
+        if (index % 2 === 0) {
+            wrapper.classList.add('border-lg-end');
+        }
+    });
+}
 export async function openTransactionDetail(id) {
     const panel = document.getElementById('transactionDetail');
     if (!panel) return;
@@ -97,8 +112,16 @@ export async function openTransactionDetail(id) {
 
                         if (!res.ok) throw new Error('Error al eliminar');
 
-                        const row = document.querySelector(`.movement-row[data-id="${id}"]`);
-                        if (row) row.closest('.movement-item').remove();
+                        document.querySelectorAll('.movement-block').forEach(container => {
+                            const target = container.querySelector(`.movement-row[data-id="${id}"]`);
+                            if (target) {
+                                const wrapper = target.closest('.col-12.col-lg-6');
+                                if (wrapper) wrapper.remove();
+                                reorganizeMovementLayout(container);
+                            }
+                        });
+
+
 
                         closePanel();
                         refreshRecentOperations();
@@ -131,13 +154,21 @@ export async function openTransactionDetail(id) {
             editOperationButton.onclick = () => {
                 closePanel();
 
+                document.querySelectorAll('article').forEach(section => section.classList.remove('show'));
+
+                const formSection = document.getElementById('operationAddForm-section');
+                formSection?.classList.add('show');
+                formSection?.scrollIntoView({ behavior: 'smooth' });
+
                 if (data.movement_type_id === 1) {
-                    document.getElementById('showIncomeForm')?.click();
+                    document.getElementById('op-income')?.click();
                 } else if (data.movement_type_id === 2) {
-                    document.getElementById('showEgressFrom')?.click();
+                    document.getElementById('op-expense')?.click();
+                } else if (data.movement_type_id === 3) {
+                    document.getElementById('op-save')?.click();
                 }
 
-                setTimeout(() => fillEditForm(data), 300);
+                setTimeout(() => fillEditForm(data), 100);
             };
         }
         openPanel();
@@ -167,11 +198,4 @@ export function closePanel() {
 
 window.closePanel = closePanel;
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.movement-row').forEach(row => {
-        row.addEventListener('click', () => {
-            const id = row.dataset.id;
-            if (id) openTransactionDetail(id);
-        });
-    });
-});
+

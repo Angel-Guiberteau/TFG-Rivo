@@ -18,7 +18,6 @@ export async function fetchData(url, method = 'GET', body = null) {
         if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`);
         return await res.json();
     } catch (err) {
-        console.error(`Error al hacer fetch a ${url}:`, err);
         return null;
     }
 }
@@ -30,7 +29,7 @@ export async function refreshRecentOperations() {
         const res = await fetch('/api/operation/refreshRecentOperations');
         const operations = await res.json();
         console.log(operations);
-        
+
         container.innerHTML = '';
 
         operations.forEach((op, index) => {

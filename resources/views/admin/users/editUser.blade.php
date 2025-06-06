@@ -17,7 +17,7 @@
     @endpush
 
     <main>
-        <section class="container-custom p-3 pb-5">
+        <section class="container-custom-lg p-3 pb-5">
             <article class="bg-light p-4 mt-4 shadow-sm rounded-3">
                 @include('templates.admin.breadCrum', [
                     'breadcrumbs' => [
