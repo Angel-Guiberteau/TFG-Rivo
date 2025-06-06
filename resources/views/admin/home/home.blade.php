@@ -17,14 +17,12 @@
 
                 @include('templates.admin.title', ['title' => 'Panel de Administración de Rivo Finanzas'])
 
-                {{-- Contenedor central con Flexbox --}}
                 <div class="container d-flex flex-column justify-content-center mt-3" style="min-height: calc(70vh - 4rem);">
                     <div class="row g-4 justify-content-center">
 
-                        {{-- Tarjeta horizontal: Usuarios --}}
                         <div class="col-12">
                             <a href="{{ route('users') }}" class="text-decoration-none">
-                                <div class="card card-custom bg-users d-flex flex-row align-items-center p-4">
+                                <div class="card card-custom bg-users d-flex flex-column flex-md-row align-items-center text-center text-md-start p-4 gap-3">
                                     <div class="card-icon-circle me-4">
                                         <i class="fa-solid fa-users fa-2x"></i>
                                     </div>
@@ -80,9 +78,8 @@
                         </div>
                     </div>
                     <div class="col-12 mt-4">
-                        {{-- Tarjeta horizontal: Endpoints --}}
                         <a href="{{ route('endPoints') }}" class="text-decoration-none">
-                            <div class="card card-custom bg-endpoints d-flex flex-row align-items-center p-4">
+                            <div class="card card-custom bg-endpoints d-flex flex-column flex-md-row align-items-center text-center text-md-start p-4 gap-3">
                                 <div class="card-icon-circle me-4">
                                     <i class="fa-solid fa-plug fa-2x"></i>
                                 </div>

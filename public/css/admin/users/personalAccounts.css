@@ -70,3 +70,11 @@
     color: #5a359e;
     font-weight: 500;
 }
+#personalAccounts .text-end {
+        text-align: center !important;
+        margin-top: 1rem;
+    }
+
+#personalAccounts .text-end .btn {
+    margin: 0 0.25rem;
+}
