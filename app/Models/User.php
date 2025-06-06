@@ -32,7 +32,7 @@ class User extends Authenticatable
         'username',
         'birth_date',
         'rol_id',
-        'is_new_user',
+        'isNewUser',
         'enabled',
     ];
 
@@ -83,7 +83,7 @@ class User extends Authenticatable
     public static function getAllUsers()
     {   
         return self::with('accounts')
-                    ->select('id','name', 'last_name', 'email', 'rol_id', 'google_id', 'birth_date', 'username')
+                    ->select('id','name', 'last_name', 'email', 'rol_id', 'google_id', 'birth_date', 'username', 'isNewUser')
                     ->where('enabled', 1)
                     ->get();
     }
@@ -99,7 +99,8 @@ class User extends Authenticatable
         $user->email = $data->email;
         $user->username = $data->username ?? null;
         $user->password = $data->password ?? null;
-
+        $user->isNewUser = $data->newUser;
+        
         return $user->save();
     }
 

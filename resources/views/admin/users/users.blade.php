@@ -33,6 +33,7 @@
                                 <th class="text-center">Google ID</th>
                                 <th class="text-center">Email</th>
                                 <th class="text-center">Nombre Usuario</th>
+                                <th class="text-center">Nuevo Usuario</th>
                                 <th class="text-center">Editar</th>
                                 <th class="text-center">Visualizar</th>
                                 <th class="text-center">Eliminar</th>
@@ -50,6 +51,13 @@
                                     <td class="text-center">{{ $user->google_id ?? '—' }}</td>
                                     <td class="text-center">{{ $user->email }}</td>
                                     <td  class="text-center">{{ $user->username ?? '—' }}</td>
+                                    <td class="text-center">
+                                        @if ($user->isNewUser)
+                                            <span class="badge bg-success">Sí</span>
+                                        @else
+                                            <span class="badge bg-secondary">No</span>
+                                        @endif
+                                    </td>
                                     <td class="text-center align-middle">
                                         @include('admin.components.buttons.editButton', [
                                             'onclick' => 'editUser(' . $user->id . ')'
