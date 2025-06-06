@@ -399,7 +399,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             $request = request()->toArray();
 
             $validate = UserValidator::validate($request, ValidationEnum::ADD->value);
-
+            
             if(!$validate['status']){
                 return redirect()->back()->with('error', $validate['error'] ?? 'Error al añadir el usuario. Póngase en contacto con el soporte.');
             }
