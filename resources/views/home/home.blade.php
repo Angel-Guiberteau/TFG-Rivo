@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
         <link rel="stylesheet" href="{{ asset('css/home/home.css') }}">
     <style>
-        
+
     </style>
     @endpush
 
@@ -87,9 +87,18 @@
                 </header>
 
                 <div class="balance-info pt-3 pt-lg-5 pb-3 pb-lg-5 px-3 px-lg-5 text-center text-lg-start">
-                    <h2 class="fs-1 fw-bold mb-4">Hola, {{ $user->username }}!</h2>
-                    <p class="fs-4 fw-light mb-0">Balance disponible</p>
-                    <p class="fs-1 fw-bold mt-0 mb-lg-4">{{ $account->balance }}€</p>
+                    <h2 class="fs-2 fs-lg-1 fw-bold mb-4">Hola, {{ $user->username }}!</h2>
+                    <div class="d-flex flex-lg-row justify-content-center justify-content-lg-start align-items-center gap-5 gap-lg-5 mt-2">
+                        <div>
+                            <p class="fs-4 fw-light mb-0">Balance disponible</p>
+                            <p class="fs-2 fw-bold mt-0 mb-lg-4">{{ $account->balance }}€</p>
+                        </div>
+                        <div>
+                            <p class="fs-4 fw-light mb-0">Total ahorrado</p>
+                            <p class="fs-2 fw-bold mt-0 mb-lg-4">{{ $account->total_saved }}€</p>
+                        </div>
+                    </div>
+
                     <div id="actionButtons-container" class="mx-auto bg-white d-flex flex-row justify-content-evenly align-items-center p-3">
                         <button id="showHome" class="action-button fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
                             <i class="fas fa-home fs-3 text-secondary"></i>
@@ -124,10 +133,7 @@
                     @include('templates.home.recentMovements')
                 @endif
 
-                @if (isset($thisMonthIncomes) && isset($thisMonthExpenses) && $thisMonthIncomes->isNotEmpty() && $thisMonthExpenses->isNotEmpty())
-                    @include('templates.home.thisMonthIncomesExpenses')
-                @endif
-
+                @include('templates.home.thisMonthIncomesExpenses')
 
             </article>
 
@@ -159,10 +165,18 @@
         @endif
     @endif
     @push('scripts')
+    <script>
+        window.chartData = {
+            incomes: @json($thisMonthIncomes),
+            expenses: @json($thisMonthExpenses)
+        };
+    </script>
+
         <script src="{{ asset('js/chart/chart.umd.min.js') }}"></script>
         <script src="{{ asset('js/sweetalert/sweetalert.min.js') }}"></script>
         <script src="{{ asset('js/home/income.js') }}"></script>
         <script src="{{ asset('js/home/navMobile.js') }}"></script>
+        {{-- <script src="{{ asset('js/home/stats.js') }}"></script> --}}
         <script src="{{ asset('js/home/income/history.js') }}"></script>
         <script src="{{ asset('js/home/objectives.js') }}"></script>
         <script src="{{ asset('js/home/category.js') }}"></script>
