@@ -11,7 +11,6 @@ enum ValidationEnum: string
     case UPDATE_PERSONAL_CATEGORIES = 'updatePersonalCategories';
     case UPDATE_PERSONAL_ACOUNTS = 'updatePersonalAccounts';
     case ADD_OPERATION_USER = 'addIncomeUser';
-    case GET_OPERATION_BY_ID = 'getOperationById';
+    case VALIDATE_ID_ONLY = 'validateIdOnly';
     case GET_OPERATIONS_OFFSET = 'incomeOperations';
-    case DELETE_OPERATION = 'deleteOperation';
 }
