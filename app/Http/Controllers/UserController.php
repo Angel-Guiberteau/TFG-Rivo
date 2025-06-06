@@ -215,19 +215,24 @@ class UserController extends Controller
         try{
             DB::beginTransaction();
             $user = User::updateUserInfoFromInitialSetup($data);
-                
+
             if(!$user){
                 throw new \Exception('Error al actualizar el usuario');
             }
+
+            
             $account = Account::addAccount($data);
+            
             if(!$account){
+                
                 throw new \Exception('Error al crear la cuenta del usuario');
             }
+           
             $userAccount = UserAccount::addUserAccount($user->id, $account->id);
             if(!$userAccount){
                 throw new \Exception('Error al crear la cuenta del usuario');
             }
-            
+
             //FixedIncomes
             
             $fixedIncomes = $this->setFixedIncomes($data, $account);
@@ -239,12 +244,13 @@ class UserController extends Controller
                     if(!$operation){
                         throw new \Exception('Error al añadir los ingresos');
                     }
-                    
+
                     $plannedOperation = OperationPlanned::addPlannedOperation($operation->id, $value);
                     
                     if(!$plannedOperation){
                         throw new \Exception('Error al añadir los ingresos planeados');
                     }
+
                 }
                 
                 $fixedExpenses = $this->setfixedExpenses($data, $account);
@@ -262,10 +268,10 @@ class UserController extends Controller
                         if(!$plannedOperation){
                             throw new \Exception('Error al añadir los gastos planeados');
                         }
+ 
                     }
                 }
             }
-
 
             
             $savedMoneyOperation = null;
@@ -278,54 +284,64 @@ class UserController extends Controller
                     if(!$savedMoneyOperation){
                         throw new \Exception('Error al añadir los ahorros');
                     }
+
                     $unscheduleOperation = OperationUnschedule::addUnscheduleOperation($savedMoneyOperation->id);
                     
                     if(!$unscheduleOperation){
                         throw new \Exception('Error al añadir los ahorros');
                     }
+
+                    if(!Account::updateSaveToTotalSave($account->id, $savedMoneyOperation->amount)){
+                        throw new \Exception('Error al añadir los ahorros a la cuenta');
+                    } 
                 }
             }
-           
+
             if(isset($data['objective']) || isset($data['personalize_objective'])){
                 if(is_null($savedMoneyOperation)){
                     $savedMoneyAmount = 0;
                 } else{
                     $savedMoneyAmount = $savedMoneyOperation->amount;
                 }
-                
+
                 $objective = $this->setObjective($data, $account, $savedMoneyAmount);
-                
+
                 if(!empty($objective)){
                     $savedObjective = Objective::addObjective($objective);
-                    
+
                     if(!$savedObjective){
                         throw new \Exception('Error al añadir los ahorros');
                     }
+
                     if($savedMoneyAmount > 0){
                         $objectiveOperation =  ObjectiveOperation::addObjectiveOperation($savedObjective->id, $savedMoneyOperation->id);
+
                         if(!$objectiveOperation){
                             throw new \Exception('Error al añadir los ahorros');
                         }
                     }
+
                 }
             }
             
-
             $allOperations = Operation::getAllOperationsByAccountId($account->id);
             if(!is_null($allOperations)){
                 $total = 0;
+
                 foreach ($allOperations as $value) {
                     $amount = (float) $value->amount;
 
-                    if($value->movement_type_id === 1 || $value->movement_type_id === 3){
+                    if($value->movement_type_id === 1){
                         $total += $amount;
                     }elseif($value->movement_type_id === 2){
                         $total-= $amount;
                     }
+
                 }
-                if(!Account::updateBalance($account->id, $total)){
+                if(!Account::updateAccountBalance($account->id, $total)){
                     throw new \Exception('Error al editar el balance de la cuenta actual');
                 }
+
             }
             if(!User::updateNewUser($user)){
                 throw new \Exception('Error al cambiar el estado de nuevo usuario');
