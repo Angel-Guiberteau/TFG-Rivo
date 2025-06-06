@@ -1,7 +1,8 @@
 <article class="row m-0 gx-0 gx-lg-4 px-3 px-lg-5 py-3 py-lg-5 text-black settings-article" id="settings-section" style="display: none;">
 
-    <form class="col-12 col-lg-10 mx-auto mt-4" method="POST" action="">
+    <form class="col-12 col-lg-10 mx-auto mt-4" method="POST" action="{{ route('updateSettingsUser') }}">
         @csrf
+        @method('PUT')
         <input type="hidden" name="operation_id" id="operation_id"> 
         <div class="d-flex flex-row justify-content-between align-items-center">
             <h2 class="fw-bold fs-3">Datos personales</h2>
@@ -10,8 +11,6 @@
         <hr class="separator">
 
         <div class="row justify-content-between align-items-center">
-            @csrf
-            @method('PUT')
 
             <div class="row mb-4">
                 <div class="col-md-6">
