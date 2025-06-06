@@ -1449,3 +1449,15 @@ body.blur-active::before {
     border-color: #dc3545 !important; 
     box-shadow: none !important;
 }
+
+.truncate-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 85%; 
+}
+
+.objective-item .info-container .d-flex.flex-column {
+    width: 85%;
+}
