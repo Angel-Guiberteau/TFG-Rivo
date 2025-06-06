@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EndPointController;
 use App\Http\Controllers\IconController;
 use App\Models\BaseCategory;
+use App\Models\Category;
 use App\Models\Icons;
 use App\Validations\ApiValidator;
 use App\Validations\BaseCategoriesValidator;
@@ -53,7 +54,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
             $data = [
                 'id' => $id,
             ];
-            $validate = ApiValidator::validate($data, ValidationEnum::GET_OPERATION_BY_ID->value);
+            $validate = ApiValidator::validate($data, ValidationEnum::VALIDATE_ID_ONLY->value);
 
             return $operation->getOperationById($validate['data']['id']);
         });
@@ -95,7 +96,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
             $data = [
                 'id' => $id,
             ];
-            $validate = ApiValidator::validate($data, ValidationEnum::DELETE_OPERATION->value);
+            $validate = ApiValidator::validate($data, ValidationEnum::VALIDATE_ID_ONLY->value);
 
             return $operation->deleteOperation($validate['data']['id']);
         });
@@ -117,30 +118,76 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
     Route::group(['prefix' => 'objective', 'middleware' => ['auth', 'role:user']], function () {
 
         Route::post('/deleteObjective/{id}', function ($id) {
-            //Añadir validación del id
             $controller = new ObjectiveController();
-            return $controller->deleteObjective($id);
+
+            $data = [
+                'id' => $id,
+            ];
+
+            $validate = ApiValidator::validate($data, ValidationEnum::VALIDATE_ID_ONLY->value);
+
+            if (!$validate['status']) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $data['error'] ?? 'Datos inválidos',
+                ], 404);
+            }
+
+            return $controller->deleteObjective($validate['data']['id']);
         });
 
         Route::get('/getObjective/{id}', function ($id) {
-            //Añadir validación del id
             $controller = new ObjectiveController();
-            return $controller->getObjective($id);
+            $data = [
+                'id' => $id,
+            ];
+
+            $validate = ApiValidator::validate($data, ValidationEnum::VALIDATE_ID_ONLY->value);
+
+            if (!$validate['status']) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $data['error'] ?? 'Datos inválidos',
+                ], 404);
+            }
+            return $controller->getObjective($validate['data']['id']);
         });
     });
 
     Route::group(['prefix' => 'category', 'middleware' => ['auth', 'role:user']], function () {
 
         Route::post('/delete/{id}', function ($id) {
-            //Añadir validación del id
             $controller = new CategoryController();
-            return $controller->deleteCategoryUser($id);
+            $data = [
+                'id' => $id,
+            ];
+
+            $validate = ApiValidator::validate($data, ValidationEnum::VALIDATE_ID_ONLY->value);
+
+            if (!$validate['status']) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $data['error'] ?? 'Datos inválidos',
+                ], 404);
+            }
+            return $controller->deleteCategoryUser($validate['data']['id']);
         });
 
-        Route::get('/getCategory/{id}', function ($id) {
-            //Añadir validación del id
+        Route::get('/getCategory/{id}', function ($id): Category|JsonResponse {
             $controller = new CategoryController();
-            return $controller->getCategory($id);
+            $data = [
+                'id' => $id,
+            ];
+
+            $validate = ApiValidator::validate($data, ValidationEnum::VALIDATE_ID_ONLY->value);
+
+            if (!$validate['status']) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $data['error'] ?? 'Datos inválidos',
+                ], 404);
+            }
+            return $controller->getCategory($validate['data']['id']);
         });
     });
 });

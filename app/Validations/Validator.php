@@ -35,9 +35,8 @@ abstract class Validator extends Controller
             'updatePersonalCategories' => static::rulesUpdatePersonalCategories(),
             'updatePersonalAccounts' => static::rulesUpdatePersonalAccounts(),
             'addIncomeUser' => static::rulesAddOperationUser(),
-            'getOperationById' => static::rulesGetOperationById(),
+            'validateIdOnly' => static::rulesValidateId(),
             'incomeOperations' => static::rulesIncomeOperations(),
-            'deleteOperation' => static::rulesDeleteOperation(),
             default => [],
         };
     }
@@ -51,9 +50,8 @@ abstract class Validator extends Controller
             'updatePersonalCategories' => static::messagesUpdatePersonalCategories(),
             'updatePersonalAccounts' => static::messagesUpdatePersonalAccounts(),
             'addIncomeUser' => static::messagesAddOperationUser(),
-            'getOperationById' => static::messagesGetOperationById(),
+            'validateIdOnly' => static::messagesValidateId(),
             'incomeOperations' => static::messagesIncomeOperations(),
-            'deleteOperation' => static::messagesDeleteOperation(),
             default => [],
         };
     }
@@ -72,10 +70,8 @@ abstract class Validator extends Controller
     protected static function messagesUpdatePersonalAccounts(): array { return []; }
     protected static function rulesAddOperationUser(): array { return []; }
     protected static function messagesAddOperationUser(): array { return []; }
-    protected static function rulesGetOperationById(): array { return []; }
-    protected static function messagesGetOperationById(): array { return []; }
+    protected static function rulesValidateId(): array { return []; }
+    protected static function messagesValidateId(): array { return []; }
     protected static function rulesIncomeOperations(): array { return []; }
     protected static function messagesIncomeOperations(): array { return []; }
-    protected static function rulesDeleteOperation(): array { return []; }
-    protected static function messagesDeleteOperation(): array { return []; }
 }
