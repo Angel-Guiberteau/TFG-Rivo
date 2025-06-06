@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <input type="text" name="returnName[]" class="form-control" placeholder="Dato" maxlength="15" required>
                 </div>
                 <div class="col-5">
-                    <input type="text" name="type[]"   class="form-control" placeholder="Tipo" maxlength="15" required>
+                    <input type="text" name="type[]" class="form-control" placeholder="Tipo" maxlength="15" required>
                 </div>
                 <div class="col-2 d-flex align-items-start">
                     <button type="button" class="btn btn-danger btn-sm remove-row">
@@ -103,13 +103,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
+    form.addEventListener('submit', (e) => {
         const allValid = Array.from(form.querySelectorAll('input, textarea')).every(inp => {
             return !inp.hasAttribute('required') || inp.classList.contains('is-valid');
         });
-        if (!allValid) return;
+
+        if (!allValid) {
+            e.preventDefault(); // detener si hay errores
+            return;
+        }
 
         const returnInputs = Array.from(form.querySelectorAll('input[name="returnName[]"]'));
         const typeInputs   = Array.from(form.querySelectorAll('input[name="type[]"]'));
@@ -122,90 +124,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const formattedReturn = `[${pairs.join(' | ')}]`;
 
-        // 4. Preparar los datos del formulario
-        const formData = new FormData(form);
-        formData.append('returnData', formattedReturn);
-
-        try {
-            const response = await fetch(form.action, {
-                method: form.getAttribute('method').toUpperCase(),
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                }
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-
-                const swalBox = document.createElement('div');
-                swalBox.textContent = data.success || data.error || "Respuesta inesperada";
-                swalBox.style.position = 'fixed';
-                swalBox.style.bottom = '1rem';
-                swalBox.style.right = '1rem';
-                swalBox.style.minWidth = '300px';
-                swalBox.style.maxWidth = '90%';
-                swalBox.style.textAlign = 'center';
-                swalBox.style.padding = '0.8rem 1.5rem';
-                swalBox.style.borderRadius = '8px';
-                swalBox.style.fontSize = '0.9rem';
-                swalBox.style.zIndex = 9999;
-                swalBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
-
-                if (data.success) {
-                    sessionStorage.setItem('swalMessage', data.success);
-                    setTimeout(() => {
-                        window.location.href = '/admin/endPoints';
-                    });
-                } else {
-                    swalBox.style.backgroundColor = '#f2dede';
-                    swalBox.style.color = '#a94442';
-                    swalBox.style.border = '1px solid #ebccd1';
-                    document.body.appendChild(swalBox);
-
-                    setTimeout(() => swalBox.remove(), 3000);
-                }
-            } else {
-                const swalBox = document.createElement('div');
-                swalBox.textContent = "Hubo un problema en el servidor.";
-                swalBox.style.position = 'fixed';
-                swalBox.style.bottom = '1rem';
-                swalBox.style.right = '1rem';
-                swalBox.style.minWidth = '300px';
-                swalBox.style.maxWidth = '90%';
-                swalBox.style.textAlign = 'center';
-                swalBox.style.padding = '0.8rem 1.5rem';
-                swalBox.style.backgroundColor = '#f2dede'; 
-                swalBox.style.color = '#a94442';
-                swalBox.style.border = '1px solid #ebccd1';
-                swalBox.style.borderRadius = '8px';
-                swalBox.style.fontSize = '0.9rem';
-                swalBox.style.zIndex = 9999;
-                swalBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
-                document.body.appendChild(swalBox);
-                setTimeout(() => swalBox.remove(), 3000);
-            }
-        } catch (error) {
-            console.error("Error al procesar la solicitud:", error);
-            const swalBox = document.createElement('div');
-            swalBox.textContent = "Hubo un problema en el servidor.";
-            swalBox.style.position = 'fixed';
-            swalBox.style.bottom = '1rem';
-            swalBox.style.right = '1rem';
-            swalBox.style.minWidth = '300px';
-            swalBox.style.maxWidth = '90%';
-            swalBox.style.textAlign = 'center';
-            swalBox.style.padding = '0.8rem 1.5rem';
-            swalBox.style.backgroundColor = '#f2dede'; 
-            swalBox.style.color = '#a94442';
-            swalBox.style.border = '1px solid #ebccd1';
-            swalBox.style.borderRadius = '8px';
-            swalBox.style.fontSize = '0.9rem';
-            swalBox.style.zIndex = 9999;
-            swalBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
-            document.body.appendChild(swalBox);
-            setTimeout(() => location.reload(), 2000);
+        let hidden = form.querySelector('input[name="returnData"]');
+        if (!hidden) {
+            hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = 'returnData';
+            form.appendChild(hidden);
         }
+        hidden.value = formattedReturn;
     });
-
 });
