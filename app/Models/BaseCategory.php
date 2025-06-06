@@ -15,6 +15,7 @@ class BaseCategory extends Model
 
     public static function listAllBaseCategories(): Collection {
         return self::with(['category.icon', 'category.movementTypes'])
+        ->where('enabled', 1)
         ->get()
         ->map(function ($base) {
             return [
@@ -85,7 +86,7 @@ class BaseCategory extends Model
             throw $e;
         }
     }
-    
+
     public function category():  BelongsTo {
         return $this->belongsTo(Category::class, 'categories_id');
     }

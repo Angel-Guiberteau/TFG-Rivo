@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class ObjectiveOperation extends Model
 {
@@ -13,6 +15,11 @@ class ObjectiveOperation extends Model
         'operation_id',
         'enabled',
     ];
+
+    public static function getObjectiveOperationByOperationId(int $operationId): ?ObjectiveOperation {
+        return self::where('operation_id', $operationId)
+            ->first();
+    }
 
     public static function addObjectiveOperation(int $objectiveId, int $operationId): bool | self{
         $objectiveOperation = new self;

@@ -80,7 +80,9 @@ class Category extends Model
     }
 
     public static function getCategory(int $categoryId): self|null {
-        return self::with('movementTypes')->find($categoryId);
+        return self::with('movementTypes')
+            ->where('enabled', 1)
+            ->find($categoryId);
     }
 
 
@@ -95,7 +97,9 @@ class Category extends Model
     }
 
     public static function getPersonalCategoriesByUserId(int $userId): ?Collection {
-        $user = User::with('personalCategories.icon', 'personalCategories.movementTypes')->find($userId);
+        $user = User::with('personalCategories.icon', 'personalCategories.movementTypes')
+        ->where('enabled', 1)
+        ->find($userId);
 
         $categories = $user->personalCategories->map(function ($category) {
             return [
