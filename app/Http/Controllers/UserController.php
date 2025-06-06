@@ -48,6 +48,7 @@ class UserController extends Controller
     public Array $news;
     public Array $accounts;
     public Array $accountMovementsTypes;
+    public bool $newUser = false;
 
 
     public static function listUsers()
@@ -67,7 +68,7 @@ class UserController extends Controller
         $data = $array['data'] ?? [];
 
         $controller = new UserController();
-
+        
         $controller->name = $data['name'] ?? '';
         $controller->last_name = $data['last_name'] ?? '';
         $controller->birth_date = $data['birth_date'] ?? '';
@@ -75,6 +76,7 @@ class UserController extends Controller
         $controller->email = $data['email'] ?? '';
         $controller->username = $data['username'] ?? '';
         $controller->password = bcrypt($data['password'] ?? '');
+        $controller->newUser = isset($data['is_new_user']) ? $data['is_new_user'] : 0;
 
         $created = User::storeUser($controller);
 
@@ -145,12 +147,6 @@ class UserController extends Controller
         }
 
         $accounts = UserAccount::getAccountsByUserId($user->id);
-        
-        if ($accounts->isEmpty()) {
-            return redirect()->back()
-                ->with('error', 'No hay cuentas asociadas al usuario.')
-                ->withInput();
-        }
 
         $movementTypes = MovementType::getEnabledMovementTypes();
 
@@ -643,12 +639,6 @@ class UserController extends Controller
         }
 
         $accounts = UserAccount::getAccountsByUserId($user->id);
-        
-        if ($accounts->isEmpty()) {
-            return redirect()->back()
-                ->with('error', 'No hay cuentas asociadas al usuario.')
-                ->withInput();
-        }
 
         $movementTypes = MovementType::getEnabledMovementTypes();
 
