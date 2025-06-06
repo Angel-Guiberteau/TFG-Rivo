@@ -16,10 +16,6 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
-    public static function listCategories(): array {
-        return Category::getAllCategoriesEnabled()->toArray();
-    }
-
     public static function numberOfCategories(): int {
         return Category::numberOfCategories();
     }

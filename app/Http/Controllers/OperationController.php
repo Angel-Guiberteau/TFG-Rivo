@@ -15,6 +15,7 @@ use App\Models\OperationUnschedule;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class OperationController extends Controller
 {
@@ -93,7 +94,7 @@ class OperationController extends Controller
 
     }
 
-    public function getAllOperations(array $data): JsonResponse {
+    public function getAllOperationsWithLimitByAccountId(array $data): JsonResponse {
         $accountId = session('active_account_id');
 
         if (!$accountId) {
@@ -101,7 +102,7 @@ class OperationController extends Controller
         }
 
         $offset = $data['offset'] ?? 0;
-        $limit  = $data['limit'] ?? 10;
+        $limit  = $data['limit'] ?? 20;
 
         $operations = Operation::getAllOperationsWithLimitByAccountId($accountId, $offset, $limit);
 
@@ -110,9 +111,52 @@ class OperationController extends Controller
 
 
     public function deleteOperation(int $id): JsonResponse{
-
+        DB::beginTransaction();
+        $operation = Operation::getOperationById($id);
+        if(!$operation){
+            DB::rollBack();
+            return response()->json(['error' => 'Operación no encontrada'], 404);
+        }
+        if($operation->movement_type_id == MovementTypesEnum::SAVEMONEY->value){
+            $objectiveOperation = ObjectiveOperation::getObjectiveOperationByOperationId($id);
+            if(!$objectiveOperation){
+                DB::rollBack();
+                return response()->json(['error' => 'Operación no asociada a un objetivo'], 404);
+            }
+            $objective = Objective::getObjective($objectiveOperation->objective_id);
+            if(!$objective){
+                DB::rollBack();
+                return response()->json(['error' => 'Objetivo no encontrado'], 404);
+            }
+            if(!Objective::updateCurrentAmount($objective->id, $operation->amount, true)){
+                DB::rollBack();
+                return response()->json(['error' => 'Error al actualizar el objetivo'], 400);
+            }
+            $accountId = session('active_account_id');
+            if(!$accountId){
+                DB::rollBack();
+                return response()->json(['error' => 'No hay cuenta activa'], 400);
+            }
+            if(!Account::updateSaveToTotalSave($accountId, $operation->amount, true)){
+                DB::rollBack();
+                return response()->json(['error' => 'Error al actualizar el total ahorrado'], 400);
+            }
+        }else{
+            if($operation->movement_type_id == MovementTypesEnum::INCOME->value){
+                if(!Account::updateAccountBalance($operation->account_id, $operation->amount, true)){
+                    DB::rollBack();
+                    return response()->json(['error' => 'Error al actualizar el balance de la cuenta'], 400);
+                }
+            }else{
+                if($operation->movement_type_id == MovementTypesEnum::EXPENSE->value){
+                    if(!Account::addIncomeToBalance($operation->account_id, $operation->amount)){
+                        DB::rollBack();
+                        return response()->json(['error' => 'Error al actualizar el balance de la cuenta'], 400);
+                    }
+                }
+            }
+        }
         return Operation::deleteOperation($id) ? response()->json(['success' => 'Operación borrada correctamente']) : response()->json(['error' => 'Error al eliminar la operacion. Póngase en contacto con el soporte'], 400);
-
     }
 
     public function getOperationById(int $operationId): JsonResponse{

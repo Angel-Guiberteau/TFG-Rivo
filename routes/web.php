@@ -87,7 +87,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
             $operation = new OperationController();
             $validate = ApiValidator::validate($data, ValidationEnum::GET_OPERATIONS_OFFSET->value);
 
-            return $operation->getAllOperations($validate['data']);
+            return $operation->getAllOperationsWithLimitByAccountId($validate['data']);
         });
 
         Route::post('/deleteOperation/{id}', function($id): JsonResponse {
@@ -399,7 +399,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             $request = request()->toArray();
 
             $validate = UserValidator::validate($request, ValidationEnum::ADD->value);
-
+            
             if(!$validate['status']){
                 return redirect()->back()->with('error', $validate['error'] ?? 'Error al añadir el usuario. Póngase en contacto con el soporte.');
             }

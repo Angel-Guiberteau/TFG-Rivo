@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedInteger('categories_id');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
-        
+
             $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
         });        
     }

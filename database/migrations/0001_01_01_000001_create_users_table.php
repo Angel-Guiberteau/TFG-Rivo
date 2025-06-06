@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('birth_date')->nullable();
             $table->unsignedTinyInteger('rol_id')->default(2);
             $table->string('google_id')->unique()->nullable();
-            $table->string('username', 75)->unique()->nullable();
+            $table->string('username', 75)->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

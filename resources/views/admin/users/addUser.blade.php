@@ -24,7 +24,7 @@
                 ])
                 @include('templates.admin.title', ['title' => 'Añadir Usuario'])
 
-                <form action="{{ route('storeUser') }}" method="POST">
+                <form action="{{ route('storeUser') }}" method="POST" class="mt-3">
                     @csrf
 
                     <div class="row mb-4">
@@ -121,7 +121,7 @@
                     </div>
 
                     <div class="row mb-4">
-                        <div class="col-md-6">
+                        <div class="col-md-6 mb-3">
                             <label for="password" class="form-label">Contraseña <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <span class="input-group-text bg-white"><i class="fa-solid fa-lock"></i></span>
@@ -130,6 +130,19 @@
                                     placeholder="Introduce una contraseña segura">
                                 @error('password')
                                 <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="is_new_user" class="form-label">¿Es nuevo usuario?</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white"><i class="fa-solid fa-user-plus"></i></span>
+                                <div class="form-check form-switch ms-2">
+                                    <input class="form-check-input @error('is_new_user') is-invalid @enderror" type="checkbox" name="is_new_user" id="is_new_user" value="1" {{ old('is_new_user', 1) ? 'checked' : '' }}>
+                                    <label class="form-check-label ms-2" for="is_new_user">Sí</label>
+                                </div>
+                                @error('is_new_user')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
