@@ -111,17 +111,11 @@ export async function openTransactionDetail(id) {
                         });
 
                         if (!res.ok) throw new Error('Error al eliminar');
-
-                        document.querySelectorAll('.movement-block').forEach(container => {
-                            const target = container.querySelector(`.movement-row[data-id="${id}"]`);
-                            if (target) {
-                                const wrapper = target.closest('.col-12.col-lg-6');
-                                if (wrapper) wrapper.remove();
-                                reorganizeMovementLayout(container);
-                            }
-                        });
-
-
+                        const response = await res.json();
+                        if(response.success){
+                            sessionStorage.setItem('success', response.success);
+                            location.reload();
+                        }
 
                         closePanel();
                         refreshRecentOperations();
@@ -131,12 +125,6 @@ export async function openTransactionDetail(id) {
                             const sectionType = visibleSection.id.replace('-section', '');
                             refreshHistory(sectionType);
                         }
-
-                        swal("Transacción eliminada correctamente", {
-                            icon: "success",
-                            timer: 2000,
-                            buttons: false
-                        });
 
                     } catch (error) {
                         console.error(error);

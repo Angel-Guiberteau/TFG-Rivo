@@ -13,7 +13,7 @@
     }
 </style>
 
-@if (isset($thisMonthIncomes) && !is_null($thisMonthIncomes))
+@if (isset($thisMonthIncomes) && $thisMonthIncomes->isnotEmpty())
     <div class="col-12 card-section mt-4">
         <h3 class="section-title">
             Resumen de ingresos de {{ ucfirst(\Carbon\Carbon::now()->locale('es')->translatedFormat('F Y')) }}
@@ -44,7 +44,7 @@
     </div>
 @endif
 
-@if (isset($thisMonthExpenses) && !is_null($thisMonthExpenses))
+@if (isset($thisMonthExpenses) && $thisMonthExpenses->isnotEmpty())
     <div class="col-12 card-section mt-4">
         <h3 class="section-title">
             Resumen de gastos de {{ ucfirst(\Carbon\Carbon::now()->locale('es')->translatedFormat('F Y')) }}
