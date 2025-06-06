@@ -3,7 +3,7 @@
         <div class="d-flex flex-row justify-content-start align-items-center">
             <img src="{{ asset('img/logos/purpleRivo.png') }}" alt="">
             <div class="d-flex flex-column align-items-start gap-0">
-                <h3 class="mb-1 fs-4 fw-bold">Objetivo: {{ $objective->name }}</h3>
+                <h3 class="mb-1 fs-4 fw-bold truncate-title">Objetivo: {{ $objective->name }}</h3>
                 <p class="fs-5 mb-0">Progreso: {{ $objective->current_amount }}€ / {{ $objective->target_amount }}€ ahorrado — <strong>{{ $objective->target_amount > 0 ? number_format(($objective->current_amount / $objective->target_amount) * 100, 2) : '0.00' }}%</strong></p>
             </div>
         </div>
