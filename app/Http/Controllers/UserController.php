@@ -145,12 +145,6 @@ class UserController extends Controller
         }
 
         $accounts = UserAccount::getAccountsByUserId($user->id);
-        
-        if ($accounts->isEmpty()) {
-            return redirect()->back()
-                ->with('error', 'No hay cuentas asociadas al usuario.')
-                ->withInput();
-        }
 
         $movementTypes = MovementType::getEnabledMovementTypes();
 
@@ -643,12 +637,6 @@ class UserController extends Controller
         }
 
         $accounts = UserAccount::getAccountsByUserId($user->id);
-        
-        if ($accounts->isEmpty()) {
-            return redirect()->back()
-                ->with('error', 'No hay cuentas asociadas al usuario.')
-                ->withInput();
-        }
 
         $movementTypes = MovementType::getEnabledMovementTypes();
 

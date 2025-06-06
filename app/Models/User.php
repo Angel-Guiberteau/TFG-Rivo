@@ -176,26 +176,11 @@ class User extends Authenticatable
 
         try {
 
-            $deletedRelation = UserCategory::where('user_id', $userId)
-                ->where('categories_id', $categoryId)
-                ->delete();
-
-            if (!$deletedRelation) {
+            $deletedCategory = Category::where('id', $categoryId)
+                ->update(['enabled' => 0]);
+            if (!$deletedCategory) {
                 DB::rollBack();
                 return false;
-            }
-
-            $stillRelated = UserCategory::where('categories_id', $categoryId)->exists();
-
-            if (!$stillRelated) {
-
-                MovementTypeCategories::where('category_id', $categoryId)->delete();
-
-                $deletedCategory = Category::where('id', $categoryId)->delete();
-                if (!$deletedCategory) {
-                    DB::rollBack();
-                    return false;
-                }
             }
 
             DB::commit();

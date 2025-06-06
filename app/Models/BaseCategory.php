@@ -14,7 +14,11 @@ class BaseCategory extends Model
     protected $fillable = [ 'categories_id' ];
 
     public static function listAllBaseCategories(): Collection {
+
+        $categoriesEnabled = Category::where('enabled', true)->pluck('id')->toArray();
+
         return self::with(['category.icon', 'category.movementTypes'])
+        ->whereIn('categories_id', $categoriesEnabled)
         ->get()
         ->map(function ($base) {
             return [
