@@ -1,51 +1,15 @@
-@if(session('success'))
-    <script>
-        const swalBox = document.createElement('div');
-        swalBox.textContent = "{{ session('success') }}";
-        swalBox.style.position = 'fixed';
-        swalBox.style.bottom = '1rem';
-        swalBox.style.right = '1rem';
-        swalBox.style.minWidth = '300px';
-        swalBox.style.maxWidth = '90%';
-        swalBox.style.textAlign = 'center';
-        swalBox.style.padding = '0.8rem 1.5rem';
-        swalBox.style.backgroundColor = '#dff0d8'; 
-        swalBox.style.color = '#3c763d';
-        swalBox.style.border = '1px solid #d6e9c6';
-        swalBox.style.borderRadius = '8px';
-        swalBox.style.fontSize = '0.9rem';
-        swalBox.style.zIndex = 9999;
-        swalBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
-        document.body.appendChild(swalBox);
-
-        setTimeout(() => {
-            swalBox.remove();
-        }, 2000);
-    </script>
-@endif
-
-@if(session('error'))
-    <script>
-        const swalBox = document.createElement('div');
-        swalBox.textContent = "{{ session('error') }}";
-        swalBox.style.position = 'fixed';
-        swalBox.style.bottom = '1rem';
-        swalBox.style.right = '1rem';
-        swalBox.style.minWidth = '300px';
-        swalBox.style.maxWidth = '90%';
-        swalBox.style.textAlign = 'center';
-        swalBox.style.padding = '0.8rem 1.5rem';
-        swalBox.style.backgroundColor = '#f2dede'; 
-        swalBox.style.color = '#a94442';
-        swalBox.style.border = '1px solid #ebccd1';
-        swalBox.style.borderRadius = '8px';
-        swalBox.style.fontSize = '0.9rem';
-        swalBox.style.zIndex = 9999;
-        swalBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
-        document.body.appendChild(swalBox);
-
-        setTimeout(() => {
-            swalBox.remove();
-        }, 2000);
-    </script>
+@if (session('success'))
+    <div class="rivo-alert alert-success">
+        <span class="rivo-alert-icon succes"><i class="fas fa-check-circle"></i></span>
+        <span class="rivo-alert-text">{{ session('success') }}</span>
+        <button type="button" class="rivo-alert-close" onclick="this.parentElement.remove();">&times;</button>
+    </div>
+@else
+    @if (session('error'))
+        <div class="rivo-alert alert-error">
+            <span class="rivo-alert-icon error"><i class="fas fa-times-circle"></i></span>
+            <span class="rivo-alert-text">{{ session('error') }}</span>
+            <button type="button" class="rivo-alert-close" onclick="this.parentElement.remove();">&times;</button>
+        </div>
+    @endif
 @endif

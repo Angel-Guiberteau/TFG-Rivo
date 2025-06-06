@@ -277,10 +277,10 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
     })->name('addOperationUser');
 
     Route::post('/addOrEditObjective', function (): RedirectResponse {
-        //Le llega el nombre del objetivo, el dinero objetivo y el id en null o relleno si es editar
         $request = request()->toArray();
 
         $objectiveController = new ObjectiveController();
+        
         if(is_null($request['objective_id'])){
             $request['account_id'] = session('active_account_id');
             if(!$objectiveController->addObjective($request)){
@@ -343,6 +343,20 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 
     })->name('addOrEditCategory');
 
+    Route::put('/updateSettingsUser', function (): RedirectResponse {
+
+        $request = request()->toArray();
+        $request['id'] = Auth::user()->id;
+        // dd($request);
+        $validate = UserValidator::validate($request, ValidationEnum::EDIT->value);
+
+        if(!$validate['status']){
+            return redirect()->back()->with('error', 'Error al actualizar el usuario. Póngase en contacto con el soporte.');
+        }
+        // dd($validate);
+        return UserController::updateUser($validate['data']);
+
+    })->name('updateSettingsUser');
 });
 
 
@@ -365,14 +379,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             ->with('numSentences', $numSentences)
             ->with('numIcons', $numIcons)
             ->with('numCategory', $numCategory);
+
     })->name('homeAdmin');
 
-    // USERS
+    // ============= Usuarios =============
 
     Route::group(['prefix' => 'users'], function () {
 
         Route::get('/', function (): View {
-
             return UserController::listUsers();
         })->name('users');
 
@@ -383,18 +397,26 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::post('/storeUser', function (): RedirectResponse {
 
             $request = request()->toArray();
-            // dd($request);
+
             $validate = UserValidator::validate($request, ValidationEnum::ADD->value);
-            // dd($validate);
+
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al añadir el usuario. Póngase en contacto con el soporte.');
+            }
+
             return UserController::storeUser($validate);
 
         })->name('storeUser');
 
         Route::post('/deleteUser', function (): RedirectResponse {
             $request = request()->toArray();
-            // dd($request);
+
             $validate = UserValidator::validate($request, ValidationEnum::DELETE->value);
-            // dd($validate);
+            
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al eliminar el usuario. Póngase en contacto con el soporte.');
+            }
+
             return UserController::deleteUser($validate['data']);
         })->name('deleteUser');
 
@@ -403,15 +425,30 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('editUser');
 
         Route::put('/updateUser', function (): RedirectResponse {
-            return UserController::updateUser();
+
+            $request = request()->toArray();
+
+            $validate = UserValidator::validate($request, ValidationEnum::EDIT->value);
+
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al actualizar el usuario. Póngase en contacto con el soporte.');
+            }
+
+            return UserController::updateUser($validate['data']);
+
         })->name('updateUser');
+
 
         Route::put('/updatePersonalCategories', function () {
 
             $request = request()->toArray();
-            // dd($request);
+            
             $validate = UserValidator::validate($request, ValidationEnum::UPDATE_PERSONAL_CATEGORIES->value);
-            // dd($validate);
+            
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al actualizar las categorías personales. Póngase en contacto con el soporte.');
+            }
+
             return UserController::updatePersonalCategories($validate);
 
         })->name('updatePersonalCategories');
@@ -420,9 +457,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
             $request = request()->toArray();
 
-            // dd($request);
-
             $validate = UserValidator::validate($request, ValidationEnum::UPDATE_PERSONAL_ACOUNTS->value);
+
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al actualizar las cuentas personales. Póngase en contacto con el soporte.');
+            }
 
             return UserController::updatePersonalAccounts($validate);
 
@@ -435,13 +474,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
             $validate = UserValidator::validate($request, ValidationEnum::DELETE->value);
 
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al previsualizar el usuario. Póngase en contacto con el soporte.');
+            }
+
             return UserController::getFullUserbyId($validate );
 
         })->name('previewUser');
 
     });
 
-                                // SENTENCES
+    // ============= Frases =============
 
     Route::group(['prefix' => 'sentences'], function () {
         Route::get('/', function (): View {
@@ -452,6 +495,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             $data = request()->toArray();
 
             $validate = SentencesValidator::validate($data, ValidationEnum::ADD->value);
+
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al añadir la frase. Póngase en contacto con el soporte.');
+            }
 
             return SentenceController::addSentence($validate);
         })->name('addSentence');
@@ -464,10 +511,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return SentenceController::editSentence($validate);
         })->name('editSentence');
 
-        Route::post('/delete', function (): JsonResponse {
+        Route::post('/delete', function (): RedirectResponse {
             $data = request()->toArray();
 
             $validate = SentencesValidator::validate($data, ValidationEnum::DELETE->value);
+
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al eliminar la frase. Póngase en contacto con el soporte.');
+            }
 
             return SentenceController::deleteSentence($validate);
         })->name('deleteSentence');
@@ -483,7 +534,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('sentenceMockups');
     });
 
-                                // CATEGORIES
+    // ============= Categorias =============
 
     Route::group(['prefix' => 'categories'], function () {
         Route::get('/', function (): View {
@@ -503,6 +554,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
             $validate = BaseCategoriesValidator::validate($data, ValidationEnum::ADD->value);
 
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al añadir la categoría. Póngase en contacto con el soporte.');
+            }
+
             return BaseCategoryController::addBaseCategory($validate);
         })->name('addCategory');
 
@@ -511,19 +566,27 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
             $validate = BaseCategoriesValidator::validate($data, ValidationEnum::EDIT->value);
 
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al editar la categoría. Póngase en contacto con el soporte.');
+            }
+
             return BaseCategoryController::editBaseCategory($validate);
         })->name('editCategory');
 
-        Route::post('/delete', function (): JsonResponse {
+        Route::post('/delete', function (): RedirectResponse {
             $data = request()->toArray();
 
             $validate = CategoriesValidator::validate($data, ValidationEnum::DELETE->value);
+
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al eliminar la categoría. Póngase en contacto con el soporte.');
+            }
 
             return CategoryController::deleteCategory($validate);
         })->name('deleteCategory');
     });
 
-                                // Icons
+    // ============= Iconos =============  
 
     Route::group(['prefix' => 'icons'], function () {
         Route::get('/', function (): View {
@@ -539,6 +602,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
             $validate = IconValidator::validate($data, ValidationEnum::ADD->value);
 
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al añadir el icono. Póngase en contacto con el soporte.');
+            }
+
             return IconController::addIcon($validate);
         })->name('addIcon');
 
@@ -547,19 +614,27 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
             $validate = IconValidator::validate($data, ValidationEnum::EDIT->value);
 
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al editar el icono. Póngase en contacto con el soporte.');
+            }
+
             return IconController::editIcon($validate);
         })->name('editIcon');
 
-        Route::post('/delete', function (): JsonResponse {
+        Route::post('/delete', function (): RedirectResponse {
             $data = request()->toArray();
 
             $validate = IconValidator::validate($data, ValidationEnum::DELETE->value);
+
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al eliminar el icono. Póngase en contacto con el soporte.');
+            }
 
             return IconController::deleteIcon($validate);
         })->name('deleteIcon');
     });
 
-                                // EndPoints
+    // ============= EndPoints =============  
 
     Route::group(['prefix' => 'endPoints'], function () {
         Route::get('/', function (): View {
@@ -571,10 +646,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return view('admin.endPoints.addEndpoint');
         })->name('addEndPoints');
 
-        Route::post('/safeEndpoint', function (): JsonResponse {
+        Route::post('/safeEndpoint', function (): RedirectResponse {
             $data = request()->toArray();
 
             $validate = EndPointValidator::validate($data, ValidationEnum::ADD->value);
+
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al añadir el endpoint. Póngase en contacto con el soporte.');
+            }
 
             return EndPointController::addEndPoint($validate);
         })->name('safeEndPoint');
@@ -585,27 +664,32 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return view('admin.endPoints.editEndpoint')->with('endPoint',$data);
         })->name('editEndPoint');
 
-        Route::put('/safeEditeEndPoint', function (): JsonResponse {
+        Route::put('/safeEditeEndPoint', function (): RedirectResponse {
             $data = request()->toArray();
 
             $validate = EndPointValidator::validate($data, ValidationEnum::EDIT->value);
 
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al editar el endpoint. Póngase en contacto con el soporte.');
+            }
+
             return EndPointController::editEndPoint($validate);
         })->name('safeEditEndPoints');
 
-        Route::post('/delete', function (): JsonResponse {
+        Route::post('/delete', function (): RedirectResponse {
             $data = request()->toArray();
 
             $validate = EndPointValidator::validate($data, ValidationEnum::DELETE->value);
+
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al eliminar el endpoint. Póngase en contacto con el soporte.');
+            }
 
             return EndPointController::deleteEndPoint($validate);
         })->name('deleteEndPoints');
 
     });
 });
-
-
-
 
 /*
 |--------------------------------------------------------------------------
