@@ -101,7 +101,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
             return $operation->deleteOperation($validate['data']['id']);
         });
 
-        Route::get('/refreshRecentOperations', function () {
+        Route::get('/refreshRecentOperations', function (): ?Collection {
             $accountId = session('active_account_id');
             $controller = new OperationController();
             return $controller->getSixOperationsByAccountId($accountId);
@@ -109,7 +109,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
     });
     Route::group(['prefix' => 'icon', 'middleware' => ['auth', 'role:user']], function () {
 
-        Route::get('/getAllIcons', function () {
+        Route::get('/getAllIcons', function (): array {
             $controller = new IconController();
             return $controller->getAllIcons();
         });
@@ -117,7 +117,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
 
     Route::group(['prefix' => 'objective', 'middleware' => ['auth', 'role:user']], function () {
 
-        Route::post('/deleteObjective/{id}', function ($id) {
+        Route::post('/deleteObjective/{id}', function ($id): JsonResponse {
             $controller = new ObjectiveController();
 
             $data = [
@@ -136,7 +136,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
             return $controller->deleteObjective($validate['data']['id']);
         });
 
-        Route::get('/getObjective/{id}', function ($id) {
+        Route::get('/getObjective/{id}', function ($id): JsonResponse {
             $controller = new ObjectiveController();
             $data = [
                 'id' => $id,
@@ -156,7 +156,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
 
     Route::group(['prefix' => 'category', 'middleware' => ['auth', 'role:user']], function () {
 
-        Route::post('/delete/{id}', function ($id) {
+        Route::post('/delete/{id}', function ($id): JsonResponse {
             $controller = new CategoryController();
             $data = [
                 'id' => $id,
