@@ -421,7 +421,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('deleteUser');
 
         Route::get('/editUser/{id}', function ($id): RedirectResponse|View {
-            return UserController::getUserbyId($id);
+            $request = request()->toArray();
+
+            $validate = UserValidator::validate($request, ValidationEnum::DELETE->value);
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al editar el obtener los datos del usuario. Póngase en contacto con el soporte.');
+            }
+
+            $si = UserController::getFullUserbyId(['id' => $id]);
+            dd($si);
         })->name('editUser');
 
         Route::put('/updateUser', function (): RedirectResponse {
