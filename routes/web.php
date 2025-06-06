@@ -420,16 +420,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return UserController::deleteUser($validate['data']);
         })->name('deleteUser');
 
-        Route::get('/editUser/{id}', function ($id): RedirectResponse|View {
-            $request = request()->toArray();
+        Route::get('/editUser/{id}', function (Request $request, $id): RedirectResponse|View {
+             $request = array_merge($request->all(), ['id' => $id]);
 
             $validate = UserValidator::validate($request, ValidationEnum::DELETE->value);
+
             if(!$validate['status']){
-                return redirect()->back()->with('error', $validate['error'] ?? 'Error al editar el obtener los datos del usuario. Póngase en contacto con el soporte.');
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al previsualizar el usuario. Póngase en contacto con el soporte.');
             }
 
-            $si = UserController::getUserbyId(['id' => $id]);
-            dd($si);
+            return UserController::getUserbyId(['id' => $id]);
+            
         })->name('editUser');
 
         Route::put('/updateUser', function (): RedirectResponse {
