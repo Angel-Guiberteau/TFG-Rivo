@@ -343,6 +343,20 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 
     })->name('addOrEditCategory');
 
+    Route::put('/updateSettingsUser', function (): RedirectResponse {
+
+        $request = request()->toArray();
+        $request['id'] = Auth::user()->id;
+        // dd($request);
+        $validate = UserValidator::validate($request, ValidationEnum::EDIT->value);
+
+        if(!$validate['status']){
+            return redirect()->back()->with('error', 'Error al actualizar el usuario. Póngase en contacto con el soporte.');
+        }
+        // dd($validate);
+        return UserController::updateUser($validate['data']);
+
+    })->name('updateSettingsUser');
 });
 
 
@@ -403,8 +417,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('editUser');
 
         Route::put('/updateUser', function (): RedirectResponse {
-            return UserController::updateUser();
+
+            $request = request()->toArray();
+
+            $validate = UserValidator::validate($request, ValidationEnum::EDIT->value);
+
+            if(!$validate['status']){
+                return redirect()->back()->with('error', 'Error al actualizar el usuario. Póngase en contacto con el soporte.');
+            }
+
+            return UserController::updateUser($validate['data']);
+
         })->name('updateUser');
+
 
         Route::put('/updatePersonalCategories', function () {
 
