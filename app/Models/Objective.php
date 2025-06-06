@@ -67,14 +67,17 @@ class Objective extends Model
         if (isset($data['deadline'])) {
             $objective->deadline = $data['deadline'];
         }
-        
+
         return $objective->save();
     }
 
-    public static function updateCurrentAmount(int $objectiveId, float $operationAmount): bool{
+    public static function updateCurrentAmount(int $objectiveId, float $operationAmount, bool $negative = false): bool{
         $objective = self::find($objectiveId);
+        if(!$negative)
+            $objective->current_amount += $operationAmount;
+        else
+            $objective->current_amount -= $operationAmount;
 
-        $objective->current_amount += $operationAmount;
         return $objective->save();
     }
 }

@@ -40,6 +40,21 @@ class Account extends Model
         return $account->save();
     }
 
+    public static function updateAccountBalance(int $accountId, float $amount, bool $negative = false): bool {
+        $account = self::find($accountId);
+
+        if (!$account) {
+            return false;
+        }
+        if ($negative) {
+            $account->balance -= $amount;
+        } else {
+            $account->balance += $amount;
+        }
+
+
+        return $account->save();
+    }
     public static function addIncomeToBalance(int $accountId, float $amount): bool {
         $account = self::find($accountId);
 
@@ -60,6 +75,20 @@ class Account extends Model
         }
 
         $account->balance -= $amount;
+
+        return $account->save();
+    }
+
+    public static function updateSaveToTotalSave(int $accountId, float $amount, bool $negative = false): bool {
+        $account = self::find($accountId);
+
+        if (!$account) {
+            return false;
+        }
+        if(!$negative)
+            $account->total_saved += $amount;
+        else
+            $account->total_saved -= $amount;
 
         return $account->save();
     }
