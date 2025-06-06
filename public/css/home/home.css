@@ -655,6 +655,15 @@ input[type="radio"]:checked + .category-option i {
     margin-bottom: 1rem;
     color: #1a1a1a;
 }
+.list-div-entry{
+    max-width: 500px;
+    width: 100%;
+}
+@media (max-width: 992px) {
+    .list-div-entry {
+        max-width: 100%;
+    }
+}
 
 .list-entry {
   background: rgba(107, 0, 229, 0.04);
@@ -687,7 +696,14 @@ input[type="radio"]:checked + .category-option i {
     font-weight: bold;
     font-size: 1.1rem;
 }
-
+.card-section,
+.row,
+.col,
+.chart-container {
+    overflow: visible !important;
+    position: relative;
+    z-index: 1;
+}
 .movement-block {
     background: #fff;
     border-radius: 20px;
@@ -1441,12 +1457,12 @@ body.blur-active::before {
     border-bottom-right-radius: 0.5rem !important;
 }
 .custom-input.is-valid {
-    border-color: #28a745 !important; 
-    box-shadow: none !important; 
+    border-color: #28a745 !important;
+    box-shadow: none !important;
 }
 
 .custom-input.is-invalid {
-    border-color: #dc3545 !important; 
+    border-color: #dc3545 !important;
     box-shadow: none !important;
 }
 

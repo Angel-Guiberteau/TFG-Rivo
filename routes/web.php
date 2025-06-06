@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EndPointController;
 use App\Http\Controllers\IconController;
 use App\Models\BaseCategory;
+use App\Models\Category;
 use App\Models\Icons;
 use App\Validations\ApiValidator;
 use App\Validations\BaseCategoriesValidator;
@@ -53,7 +54,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
             $data = [
                 'id' => $id,
             ];
-            $validate = ApiValidator::validate($data, ValidationEnum::GET_OPERATION_BY_ID->value);
+            $validate = ApiValidator::validate($data, ValidationEnum::VALIDATE_ID_ONLY->value);
 
             return $operation->getOperationById($validate['data']['id']);
         });
@@ -95,12 +96,12 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
             $data = [
                 'id' => $id,
             ];
-            $validate = ApiValidator::validate($data, ValidationEnum::DELETE_OPERATION->value);
+            $validate = ApiValidator::validate($data, ValidationEnum::VALIDATE_ID_ONLY->value);
 
             return $operation->deleteOperation($validate['data']['id']);
         });
 
-        Route::get('/refreshRecentOperations', function () {
+        Route::get('/refreshRecentOperations', function (): ?Collection {
             $accountId = session('active_account_id');
             $controller = new OperationController();
             return $controller->getSixOperationsByAccountId($accountId);
@@ -108,7 +109,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
     });
     Route::group(['prefix' => 'icon', 'middleware' => ['auth', 'role:user']], function () {
 
-        Route::get('/getAllIcons', function () {
+        Route::get('/getAllIcons', function (): array {
             $controller = new IconController();
             return $controller->getAllIcons();
         });
@@ -116,31 +117,77 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
 
     Route::group(['prefix' => 'objective', 'middleware' => ['auth', 'role:user']], function () {
 
-        Route::post('/deleteObjective/{id}', function ($id) {
-            //Añadir validación del id
+        Route::post('/deleteObjective/{id}', function ($id): JsonResponse {
             $controller = new ObjectiveController();
-            return $controller->deleteObjective($id);
+
+            $data = [
+                'id' => $id,
+            ];
+
+            $validate = ApiValidator::validate($data, ValidationEnum::VALIDATE_ID_ONLY->value);
+
+            if (!$validate['status']) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $data['error'] ?? 'Datos inválidos',
+                ], 404);
+            }
+
+            return $controller->deleteObjective($validate['data']['id']);
         });
 
-        Route::get('/getObjective/{id}', function ($id) {
-            //Añadir validación del id
+        Route::get('/getObjective/{id}', function ($id): JsonResponse {
             $controller = new ObjectiveController();
-            return $controller->getObjective($id);
+            $data = [
+                'id' => $id,
+            ];
+
+            $validate = ApiValidator::validate($data, ValidationEnum::VALIDATE_ID_ONLY->value);
+
+            if (!$validate['status']) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $data['error'] ?? 'Datos inválidos',
+                ], 404);
+            }
+            return $controller->getObjective($validate['data']['id']);
         });
     });
 
     Route::group(['prefix' => 'category', 'middleware' => ['auth', 'role:user']], function () {
 
-        Route::post('/delete/{id}', function ($id) {
-            //Añadir validación del id
+        Route::post('/delete/{id}', function ($id): JsonResponse {
             $controller = new CategoryController();
-            return $controller->deleteCategoryUser($id);
+            $data = [
+                'id' => $id,
+            ];
+
+            $validate = ApiValidator::validate($data, ValidationEnum::VALIDATE_ID_ONLY->value);
+
+            if (!$validate['status']) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $data['error'] ?? 'Datos inválidos',
+                ], 404);
+            }
+            return $controller->deleteCategoryUser($validate['data']['id']);
         });
 
-        Route::get('/getCategory/{id}', function ($id) {
-            //Añadir validación del id
+        Route::get('/getCategory/{id}', function ($id): Category|JsonResponse {
             $controller = new CategoryController();
-            return $controller->getCategory($id);
+            $data = [
+                'id' => $id,
+            ];
+
+            $validate = ApiValidator::validate($data, ValidationEnum::VALIDATE_ID_ONLY->value);
+
+            if (!$validate['status']) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $data['error'] ?? 'Datos inválidos',
+                ], 404);
+            }
+            return $controller->getCategory($validate['data']['id']);
         });
     });
 });
@@ -216,11 +263,6 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
         $baseCategories = $categoryController->getAllBaseCategories();
         $personalCategories = $categoryController->getPersonalCategoriesByUserId($user->id);
 
-
-
-        $allIncomes = $operationController->getAllIncomesByAccountId($account->id);
-        $allExpenses = $operationController->getAllIncomesByAccountId($account->id);
-
         return view('home.home')
             ->with('user', $user)
             ->with('account', $account)
@@ -228,8 +270,6 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
             ->with('thisMonthOperations', $thisMonthOperations)
             ->with('thisMonthIncomes', $incomes)
             ->with('thisMonthExpenses', $expenses)
-            ->with('allIncomes', $allIncomes)
-            ->with('allExpenses', $allExpenses)
             ->with('baseCategories', $baseCategories)
             ->with('personalCategories', $personalCategories)
             ->with('objectives', $objective);
@@ -280,7 +320,7 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
         $request = request()->toArray();
 
         $objectiveController = new ObjectiveController();
-        
+
         if(is_null($request['objective_id'])){
             $request['account_id'] = session('active_account_id');
             if(!$objectiveController->addObjective($request)){
@@ -399,7 +439,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             $request = request()->toArray();
 
             $validate = UserValidator::validate($request, ValidationEnum::ADD->value);
-            
+
             if(!$validate['status']){
                 return redirect()->back()->with('error', $validate['error'] ?? 'Error al añadir el usuario. Póngase en contacto con el soporte.');
             }
@@ -412,7 +452,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             $request = request()->toArray();
 
             $validate = UserValidator::validate($request, ValidationEnum::DELETE->value);
-            
+
             if(!$validate['status']){
                 return redirect()->back()->with('error', $validate['error'] ?? 'Error al eliminar el usuario. Póngase en contacto con el soporte.');
             }
@@ -420,14 +460,23 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return UserController::deleteUser($validate['data']);
         })->name('deleteUser');
 
-        Route::get('/editUser/{id}', function ($id): RedirectResponse|View {
-            return UserController::getUserbyId($id);
+        Route::get('/editUser/{id}', function (Request $request, $id): RedirectResponse|View {
+             $request = array_merge($request->all(), ['id' => $id]);
+
+            $validate = UserValidator::validate($request, ValidationEnum::DELETE->value);
+
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al previsualizar el usuario. Póngase en contacto con el soporte.');
+            }
+
+            return UserController::getUserbyId(['id' => $id]);
+            
         })->name('editUser');
 
         Route::put('/updateUser', function (): RedirectResponse {
 
             $request = request()->toArray();
-
+            
             $validate = UserValidator::validate($request, ValidationEnum::EDIT->value);
 
             if(!$validate['status']){
@@ -442,9 +491,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::put('/updatePersonalCategories', function () {
 
             $request = request()->toArray();
-            
+
             $validate = UserValidator::validate($request, ValidationEnum::UPDATE_PERSONAL_CATEGORIES->value);
-            
+
             if(!$validate['status']){
                 return redirect()->back()->with('error', $validate['error'] ?? 'Error al actualizar las categorías personales. Póngase en contacto con el soporte.');
             }
@@ -586,7 +635,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('deleteCategory');
     });
 
-    // ============= Iconos =============  
+    // ============= Iconos =============
 
     Route::group(['prefix' => 'icons'], function () {
         Route::get('/', function (): View {
@@ -634,7 +683,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         })->name('deleteIcon');
     });
 
-    // ============= EndPoints =============  
+    // ============= EndPoints =============
 
     Route::group(['prefix' => 'endPoints'], function () {
         Route::get('/', function (): View {
