@@ -5,6 +5,28 @@ import { setObjetiveValidation } from './homeValidations/objetiveValidation.js';
 import { setSettingsValidation } from './homeValidations/settingsValidations.js';
 import { initCategoryValidation } from './homeValidations/categoriesValidations.js';
 
+function setupGlobalSearch(type) {
+    const searchInput = document.getElementById(`${type}-search`);
+    const movementContainer = document.getElementById(`${type}-movements`);
+    if (!searchInput || !movementContainer) return;
+
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase();
+
+        const items = movementContainer.querySelectorAll('.col-12.col-lg-6');
+
+        items.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            if (text.includes(query)) {
+                item.classList.remove('d-none');
+            } else {
+                item.classList.add('d-none');
+            }
+        });
+    });
+}
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const homeSection = document.getElementById('home-section');
     const showHomeButton = document.getElementById('showHome');
@@ -242,15 +264,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!allLoaded) loadMore();
             });
         }
-
+        setupGlobalSearch(type);
     }
 
-    if (showHomeButton) {
-        showHomeButton.addEventListener('click', () => {
-            hideContentSections();
-            showSection(homeSection);
-        });
-    }
+        if (showHomeButton) {
+            showHomeButton.addEventListener('click', () => {
+                hideContentSections();
+                showSection(homeSection);
+            });
+        }
 
 
     setupHistory('income');
@@ -315,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     let allHistoryOffset = 0;
-    const allHistoryLimit = 10;
+    const allHistoryLimit = 20;
     let allHistoryAllLoaded = false;
 
     const loadMoreBtn = document.getElementById('allHistory-loadMoreBtn');
@@ -344,6 +366,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 setFabIcon('custom');
 
                 await loadAllHistory();
+
+                setupGlobalSearch('allHistory');
+
             });
         });
     }
@@ -365,7 +390,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    
+
     const showSettingsBtn = document.getElementById('showSettingsButton');
     const settingsSection = document.getElementById('settings-section');
 
@@ -374,7 +399,7 @@ document.addEventListener('DOMContentLoaded', function () {
             hideContentSections();
             showSection(settingsSection);
             setFabIcon('custom');
-            setSettingsValidation(); 
+            setSettingsValidation();
         });
     }
 
@@ -392,7 +417,6 @@ if (showCategoryFormButton.length > 0 && categorySection) {
             showSection(categorySection);
             setFabIcon('custom');
 
-            // Cargar iconos solo la primera vez que se abre el formulario
             if (iconGrid && iconGrid.children.length === 0) {
                 try {
                     const res = await fetch('/api/icon/getAllIcons');
@@ -418,7 +442,6 @@ if (showCategoryFormButton.length > 0 && categorySection) {
                 }
             }
 
-            // Inicializa la validación de categorías al mostrar el formulario
             initCategoryValidation();
         });
     });
