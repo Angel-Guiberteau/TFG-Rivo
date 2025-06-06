@@ -1,3 +1,25 @@
+function sendDeleteForm(id) {
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/admin/icons/delete';
+
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const csrfInput = document.createElement('input');
+    csrfInput.type = 'hidden';
+    csrfInput.name = '_token';
+    csrfInput.value = token;
+    form.appendChild(csrfInput);
+
+    const idInput = document.createElement('input');
+    idInput.type = 'hidden';
+    idInput.name = 'id';
+    idInput.value = id;
+    form.appendChild(idInput);
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
 function deleteIcon(id) {
     swal({
         title: "¿Estás seguro?",
@@ -41,71 +63,9 @@ function deleteIcon(id) {
                         closeModal: true
                     }
                 }
-            }).then(function (secondConfirmed) {
+            }).then(secondConfirmed => {
                 if (secondConfirmed) {
-                    fetch('/admin/icons/delete', {
-                        method: "POST",
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        },
-                        body: JSON.stringify({ id: id })
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error("Respuesta no válida del servidor");
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        const swalBox = document.createElement('div');
-                        swalBox.textContent = data.success || data.error || "Respuesta inesperada";
-                        swalBox.style.position = 'fixed';
-                        swalBox.style.bottom = '1rem';
-                        swalBox.style.right = '1rem';
-                        swalBox.style.minWidth = '300px';
-                        swalBox.style.maxWidth = '90%';
-                        swalBox.style.textAlign = 'center';
-                        swalBox.style.padding = '0.8rem 1.5rem';
-                        swalBox.style.borderRadius = '8px';
-                        swalBox.style.fontSize = '0.9rem';
-                        swalBox.style.zIndex = 9999;
-                        swalBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
-                        
-                        if (data.success) {
-                            swalBox.style.backgroundColor = '#dff0d8'; 
-                            swalBox.style.color = '#3c763d';
-                            swalBox.style.border = '1px solid #d6e9c6';
-                        } else {
-                            swalBox.style.backgroundColor = '#f2dede';
-                            swalBox.style.color = '#a94442';
-                            swalBox.style.border = '1px solid #ebccd1';
-                        }
-
-                        document.body.appendChild(swalBox);
-                        setTimeout(() => location.reload(), 1200);
-                    })
-                    .catch(error => {
-                        console.error("Error al procesar la solicitud:", error);
-                        const swalBox = document.createElement('div');
-                        swalBox.textContent = "Hubo un problema en el servidor.";
-                        swalBox.style.position = 'fixed';
-                        swalBox.style.bottom = '1rem';
-                        swalBox.style.right = '1rem';
-                        swalBox.style.minWidth = '300px';
-                        swalBox.style.maxWidth = '90%';
-                        swalBox.style.textAlign = 'center';
-                        swalBox.style.padding = '0.8rem 1.5rem';
-                        swalBox.style.backgroundColor = '#f2dede'; 
-                        swalBox.style.color = '#a94442';
-                        swalBox.style.border = '1px solid #ebccd1';
-                        swalBox.style.borderRadius = '8px';
-                        swalBox.style.fontSize = '0.9rem';
-                        swalBox.style.zIndex = 9999;
-                        swalBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
-                        document.body.appendChild(swalBox);
-                        setTimeout(() => location.reload(), 2000);
-                    });
+                    sendDeleteForm(id);
                 }
             });
         }

@@ -10,10 +10,32 @@ function viewUser(id) {
     window.location.href = `/admin/users/previewUser/${id}`;
 }
 
+function sendDeleteForm(id) {
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/admin/users/deleteUser';
+
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const csrfInput = document.createElement('input');
+    csrfInput.type = 'hidden';
+    csrfInput.name = '_token';
+    csrfInput.value = token;
+    form.appendChild(csrfInput);
+
+    const idInput = document.createElement('input');
+    idInput.type = 'hidden';
+    idInput.name = 'id';
+    idInput.value = id;
+    form.appendChild(idInput);
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
 function deleteUser(id) {
     swal({
         title: "¿Estás seguro?",
-        text: "Estás a punto de eliminar esta frase.",
+        text: "Estás a punto de eliminar este Usuario.",
         icon: "warning",
         buttons: {
             cancel: {
@@ -35,7 +57,7 @@ function deleteUser(id) {
         if (firstConfirmed) {
             swal({
                 title: "¡Confirmación final!",
-                text: "¿Realmente deseas eliminar esta frase? Esta acción no se puede deshacer.",
+                text: "¿Realmente deseas eliminar este Usuario? Esta acción no se puede deshacer.",
                 icon: "warning",
                 buttons: {
                     cancel: {
@@ -53,27 +75,9 @@ function deleteUser(id) {
                         closeModal: true
                     }
                 }
-            }).then(function (secondConfirmed) {
+            }).then(secondConfirmed => {
                 if (secondConfirmed) {
-                    fetch('/admin/users/deleteUser', {
-                        method: "POST",
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        },
-                        body: JSON.stringify({ id: id })
-                    })
-                    .then(response => {
-                        if (response.redirected) {
-                            window.location.href = response.url;
-                        } else {
-                            location.reload();
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error al procesar la solicitud:", error);
-                        location.reload();
-                    });
+                    sendDeleteForm(id);
                 }
             });
         }

@@ -63,19 +63,19 @@ class IconController extends Controller
             ->with('success', 'Icono editado correctamente.');
     }
 
-    public static function deleteIcon(array $data): JsonResponse {
+    public static function deleteIcon(array $data): RedirectResponse {
         
         if (empty($data['status']) || !$data['status']) { 
-            return response()->json(['error' => $data['error']]);;
+            return redirect()->back()->with('error', $data['error']);;
         }
 
         $baseCategory = Icon::deleteIcon($data['data']['id']);
 
         if (!$baseCategory) {
-            return response()->json(['error' => 'Ha habido un error inesperado.']);
+            return redirect()->back()->with('error', 'Ha habido un error inesperado.');
         }
 
-        return response()->json(['success' => 'Icono eliminado correctamente.']);
+        return redirect()->back()->with('success', 'Icono eliminado correctamente.');
     }
     
 }

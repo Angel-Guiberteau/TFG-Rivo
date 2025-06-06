@@ -56,16 +56,22 @@ class SentenceController extends Controller
                 ->with('success', 'Frase editada correctamente.');
     }
 
-    public static function deleteSentence(array $data): JsonResponse {
+    public static function deleteSentence(array $data): RedirectResponse {
         if (!$data['status']) {
-            return response()->json(['error' => $data['error']]);
+            return redirect()
+                    ->back()
+                    ->with('error', $data['error']);
         }
 
         if (!Sentence::deleteSentence($data['data']['id'])) {
-            return response()->json(['error' => 'Ha habido un error inesperado.']);
+            return redirect()
+                    ->back()
+                    ->with('error', 'Ha habido un error inesperado.');
         }
 
-        return response()->json(['success' => 'Frase borrada correctamente.']);
+        return redirect()
+                ->back()
+                ->with('success', 'Frase borrada correctamente.');
     }
     
 }

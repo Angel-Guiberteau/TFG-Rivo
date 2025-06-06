@@ -32,16 +32,16 @@ class CategoryController extends Controller
         return response()->json(['success' => 'Categoría borrada correctamente.']);
     }
 
-    public static function deleteCategory(array $data): JsonResponse {
+    public static function deleteCategory(array $data): RedirectResponse {
         if (!$data['status']) {
-            return response()->json(['error' => $data['error']]);
+            return redirect()->back()->with('error', 'Id erroneo');
         }
 
         if (!Category::deleteCategory($data['data']['id'])) {
-            return response()->json(['error' => 'Ha habido un error inesperado.']);
+            return redirect()->back()->with('error', 'Ha habido un error inesperado.');
         }
 
-        return response()->json(['success' => 'Categoría borrada correctamente.']);
+        return redirect()->back()->with('success', 'Categoría borrada correctamente.');
     }
 
     public static function updateCategory(array $data): bool {
