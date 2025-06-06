@@ -144,9 +144,29 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="col-md-6">
+                                <label for="is_new_user" class="form-label">¿Es nuevo usuario?</label>
+                                <div class="input-group align-items-center">
+                                    <span class="input-group-text bg-white"><i class="fa-solid fa-user-plus"></i></span>
+                                    <div class="form-check form-switch ms-2">
+                                        <input class="form-check-input @error('is_new_user') is-invalid @enderror"
+                                            type="checkbox"
+                                            name="is_new_user"
+                                            id="is_new_user"
+                                            value="1"
+                                            @if(old('is_new_user') === '1' || (old('is_new_user') === null && $user->isNewUser)) checked @endif>
+                                        <label class="form-check-label ms-2" for="is_new_user">Sí</label>
+                                    </div>
+                                    @error('is_new_user')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
+
                         <input type="hidden" name="id" value="{{ $user->id }}">
-                        <div class="text-end">
+                        <div class="text-end mt-4">
                             <button type="submit" class="btn btn-primary btn-sm">
                                 <i class="fa-solid fa-floppy-disk"></i>
                             </button>

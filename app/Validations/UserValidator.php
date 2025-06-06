@@ -60,6 +60,7 @@ class UserValidator extends Validator {
             'email' => 'required|email|max:255',
             'username' => 'required|string|max:75',
             'password' => 'nullable|string|min:8|max:255',
+            'is_new_user' => 'sometimes|boolean',
         ];
     }
 
@@ -93,6 +94,8 @@ class UserValidator extends Validator {
             'password.string' => 'La contraseña debe ser una cadena de texto.',
             'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
             'password.max' => 'La contraseña no puede tener más de 255 caracteres.',
+
+            'is_new_user.boolean' => 'El campo de nuevo usuario debe ser verdadero o falso.',
         ];
     }
 

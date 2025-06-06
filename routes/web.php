@@ -460,14 +460,23 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             return UserController::deleteUser($validate['data']);
         })->name('deleteUser');
 
-        Route::get('/editUser/{id}', function ($id): RedirectResponse|View {
-            return UserController::getUserbyId($id);
+        Route::get('/editUser/{id}', function (Request $request, $id): RedirectResponse|View {
+             $request = array_merge($request->all(), ['id' => $id]);
+
+            $validate = UserValidator::validate($request, ValidationEnum::DELETE->value);
+
+            if(!$validate['status']){
+                return redirect()->back()->with('error', $validate['error'] ?? 'Error al previsualizar el usuario. Póngase en contacto con el soporte.');
+            }
+
+            return UserController::getUserbyId(['id' => $id]);
+            
         })->name('editUser');
 
         Route::put('/updateUser', function (): RedirectResponse {
 
             $request = request()->toArray();
-
+            
             $validate = UserValidator::validate($request, ValidationEnum::EDIT->value);
 
             if(!$validate['status']){
