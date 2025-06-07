@@ -23,11 +23,11 @@ class GoogleMailController extends Controller
         }
 
         $token = Str::random(60);
-        $url = url("/reset-password/{$token}");
+        $url = url("/reset-password/{$token}") . '?email=' . urlencode($user->email);
 
         DB::table('password_resets')->updateOrInsert(
             ['email' => $user->email],
-            ['token' => $token, 'created_at' => now()]
+            ['token' => Hash::make($token), 'created_at' => now()]
         );
 
         $html = view('emails.custom-reset-password', ['url' => $url])->render();

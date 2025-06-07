@@ -380,7 +380,7 @@ class User extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        $url = url("/reset-password/{$token}");
+        $url = url("/reset-password/{$token}") . '?email=' . urlencode($this->email);
 
         $html = view('emails.custom-reset-password', ['url' => $url])->render();
 
@@ -388,4 +388,7 @@ class User extends Authenticatable
 
         $mailer->send($this->email, 'Restablece tu contraseña', $html);
     }
+
+
+
 }
