@@ -32,6 +32,12 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Models\MovementTypeCategories;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Controlador encargado de gestionar las acciones relacionadas con los usuarios,
+ * incluyendo su creación, actualización, eliminación y configuración inicial.
+ *
+ * @package App\Http\Controllers
+ */
 class UserController extends Controller
 {
 
@@ -55,7 +61,7 @@ class UserController extends Controller
     public static function listUsers()
     {
         $users = User::getAllUsers();
-    
+
         return view('admin.users.users')
             ->with('users', $users);
     }
@@ -69,7 +75,7 @@ class UserController extends Controller
         $data = $array['data'] ?? [];
 
         $controller = new UserController();
-        
+
         $controller->name = $data['name'] ?? '';
         $controller->last_name = $data['last_name'] ?? '';
         $controller->birth_date = $data['birth_date'] ?? '';
@@ -219,7 +225,7 @@ class UserController extends Controller
 
     public function updateUserInfoFromInitialSetup($data) : RedirectResponse
     {
-        
+
         try{
             DB::beginTransaction();
             $user = User::updateUserInfoFromInitialSetup($data);
@@ -228,25 +234,25 @@ class UserController extends Controller
                 throw new \Exception('Error al actualizar el usuario');
             }
 
-            
+
             $account = Account::addAccount($data);
-            
+
             if(!$account){
-                
+
                 throw new \Exception('Error al crear la cuenta del usuario');
             }
-           
+
             $userAccount = UserAccount::addUserAccount($user->id, $account->id);
             if(!$userAccount){
                 throw new \Exception('Error al crear la cuenta del usuario');
             }
 
             //FixedIncomes
-            
+
             $fixedIncomes = $this->setFixedIncomes($data, $account);
-            
+
             if(!empty($fixedIncomes)){
-                
+
                 foreach ($fixedIncomes as $key => $value) {
                     $operation = Operation::addOperation($value);
                     if(!$operation){
@@ -254,15 +260,15 @@ class UserController extends Controller
                     }
 
                     $plannedOperation = OperationPlanned::addPlannedOperation($operation->id, $value);
-                    
+
                     if(!$plannedOperation){
                         throw new \Exception('Error al añadir los ingresos planeados');
                     }
 
                 }
-                
+
                 $fixedExpenses = $this->setfixedExpenses($data, $account);
-            
+
                 if(!empty($fixedExpenses)){
                     foreach ($fixedExpenses as $key => $value) {
                         $operation = Operation::addOperation($value);
@@ -276,12 +282,12 @@ class UserController extends Controller
                         if(!$plannedOperation){
                             throw new \Exception('Error al añadir los gastos planeados');
                         }
- 
+
                     }
                 }
             }
 
-            
+
             $savedMoneyOperation = null;
             if($data['actually_save'] > 0){
                 $savedMoney = $this->setSavedMoneyOperation($data, $account);
@@ -294,14 +300,14 @@ class UserController extends Controller
                     }
 
                     $unscheduleOperation = OperationUnschedule::addUnscheduleOperation($savedMoneyOperation->id);
-                    
+
                     if(!$unscheduleOperation){
                         throw new \Exception('Error al añadir los ahorros');
                     }
 
                     if(!Account::updateSaveToTotalSave($account->id, $savedMoneyOperation->amount)){
                         throw new \Exception('Error al añadir los ahorros a la cuenta');
-                    } 
+                    }
                 }
             }
 
@@ -331,7 +337,7 @@ class UserController extends Controller
 
                 }
             }
-            
+
             $allOperations = Operation::getAllOperationsByAccountId($account->id);
             if(!is_null($allOperations)){
                 $total = 0;
@@ -356,7 +362,7 @@ class UserController extends Controller
             }
 
             DB::commit();
-            
+
             return redirect()->action([DashboardController::class, 'index']);
         } catch (Throwable $e){
             DB::rollback();
@@ -379,7 +385,7 @@ class UserController extends Controller
                 'account_id' => $account->id,
                 'start_date' => Carbon::now()->startOfMonth()->toDateTimeString(),
                 'period' => 'm',
-                'category_id' => 1, 
+                'category_id' => 1,
             ];
         }
 
@@ -393,10 +399,10 @@ class UserController extends Controller
                 'account_id' => $account->id,
                 'start_date' => Carbon::now()->startOfMonth()->toDateTimeString(),
                 'period' => 'm',
-                'category_id' => 2, 
+                'category_id' => 2,
             ];
         }
-        
+
         if (isset($data['stateHelp']) && !is_null($data['stateHelp'])) {
             $fixedIncomes['stateHelp'] = [
                 'amount' => $data['stateHelp'],
@@ -407,13 +413,13 @@ class UserController extends Controller
                 'account_id' => $account->id,
                 'start_date' => Carbon::now()->startOfMonth()->toDateTimeString(),
                 'period' => 'm',
-                'category_id' => 3, 
+                'category_id' => 3,
             ];
         }
 
         return $fixedIncomes;
     }
-    
+
     private function setSavedMoneyOperation(Array $data, Account $account): Array{
         $savedMoney = [];
 
@@ -424,12 +430,12 @@ class UserController extends Controller
             $savedMoney['action_date'] = Carbon::now()->toDateTimeString();
             $savedMoney['movement_type_id'] = 3;
             $savedMoney['account_id'] = $account->id;
-            $savedMoney['category_id'] = 12; 
+            $savedMoney['category_id'] = 12;
         }
 
         return $savedMoney;
     }
-    
+
     private function setFixedExpenses(Array $data, Account $account): Array{
 
         $fixedExpensesKeys = [
@@ -590,7 +596,7 @@ class UserController extends Controller
             return Redirect::back()->with('error', 'El usuario no existe.');
         }
 
- 
+
         if (!empty($object->delete)) {
             foreach ($object->delete as $categoryId) {
                 $category = User::deletePersonalCategory($object->id, $categoryId);
@@ -646,7 +652,7 @@ class UserController extends Controller
 
     public static function getFullUserbyId($data)
     {
-        
+
         $objet = new UserController();
 
         $objet->id = $data['data']['id'] ?? null;
@@ -691,7 +697,7 @@ class UserController extends Controller
         $data = $data['data'] ?? [];
 
         $object = new UserController();
-        
+
         $object->delete = json_decode($data['deleted'] ?? '[]', true);
         $object->id = $data['user_id'] ?? null;
         $object->accounts = $data['accounts'] ?? [];
@@ -709,7 +715,7 @@ class UserController extends Controller
                 }
             }
         }
-        
+
         if (!empty($object->accounts)) {
             foreach ($object->accounts as $account) {
 
@@ -747,7 +753,7 @@ class UserController extends Controller
 
             }
         }
-        
+
         return redirect()->route('users')->with('success', 'Cuentas personales actualizadas correctamente.');
     }
 
@@ -755,7 +761,7 @@ class UserController extends Controller
     {
         // dd($data['data']);
         $data = $data['data'] ?? [];
-        
+
         $object = new UserController();
 
         $object->objetives = json_decode($data['existingObjectives'] ?? '[]', true);
@@ -781,7 +787,7 @@ class UserController extends Controller
                 $objectiveTargetAmount = $objective['target_amount'] ?? null;
                 $objectiveCurrentAmount = $objective['current_amount'] ?? 0;
                 $objectiveDeadline = $objective['deadline'] ?? null;
-                $objectiveAccountId = Auth::user()->id ?? null; 
+                $objectiveAccountId = Auth::user()->id ?? null;
                 $objetiveEnabled = $objective['enabled'] ?? null;
 
                 if ($objectiveId && $objectiveName && $objectiveTargetAmount && $objectiveAccountId) {
@@ -809,7 +815,7 @@ class UserController extends Controller
                 $newObjectiveTargetAmount = $newObjective['target_amount'] ?? null;
                 $newObjectiveCurrentAmount = $newObjective['current_amount'] ?? 0;
                 $newObjectiveDeadline = trim($newObjective['deadline'] ?? '') ?: null;
-                $newObjectiveAccountId = Auth::user()->id ?? null; 
+                $newObjectiveAccountId = Auth::user()->id ?? null;
                 $objetiveEnabled = $newObjective['enabled'] ?? null;
 
                 if ($newObjectiveName && $newObjectiveTargetAmount && $newObjectiveAccountId) {
@@ -827,8 +833,8 @@ class UserController extends Controller
                 }
             }
         }
-        
+
         return redirect()->route('users')->with('success', 'Objetivos personales actualizados correctamente.');
-        
+
     }
 }
