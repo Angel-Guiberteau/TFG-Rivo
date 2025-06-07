@@ -73,8 +73,17 @@ export async function openTransactionDetail(id) {
         document.querySelector('#tx-category .tx-value').textContent = data.category_name ?? '—';
 
         const amountEl = document.querySelector('#tx-amount .tx-value');
-        amountEl.textContent = `${data.amount > 0 ? '+' : ''}${parseFloat(data.amount).toFixed(2)}€`;
-        amountEl.className = 'tx-value ' + (data.amount > 0 ? 'positive' : 'negative');
+        let sign = '';
+        if (data.movement_type_id === 1) sign = '+';
+        if (data.movement_type_id === 2) sign = '-';
+        if (data.movement_type_id === 3) sign = '+';
+
+        amountEl.textContent = `${sign}${parseFloat(data.amount).toFixed(2)}€`;
+
+        amountEl.className = 'tx-value ' + (
+            data.movement_type_id === 2 ? 'negative' : 'positive'
+        );
+
 
         document.querySelector('#tx-date .tx-value').textContent = formatDate(data.action_date);
 
