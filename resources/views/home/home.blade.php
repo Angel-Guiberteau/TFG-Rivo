@@ -100,19 +100,19 @@
                     </div>
 
                     <div id="actionButtons-container" class="mx-auto bg-white d-flex flex-row justify-content-evenly align-items-center p-3">
-                        <button id="showHome" class="action-button fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
+                        <button  type="button" id="showHome" class="action-button fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
                             <i class="fas fa-home fs-3 text-secondary"></i>
                             <span class="fs-6">Inicio</span>
                         </button>
-                        <button id="showIncomeForm" class="action-button fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
+                        <button type="button" id="showIncomeForm" class="action-button fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
                             <i class="fas fa-plus fs-3 text-success"></i>
                             <span class="fs-6">Ingreso</span>
                         </button>
-                        <button id="showExpenseForm" class="action-button fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
+                        <button type="button" id="showExpenseForm" class="action-button fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
                             <i class="fas fa-minus fs-3 text-danger" style="text-shadow: 0 0 1px currentColor;"></i>
                             <span class="fs-6">Gasto</span>
                         </button>
-                        <button id="showSaveForm" class="action-button fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
+                        <button type="button" id="showSaveForm" class="action-button fw-bold d-flex flex-column align-items-center border-0 bg-transparent">
                             <i class="fas fa-piggy-bank fs-3 text-warning"></i>
                             <span class="fs-6">Ahorro</span>
                         </button>
@@ -136,7 +136,7 @@
                 @include('templates.home.thisMonthIncomesExpenses')
 
             </article>
-
+            
             @include('templates.home.operations.history', ['type' => 'income', 'title' => 'ingresos'])
             @include('templates.home.operations.history', ['type' => 'expense', 'title' => 'egresos'])
             @include('templates.home.operations.history', ['type' => 'save', 'title' => 'ahorro'])
