@@ -32,12 +32,24 @@
         @if(session('status'))
             <div class="alert alert-success text-center">{{ session('status') }}</div>
         @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <form method="POST" action="{{ route('password.update') }}">
             @csrf
+            <p>Token: {{ $request->route('token') }}</p>
+            <p>Email: {{ $request->query('email') }}</p>
 
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
-            <input type="hidden" name="email" value="{{ $request->email }}">
+            <input type="hidden" name="email" value="{{ $request->query('email') }}">
+
 
             <div class="mb-3">
                 <label for="password" class="form-label">Nueva contraseña</label>
