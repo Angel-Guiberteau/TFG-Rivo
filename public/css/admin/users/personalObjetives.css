@@ -1,0 +1,62 @@
+#personalObjetives .accordion-item {
+    border-left: 5px solid #6f42c1;
+    background: linear-gradient(to bottom right, #f9f7fc, #ffffff);
+    transition: box-shadow 0.3s ease-in-out, transform 0.2s;
+    border-radius: 1rem;
+}
+
+#personalObjetives .accordion-item:hover {
+    box-shadow: 0 0 0 4px rgba(111, 66, 193, 0.1);
+    transform: scale(1.01);
+}
+
+#personalObjetives .accordion-button {
+    background-color: #e9e3fa;
+    color: #4b2e88;
+    font-weight: bold;
+    border-radius: 1rem 1rem 0 0;
+}
+
+#personalObjetives input.form-control {
+    background-color: #f4f2fa;
+    border: 1px solid #d6cbed;
+    color: #333;
+    transition: border-color 0.2s ease-in-out;
+}
+
+#personalObjetives input.form-control:focus {
+    border-color: #6f42c1;
+    box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25);
+}
+
+#personalObjetives label.form-label {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+#personalObjetives .form-check-input {
+    cursor: pointer;
+    background-color: #e6dfff;
+    border-color: #c7b8e6;
+}
+
+#personalObjetives .form-check-input:checked {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+}
+
+#personalObjetives .form-check-label {
+    color: #5a359e;
+    font-weight: 500;
+}
+
+#personalObjetives #addAObjectiveBtn {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+    color: white;
+}
+
+#personalObjetives #addAObjectiveBtn:hover {
+    background-color: #5a359e;
+    border-color: #5a359e;
+}

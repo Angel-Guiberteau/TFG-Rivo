@@ -47,6 +47,7 @@ class UserController extends Controller
     public Array $categories;
     public Array $news;
     public Array $accounts;
+    public Array $objetives;
     public Array $accountMovementsTypes;
     public bool $newUser = false;
 
@@ -156,12 +157,15 @@ class UserController extends Controller
                 ->withInput();
         }
 
+        $objectives = Objective::getObjectives($user->id);
+        // dd($objetives);
         return view('admin.users.editUser')
             ->with('user', $user)
             ->with('personalCategories', $personalCategories)
             ->with('allIcons', $allIcons)
             ->with('personalAccounts', $accounts)
-            ->with('movementTypes', $movementTypes);
+            ->with('movementTypes', $movementTypes)
+            ->with('objectives', $objectives);
     }
 
     public static function updateUser(array $data): RedirectResponse
@@ -740,5 +744,86 @@ class UserController extends Controller
         }
         
         return redirect()->route('users')->with('success', 'Cuentas personales actualizadas correctamente.');
+    }
+
+    public static function updatePersonalObjetives($data): RedirectResponse
+    {
+        // dd($data['data']);
+        $data = $data['data'] ?? [];
+        
+        $object = new UserController();
+
+        $object->objetives = json_decode($data['existingObjectives'] ?? '[]', true);
+        $object->delete = json_decode($data['deleted'] ?? '[]', true);
+        $object->news = json_decode($data['newObjectives'] ?? '[]', true);
+
+        // dd($object->objetives);
+
+        if (!empty($object->delete) && is_array($object->delete)) {
+            foreach ($object->delete as $objectiveId) {
+                $objective = Objective::deleteObjective($objectiveId);
+                if (!$objective) {
+                    return redirect()->route('users')->with('error', 'Error al eliminar el objetivo personal.');
+                }
+            }
+        }
+
+        if (!empty($object->objetives) && is_array($object->objetives)) {
+            foreach ($object->objetives as $objective) {
+
+                $objectiveId = $objective['id'] ?? null;
+                $objectiveName = $objective['name'] ?? null;
+                $objectiveTargetAmount = $objective['target_amount'] ?? null;
+                $objectiveCurrentAmount = $objective['current_amount'] ?? 0;
+                $objectiveDeadline = $objective['deadline'] ?? null;
+                $objectiveAccountId = Auth::user()->id ?? null; 
+                $objetiveEnabled = $objective['enabled'] ?? null;
+
+                if ($objectiveId && $objectiveName && $objectiveTargetAmount && $objectiveAccountId) {
+                    $updatedObjective = Objective::updateFullObjective([
+                        'id' => $objectiveId,
+                        'name' => $objectiveName,
+                        'target_amount' => $objectiveTargetAmount,
+                        'current_amount' => $objectiveCurrentAmount,
+                        'deadline' => $objectiveDeadline,
+                        'account_id' => $objectiveAccountId,
+                        'enabled' => $objetiveEnabled
+                    ]);
+                    if (!$updatedObjective) {
+                        return redirect()->route('users')->with('error', 'Error al actualizar el objetivo personal.');
+                    }
+                }
+            }
+        }
+
+
+        if (!empty($object->news) && is_array($object->news)) {
+            foreach ($object->news as $newObjective) {
+
+                $newObjectiveName = $newObjective['name'] ?? null;
+                $newObjectiveTargetAmount = $newObjective['target_amount'] ?? null;
+                $newObjectiveCurrentAmount = $newObjective['current_amount'] ?? 0;
+                $newObjectiveDeadline = trim($newObjective['deadline'] ?? '') ?: null;
+                $newObjectiveAccountId = Auth::user()->id ?? null; 
+                $objetiveEnabled = $newObjective['enabled'] ?? null;
+
+                if ($newObjectiveName && $newObjectiveTargetAmount && $newObjectiveAccountId) {
+                    $addedObjective = Objective::addObjective([
+                        'name' => $newObjectiveName,
+                        'target_amount' => $newObjectiveTargetAmount,
+                        'current_amount' => $newObjectiveCurrentAmount,
+                        'deadline' => $newObjectiveDeadline,
+                        'account_id' => $newObjectiveAccountId,
+                        'enabled' => $objetiveEnabled
+                    ]);
+                    if (!$addedObjective) {
+                        return redirect()->route('users')->with('error', 'Error al añadir el objetivo personal.');
+                    }
+                }
+            }
+        }
+        
+        return redirect()->route('users')->with('success', 'Objetivos personales actualizados correctamente.');
+        
     }
 }
