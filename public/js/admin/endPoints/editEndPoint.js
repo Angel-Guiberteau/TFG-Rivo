@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         url: 255,
         method: 7,
         parameters: 75,
-        return: 15,
+        return: 50,
         description: 255,
         'returnName[]': 15,
         'type[]': 15

@@ -60,7 +60,7 @@
 
                             <div class="col">
                                 <label for="return" class="form-label">Retorno <span class="text-danger">*</span></label>
-                                <input type="text" name="return" id="return" class="form-control mb-3" maxlength="15" required value="{{ $endPoint['return'] }}">
+                                <input type="text" name="return" id="return" class="form-control mb-3" maxlength="50" required value="{{ $endPoint['return'] }}">
                             </div>
 
                             <div class="col" id="return-container">
