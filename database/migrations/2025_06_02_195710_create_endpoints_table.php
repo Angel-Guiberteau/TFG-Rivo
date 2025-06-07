@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->string('url', 255);
             $table->string('method', 7);
             $table->string('parameters', 75)->nullable();;
-            $table->string('return', 15);
+            $table->string('return', 50);
             $table->string('return_data', 255);
             $table->string('description', 255)->nullable();
             $table->boolean('enabled')->default(true);

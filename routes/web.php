@@ -238,7 +238,6 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 
         $userController = new UserController();
         $user = $userController->getUser();
-
         $accountController = new AccountController();
         $account = $accountController->getAccountByUserId($user->id);
 
@@ -470,13 +469,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             }
 
             return UserController::getUserbyId(['id' => $id]);
-            
+
         })->name('editUser');
 
         Route::put('/updateUser', function (): RedirectResponse {
 
             $request = request()->toArray();
-            
+
             $validate = UserValidator::validate($request, ValidationEnum::EDIT->value);
 
             if(!$validate['status']){

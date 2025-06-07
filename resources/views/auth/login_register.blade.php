@@ -2,7 +2,7 @@
 
 @section('title', 'Iniciar sesión')
 
-    
+
 @section('content')
 
     @push('styles')
@@ -11,13 +11,13 @@
         <link rel="stylesheet" href="{{ asset('css/login_register/login.css') }}">
 
     @endpush
-    
+
     <main class="container min-vh-100 d-flex align-items-center justify-content-center">
         <section class="row justify-content-center align-items-center py-3 gx-0 gx-lg-5">
             <article class="col-12 col-lg-6 row text-white mt-4 mt-lg-0">
                 <h1 class="w-100 fs-1 fw-bold text-center text-lg-start">Bienvenido a Rivo</h1>
                 <p class="w-100 fs-4 subtitle-mobile">
-                    Start saving, organize your income and expenses, and reach your goals with Rivo.
+                    Bienvenid@ a Rivo, la aplicación que te ayuda a gestionar tus finanzas de manera sencilla y eficiente. Lleva el control de tus ingresos hoy mismo.
                 </p>
                 @if (session('status'))
                     <div class="alert alert-success">{{ session('status') }}</div>
@@ -28,13 +28,13 @@
                         <div class="alert alert-danger">{{ $error }}</div>
                     @endforeach
                 @endif
-            
+
             </article>
-            
-            
+
+
             <article class="row col-12 col-lg-6 mt-4 mt-lg-0">
                 <div class="login-container register-container mx-auto">
-                    
+
                     <h2 class="fw-bold fs-2">Iniciar sesión</h2>
                     <form id="login-form" class="fade-toggle active" action="/login" method="POST">
                         @csrf
@@ -50,7 +50,7 @@
                             <i class="fas fa-eye toggle-password" style="cursor: pointer; position: absolute; right: 10px;"></i>
                             <i class="fas fa-eye-slash toggle-password d-none" style="cursor: pointer; position: absolute; right: 10px;"></i>
                         </div>
-                        
+
                         <div class="d-flex flex-column flex-lg-row justify-content-start justify-content-lg-between align-items-start align-items-lg-center w-100 p-1 mb-3 text-start gap-3 gap-lg-0">
                             <div class="d-flex align-items-center gap-1">
                                 <input type="checkbox" id="rememberMe" name="remember"/>
@@ -58,11 +58,11 @@
                             </div>
                             <a href="{{ route('password.request') }}" class="fs-6 w-100 link-login text-center text-lg-end">¿Has olvidado tu contraseña?</a>
                             </div>
-        
+
                         <div class="register mb-2">
                             <p  class="fs-6">¿No registrado? <a href="#">Regístrate aquí</a></p>
                         </div>
-        
+
                         <button type="submit" class="login-btn w-100 fs-4 fw-bold">Iniciar sesión</button>
                         <hr class="my-4" />
                         <a href="{{ route('google.login') }}" class="google-btn w-100 fs-4 fw-bold">
@@ -132,11 +132,11 @@
                             <div class="password-strength-bar" id="strengthBar"></div>
                             <label class="strength-text" id="strengthText"></label>
                         </div>
-                        
+
                         <div class="register mb-4">
                             <p  class="fs-6">Ya tienes cuenta? <a href="#">Inicia sesión</a></p>
                         </div>
-        
+
                         <button type="submit" class="login-btn w-100 fs-4 fw-bold">Registrarse</button>
                         <hr class="my-4" />
                         <a href="{{ route('google.login') }}" class="google-btn w-100 fs-4 fw-bold">
@@ -185,5 +185,5 @@
 
     @endpush
 @endsection
-    
+
 
