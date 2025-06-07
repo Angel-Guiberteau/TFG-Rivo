@@ -672,12 +672,14 @@ class UserController extends Controller
                 ->withInput();
         }
 
-        // dd($user, $personalCategories, $accounts, $movementTypes);
+        $objectives = Objective::getObjectives($user->id);
+
         return view('admin.users.previewUser')
             ->with('user', $user)
             ->with('personalCategories', $personalCategories)
             ->with('personalAccounts', $accounts)
-            ->with('movementTypes', $movementTypes);
+            ->with('movementTypes', $movementTypes)
+            ->with('objectives', $objectives);
 
     }
 
