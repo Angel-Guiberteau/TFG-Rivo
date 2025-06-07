@@ -12,9 +12,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class ObjectiveController extends Controller
 {
-    public function getObjectives(): Collection{
-        return Objective::getObjectives();
-    }
     public function getObjective(int $id): JsonResponse{
         return response()->json(Objective::getObjective($id));
     }

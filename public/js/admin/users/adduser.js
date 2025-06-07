@@ -26,13 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const errorMessages = {
-        name: 'El nombre es obligatorio.',
-        last_name: 'El apellido es obligatorio.',
-        birth_date: 'La fecha de nacimiento es obligatoria.',
-        rol_id: 'Debes seleccionar un rol.',
-        email: 'Introduce un correo válido.',
-        username: 'El nombre de usuario es obligatorio.',
-        password: 'La contraseña es obligatoria y debe tener al menos 8 caracteres.'
+        name: '⚠️ El nombre es obligatorio.',
+        last_name: '⚠️ El apellido es obligatorio.',
+        birth_date: '⚠️ La fecha de nacimiento es obligatoria.',
+        rol_id: '⚠️ Debes seleccionar un rol.',
+        email: '⚠️ Introduce un correo válido.',
+        username: '⚠️ El nombre de usuario es obligatorio.',
+        password: '⚠️ La contraseña es obligatoria y debe tener al menos 8 caracteres.'
     };
 
     function showError(field, message) {
