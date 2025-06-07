@@ -11,7 +11,6 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <link rel="stylesheet" href="{{ asset('css/admin/users/usersCommon.css') }}">
         <link rel="stylesheet" href="{{ asset('css/admin/users/personalData.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/admin/users/baseCategories.css') }}">
         <link rel="stylesheet" href="{{ asset('css/admin/users/personalCategories.css') }}">
         <link rel="stylesheet" href="{{ asset('css/admin/users/personalAccounts.css') }}">
         <link rel="stylesheet" href="{{ asset('css/admin/users/personalObjetives.css') }}">

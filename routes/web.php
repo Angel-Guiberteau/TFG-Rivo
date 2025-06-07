@@ -490,9 +490,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::put('/updatePersonalCategories', function () {
 
             $request = request()->toArray();
-
+            // dd($request);
             $validate = UserValidator::validate($request, ValidationEnum::UPDATE_PERSONAL_CATEGORIES->value);
-
+            // dd($validate);
             if(!$validate['status']){
                 return redirect()->back()->with('error', $validate['error'] ?? 'Error al actualizar las categorías personales. Póngase en contacto con el soporte.');
             }

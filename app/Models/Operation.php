@@ -9,10 +9,24 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * Modelo Operation
+ * Representa una operación financiera realizada en una cuenta.
+ */
 class Operation extends Model
 {
+    /**
+     * Tabla asociada al modelo.
+     *
+     * @var string
+     */
     protected $table = 'operations';
 
+    /**
+     * Atributos asignables en masa.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'subject',
         'description',
@@ -24,6 +38,12 @@ class Operation extends Model
         'enabled',
     ];
 
+    /**
+     * Crea una nueva operación.
+     *
+     * @param array $data
+     * @return bool|self
+     */
     public static function addOperation(Array $data): bool | self {
         $operation = new self;
 
@@ -41,11 +61,23 @@ class Operation extends Model
         return $operation;
     }
 
+    /**
+     * Obtiene todas las operaciones de una cuenta.
+     *
+     * @param int $accountId
+     * @return Collection|null
+     */
     public static function getAllOperationsByAccountId(int $accountId): ?Collection {
         return self::where('account_id', $accountId)
             ->get();
     }
 
+    /**
+     * Obtiene las operaciones del mes actual agrupadas por categoría y tipo de movimiento.
+     *
+     * @param int $accountId
+     * @return Collection|null
+     */
     public static function thisMonthOperationsByAccountId(int $accountId): ?Collection {
         $operations = self::with('category.icon')
             ->where('account_id', $accountId)
@@ -66,8 +98,13 @@ class Operation extends Model
         })->values();
     }
 
-    public static function getSixOperationsByAccountId(int $accountId): ?Collection{
-
+    /**
+     * Obtiene las últimas seis operaciones de una cuenta.
+     *
+     * @param int $accountId
+     * @return Collection|null
+     */
+    public static function getSixOperationsByAccountId(int $accountId): ?Collection {
         return self::with('category.icon')
             ->where('account_id', $accountId)
             ->orderByDesc('action_date')
@@ -75,7 +112,13 @@ class Operation extends Model
             ->get();
     }
 
-    public static function getAllIncomesByAccountId(int $accountId): ?Collection{
+    /**
+     * Obtiene todos los ingresos de una cuenta.
+     *
+     * @param int $accountId
+     * @return Collection|null
+     */
+    public static function getAllIncomesByAccountId(int $accountId): ?Collection {
         return self::with('category.icon')
             ->where('account_id', $accountId)
             ->where('movement_type_id', MovementTypesEnum::INCOME->value)
@@ -83,12 +126,24 @@ class Operation extends Model
             ->get();
     }
 
-    public static function getOperationById(int $operationId): ?self{
+    /**
+     * Obtiene una operación por su ID.
+     *
+     * @param int $operationId
+     * @return self|null
+     */
+    public static function getOperationById(int $operationId): ?self {
         return Operation::with(['category.icon', 'planned', 'unschedule'])
             ->findOrFail($operationId);
     }
 
-    public static function getAllExpensesByAccountId(int $accountId): ?Collection{
+    /**
+     * Obtiene todos los egresos de una cuenta.
+     *
+     * @param int $accountId
+     * @return Collection|null
+     */
+    public static function getAllExpensesByAccountId(int $accountId): ?Collection {
         return self::with('category.icon')
             ->where('account_id', $accountId)
             ->where('movement_type_id', MovementTypesEnum::EXPENSE->value)
@@ -96,7 +151,15 @@ class Operation extends Model
             ->get();
     }
 
-    public static function getIncomesWithLimitByAccountId(int $accountId, int $offset,int $limit): ?Collection{
+    /**
+     * Obtiene ingresos paginados.
+     *
+     * @param int $accountId
+     * @param int $offset
+     * @param int $limit
+     * @return Collection|null
+     */
+    public static function getIncomesWithLimitByAccountId(int $accountId, int $offset,int $limit): ?Collection {
         return self::where('account_id', $accountId)
             ->where('movement_type_id', MovementTypesEnum::INCOME->value)
             ->with('category.icon')
@@ -106,7 +169,15 @@ class Operation extends Model
             ->get();
     }
 
-    public static function getExpensesWithLimitByAccountId(int $accountId, int $offset,int $limit): ?Collection{
+    /**
+     * Obtiene egresos paginados.
+     *
+     * @param int $accountId
+     * @param int $offset
+     * @param int $limit
+     * @return Collection|null
+     */
+    public static function getExpensesWithLimitByAccountId(int $accountId, int $offset,int $limit): ?Collection {
         return self::where('account_id', $accountId)
             ->where('movement_type_id', MovementTypesEnum::EXPENSE->value)
             ->with('category.icon')
@@ -116,7 +187,15 @@ class Operation extends Model
             ->get();
     }
 
-    public static function getSaveWithLimitByAccountId(int $accountId, int $offset,int $limit): ?Collection{
+    /**
+     * Obtiene ahorros paginados.
+     *
+     * @param int $accountId
+     * @param int $offset
+     * @param int $limit
+     * @return Collection|null
+     */
+    public static function getSaveWithLimitByAccountId(int $accountId, int $offset,int $limit): ?Collection {
         return self::where('account_id', $accountId)
             ->where('movement_type_id', MovementTypesEnum::SAVEMONEY->value)
             ->with('category.icon')
@@ -126,8 +205,15 @@ class Operation extends Model
             ->get();
     }
 
-    public static function getAllOperationsWithLimitByAccountId(int $accountId, int $offset,int $limit): ?Collection{
-
+    /**
+     * Obtiene todas las operaciones paginadas.
+     *
+     * @param int $accountId
+     * @param int $offset
+     * @param int $limit
+     * @return Collection|null
+     */
+    public static function getAllOperationsWithLimitByAccountId(int $accountId, int $offset,int $limit): ?Collection {
         return self::where('account_id', $accountId)
             ->with('category.icon')
             ->orderBy('action_date', 'desc')
@@ -136,8 +222,13 @@ class Operation extends Model
             ->get();
     }
 
+    /**
+     * Elimina una operación y sus relaciones (planeada o no planeada).
+     *
+     * @param int $id
+     * @return bool
+     */
     public static function deleteOperation(int $id): bool {
-
         DB::beginTransaction();
         try {
             $operation = self::findOrFail($id);
@@ -161,22 +252,35 @@ class Operation extends Model
             return false;
         }
 
-        return true;
     }
 
+    /**
+     * Relación con la categoría.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
+    /**
+     * Relación con la operación planeada.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function planned()
     {
         return $this->hasOne(OperationPlanned::class);
     }
 
+    /**
+     * Relación con la operación no planeada.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function unschedule()
     {
         return $this->hasOne(OperationUnschedule::class);
     }
-
 }

@@ -9,13 +9,24 @@ use Symfony\Component\HttpFoundation\Response;
 
 use App\Models\User;
 
-
+/**
+ * Middleware que verifica si el usuario autenticado tiene alguno de los roles permitidos.
+ *
+ * @package App\Http\Middleware
+ */
 class CheckRole
 {
     /**
-     * Handle an incoming request.
+     * Maneja una solicitud entrante.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * Comprueba si el usuario está autenticado y si su rol coincide con alguno de los roles permitidos.
+     * Si no está autenticado, redirige al inicio. Si no tiene el rol adecuado, lanza un error 403.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP entrante.
+     * @param \Closure $next La siguiente función middleware.
+     * @param mixed ...$roles Lista de roles permitidos.
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handle($request, Closure $next, ...$roles)
     {
@@ -31,5 +42,4 @@ class CheckRole
 
         return $next($request);
     }
-
 }
