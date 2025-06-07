@@ -36,6 +36,8 @@ use App\Validations\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Js;
+use App\Http\Controllers\GoogleMailController;
+
 
 
 
@@ -211,6 +213,14 @@ Route::get('/auth/google/callback', function () {
     return $controller->handleGoogleCallback();
 
 });
+
+Route::post('/forgot-password', [GoogleMailController::class, 'sendResetEmail'])->name('password.email');
+
+Route::get('/reset-password/{token}', function (Request $request, $token) {
+    return view('auth.reset-password', ['request' => $request, 'token' => $token]);
+})->name('password.reset');
+
+Route::post('/reset-password', [GoogleMailController::class, 'updatePassword'])->name('password.update');
 
 Route::post('/logout', function () {
     Auth::logout();
