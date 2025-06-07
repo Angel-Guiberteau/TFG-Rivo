@@ -73,13 +73,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (name.includes('[name]')) {
             valid = value.length > 0;
-            message = valid ? '' : 'El nombre no puede estar vacío.';
+            message = valid ? '' : '⚠️ El nombre no puede estar vacío.';
         } else if (name.includes('[balance]')) {
             valid = !isNaN(value) && value !== '';
-            message = valid ? '' : 'Introduce un saldo válido.';
+            message = valid ? '' : '⚠️ Introduce un saldo válido.';
         } else if (name.includes('[currency]')) {
             valid = value.length > 0 && value.length <= 3;
-            message = valid ? '' : 'La moneda debe tener máximo 3 caracteres.';
+            message = valid ? '' : '⚠️ La moneda debe tener máximo 3 caracteres.';
         }
 
         input.classList.remove('is-valid', 'is-invalid');

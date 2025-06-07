@@ -1,4 +1,4 @@
-<form method="POST" action="" id="objectivesForm" class="needs-validation" novalidate>
+<form method="POST" action="{{ route('updatePersonalObjetives') }}" id="objectivesForm" class="needs-validation" novalidate>
     @csrf
     @method('PUT')
 
@@ -19,6 +19,5 @@
             <i class="fa-solid fa-arrow-left"></i>
         </a>
     </div>
-    <input type="hidden" name="deleted[]" id="deletedObjectives">
-    <input type="hidden" name="news[]" id="newObjectives">
+    <input type="hidden" name="deleted" id="deletedObjectives">
 </form>

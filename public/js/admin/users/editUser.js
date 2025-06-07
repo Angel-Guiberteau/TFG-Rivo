@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Flatpickr
     flatpickr("#birth_date", {
         dateFormat: "Y-m-d",
         altInput: true,
@@ -39,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
             feedbackContainer.appendChild(feedback);
         }
 
-        feedback.textContent = !isValid ? customMessage || 'Este campo es obligatorio' : '';
+        feedback.textContent = !isValid ? customMessage || '⚠️ Este campo es obligatorio' : '';
     }
 
     function validateField(input) {
@@ -49,23 +48,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (fieldId === 'name' || fieldId === 'last_name' || fieldId === 'username') {
             isValid = value.length > 0;
-            setValidationState(input, isValid, 'Este campo es obligatorio');
+            setValidationState(input, isValid, '⚠️ Este campo es obligatorio');
         } else if (fieldId === 'birth_date') {
             isValid = value !== '';
-            setValidationState(input, isValid, 'Debes seleccionar una fecha');
+            setValidationState(input, isValid, '⚠️ Debes seleccionar una fecha');
         } else if (fieldId === 'rol_id') {
             isValid = input.value !== '';
-            setValidationState(input, isValid, 'Debes seleccionar un rol');
+            setValidationState(input, isValid, '⚠️ Debes seleccionar un rol');
         } else if (fieldId === 'email') {
             isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-            setValidationState(input, isValid, 'Correo electrónico inválido');
+            setValidationState(input, isValid, '⚠️ Correo electrónico inválido');
         } else if (fieldId === 'password') {
             if (value === '') {
                 setValidationState(input, true);
                 isValid = true;
             } else {
                 isValid = value.length >= 8;
-                setValidationState(input, isValid, 'Debe tener al menos 8 caracteres');
+                setValidationState(input, isValid, '⚠️ Debe tener al menos 8 caracteres');
             }
         }
 

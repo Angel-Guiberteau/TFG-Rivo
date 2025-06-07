@@ -1,4 +1,4 @@
-<div class="accordion-item mb-3 shadow-sm border-0 rounded-3 objective-card" data-index="{{ $index }}">
+<div class="accordion-item mb-3 shadow-sm border-0 rounded-3 objective-card" data-index="{{ $index }}" data-id="{{ $objective->id }}">
     <h2 class="accordion-header" id="heading{{ $index }}">
         <button class="accordion-button {{ $index > 0 ? 'collapsed' : '' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}" aria-expanded="{{ $index === 0 ? 'true' : 'false' }}" aria-controls="collapse{{ $index }}">
             Objetivo: {{ old("objectives.$index.name", $objective->name ?? 'Nuevo') }}
@@ -9,32 +9,45 @@
             <div class="row g-3">
                 <div class="col-md-6">
                     <label class="form-label">Nombre del objetivo</label>
-                    <input type="text" name="objectives[{{ $index }}][name]" class="form-control objective-name" value="{{ old("objectives.$index.name", $objective->name ?? '') }}" required maxlength="100">
-                    <div class="valid-feedback">¡Correcto!</div>
-                    <div class="invalid-feedback">El nombre es obligatorio y máximo 100 caracteres.</div>
+                    <input type="text" name="objectives[{{ $index }}][name]" class="form-control objective-name"
+                           value="{{ old("objectives.$index.name", $objective->name ?? '') }}"
+                           required maxlength="100"
+                           data-original="{{ $objective->name ?? '' }}">
+                    <div class="valid-feedback">✅ ¡Correcto!</div>
+                    <div class="invalid-feedback">⚠️ El nombre es obligatorio y máximo 100 caracteres.</div>
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label">Monto objetivo</label>
-                    <input type="number" name="objectives[{{ $index }}][target_amount]" class="form-control target-amount" step="0.01" value="{{ old("objectives.$index.target_amount", $objective->target_amount ?? '') }}" required>
-                    <div class="valid-feedback">¡Correcto!</div>
-                    <div class="invalid-feedback">Debe ser un número positivo.</div>
+                    <label class="form-label">Dinero objetivo</label>
+                    <input type="number" name="objectives[{{ $index }}][target_amount]" class="form-control target-amount"
+                           step="0.01" required
+                           value="{{ old("objectives.$index.target_amount", $objective->target_amount ?? '') }}"
+                           data-original="{{ $objective->target_amount ?? '' }}">
+                    <div class="valid-feedback">✅ ¡Correcto!</div>
+                    <div class="invalid-feedback">⚠️ Debe ser un número positivo.</div>
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label">Monto actual</label>
-                    <input type="number" name="objectives[{{ $index }}][current_amount]" class="form-control current-amount" step="0.01" value="{{ old("objectives.$index.current_amount", $objective->current_amount ?? '') }}" required>
-                    <div class="valid-feedback">¡Correcto!</div>
-                    <div class="invalid-feedback">Debe ser un número positivo.</div>
+                    <label class="form-label">Dinero actual</label>
+                    <input type="number" name="objectives[{{ $index }}][current_amount]" class="form-control current-amount"
+                           step="0.01" required
+                           value="{{ old("objectives.$index.current_amount", $objective->current_amount ?? '') }}"
+                           data-original="{{ $objective->current_amount ?? '' }}">
+                    <div class="valid-feedback">✅ ¡Correcto!</div>
+                    <div class="invalid-feedback">⚠️ Debe ser un número positivo.</div>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Fecha límite</label>
-                    <input type="date" name="objectives[{{ $index }}][deadline]" class="form-control deadline" value="{{ old("objectives.$index.deadline", $objective->deadline ?? '') }}">
-                    <div class="valid-feedback">¡Correcto!</div>
-                    <div class="invalid-feedback">La fecha debe ser hoy o posterior.</div>
+                    <input type="date" name="objectives[{{ $index }}][deadline]" class="form-control deadline"
+                           value="{{ old("objectives.$index.deadline", $objective->deadline ?? '') }}"
+                           data-original="{{ $objective->deadline ?? '' }}">
+                    <div class="valid-feedback">✅ ¡Correcto!</div>
+                    <div class="invalid-feedback">⚠️ La fecha debe ser hoy o posterior.</div>
                 </div>
 
                 <div class="col-md-4 d-flex align-items-center">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" name="objectives[{{ $index }}][enabled]" value="1" {{ old("objectives.$index.enabled", $objective->enabled ?? false) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" name="objectives[{{ $index }}][enabled]"
+                               value="1" {{ old("objectives.$index.enabled", $objective->enabled ?? false) ? 'checked' : '' }}
+                               data-original="{{ $objective->enabled ? '1' : '0' }}">
                         <label class="form-check-label">Habilitado</label>
                     </div>
                 </div>

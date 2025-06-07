@@ -26,6 +26,7 @@ class Objective extends Model
         $objective->current_amount = $data['current_amount'] ?? 0;
         $objective->deadline = $data['deadline'] ?? null;
         $objective->account_id = $data['account_id'];
+        $objective->enabled = $data['enabled'] ?? 1;
 
         return $objective->save() ? $objective : false;
 
@@ -67,6 +68,20 @@ class Objective extends Model
         if (isset($data['deadline'])) {
             $objective->deadline = $data['deadline'];
         }
+
+        return $objective->save();
+    }
+
+    public static function updateFullObjective(array $data): bool{
+        $objective = self::find($data['id']);
+        if (!$objective) return false;
+
+        $objective->name = $data['name'];
+        $objective->target_amount = $data['target_amount'];
+        $objective->current_amount = $data['current_amount'];
+        $objective->deadline = $data['deadline'];
+        $objective->account_id = $data['account_id'];
+        $objective->enabled = $data['enabled'] ?? 1;
 
         return $objective->save();
     }

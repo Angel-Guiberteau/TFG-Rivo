@@ -10,6 +10,7 @@ enum ValidationEnum: string
     case INITIALSETUP = 'initialSetup';
     case UPDATE_PERSONAL_CATEGORIES = 'updatePersonalCategories';
     case UPDATE_PERSONAL_ACOUNTS = 'updatePersonalAccounts';
+    case UPDATE_PERSONAL_OBJETIVES = 'updatePersonalObjetives';
     case ADD_OPERATION_USER = 'addIncomeUser';
     case VALIDATE_ID_ONLY = 'validateIdOnly';
     case GET_OPERATIONS_OFFSET = 'incomeOperations';
