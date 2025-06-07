@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\UserController;
 use App\Models\UserCategory;
 use App\Models\Category;
+use App\Services\GoogleMailerService;
 
 /**
  * Clase User
@@ -374,5 +375,17 @@ class User extends Authenticatable
     public function personalCategories()
     {
         return $this->belongsToMany(Category::class, 'user_categories', 'user_id', 'categories_id');
+    }
+
+
+    public function sendPasswordResetNotification($token)
+    {
+        $url = url("/reset-password/{$token}");
+
+        $html = view('emails.custom-reset-password', ['url' => $url])->render();
+
+        $mailer = app(GoogleMailerService::class);
+
+        $mailer->send($this->email, 'Restablece tu contraseña', $html);
     }
 }

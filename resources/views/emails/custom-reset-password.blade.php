@@ -11,11 +11,6 @@
 
   <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px; margin:auto; background: linear-gradient(120deg, rgba(255, 255, 255, 0.15) 10%, rgba(255, 255, 255, 0.08) 70%); border-radius: 24px; padding: 30px; box-shadow: 0 20px 50px rgba(145, 88, 193, 0.4);">
     <tr>
-      <td align="center" style="padding-bottom: 20px;">
-        <img src="{{ asset('img/logos/whiteRivoPng.png') }}" alt="RIVO" width="70" style="filter: drop-shadow(0 2px 6px rgba(255,255,255,0.5));" />
-      </td>
-    </tr>
-    <tr>
       <td style="text-align:center;">
         <h2 style="margin: 0 0 15px; font-size: 28px; font-weight: 700; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);">
           Restablece tu contraseña
