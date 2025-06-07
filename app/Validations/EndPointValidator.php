@@ -10,7 +10,7 @@ class EndPointValidator extends Validator {
             'url' => 'required|string|max:255',
             'method' => 'required|string|max:7',
             'parameters' => 'nullable|string|max:75',
-            'return' => 'required|string|max:15',
+            'return' => 'required|string|max:50',
             'description' => 'nullable|string|max:255',
             'returnData' => 'required|string|max:255'
         ];
@@ -53,7 +53,7 @@ class EndPointValidator extends Validator {
             'url' => 'required|string|max:255',
             'method' => 'required|string|max:7',
             'parameters' => 'nullable|string|max:75',
-            'return' => 'required|string|max:15',
+            'return' => 'required|string|max:50',
             'description' => 'nullable|string|max:255',
             'returnData' => 'required|string|max:255'
         ];
