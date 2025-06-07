@@ -24,12 +24,17 @@ document.addEventListener('DOMContentLoaded', function () {
     initIconSelection();
     attachDeleteCategoryListeners();
 
+    function generateRandomId() {
+        return 'id' + Date.now() + Math.floor(Math.random() * 1000);
+    }
+
+
     let counter = 0;
     const addBtn = document.getElementById('addCustomCategoryBtn');
     if (addBtn) {
         addBtn.addEventListener('click', function () {
             const container = document.getElementById('categoryContainer');
-            const randomId = counter++;
+            const randomId = generateRandomId();
 
             const iconOptionsHtml = allIcons.map(icon => `
                 <div class="icon-option"
@@ -52,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                 `;
             }).join('');
+
 
             const newCategoryHtml = `
                 <div class="col-md-6 col-lg-4 mb-4 category-card">

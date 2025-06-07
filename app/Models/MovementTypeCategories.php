@@ -4,14 +4,36 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Modelo MovementTypeCategories que representa la relación entre tipos de movimiento y categorías.
+ */
 class MovementTypeCategories extends Model
 {
+    /**
+     * Nombre de la tabla asociada al modelo.
+     *
+     * @var string
+     */
     protected $table = 'movements_types_categories';
-    protected $fillable = [ 
+
+    /**
+     * Atributos que se pueden asignar masivamente.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
         'movement_type_id',
         'category_id',
     ];
 
+    /**
+     * Sincroniza los tipos de movimiento asociados a una categoría,
+     * añadiendo nuevos y eliminando los que ya no están presentes.
+     *
+     * @param int $categoryId
+     * @param array $newTypeIds
+     * @return void
+     */
     public static function syncTypesOfCategory(int $categoryId, array $newTypeIds): void
     {
         $currentTypeIds = self::where('category_id', $categoryId)->pluck('movement_type_id')->toArray();
@@ -32,7 +54,13 @@ class MovementTypeCategories extends Model
             ]);
         }
     }
-    
+
+    /**
+     * Añade una nueva relación entre tipo de movimiento y categoría.
+     *
+     * @param array $data
+     * @return bool|self
+     */
     public static function addMovementTypeCategory(array $data): bool | self
     {
         $movementTypeCategory = new self;

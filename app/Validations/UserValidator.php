@@ -224,6 +224,12 @@ class UserValidator extends Validator {
             'categories.*.name' => 'sometimes|string|max:30',
             'categories.*.icon' => 'sometimes|string|max:75',
 
+            'data' => 'sometimes|array',
+            'data.movement_types' => 'sometimes|array',
+            'data.movement_types.*' => 'sometimes|array',
+            'data.movement_types.*.*' => 'sometimes|string',
+
+
             'news' => 'sometimes|array',
             'news.*.name' => 'sometimes|string|max:75',
             'news.*.icon' => 'sometimes|string|max:75',
