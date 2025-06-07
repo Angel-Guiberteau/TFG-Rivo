@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const sections = {
         stepInfo: document.getElementById('personalData'),
         stepCreation: document.getElementById('personalCategories'),
-        stepPreview: document.getElementById('personalAccounts')
+        stepPreview: document.getElementById('personalAccounts'),
+        stepObjetives: document.getElementById('personalObjetives')
     };
 
     steps.forEach(step => {
@@ -196,17 +197,17 @@ function validateCategoryForm() {
         if (!nameInput.value.trim()) {
             nameInput.classList.add('is-invalid');
             nameInput.classList.remove('is-valid');
-            showErrorMessage(nameInput, 'El nombre de la categoría es obligatorio.');
+            showErrorMessage(nameInput, '⚠️ El nombre de la categoría es obligatorio.');
             isValid = false;
         } else if (nameInput.value.trim().length > 30) {
             nameInput.classList.add('is-invalid');
             nameInput.classList.remove('is-valid');
-            showErrorMessage(nameInput, 'El nombre no puede superar 30 caracteres.');
+            showErrorMessage(nameInput, '⚠️ El nombre no puede superar 30 caracteres.');
             isValid = false;
         } else {
             nameInput.classList.remove('is-invalid');
             nameInput.classList.add('is-valid');
-            showSuccessMessage(nameInput, 'Nombre válido');
+            showSuccessMessage(nameInput, '✅ Nombre válido');
         }
 
         if (!selectedIcon || !iconInput.value.trim()) {
@@ -227,7 +228,7 @@ function validateCategoryForm() {
             if (!movementTypesWrapper.querySelector('.invalid-feedback')) {
                 const errorDiv = document.createElement('div');
                 errorDiv.className = 'invalid-feedback d-block small';
-                errorDiv.textContent = 'Selecciona al menos un tipo de movimiento.';
+                errorDiv.textContent = '⚠️ Selecciona al menos un tipo de movimiento.';
                 movementTypesWrapper.appendChild(errorDiv);
             }
             isValid = false;

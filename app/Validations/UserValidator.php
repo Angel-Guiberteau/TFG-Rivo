@@ -383,7 +383,67 @@ class UserValidator extends Validator {
         ];
     }
 
-    
+    protected static function rulesUpdatePersonalObjetives(): array {
+        return [
+            'deleted' => 'nullable|string',
 
+            'objectives' => 'sometimes|array|min:1',
+            'objectives.*.id' => 'nullable|string|exists:objectives,id',
+            'objectives.*.name' => 'sometimes|string|max:75',
+            'objectives.*.target_amount' => 'sometimes|numeric',
+            'objectives.*.current_amount' => 'sometimes|numeric',
+            'objectives.*.deadline' => 'sometimes|nullable|date',
+            'objectives.*.enabled' => 'sometimes|boolean',
 
+            'existingObjectives' => 'sometimes|string',
+            'existingObjectives.*.id' => 'sometimes|regex:/^\d+$/|exists:objectives,id',
+            'existingObjectives.*.name' => 'sometimes|string|max:75',
+            'existingObjectives.*.target_amount' => 'sometimes|numeric',
+            'existingObjectives.*.current_amount' => 'sometimes|numeric',
+            'existingObjectives.*.deadline' => 'sometimes|nullable|date',
+            'existingObjectives.*.enabled' => 'sometimes|boolean',
+
+            'newObjectives' => 'sometimes|string',
+            'newObjectives.*.name' => 'sometimes|string|max:75',
+            'newObjectives.*.target_amount' => 'sometimes|numeric',
+            'newObjectives.*.current_amount' => 'sometimes|numeric',
+            'newObjectives.*.deadline' => 'sometimes|nullable|date',
+            'newObjectives.*.enabled' => 'sometimes|boolean',
+        ];
+    }
+
+    protected static function messagesUpdatePersonalObjetives(): array {
+        return [
+            'deleted.string' => 'El formato de los objetivos eliminados no es válido.',
+
+            'objectives.array' => 'Los objetivos deben estar en formato de lista.',
+            'objectives.min' => 'Debes tener al menos un objetivo.',
+            'objectives.*.id.exists' => 'El objetivo seleccionado no existe.',
+            'objectives.*.id.integer' => 'El ID de cada objetivo debe ser un número entero.',
+            'objectives.*.name.string' => 'El nombre del objetivo debe ser texto.',
+            'objectives.*.name.max' => 'El nombre del objetivo no puede exceder los 75 caracteres.',
+            'objectives.*.target_amount.numeric' => 'La cantidad objetivo debe ser un número.',
+            'objectives.*.current_amount.numeric' => 'La cantidad actual debe ser un número.',
+            'objectives.*.deadline.date' => 'La fecha límite debe ser una fecha válida.',
+            'objectives.*.enabled.boolean' => 'El campo de habilitación del objetivo debe ser verdadero o falso.',
+
+            'existingObjectives.array' => 'Los objetivos existentes deben estar en formato de lista.',
+            'existingObjectives.*.id.regex' => 'El ID de cada objetivo existente debe ser un número.',
+            'existingObjectives.*.id.exists' => 'El objetivo existente seleccionado no existe.',
+            'existingObjectives.*.name.string' => 'El nombre del objetivo existente debe ser texto.',
+            'existingObjectives.*.name.max' => 'El nombre del objetivo existente no puede exceder los 75 caracteres.',
+            'existingObjectives.*.target_amount.numeric' => 'La cantidad objetivo del objetivo existente debe ser un número.',
+            'existingObjectives.*.current_amount.numeric' => 'La cantidad actual del objetivo existente debe ser un número.',
+            'existingObjectives.*.deadline.date' => 'La fecha límite del objetivo existente debe ser una fecha válida.',
+            'existingObjectives.*.enabled.boolean' => 'El campo de habilitación del objetivo existente debe ser verdadero o falso.',
+
+            'newObjectives.array' => 'Los nuevos objetivos deben estar en formato de lista.',
+            'newObjectives.*.name.string' => 'El nombre del nuevo objetivo debe ser texto.',
+            'newObjectives.*.name.max' => 'El nombre del nuevo objetivo no puede exceder los 75 caracteres.',
+            'newObjectives.*.target_amount.numeric' => 'La cantidad objetivo del nuevo objetivo debe ser un número.',
+            'newObjectives.*.current_amount.numeric' => 'La cantidad actual del nuevo objetivo debe ser un número.',
+            'newObjectives.*.deadline.date' => 'La fecha límite del nuevo objetivo debe ser una fecha válida.',
+            'newObjectives.*.enabled.boolean' => 'El campo de habilitación del nuevo objetivo debe ser verdadero o falso.',
+        ];
+    }
 }
