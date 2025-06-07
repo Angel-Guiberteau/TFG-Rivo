@@ -5,10 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
+/**
+ * Modelo Objective que representa los objetivos financieros de los usuarios.
+ */
 class Objective extends Model
 {
+    /**
+     * Nombre de la tabla asociada al modelo.
+     *
+     * @var string
+     */
     protected $table = 'objectives';
 
+    /**
+     * Atributos que se pueden asignar masivamente.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'name',
         'target_amount',
@@ -18,6 +31,12 @@ class Objective extends Model
         'enabled',
     ];
 
+    /**
+     * Crea un nuevo objetivo.
+     *
+     * @param array $data
+     * @return bool|self
+     */
     public static function addObjective(Array $data): bool | self{
         $objective = new self;
 
@@ -29,24 +48,46 @@ class Objective extends Model
         $objective->enabled = $data['enabled'] ?? 1;
 
         return $objective->save() ? $objective : false;
-
     }
 
+    /**
+     * Obtiene todos los objetivos de una cuenta.
+     *
+     * @param int $accountsId
+     * @return Collection
+     */
     public static function getObjectives(int $accountsId): Collection{
-        return self::where('account_id', $accountsId)
-            ->get();
+        return self::where('account_id', $accountsId)->get();
     }
 
+    /**
+     * Obtiene un objetivo por su ID.
+     *
+     * @param int $id
+     * @return self|null
+     */
     public static function getObjective(int $id): self{
         return self::find($id);
     }
 
+    /**
+     * Obtiene todos los objetivos activos por ID de cuenta.
+     *
+     * @param int $accountsId
+     * @return Collection
+     */
     public static function getObjectivesByAccountId(int $accountsId): Collection{
         return self::where('account_id', $accountsId)
             ->where('enabled', 1)
             ->get();
     }
 
+    /**
+     * Elimina un objetivo por su ID.
+     *
+     * @param int $objectiveId
+     * @return bool
+     */
     public static function deleteObjective(int $objectiveId): bool {
         $objective = self::find($objectiveId);
         if (!$objective) return false;
@@ -54,7 +95,12 @@ class Objective extends Model
         return $objective->delete();
     }
 
-
+    /**
+     * Actualiza parcialmente un objetivo.
+     *
+     * @param array $data
+     * @return bool
+     */
     public static function updateObjective(array $data): bool{
         $objective = self::find($data['objective_id']);
         if (!$objective) return false;
@@ -72,6 +118,12 @@ class Objective extends Model
         return $objective->save();
     }
 
+    /**
+     * Actualiza todos los campos de un objetivo.
+     *
+     * @param array $data
+     * @return bool
+     */
     public static function updateFullObjective(array $data): bool{
         $objective = self::find($data['id']);
         if (!$objective) return false;
@@ -86,6 +138,14 @@ class Objective extends Model
         return $objective->save();
     }
 
+    /**
+     * Actualiza el valor actual del objetivo según el monto de una operación.
+     *
+     * @param int $objectiveId
+     * @param float $operationAmount
+     * @param bool $negative
+     * @return bool
+     */
     public static function updateCurrentAmount(int $objectiveId, float $operationAmount, bool $negative = false): bool{
         $objective = self::find($objectiveId);
         if(!$negative)
