@@ -131,7 +131,9 @@ class Objective extends Model
         $objective->name = $data['name'];
         $objective->target_amount = $data['target_amount'];
         $objective->current_amount = $data['current_amount'];
-        $objective->deadline = $data['deadline'];
+        if (!empty($data['deadline'])) {
+            $objective->deadline = $data['deadline'];
+        }
         $objective->account_id = $data['account_id'];
         $objective->enabled = $data['enabled'] ?? 1;
 
