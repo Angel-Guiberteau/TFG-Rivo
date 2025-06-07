@@ -2,7 +2,7 @@
     $usersRoutes = ['users', 'addUser', 'editUser', 'previewUser'];
     $endPointRoutes = ['endPoints', 'addEndPoints', 'editEndPoint'];
 @endphp
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm px-3">
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
     <div class="container-fluid">
 
         <button class="navbar-toggler mb-3 mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">

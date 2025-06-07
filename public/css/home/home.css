@@ -811,6 +811,7 @@ input[type="radio"]:checked + .category-option i {
     color: #E63946;
 }
 
+
 .badge-income {
     background: #D4AF37;
     color: #fff;
@@ -1471,9 +1472,14 @@ body.blur-active::before {
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
-    max-width: 85%; 
+    max-width: 85%;
 }
 
 .objective-item .info-container .d-flex.flex-column {
     width: 85%;
+}
+
+
+.tx-value.negative {
+    color: #E63946 !important;
 }
