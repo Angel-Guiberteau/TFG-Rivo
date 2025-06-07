@@ -88,18 +88,22 @@ class BaseCategory extends Model
      * @return BaseCategory|null Retorna la categoría editada o null si no se encontró.
      * @throws \Exception Si ocurre un error durante la transacción.
      */
-    public static function editBaseCategory(array $data): ?BaseCategory {
+    public static function editBaseCategory(array $data): ?bool { 
         DB::beginTransaction();
 
         try {
-            $baseCategory = self::find($data['id']);
+            
+            $baseCategory = self::where('categories_id', $data['id'])->get();
+
             if (!$baseCategory) {
                 DB::rollBack();
                 return null;
             }
+            $categories_id = $baseCategory[0]->categories_id;
+
 
             $category = Category::updateOrCreate(
-                ['id' => $baseCategory->categories_id],
+                ['id' => $categories_id],
                 ['name' => $data['name'], 'icon_id' => $data['icon'] ?? null]
             );
 
@@ -107,14 +111,14 @@ class BaseCategory extends Model
                 $category->movementTypes()->sync($data['types']);
             }
 
-            if ($baseCategory->categories_id !== $category->id) {
-                $baseCategory->categories_id = $category->id;
+            if ($categories_id !== $category->id) {
+                $categories_id = $category->id;
                 $baseCategory->save();
             }
 
             DB::commit();
 
-            return $baseCategory;
+            return true;
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;

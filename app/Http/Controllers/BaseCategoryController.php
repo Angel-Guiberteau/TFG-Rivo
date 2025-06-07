@@ -62,9 +62,7 @@ class BaseCategoryController extends Controller
                 ->with('error', $data['error'] ?? 'Datos inválidos');
         }
 
-        $baseCategory = BaseCategory::editBaseCategory($data['data']);
-
-        if (!$baseCategory) {
+        if (!BaseCategory::editBaseCategory($data['data'])) {
             return redirect()
                 ->back()
                 ->with('error', 'Ha habido un error inesperado.');
