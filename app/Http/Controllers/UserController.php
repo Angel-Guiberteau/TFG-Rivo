@@ -164,7 +164,7 @@ class UserController extends Controller
         }
 
         $objectives = Objective::getObjectives($user->id);
-        // dd($objetives);
+        // dd($personalCategories);
         return view('admin.users.editUser')
             ->with('user', $user)
             ->with('personalCategories', $personalCategories)
@@ -584,18 +584,18 @@ class UserController extends Controller
     public static function updatePersonalCategories($data): RedirectResponse
     {
         $data = $data['data'] ?? [];
-
         $object = new UserController();
 
         $object->delete = json_decode($data['deleted'] ?? '[]', true);
         $object->id = $data['user_id'] ?? null;
         $object->categories = $data['categories'] ?? [];
         $object->news = $data['news'] ?? [];
-        $object->accountMovementsTypes = $data['movement_types'] ?? [];
-
+        $object->accountMovementsTypes = $data['data']['movement_types'] ?? [];
+       
         if (!User::getUserById($object->id)) {
             return Redirect::back()->with('error', 'El usuario no existe.');
         }
+
 
         if (!empty($object->delete)) {
             foreach ($object->delete as $categoryId) {
@@ -608,29 +608,31 @@ class UserController extends Controller
 
         if (!empty($object->categories)) {
             foreach ($object->categories as $category) {
-                $categoryId = $category['id'] ?? null;
+                $categoryId = (int)($category['id'] ?? 0);
                 $categoryName = $category['name'] ?? null;
                 $categoryIcon = $category['icon'] ?? null;
-                $movementTypes = $object->accountMovementsTypes[$categoryId] ?? [];
 
                 if ($categoryId && $categoryName && $categoryIcon) {
-
                     $updated = User::updatePersonalCategory($object->id, $categoryId, $categoryName, $categoryIcon);
-
                     if (!$updated) {
                         return redirect()->route('users')->with('error', 'Error al actualizar la categoría personal.');
                     }
 
-                    MovementTypeCategories::syncTypesOfCategory($categoryId, $movementTypes);
+                    $categoryIdStr = (string)$categoryId;
+                    if (array_key_exists($categoryIdStr, $object->accountMovementsTypes)) {
+                        $movementTypes = array_map('intval', $object->accountMovementsTypes[$categoryIdStr]);
+                        MovementTypeCategories::syncTypesOfCategory($categoryId, $movementTypes);
+                    }
                 }
             }
         }
+
 
         if (!empty($object->news)) {
             foreach ($object->news as $newCategory) {
                 $newCategoryName = $newCategory['name'] ?? null;
                 $newCategoryIcon = $newCategory['icon'] ?? null;
-                $movementTypes = $newCategory['movement_types'] ?? [];
+                $movementTypes = array_map('intval', $newCategory['movement_types'] ?? []);
 
                 if ($newCategoryName && $newCategoryIcon) {
                     $addedCategoryId = User::addPersonalCategory($object->id, $newCategoryName, $newCategoryIcon);
@@ -645,6 +647,7 @@ class UserController extends Controller
 
         return redirect()->route('users')->with('success', 'Categorías personales actualizadas correctamente.');
     }
+
 
 
     public static function getFullUserbyId($data)
@@ -699,7 +702,7 @@ class UserController extends Controller
         $object->id = $data['user_id'] ?? null;
         $object->accounts = $data['accounts'] ?? [];
         $object->news = $data['news'] ?? [];
-
+        
         if (!User::getUserById($object->id)) {
             return Redirect::back()->with('error', 'El usuario no existe.');
         }

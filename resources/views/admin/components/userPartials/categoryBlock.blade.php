@@ -43,14 +43,17 @@
                 <div class="types d-flex flex-row flex-wrap mb-2">
                     @foreach ($movementTypes as $type)
                         <div class="form-check mb-2 me-2">
-                            <input class="form-check-input type-checkbox-edit"
-                                id="movement_type_{{ $index }}_{{ $type->id }}"
+                            <input 
                                 type="checkbox"
-                                name="movement_types[{{ $index }}][]"
+                                class="form-check-input d-none type-checkbox-edit"
+                                id="movement_type_{{ $category['id'] }}_{{ $type->id }}"
+                                name="data[movement_types][{{ $category['id'] }}][]"
                                 value="{{ $type->id }}"
-                                @if(!empty($category['movement_type_ids']) && in_array($type->id, $category['movement_type_ids'])) checked @endif
+                                @if(in_array($type->id, $category['movement_type_ids'] ?? [])) checked @endif
                             >
-                            <label class="form-check-label" for="movement_type_{{ $index }}_{{ $type->id }}">
+                            <label 
+                                class="form-check-label"
+                                for="movement_type_{{ $category['id'] }}_{{ $type->id }}">
                                 {{ $type->name }}
                             </label>
                         </div>
