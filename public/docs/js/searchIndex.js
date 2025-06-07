@@ -78,157 +78,162 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Enums\\MovementTypesEnum",
             "name": "MovementTypesEnum",
-            "summary": "",
+            "summary": "Enum\u0020MovementTypesEnum",
             "url": "classes/App-Enums-MovementTypesEnum.html"
         },                {
             "fqsen": "\\App\\Enums\\MovementTypesEnum\u003A\u003AINCOME",
             "name": "INCOME",
-            "summary": "",
+            "summary": "Ingreso",
             "url": "classes/App-Enums-MovementTypesEnum.html#enumcase_INCOME"
         },                {
             "fqsen": "\\App\\Enums\\MovementTypesEnum\u003A\u003AEXPENSE",
             "name": "EXPENSE",
-            "summary": "",
+            "summary": "Gasto",
             "url": "classes/App-Enums-MovementTypesEnum.html#enumcase_EXPENSE"
         },                {
             "fqsen": "\\App\\Enums\\MovementTypesEnum\u003A\u003ASAVEMONEY",
             "name": "SAVEMONEY",
-            "summary": "",
+            "summary": "Ahorro",
             "url": "classes/App-Enums-MovementTypesEnum.html#enumcase_SAVEMONEY"
         },                {
             "fqsen": "\\App\\Enums\\ValidationEnum",
             "name": "ValidationEnum",
-            "summary": "",
+            "summary": "Enum\u0020ValidationEnum",
             "url": "classes/App-Enums-ValidationEnum.html"
         },                {
             "fqsen": "\\App\\Enums\\ValidationEnum\u003A\u003AADD",
             "name": "ADD",
-            "summary": "",
+            "summary": "Validaci\u00F3n\u0020para\u0020a\u00F1adir\u0020un\u0020nuevo\u0020recurso",
             "url": "classes/App-Enums-ValidationEnum.html#enumcase_ADD"
         },                {
             "fqsen": "\\App\\Enums\\ValidationEnum\u003A\u003AEDIT",
             "name": "EDIT",
-            "summary": "",
+            "summary": "Validaci\u00F3n\u0020para\u0020editar\u0020un\u0020recurso\u0020existente",
             "url": "classes/App-Enums-ValidationEnum.html#enumcase_EDIT"
         },                {
             "fqsen": "\\App\\Enums\\ValidationEnum\u003A\u003ADELETE",
             "name": "DELETE",
-            "summary": "",
+            "summary": "Validaci\u00F3n\u0020para\u0020eliminar\u0020un\u0020recurso",
             "url": "classes/App-Enums-ValidationEnum.html#enumcase_DELETE"
         },                {
             "fqsen": "\\App\\Enums\\ValidationEnum\u003A\u003AINITIALSETUP",
             "name": "INITIALSETUP",
-            "summary": "",
+            "summary": "Validaci\u00F3n\u0020para\u0020el\u0020proceso\u0020de\u0020configuraci\u00F3n\u0020inicial\u0020del\u0020usuario",
             "url": "classes/App-Enums-ValidationEnum.html#enumcase_INITIALSETUP"
         },                {
             "fqsen": "\\App\\Enums\\ValidationEnum\u003A\u003AUPDATE_PERSONAL_CATEGORIES",
             "name": "UPDATE_PERSONAL_CATEGORIES",
-            "summary": "",
+            "summary": "Validaci\u00F3n\u0020para\u0020actualizar\u0020categor\u00EDas\u0020personales\u0020del\u0020usuario",
             "url": "classes/App-Enums-ValidationEnum.html#enumcase_UPDATE_PERSONAL_CATEGORIES"
         },                {
             "fqsen": "\\App\\Enums\\ValidationEnum\u003A\u003AUPDATE_PERSONAL_ACOUNTS",
             "name": "UPDATE_PERSONAL_ACOUNTS",
-            "summary": "",
+            "summary": "Validaci\u00F3n\u0020para\u0020actualizar\u0020cuentas\u0020personales\u0020del\u0020usuario",
             "url": "classes/App-Enums-ValidationEnum.html#enumcase_UPDATE_PERSONAL_ACOUNTS"
+        },                {
+            "fqsen": "\\App\\Enums\\ValidationEnum\u003A\u003AUPDATE_PERSONAL_OBJETIVES",
+            "name": "UPDATE_PERSONAL_OBJETIVES",
+            "summary": "Validaci\u00F3n\u0020para\u0020actualizar\u0020objetivos\u0020personales\u0020del\u0020usuario",
+            "url": "classes/App-Enums-ValidationEnum.html#enumcase_UPDATE_PERSONAL_OBJETIVES"
         },                {
             "fqsen": "\\App\\Enums\\ValidationEnum\u003A\u003AADD_OPERATION_USER",
             "name": "ADD_OPERATION_USER",
-            "summary": "",
+            "summary": "Validaci\u00F3n\u0020para\u0020a\u00F1adir\u0020una\u0020operaci\u00F3n\u0020de\u0020ingreso\u0020del\u0020usuario",
             "url": "classes/App-Enums-ValidationEnum.html#enumcase_ADD_OPERATION_USER"
         },                {
             "fqsen": "\\App\\Enums\\ValidationEnum\u003A\u003AVALIDATE_ID_ONLY",
             "name": "VALIDATE_ID_ONLY",
-            "summary": "",
+            "summary": "Validaci\u00F3n\u0020que\u0020solo\u0020requiere\u0020verificar\u0020el\u0020ID",
             "url": "classes/App-Enums-ValidationEnum.html#enumcase_VALIDATE_ID_ONLY"
         },                {
             "fqsen": "\\App\\Enums\\ValidationEnum\u003A\u003AGET_OPERATIONS_OFFSET",
             "name": "GET_OPERATIONS_OFFSET",
-            "summary": "",
+            "summary": "Validaci\u00F3n\u0020para\u0020obtener\u0020operaciones\u0020con\u0020paginaci\u00F3n\u0020por\u0020offset",
             "url": "classes/App-Enums-ValidationEnum.html#enumcase_GET_OPERATIONS_OFFSET"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\AccountController",
             "name": "AccountController",
-            "summary": "",
+            "summary": "Controlador\u0020AccountController",
             "url": "classes/App-Http-Controllers-AccountController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\AccountController\u003A\u003AgetAccountByUserId\u0028\u0029",
             "name": "getAccountByUserId",
-            "summary": "",
+            "summary": "Obtiene\u0020la\u0020cuenta\u0020asociada\u0020a\u0020un\u0020usuario\u0020por\u0020su\u0020ID.",
             "url": "classes/App-Http-Controllers-AccountController.html#method_getAccountByUserId"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\AccountController\u003A\u003AgetTotalSavedByAccountId\u0028\u0029",
             "name": "getTotalSavedByAccountId",
-            "summary": "",
+            "summary": "Devuelve\u0020el\u0020total\u0020ahorrado\u0020por\u0020una\u0020cuenta\u0020espec\u00EDfica.",
             "url": "classes/App-Http-Controllers-AccountController.html#method_getTotalSavedByAccountId"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\BaseCategoryController",
             "name": "BaseCategoryController",
-            "summary": "",
+            "summary": "Controlador\u0020BaseCategoryController",
             "url": "classes/App-Http-Controllers-BaseCategoryController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\BaseCategoryController\u003A\u003AlistAllBaseCategories\u0028\u0029",
             "name": "listAllBaseCategories",
-            "summary": "",
+            "summary": "Devuelve\u0020un\u0020listado\u0020de\u0020todas\u0020las\u0020categor\u00EDas\u0020base.",
             "url": "classes/App-Http-Controllers-BaseCategoryController.html#method_listAllBaseCategories"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\BaseCategoryController\u003A\u003AaddBaseCategory\u0028\u0029",
             "name": "addBaseCategory",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020una\u0020nueva\u0020categor\u00EDa\u0020base\u0020si\u0020los\u0020datos\u0020son\u0020v\u00E1lidos.",
             "url": "classes/App-Http-Controllers-BaseCategoryController.html#method_addBaseCategory"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\BaseCategoryController\u003A\u003AeditBaseCategory\u0028\u0029",
             "name": "editBaseCategory",
-            "summary": "",
+            "summary": "Edita\u0020una\u0020categor\u00EDa\u0020base\u0020existente\u0020si\u0020los\u0020datos\u0020son\u0020v\u00E1lidos.",
             "url": "classes/App-Http-Controllers-BaseCategoryController.html#method_editBaseCategory"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\CategoryController",
             "name": "CategoryController",
-            "summary": "",
+            "summary": "Controlador\u0020CategoryController",
             "url": "classes/App-Http-Controllers-CategoryController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\CategoryController\u003A\u003AnumberOfCategories\u0028\u0029",
             "name": "numberOfCategories",
-            "summary": "",
+            "summary": "Devuelve\u0020el\u0020n\u00FAmero\u0020total\u0020de\u0020categor\u00EDas\u0020registradas.",
             "url": "classes/App-Http-Controllers-CategoryController.html#method_numberOfCategories"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\CategoryController\u003A\u003AdeleteCategoryUser\u0028\u0029",
             "name": "deleteCategoryUser",
-            "summary": "",
+            "summary": "Elimina\u0020una\u0020categor\u00EDa\u0020de\u0020usuario\u0020por\u0020su\u0020ID.",
             "url": "classes/App-Http-Controllers-CategoryController.html#method_deleteCategoryUser"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\CategoryController\u003A\u003AdeleteCategory\u0028\u0029",
             "name": "deleteCategory",
-            "summary": "",
+            "summary": "Elimina\u0020una\u0020categor\u00EDa\u0020a\u0020partir\u0020de\u0020los\u0020datos\u0020validados.",
             "url": "classes/App-Http-Controllers-CategoryController.html#method_deleteCategory"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\CategoryController\u003A\u003AupdateCategory\u0028\u0029",
             "name": "updateCategory",
-            "summary": "",
+            "summary": "Actualiza\u0020una\u0020categor\u00EDa\u0020existente.",
             "url": "classes/App-Http-Controllers-CategoryController.html#method_updateCategory"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\CategoryController\u003A\u003AaddUserCategory\u0028\u0029",
             "name": "addUserCategory",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020una\u0020nueva\u0020categor\u00EDa\u0020personalizada\u0020para\u0020el\u0020usuario\u0020autenticado.",
             "url": "classes/App-Http-Controllers-CategoryController.html#method_addUserCategory"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\CategoryController\u003A\u003AgetCategory\u0028\u0029",
             "name": "getCategory",
-            "summary": "",
+            "summary": "Obtiene\u0020una\u0020categor\u00EDa\u0020espec\u00EDfica\u0020por\u0020su\u0020ID.",
             "url": "classes/App-Http-Controllers-CategoryController.html#method_getCategory"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\CategoryController\u003A\u003AgetEnabledMovementTypes\u0028\u0029",
             "name": "getEnabledMovementTypes",
-            "summary": "",
+            "summary": "Devuelve\u0020los\u0020tipos\u0020de\u0020movimiento\u0020habilitados.",
             "url": "classes/App-Http-Controllers-CategoryController.html#method_getEnabledMovementTypes"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\CategoryController\u003A\u003AgetAllBaseCategories\u0028\u0029",
             "name": "getAllBaseCategories",
-            "summary": "",
+            "summary": "Devuelve\u0020todas\u0020las\u0020categor\u00EDas\u0020base\u0020disponibles.",
             "url": "classes/App-Http-Controllers-CategoryController.html#method_getAllBaseCategories"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\CategoryController\u003A\u003AgetPersonalCategoriesByUserId\u0028\u0029",
             "name": "getPersonalCategoriesByUserId",
-            "summary": "",
+            "summary": "Devuelve\u0020las\u0020categor\u00EDas\u0020personales\u0020asociadas\u0020a\u0020un\u0020usuario.",
             "url": "classes/App-Http-Controllers-CategoryController.html#method_getPersonalCategoriesByUserId"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\Controller",
@@ -238,187 +243,182 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Http\\Controllers\\DashboardController",
             "name": "DashboardController",
-            "summary": "",
+            "summary": "Controlador\u0020DashboardController",
             "url": "classes/App-Http-Controllers-DashboardController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\DashboardController\u003A\u003Aindex\u0028\u0029",
             "name": "index",
-            "summary": "",
+            "summary": "Redirige\u0020al\u0020panel\u0020correspondiente\u0020seg\u00FAn\u0020el\u0020tipo\u0020de\u0020usuario.",
             "url": "classes/App-Http-Controllers-DashboardController.html#method_index"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\EndPointController",
             "name": "EndPointController",
-            "summary": "",
+            "summary": "Controlador\u0020EndPointController",
             "url": "classes/App-Http-Controllers-EndPointController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\EndPointController\u003A\u003AgetAllEnabledEndPoints\u0028\u0029",
             "name": "getAllEnabledEndPoints",
-            "summary": "",
+            "summary": "Obtiene\u0020todos\u0020los\u0020endpoints\u0020habilitados\u0020en\u0020el\u0020sistema.",
             "url": "classes/App-Http-Controllers-EndPointController.html#method_getAllEnabledEndPoints"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\EndPointController\u003A\u003AgetEndPointById\u0028\u0029",
             "name": "getEndPointById",
-            "summary": "",
+            "summary": "Devuelve\u0020un\u0020endpoint\u0020por\u0020su\u0020ID\u0020con\u0020procesamiento\u0020adicional\u0020de\u0020datos.",
             "url": "classes/App-Http-Controllers-EndPointController.html#method_getEndPointById"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\EndPointController\u003A\u003AaddEndPoint\u0028\u0029",
             "name": "addEndPoint",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020un\u0020nuevo\u0020endpoint\u0020al\u0020sistema\u0020si\u0020los\u0020datos\u0020son\u0020v\u00E1lidos.",
             "url": "classes/App-Http-Controllers-EndPointController.html#method_addEndPoint"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\EndPointController\u003A\u003AeditEndPoint\u0028\u0029",
             "name": "editEndPoint",
-            "summary": "",
+            "summary": "Edita\u0020un\u0020endpoint\u0020existente\u0020si\u0020los\u0020datos\u0020son\u0020v\u00E1lidos.",
             "url": "classes/App-Http-Controllers-EndPointController.html#method_editEndPoint"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\EndPointController\u003A\u003AdeleteEndPoint\u0028\u0029",
             "name": "deleteEndPoint",
-            "summary": "",
+            "summary": "Elimina\u0020un\u0020endpoint\u0020si\u0020el\u0020ID\u0020es\u0020v\u00E1lido.",
             "url": "classes/App-Http-Controllers-EndPointController.html#method_deleteEndPoint"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\GoogleController",
             "name": "GoogleController",
-            "summary": "",
+            "summary": "Controlador\u0020GoogleController",
             "url": "classes/App-Http-Controllers-GoogleController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\GoogleController\u003A\u003AredirectToGoogle\u0028\u0029",
             "name": "redirectToGoogle",
-            "summary": "",
+            "summary": "Redirige\u0020al\u0020usuario\u0020a\u0020la\u0020p\u00E1gina\u0020de\u0020autenticaci\u00F3n\u0020de\u0020Google.",
             "url": "classes/App-Http-Controllers-GoogleController.html#method_redirectToGoogle"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\GoogleController\u003A\u003AhandleGoogleCallback\u0028\u0029",
             "name": "handleGoogleCallback",
-            "summary": "",
+            "summary": "Maneja\u0020la\u0020respuesta\u0020de\u0020Google\u0020tras\u0020la\u0020autenticaci\u00F3n.",
             "url": "classes/App-Http-Controllers-GoogleController.html#method_handleGoogleCallback"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\IconController",
             "name": "IconController",
-            "summary": "",
+            "summary": "Controlador\u0020IconController",
             "url": "classes/App-Http-Controllers-IconController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\IconController\u003A\u003AgetAllIcons\u0028\u0029",
             "name": "getAllIcons",
-            "summary": "",
+            "summary": "Obtiene\u0020todos\u0020los\u0020iconos\u0020habilitados.",
             "url": "classes/App-Http-Controllers-IconController.html#method_getAllIcons"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\IconController\u003A\u003AnumberOfIcons\u0028\u0029",
             "name": "numberOfIcons",
-            "summary": "",
+            "summary": "Devuelve\u0020el\u0020n\u00FAmero\u0020total\u0020de\u0020iconos\u0020registrados.",
             "url": "classes/App-Http-Controllers-IconController.html#method_numberOfIcons"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\IconController\u003A\u003AaddIcon\u0028\u0029",
             "name": "addIcon",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020un\u0020nuevo\u0020icono\u0020al\u0020sistema.",
             "url": "classes/App-Http-Controllers-IconController.html#method_addIcon"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\IconController\u003A\u003AeditIcon\u0028\u0029",
             "name": "editIcon",
-            "summary": "",
+            "summary": "Edita\u0020un\u0020icono\u0020existente.",
             "url": "classes/App-Http-Controllers-IconController.html#method_editIcon"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\IconController\u003A\u003AdeleteIcon\u0028\u0029",
             "name": "deleteIcon",
-            "summary": "",
+            "summary": "Elimina\u0020un\u0020icono\u0020existente\u0020del\u0020sistema.",
             "url": "classes/App-Http-Controllers-IconController.html#method_deleteIcon"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\NoProgrammedController",
             "name": "NoProgrammedController",
-            "summary": "",
+            "summary": "Controlador\u0020NoProgrammedController",
             "url": "classes/App-Http-Controllers-NoProgrammedController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\ObjectiveController",
             "name": "ObjectiveController",
-            "summary": "",
+            "summary": "Controlador\u0020ObjectiveController",
             "url": "classes/App-Http-Controllers-ObjectiveController.html"
-        },                {
-            "fqsen": "\\App\\Http\\Controllers\\ObjectiveController\u003A\u003AgetObjectives\u0028\u0029",
-            "name": "getObjectives",
-            "summary": "",
-            "url": "classes/App-Http-Controllers-ObjectiveController.html#method_getObjectives"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\ObjectiveController\u003A\u003AgetObjective\u0028\u0029",
             "name": "getObjective",
-            "summary": "",
+            "summary": "Obtiene\u0020un\u0020objetivo\u0020por\u0020su\u0020ID.",
             "url": "classes/App-Http-Controllers-ObjectiveController.html#method_getObjective"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\ObjectiveController\u003A\u003AaddObjective\u0028\u0029",
             "name": "addObjective",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020un\u0020nuevo\u0020objetivo.",
             "url": "classes/App-Http-Controllers-ObjectiveController.html#method_addObjective"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\ObjectiveController\u003A\u003AupdateObjective\u0028\u0029",
             "name": "updateObjective",
-            "summary": "",
+            "summary": "Actualiza\u0020un\u0020objetivo\u0020existente.",
             "url": "classes/App-Http-Controllers-ObjectiveController.html#method_updateObjective"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\ObjectiveController\u003A\u003AdeleteObjective\u0028\u0029",
             "name": "deleteObjective",
-            "summary": "",
+            "summary": "Elimina\u0020un\u0020objetivo\u0020por\u0020su\u0020ID.",
             "url": "classes/App-Http-Controllers-ObjectiveController.html#method_deleteObjective"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\ObjectiveController\u003A\u003AgetObjectivesByAccountId\u0028\u0029",
             "name": "getObjectivesByAccountId",
-            "summary": "",
+            "summary": "Obtiene\u0020todos\u0020los\u0020objetivos\u0020de\u0020una\u0020cuenta\u0020por\u0020su\u0020ID.",
             "url": "classes/App-Http-Controllers-ObjectiveController.html#method_getObjectivesByAccountId"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\OperationController",
             "name": "OperationController",
-            "summary": "",
+            "summary": "Controlador\u0020OperationController",
             "url": "classes/App-Http-Controllers-OperationController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\OperationController\u003A\u003AgetSixOperationsByAccountId\u0028\u0029",
             "name": "getSixOperationsByAccountId",
-            "summary": "",
+            "summary": "Obtiene\u0020las\u00206\u0020operaciones\u0020m\u00E1s\u0020recientes\u0020por\u0020cuenta.",
             "url": "classes/App-Http-Controllers-OperationController.html#method_getSixOperationsByAccountId"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\OperationController\u003A\u003AthisMonthOperationsByAccountId\u0028\u0029",
             "name": "thisMonthOperationsByAccountId",
-            "summary": "",
+            "summary": "Obtiene\u0020todas\u0020las\u0020operaciones\u0020del\u0020mes\u0020actual\u0020por\u0020cuenta.",
             "url": "classes/App-Http-Controllers-OperationController.html#method_thisMonthOperationsByAccountId"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\OperationController\u003A\u003AgetAllIncomesByAccountId\u0028\u0029",
             "name": "getAllIncomesByAccountId",
-            "summary": "",
+            "summary": "Devuelve\u0020todos\u0020los\u0020ingresos\u0020de\u0020una\u0020cuenta.",
             "url": "classes/App-Http-Controllers-OperationController.html#method_getAllIncomesByAccountId"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\OperationController\u003A\u003AgetAllExpensesByAccountId\u0028\u0029",
             "name": "getAllExpensesByAccountId",
-            "summary": "",
+            "summary": "Devuelve\u0020todos\u0020los\u0020gastos\u0020de\u0020una\u0020cuenta.",
             "url": "classes/App-Http-Controllers-OperationController.html#method_getAllExpensesByAccountId"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\OperationController\u003A\u003AincomeOperations\u0028\u0029",
             "name": "incomeOperations",
-            "summary": "",
+            "summary": "Devuelve\u0020ingresos\u0020con\u0020paginaci\u00F3n.",
             "url": "classes/App-Http-Controllers-OperationController.html#method_incomeOperations"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\OperationController\u003A\u003AexpenseOperations\u0028\u0029",
             "name": "expenseOperations",
-            "summary": "",
+            "summary": "Devuelve\u0020gastos\u0020con\u0020paginaci\u00F3n.",
             "url": "classes/App-Http-Controllers-OperationController.html#method_expenseOperations"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\OperationController\u003A\u003AsaveOperations\u0028\u0029",
             "name": "saveOperations",
-            "summary": "",
+            "summary": "Devuelve\u0020ahorros\u0020con\u0020paginaci\u00F3n.",
             "url": "classes/App-Http-Controllers-OperationController.html#method_saveOperations"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\OperationController\u003A\u003AgetAllOperationsWithLimitByAccountId\u0028\u0029",
             "name": "getAllOperationsWithLimitByAccountId",
-            "summary": "",
+            "summary": "Devuelve\u0020operaciones\u0020paginadas\u0020por\u0020cuenta.",
             "url": "classes/App-Http-Controllers-OperationController.html#method_getAllOperationsWithLimitByAccountId"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\OperationController\u003A\u003AdeleteOperation\u0028\u0029",
             "name": "deleteOperation",
-            "summary": "",
+            "summary": "Elimina\u0020una\u0020operaci\u00F3n\u0020por\u0020ID\u0020y\u0020actualiza\u0020las\u0020entidades\u0020relacionadas.",
             "url": "classes/App-Http-Controllers-OperationController.html#method_deleteOperation"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\OperationController\u003A\u003AgetOperationById\u0028\u0029",
             "name": "getOperationById",
-            "summary": "",
+            "summary": "Devuelve\u0020una\u0020operaci\u00F3n\u0020por\u0020su\u0020ID.",
             "url": "classes/App-Http-Controllers-OperationController.html#method_getOperationById"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\OperationController\u003A\u003AaddOperationRequested\u0028\u0029",
             "name": "addOperationRequested",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020una\u0020operaci\u00F3n\u0020solicitada\u0020seg\u00FAn\u0020el\u0020tipo\u0020\u0028ingreso,\u0020gasto\u0020o\u0020ahorro\u0029.",
             "url": "classes/App-Http-Controllers-OperationController.html#method_addOperationRequested"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\OperationController\u003A\u003A\u0024movement_type",
@@ -428,52 +428,52 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Http\\Controllers\\ProgrammedController",
             "name": "ProgrammedController",
-            "summary": "",
+            "summary": "Controlador\u0020ProgrammedController",
             "url": "classes/App-Http-Controllers-ProgrammedController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\RoleController",
             "name": "RoleController",
-            "summary": "",
+            "summary": "Controlador\u0020RoleController",
             "url": "classes/App-Http-Controllers-RoleController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SentenceController",
             "name": "SentenceController",
-            "summary": "",
+            "summary": "Controlador\u0020SentenceController",
             "url": "classes/App-Http-Controllers-SentenceController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SentenceController\u003A\u003AlistSentences\u0028\u0029",
             "name": "listSentences",
-            "summary": "",
+            "summary": "Muestra\u0020la\u0020vista\u0020con\u0020todas\u0020las\u0020frases\u0020habilitadas.",
             "url": "classes/App-Http-Controllers-SentenceController.html#method_listSentences"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SentenceController\u003A\u003AnumberOfSentences\u0028\u0029",
             "name": "numberOfSentences",
-            "summary": "",
+            "summary": "Devuelve\u0020el\u0020n\u00FAmero\u0020total\u0020de\u0020frases\u0020registradas.",
             "url": "classes/App-Http-Controllers-SentenceController.html#method_numberOfSentences"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SentenceController\u003A\u003AaddSentence\u0028\u0029",
             "name": "addSentence",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020una\u0020nueva\u0020frase\u0020al\u0020sistema\u0020si\u0020los\u0020datos\u0020son\u0020v\u00E1lidos.",
             "url": "classes/App-Http-Controllers-SentenceController.html#method_addSentence"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SentenceController\u003A\u003AeditSentence\u0028\u0029",
             "name": "editSentence",
-            "summary": "",
+            "summary": "Edita\u0020una\u0020frase\u0020existente\u0020si\u0020los\u0020datos\u0020son\u0020v\u00E1lidos.",
             "url": "classes/App-Http-Controllers-SentenceController.html#method_editSentence"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SentenceController\u003A\u003AdeleteSentence\u0028\u0029",
             "name": "deleteSentence",
-            "summary": "",
+            "summary": "Elimina\u0020una\u0020frase\u0020por\u0020su\u0020ID\u0020si\u0020los\u0020datos\u0020son\u0020v\u00E1lidos.",
             "url": "classes/App-Http-Controllers-SentenceController.html#method_deleteSentence"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\UserCategoryController",
             "name": "UserCategoryController",
-            "summary": "",
+            "summary": "Controlador\u0020UserCategoryController",
             "url": "classes/App-Http-Controllers-UserCategoryController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\UserController",
             "name": "UserController",
-            "summary": "",
+            "summary": "Controlador\u0020encargado\u0020de\u0020gestionar\u0020las\u0020acciones\u0020relacionadas\u0020con\u0020los\u0020usuarios,\nincluyendo\u0020su\u0020creaci\u00F3n,\u0020actualizaci\u00F3n,\u0020eliminaci\u00F3n\u0020y\u0020configuraci\u00F3n\u0020inicial.",
             "url": "classes/App-Http-Controllers-UserController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\UserController\u003A\u003AlistUsers\u0028\u0029",
@@ -551,6 +551,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Http-Controllers-UserController.html#method_updatePersonalAccounts"
         },                {
+            "fqsen": "\\App\\Http\\Controllers\\UserController\u003A\u003AupdatePersonalObjetives\u0028\u0029",
+            "name": "updatePersonalObjetives",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-UserController.html#method_updatePersonalObjetives"
+        },                {
             "fqsen": "\\App\\Http\\Controllers\\UserController\u003A\u003A\u0024delete",
             "name": "delete",
             "summary": "",
@@ -611,6 +616,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Http-Controllers-UserController.html#property_accounts"
         },                {
+            "fqsen": "\\App\\Http\\Controllers\\UserController\u003A\u003A\u0024objetives",
+            "name": "objetives",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-UserController.html#property_objetives"
+        },                {
             "fqsen": "\\App\\Http\\Controllers\\UserController\u003A\u003A\u0024accountMovementsTypes",
             "name": "accountMovementsTypes",
             "summary": "",
@@ -623,7 +633,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Http\\Controllers\\UsersAccountController",
             "name": "UsersAccountController",
-            "summary": "",
+            "summary": "Controlador\u0020reservado\u0020para\u0020futuras\u0020operaciones\u0020relacionadas\u0020con\nlas\u0020cuentas\u0020de\u0020usuario.",
             "url": "classes/App-Http-Controllers-UsersAccountController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\UsersFriendController",
@@ -633,12 +643,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Http\\Middleware\\CheckRole",
             "name": "CheckRole",
-            "summary": "",
+            "summary": "Middleware\u0020que\u0020verifica\u0020si\u0020el\u0020usuario\u0020autenticado\u0020tiene\u0020alguno\u0020de\u0020los\u0020roles\u0020permitidos.",
             "url": "classes/App-Http-Middleware-CheckRole.html"
         },                {
             "fqsen": "\\App\\Http\\Middleware\\CheckRole\u003A\u003Ahandle\u0028\u0029",
             "name": "handle",
-            "summary": "Handle\u0020an\u0020incoming\u0020request.",
+            "summary": "Maneja\u0020una\u0020solicitud\u0020entrante.",
             "url": "classes/App-Http-Middleware-CheckRole.html#method_handle"
         },                {
             "fqsen": "\\App\\Mail\\CustomResetPasswordMail",
@@ -668,552 +678,557 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Account",
             "name": "Account",
-            "summary": "",
+            "summary": "Modelo\u0020que\u0020representa\u0020una\u0020cuenta\u0020financiera\u0020de\u0020un\u0020usuario.",
             "url": "classes/App-Models-Account.html"
         },                {
             "fqsen": "\\App\\Models\\Account\u003A\u003AaddAccount\u0028\u0029",
             "name": "addAccount",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020una\u0020nueva\u0020cuenta.",
             "url": "classes/App-Models-Account.html#method_addAccount"
         },                {
             "fqsen": "\\App\\Models\\Account\u003A\u003AgetAccountByUserId\u0028\u0029",
             "name": "getAccountByUserId",
-            "summary": "",
+            "summary": "Obtiene\u0020la\u0020cuenta\u0020asociada\u0020a\u0020un\u0020usuario.",
             "url": "classes/App-Models-Account.html#method_getAccountByUserId"
         },                {
             "fqsen": "\\App\\Models\\Account\u003A\u003AupdateAccountBalance\u0028\u0029",
             "name": "updateAccountBalance",
-            "summary": "",
+            "summary": "Actualiza\u0020el\u0020balance\u0020de\u0020la\u0020cuenta.",
             "url": "classes/App-Models-Account.html#method_updateAccountBalance"
         },                {
             "fqsen": "\\App\\Models\\Account\u003A\u003AaddIncomeToBalance\u0028\u0029",
             "name": "addIncomeToBalance",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020un\u0020ingreso\u0020al\u0020balance\u0020de\u0020la\u0020cuenta.",
             "url": "classes/App-Models-Account.html#method_addIncomeToBalance"
         },                {
             "fqsen": "\\App\\Models\\Account\u003A\u003AaddExpenseToBalance\u0028\u0029",
             "name": "addExpenseToBalance",
-            "summary": "",
+            "summary": "Resta\u0020un\u0020gasto\u0020del\u0020balance\u0020de\u0020la\u0020cuenta.",
             "url": "classes/App-Models-Account.html#method_addExpenseToBalance"
         },                {
             "fqsen": "\\App\\Models\\Account\u003A\u003AupdateSaveToTotalSave\u0028\u0029",
             "name": "updateSaveToTotalSave",
-            "summary": "",
+            "summary": "Actualiza\u0020el\u0020total\u0020ahorrado\u0020de\u0020la\u0020cuenta.",
             "url": "classes/App-Models-Account.html#method_updateSaveToTotalSave"
         },                {
             "fqsen": "\\App\\Models\\Account\u003A\u003AaddSaveToTotalSave\u0028\u0029",
             "name": "addSaveToTotalSave",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020un\u0020ahorro\u0020al\u0020total\u0020ahorrado.",
             "url": "classes/App-Models-Account.html#method_addSaveToTotalSave"
         },                {
             "fqsen": "\\App\\Models\\Account\u003A\u003AgetTotalSavedByAccountId\u0028\u0029",
             "name": "getTotalSavedByAccountId",
-            "summary": "",
+            "summary": "Obtiene\u0020el\u0020total\u0020ahorrado\u0020por\u0020ID\u0020de\u0020cuenta.",
             "url": "classes/App-Models-Account.html#method_getTotalSavedByAccountId"
         },                {
             "fqsen": "\\App\\Models\\Account\u003A\u003Ausers\u0028\u0029",
             "name": "users",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020con\u0020el\u0020modelo\u0020User\u0020\u0028usuarios\u0020asociados\u0020a\u0020la\u0020cuenta\u0029.",
             "url": "classes/App-Models-Account.html#method_users"
         },                {
             "fqsen": "\\App\\Models\\Account\u003A\u003Aobjectives\u0028\u0029",
             "name": "objectives",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020con\u0020los\u0020objetivos\u0020financieros\u0020de\u0020la\u0020cuenta.",
             "url": "classes/App-Models-Account.html#method_objectives"
         },                {
             "fqsen": "\\App\\Models\\Account\u003A\u003Aoperations\u0028\u0029",
             "name": "operations",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020con\u0020las\u0020operaciones\u0020financieras\u0020realizadas.",
             "url": "classes/App-Models-Account.html#method_operations"
         },                {
             "fqsen": "\\App\\Models\\Account\u003A\u003Aicon\u0028\u0029",
             "name": "icon",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020con\u0020el\u0020icono\u0020asignado\u0020a\u0020la\u0020cuenta.",
             "url": "classes/App-Models-Account.html#method_icon"
         },                {
             "fqsen": "\\App\\Models\\Account\u003A\u003A\u0024table",
             "name": "table",
-            "summary": "",
+            "summary": "Nombre\u0020de\u0020la\u0020tabla\u0020asociada\u0020al\u0020modelo.",
             "url": "classes/App-Models-Account.html#property_table"
         },                {
             "fqsen": "\\App\\Models\\Account\u003A\u003A\u0024fillable",
             "name": "fillable",
-            "summary": "",
+            "summary": "Atributos\u0020asignables\u0020en\u0020masa.",
             "url": "classes/App-Models-Account.html#property_fillable"
         },                {
             "fqsen": "\\App\\Models\\BaseCategory",
             "name": "BaseCategory",
-            "summary": "",
+            "summary": "Modelo\u0020BaseCategory\u0020que\u0020representa\u0020las\u0020categor\u00EDas\u0020base\u0020del\u0020sistema.",
             "url": "classes/App-Models-BaseCategory.html"
         },                {
             "fqsen": "\\App\\Models\\BaseCategory\u003A\u003AlistAllBaseCategories\u0028\u0029",
             "name": "listAllBaseCategories",
-            "summary": "",
+            "summary": "Obtiene\u0020todas\u0020las\u0020categor\u00EDas\u0020base\u0020habilitadas\u0020junto\u0020con\u0020sus\u0020iconos\u0020y\u0020tipos\u0020de\u0020movimiento.",
             "url": "classes/App-Models-BaseCategory.html#method_listAllBaseCategories"
         },                {
             "fqsen": "\\App\\Models\\BaseCategory\u003A\u003AaddBaseCategory\u0028\u0029",
             "name": "addBaseCategory",
-            "summary": "",
+            "summary": "Crea\u0020una\u0020nueva\u0020categor\u00EDa\u0020base\u0020y\u0020sincroniza\u0020sus\u0020tipos\u0020de\u0020movimiento.",
             "url": "classes/App-Models-BaseCategory.html#method_addBaseCategory"
         },                {
             "fqsen": "\\App\\Models\\BaseCategory\u003A\u003AeditBaseCategory\u0028\u0029",
             "name": "editBaseCategory",
-            "summary": "",
+            "summary": "Edita\u0020una\u0020categor\u00EDa\u0020base\u0020existente\u0020actualizando\u0020su\u0020nombre,\u0020icono\u0020y\u0020tipos\u0020de\u0020movimiento.",
             "url": "classes/App-Models-BaseCategory.html#method_editBaseCategory"
         },                {
             "fqsen": "\\App\\Models\\BaseCategory\u003A\u003Acategory\u0028\u0029",
             "name": "category",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020con\u0020el\u0020modelo\u0020Category\u0020\u0028categor\u00EDa\u0020asociada\u0029.",
             "url": "classes/App-Models-BaseCategory.html#method_category"
         },                {
             "fqsen": "\\App\\Models\\BaseCategory\u003A\u003A\u0024table",
             "name": "table",
-            "summary": "",
+            "summary": "Nombre\u0020de\u0020la\u0020tabla\u0020asociada\u0020al\u0020modelo.",
             "url": "classes/App-Models-BaseCategory.html#property_table"
         },                {
             "fqsen": "\\App\\Models\\BaseCategory\u003A\u003A\u0024fillable",
             "name": "fillable",
-            "summary": "",
+            "summary": "Atributos\u0020que\u0020se\u0020pueden\u0020asignar\u0020masivamente.",
             "url": "classes/App-Models-BaseCategory.html#property_fillable"
         },                {
             "fqsen": "\\App\\Models\\Category",
             "name": "Category",
-            "summary": "",
+            "summary": "Modelo\u0020Category\u0020que\u0020representa\u0020las\u0020categor\u00EDas\u0020del\u0020sistema.",
             "url": "classes/App-Models-Category.html"
         },                {
             "fqsen": "\\App\\Models\\Category\u003A\u003AnumberOfCategories\u0028\u0029",
             "name": "numberOfCategories",
-            "summary": "",
+            "summary": "Obtiene\u0020el\u0020n\u00FAmero\u0020total\u0020de\u0020categor\u00EDas\u0020registradas.",
             "url": "classes/App-Models-Category.html#method_numberOfCategories"
         },                {
             "fqsen": "\\App\\Models\\Category\u003A\u003AaddCategory\u0028\u0029",
             "name": "addCategory",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020una\u0020nueva\u0020categor\u00EDa\u0020con\u0020un\u0020nombre\u0020y\u0020un\u0020icono.",
             "url": "classes/App-Models-Category.html#method_addCategory"
         },                {
             "fqsen": "\\App\\Models\\Category\u003A\u003AupdateCategory\u0028\u0029",
             "name": "updateCategory",
-            "summary": "",
+            "summary": "Actualiza\u0020los\u0020datos\u0020de\u0020una\u0020categor\u00EDa\u0020existente.",
             "url": "classes/App-Models-Category.html#method_updateCategory"
         },                {
             "fqsen": "\\App\\Models\\Category\u003A\u003AaddUserCategory\u0028\u0029",
             "name": "addUserCategory",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020una\u0020categor\u00EDa\u0020personalizada\u0020de\u0020usuario.",
             "url": "classes/App-Models-Category.html#method_addUserCategory"
         },                {
             "fqsen": "\\App\\Models\\Category\u003A\u003AgetCategory\u0028\u0029",
             "name": "getCategory",
-            "summary": "",
+            "summary": "Obtiene\u0020una\u0020categor\u00EDa\u0020habilitada\u0020por\u0020su\u0020ID\u0020con\u0020sus\u0020tipos\u0020de\u0020movimiento.",
             "url": "classes/App-Models-Category.html#method_getCategory"
         },                {
             "fqsen": "\\App\\Models\\Category\u003A\u003AdeleteCategory\u0028\u0029",
             "name": "deleteCategory",
-            "summary": "",
+            "summary": "Marca\u0020una\u0020categor\u00EDa\u0020como\u0020deshabilitada.",
             "url": "classes/App-Models-Category.html#method_deleteCategory"
         },                {
             "fqsen": "\\App\\Models\\Category\u003A\u003AgetPersonalCategoriesByUserId\u0028\u0029",
             "name": "getPersonalCategoriesByUserId",
-            "summary": "",
+            "summary": "Obtiene\u0020las\u0020categor\u00EDas\u0020personales\u0020habilitadas\u0020de\u0020un\u0020usuario.",
             "url": "classes/App-Models-Category.html#method_getPersonalCategoriesByUserId"
         },                {
             "fqsen": "\\App\\Models\\Category\u003A\u003Aoperations\u0028\u0029",
             "name": "operations",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020uno\u0020a\u0020muchos\u0020con\u0020operaciones.",
             "url": "classes/App-Models-Category.html#method_operations"
         },                {
             "fqsen": "\\App\\Models\\Category\u003A\u003Aicon\u0028\u0029",
             "name": "icon",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020con\u0020el\u0020icono\u0020de\u0020la\u0020categor\u00EDa.",
             "url": "classes/App-Models-Category.html#method_icon"
         },                {
             "fqsen": "\\App\\Models\\Category\u003A\u003AmovementTypes\u0028\u0029",
             "name": "movementTypes",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020muchos\u0020a\u0020muchos\u0020con\u0020tipos\u0020de\u0020movimiento.",
             "url": "classes/App-Models-Category.html#method_movementTypes"
         },                {
             "fqsen": "\\App\\Models\\Category\u003A\u003A\u0024table",
             "name": "table",
-            "summary": "",
+            "summary": "Nombre\u0020de\u0020la\u0020tabla\u0020asociada\u0020al\u0020modelo.",
             "url": "classes/App-Models-Category.html#property_table"
         },                {
             "fqsen": "\\App\\Models\\Category\u003A\u003A\u0024fillable",
             "name": "fillable",
-            "summary": "",
+            "summary": "Atributos\u0020que\u0020se\u0020pueden\u0020asignar\u0020masivamente.",
             "url": "classes/App-Models-Category.html#property_fillable"
         },                {
             "fqsen": "\\App\\Models\\EndPoint",
             "name": "EndPoint",
-            "summary": "",
+            "summary": "Modelo\u0020EndPoint\u0020que\u0020gestiona\u0020los\u0020endpoints\u0020disponibles\u0020en\u0020el\u0020sistema.",
             "url": "classes/App-Models-EndPoint.html"
         },                {
             "fqsen": "\\App\\Models\\EndPoint\u003A\u003AgetAllEnabledEndPoints\u0028\u0029",
             "name": "getAllEnabledEndPoints",
-            "summary": "",
+            "summary": "Obtiene\u0020todos\u0020los\u0020endpoints\u0020habilitados.",
             "url": "classes/App-Models-EndPoint.html#method_getAllEnabledEndPoints"
         },                {
             "fqsen": "\\App\\Models\\EndPoint\u003A\u003AgetEndPointById\u0028\u0029",
             "name": "getEndPointById",
-            "summary": "",
+            "summary": "Devuelve\u0020un\u0020endpoint\u0020habilitado\u0020por\u0020su\u0020ID.",
             "url": "classes/App-Models-EndPoint.html#method_getEndPointById"
         },                {
             "fqsen": "\\App\\Models\\EndPoint\u003A\u003AaddEndPoint\u0028\u0029",
             "name": "addEndPoint",
-            "summary": "",
+            "summary": "Crea\u0020un\u0020nuevo\u0020endpoint\u0020con\u0020los\u0020datos\u0020proporcionados.",
             "url": "classes/App-Models-EndPoint.html#method_addEndPoint"
         },                {
             "fqsen": "\\App\\Models\\EndPoint\u003A\u003AeditEndPoint\u0028\u0029",
             "name": "editEndPoint",
-            "summary": "",
+            "summary": "Edita\u0020un\u0020endpoint\u0020existente\u0020con\u0020los\u0020nuevos\u0020datos\u0020proporcionados.",
             "url": "classes/App-Models-EndPoint.html#method_editEndPoint"
         },                {
             "fqsen": "\\App\\Models\\EndPoint\u003A\u003AdeleteEndPoint\u0028\u0029",
             "name": "deleteEndPoint",
-            "summary": "",
+            "summary": "Deshabilita\u0020un\u0020endpoint\u0020l\u00F3gico\u0020por\u0020su\u0020ID.",
             "url": "classes/App-Models-EndPoint.html#method_deleteEndPoint"
         },                {
             "fqsen": "\\App\\Models\\EndPoint\u003A\u003A\u0024table",
             "name": "table",
-            "summary": "",
+            "summary": "Nombre\u0020de\u0020la\u0020tabla\u0020asociada\u0020al\u0020modelo.",
             "url": "classes/App-Models-EndPoint.html#property_table"
         },                {
             "fqsen": "\\App\\Models\\EndPoint\u003A\u003A\u0024fillable",
             "name": "fillable",
-            "summary": "",
+            "summary": "Atributos\u0020que\u0020se\u0020pueden\u0020asignar\u0020masivamente.",
             "url": "classes/App-Models-EndPoint.html#property_fillable"
         },                {
             "fqsen": "\\App\\Models\\Icon",
             "name": "Icon",
-            "summary": "",
+            "summary": "Modelo\u0020Icon\u0020que\u0020representa\u0020los\u0020iconos\u0020utilizados\u0020en\u0020categor\u00EDas\u0020y\u0020otras\u0020entidades.",
             "url": "classes/App-Models-Icon.html"
         },                {
             "fqsen": "\\App\\Models\\Icon\u003A\u003AgetAllIconsEnabled\u0028\u0029",
             "name": "getAllIconsEnabled",
-            "summary": "",
+            "summary": "Obtiene\u0020todos\u0020los\u0020iconos\u0020habilitados.",
             "url": "classes/App-Models-Icon.html#method_getAllIconsEnabled"
         },                {
             "fqsen": "\\App\\Models\\Icon\u003A\u003AnumberOfIcons\u0028\u0029",
             "name": "numberOfIcons",
-            "summary": "",
+            "summary": "Devuelve\u0020el\u0020n\u00FAmero\u0020total\u0020de\u0020iconos\u0020habilitados.",
             "url": "classes/App-Models-Icon.html#method_numberOfIcons"
         },                {
             "fqsen": "\\App\\Models\\Icon\u003A\u003AaddIcon\u0028\u0029",
             "name": "addIcon",
-            "summary": "",
+            "summary": "Crea\u0020un\u0020nuevo\u0020icono\u0020con\u0020el\u0020nombre\u0020proporcionado.",
             "url": "classes/App-Models-Icon.html#method_addIcon"
         },                {
             "fqsen": "\\App\\Models\\Icon\u003A\u003AeditIcon\u0028\u0029",
             "name": "editIcon",
-            "summary": "",
+            "summary": "Edita\u0020la\u0020clase\u0020CSS\u0020de\u0020un\u0020icono\u0020existente.",
             "url": "classes/App-Models-Icon.html#method_editIcon"
         },                {
             "fqsen": "\\App\\Models\\Icon\u003A\u003AdeleteIcon\u0028\u0029",
             "name": "deleteIcon",
-            "summary": "",
+            "summary": "Deshabilita\u0020un\u0020icono\u0020l\u00F3gico\u0020por\u0020su\u0020ID.",
             "url": "classes/App-Models-Icon.html#method_deleteIcon"
         },                {
             "fqsen": "\\App\\Models\\Icon\u003A\u003Acategories\u0028\u0029",
             "name": "categories",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020con\u0020las\u0020categor\u00EDas\u0020que\u0020usan\u0020este\u0020icono.",
             "url": "classes/App-Models-Icon.html#method_categories"
         },                {
             "fqsen": "\\App\\Models\\Icon\u003A\u003A\u0024table",
             "name": "table",
-            "summary": "",
+            "summary": "Nombre\u0020de\u0020la\u0020tabla\u0020asociada\u0020al\u0020modelo.",
             "url": "classes/App-Models-Icon.html#property_table"
         },                {
             "fqsen": "\\App\\Models\\Icon\u003A\u003A\u0024fillable",
             "name": "fillable",
-            "summary": "",
+            "summary": "Atributos\u0020que\u0020se\u0020pueden\u0020asignar\u0020masivamente.",
             "url": "classes/App-Models-Icon.html#property_fillable"
         },                {
             "fqsen": "\\App\\Models\\MovementType",
             "name": "MovementType",
-            "summary": "",
+            "summary": "Modelo\u0020MovementType\u0020que\u0020representa\u0020los\u0020tipos\u0020de\u0020movimiento\u0020\u0028ingreso,\u0020gasto,\u0020ahorro\u0029.",
             "url": "classes/App-Models-MovementType.html"
         },                {
             "fqsen": "\\App\\Models\\MovementType\u003A\u003AgetEnabledMovementTypes\u0028\u0029",
             "name": "getEnabledMovementTypes",
-            "summary": "",
+            "summary": "Obtiene\u0020todos\u0020los\u0020tipos\u0020de\u0020movimiento\u0020habilitados.",
             "url": "classes/App-Models-MovementType.html#method_getEnabledMovementTypes"
         },                {
             "fqsen": "\\App\\Models\\MovementType\u003A\u003A\u0024table",
             "name": "table",
-            "summary": "",
+            "summary": "Nombre\u0020de\u0020la\u0020tabla\u0020asociada\u0020al\u0020modelo.",
             "url": "classes/App-Models-MovementType.html#property_table"
         },                {
             "fqsen": "\\App\\Models\\MovementType\u003A\u003A\u0024fillable",
             "name": "fillable",
-            "summary": "",
+            "summary": "Atributos\u0020que\u0020se\u0020pueden\u0020asignar\u0020masivamente.",
             "url": "classes/App-Models-MovementType.html#property_fillable"
         },                {
             "fqsen": "\\App\\Models\\MovementTypeCategories",
             "name": "MovementTypeCategories",
-            "summary": "",
+            "summary": "Modelo\u0020MovementTypeCategories\u0020que\u0020representa\u0020la\u0020relaci\u00F3n\u0020entre\u0020tipos\u0020de\u0020movimiento\u0020y\u0020categor\u00EDas.",
             "url": "classes/App-Models-MovementTypeCategories.html"
         },                {
             "fqsen": "\\App\\Models\\MovementTypeCategories\u003A\u003AsyncTypesOfCategory\u0028\u0029",
             "name": "syncTypesOfCategory",
-            "summary": "",
+            "summary": "Sincroniza\u0020los\u0020tipos\u0020de\u0020movimiento\u0020asociados\u0020a\u0020una\u0020categor\u00EDa,\na\u00F1adiendo\u0020nuevos\u0020y\u0020eliminando\u0020los\u0020que\u0020ya\u0020no\u0020est\u00E1n\u0020presentes.",
             "url": "classes/App-Models-MovementTypeCategories.html#method_syncTypesOfCategory"
         },                {
             "fqsen": "\\App\\Models\\MovementTypeCategories\u003A\u003AaddMovementTypeCategory\u0028\u0029",
             "name": "addMovementTypeCategory",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020una\u0020nueva\u0020relaci\u00F3n\u0020entre\u0020tipo\u0020de\u0020movimiento\u0020y\u0020categor\u00EDa.",
             "url": "classes/App-Models-MovementTypeCategories.html#method_addMovementTypeCategory"
         },                {
             "fqsen": "\\App\\Models\\MovementTypeCategories\u003A\u003A\u0024table",
             "name": "table",
-            "summary": "",
+            "summary": "Nombre\u0020de\u0020la\u0020tabla\u0020asociada\u0020al\u0020modelo.",
             "url": "classes/App-Models-MovementTypeCategories.html#property_table"
         },                {
             "fqsen": "\\App\\Models\\MovementTypeCategories\u003A\u003A\u0024fillable",
             "name": "fillable",
-            "summary": "",
+            "summary": "Atributos\u0020que\u0020se\u0020pueden\u0020asignar\u0020masivamente.",
             "url": "classes/App-Models-MovementTypeCategories.html#property_fillable"
         },                {
             "fqsen": "\\App\\Models\\Objective",
             "name": "Objective",
-            "summary": "",
+            "summary": "Modelo\u0020Objective\u0020que\u0020representa\u0020los\u0020objetivos\u0020financieros\u0020de\u0020los\u0020usuarios.",
             "url": "classes/App-Models-Objective.html"
         },                {
             "fqsen": "\\App\\Models\\Objective\u003A\u003AaddObjective\u0028\u0029",
             "name": "addObjective",
-            "summary": "",
+            "summary": "Crea\u0020un\u0020nuevo\u0020objetivo.",
             "url": "classes/App-Models-Objective.html#method_addObjective"
         },                {
             "fqsen": "\\App\\Models\\Objective\u003A\u003AgetObjectives\u0028\u0029",
             "name": "getObjectives",
-            "summary": "",
+            "summary": "Obtiene\u0020todos\u0020los\u0020objetivos\u0020de\u0020una\u0020cuenta.",
             "url": "classes/App-Models-Objective.html#method_getObjectives"
         },                {
             "fqsen": "\\App\\Models\\Objective\u003A\u003AgetObjective\u0028\u0029",
             "name": "getObjective",
-            "summary": "",
+            "summary": "Obtiene\u0020un\u0020objetivo\u0020por\u0020su\u0020ID.",
             "url": "classes/App-Models-Objective.html#method_getObjective"
         },                {
             "fqsen": "\\App\\Models\\Objective\u003A\u003AgetObjectivesByAccountId\u0028\u0029",
             "name": "getObjectivesByAccountId",
-            "summary": "",
+            "summary": "Obtiene\u0020todos\u0020los\u0020objetivos\u0020activos\u0020por\u0020ID\u0020de\u0020cuenta.",
             "url": "classes/App-Models-Objective.html#method_getObjectivesByAccountId"
         },                {
             "fqsen": "\\App\\Models\\Objective\u003A\u003AdeleteObjective\u0028\u0029",
             "name": "deleteObjective",
-            "summary": "",
+            "summary": "Elimina\u0020un\u0020objetivo\u0020por\u0020su\u0020ID.",
             "url": "classes/App-Models-Objective.html#method_deleteObjective"
         },                {
             "fqsen": "\\App\\Models\\Objective\u003A\u003AupdateObjective\u0028\u0029",
             "name": "updateObjective",
-            "summary": "",
+            "summary": "Actualiza\u0020parcialmente\u0020un\u0020objetivo.",
             "url": "classes/App-Models-Objective.html#method_updateObjective"
+        },                {
+            "fqsen": "\\App\\Models\\Objective\u003A\u003AupdateFullObjective\u0028\u0029",
+            "name": "updateFullObjective",
+            "summary": "Actualiza\u0020todos\u0020los\u0020campos\u0020de\u0020un\u0020objetivo.",
+            "url": "classes/App-Models-Objective.html#method_updateFullObjective"
         },                {
             "fqsen": "\\App\\Models\\Objective\u003A\u003AupdateCurrentAmount\u0028\u0029",
             "name": "updateCurrentAmount",
-            "summary": "",
+            "summary": "Actualiza\u0020el\u0020valor\u0020actual\u0020del\u0020objetivo\u0020seg\u00FAn\u0020el\u0020monto\u0020de\u0020una\u0020operaci\u00F3n.",
             "url": "classes/App-Models-Objective.html#method_updateCurrentAmount"
         },                {
             "fqsen": "\\App\\Models\\Objective\u003A\u003A\u0024table",
             "name": "table",
-            "summary": "",
+            "summary": "Nombre\u0020de\u0020la\u0020tabla\u0020asociada\u0020al\u0020modelo.",
             "url": "classes/App-Models-Objective.html#property_table"
         },                {
             "fqsen": "\\App\\Models\\Objective\u003A\u003A\u0024fillable",
             "name": "fillable",
-            "summary": "",
+            "summary": "Atributos\u0020que\u0020se\u0020pueden\u0020asignar\u0020masivamente.",
             "url": "classes/App-Models-Objective.html#property_fillable"
         },                {
             "fqsen": "\\App\\Models\\ObjectiveOperation",
             "name": "ObjectiveOperation",
-            "summary": "",
+            "summary": "Modelo\u0020ObjectiveOperation\nRelaciona\u0020operaciones\u0020con\u0020objetivos\u0020de\u0020ahorro.",
             "url": "classes/App-Models-ObjectiveOperation.html"
         },                {
             "fqsen": "\\App\\Models\\ObjectiveOperation\u003A\u003AgetObjectiveOperationByOperationId\u0028\u0029",
             "name": "getObjectiveOperationByOperationId",
-            "summary": "",
+            "summary": "Obtiene\u0020una\u0020relaci\u00F3n\u0020objetivo\u002Doperaci\u00F3n\u0020por\u0020el\u0020ID\u0020de\u0020operaci\u00F3n.",
             "url": "classes/App-Models-ObjectiveOperation.html#method_getObjectiveOperationByOperationId"
         },                {
             "fqsen": "\\App\\Models\\ObjectiveOperation\u003A\u003AaddObjectiveOperation\u0028\u0029",
             "name": "addObjectiveOperation",
-            "summary": "",
+            "summary": "Crea\u0020una\u0020nueva\u0020relaci\u00F3n\u0020entre\u0020un\u0020objetivo\u0020y\u0020una\u0020operaci\u00F3n.",
             "url": "classes/App-Models-ObjectiveOperation.html#method_addObjectiveOperation"
         },                {
             "fqsen": "\\App\\Models\\ObjectiveOperation\u003A\u003A\u0024table",
             "name": "table",
-            "summary": "",
+            "summary": "Nombre\u0020de\u0020la\u0020tabla\u0020asociada\u0020al\u0020modelo.",
             "url": "classes/App-Models-ObjectiveOperation.html#property_table"
         },                {
             "fqsen": "\\App\\Models\\ObjectiveOperation\u003A\u003A\u0024fillable",
             "name": "fillable",
-            "summary": "",
+            "summary": "Atributos\u0020que\u0020se\u0020pueden\u0020asignar\u0020masivamente.",
             "url": "classes/App-Models-ObjectiveOperation.html#property_fillable"
         },                {
             "fqsen": "\\App\\Models\\Operation",
             "name": "Operation",
-            "summary": "",
+            "summary": "Modelo\u0020Operation\nRepresenta\u0020una\u0020operaci\u00F3n\u0020financiera\u0020realizada\u0020en\u0020una\u0020cuenta.",
             "url": "classes/App-Models-Operation.html"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003AaddOperation\u0028\u0029",
             "name": "addOperation",
-            "summary": "",
+            "summary": "Crea\u0020una\u0020nueva\u0020operaci\u00F3n.",
             "url": "classes/App-Models-Operation.html#method_addOperation"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003AgetAllOperationsByAccountId\u0028\u0029",
             "name": "getAllOperationsByAccountId",
-            "summary": "",
+            "summary": "Obtiene\u0020todas\u0020las\u0020operaciones\u0020de\u0020una\u0020cuenta.",
             "url": "classes/App-Models-Operation.html#method_getAllOperationsByAccountId"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003AthisMonthOperationsByAccountId\u0028\u0029",
             "name": "thisMonthOperationsByAccountId",
-            "summary": "",
+            "summary": "Obtiene\u0020las\u0020operaciones\u0020del\u0020mes\u0020actual\u0020agrupadas\u0020por\u0020categor\u00EDa\u0020y\u0020tipo\u0020de\u0020movimiento.",
             "url": "classes/App-Models-Operation.html#method_thisMonthOperationsByAccountId"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003AgetSixOperationsByAccountId\u0028\u0029",
             "name": "getSixOperationsByAccountId",
-            "summary": "",
+            "summary": "Obtiene\u0020las\u0020\u00FAltimas\u0020seis\u0020operaciones\u0020de\u0020una\u0020cuenta.",
             "url": "classes/App-Models-Operation.html#method_getSixOperationsByAccountId"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003AgetAllIncomesByAccountId\u0028\u0029",
             "name": "getAllIncomesByAccountId",
-            "summary": "",
+            "summary": "Obtiene\u0020todos\u0020los\u0020ingresos\u0020de\u0020una\u0020cuenta.",
             "url": "classes/App-Models-Operation.html#method_getAllIncomesByAccountId"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003AgetOperationById\u0028\u0029",
             "name": "getOperationById",
-            "summary": "",
+            "summary": "Obtiene\u0020una\u0020operaci\u00F3n\u0020por\u0020su\u0020ID.",
             "url": "classes/App-Models-Operation.html#method_getOperationById"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003AgetAllExpensesByAccountId\u0028\u0029",
             "name": "getAllExpensesByAccountId",
-            "summary": "",
+            "summary": "Obtiene\u0020todos\u0020los\u0020egresos\u0020de\u0020una\u0020cuenta.",
             "url": "classes/App-Models-Operation.html#method_getAllExpensesByAccountId"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003AgetIncomesWithLimitByAccountId\u0028\u0029",
             "name": "getIncomesWithLimitByAccountId",
-            "summary": "",
+            "summary": "Obtiene\u0020ingresos\u0020paginados.",
             "url": "classes/App-Models-Operation.html#method_getIncomesWithLimitByAccountId"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003AgetExpensesWithLimitByAccountId\u0028\u0029",
             "name": "getExpensesWithLimitByAccountId",
-            "summary": "",
+            "summary": "Obtiene\u0020egresos\u0020paginados.",
             "url": "classes/App-Models-Operation.html#method_getExpensesWithLimitByAccountId"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003AgetSaveWithLimitByAccountId\u0028\u0029",
             "name": "getSaveWithLimitByAccountId",
-            "summary": "",
+            "summary": "Obtiene\u0020ahorros\u0020paginados.",
             "url": "classes/App-Models-Operation.html#method_getSaveWithLimitByAccountId"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003AgetAllOperationsWithLimitByAccountId\u0028\u0029",
             "name": "getAllOperationsWithLimitByAccountId",
-            "summary": "",
+            "summary": "Obtiene\u0020todas\u0020las\u0020operaciones\u0020paginadas.",
             "url": "classes/App-Models-Operation.html#method_getAllOperationsWithLimitByAccountId"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003AdeleteOperation\u0028\u0029",
             "name": "deleteOperation",
-            "summary": "",
+            "summary": "Elimina\u0020una\u0020operaci\u00F3n\u0020y\u0020sus\u0020relaciones\u0020\u0028planeada\u0020o\u0020no\u0020planeada\u0029.",
             "url": "classes/App-Models-Operation.html#method_deleteOperation"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003Acategory\u0028\u0029",
             "name": "category",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020con\u0020la\u0020categor\u00EDa.",
             "url": "classes/App-Models-Operation.html#method_category"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003Aplanned\u0028\u0029",
             "name": "planned",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020con\u0020la\u0020operaci\u00F3n\u0020planeada.",
             "url": "classes/App-Models-Operation.html#method_planned"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003Aunschedule\u0028\u0029",
             "name": "unschedule",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020con\u0020la\u0020operaci\u00F3n\u0020no\u0020planeada.",
             "url": "classes/App-Models-Operation.html#method_unschedule"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003A\u0024table",
             "name": "table",
-            "summary": "",
+            "summary": "Tabla\u0020asociada\u0020al\u0020modelo.",
             "url": "classes/App-Models-Operation.html#property_table"
         },                {
             "fqsen": "\\App\\Models\\Operation\u003A\u003A\u0024fillable",
             "name": "fillable",
-            "summary": "",
+            "summary": "Atributos\u0020asignables\u0020en\u0020masa.",
             "url": "classes/App-Models-Operation.html#property_fillable"
         },                {
             "fqsen": "\\App\\Models\\OperationPlanned",
             "name": "OperationPlanned",
-            "summary": "",
+            "summary": "Modelo\u0020OperationPlanned\nRepresenta\u0020una\u0020operaci\u00F3n\u0020planificada\u0020asociada\u0020a\u0020una\u0020operaci\u00F3n\u0020principal.",
             "url": "classes/App-Models-OperationPlanned.html"
         },                {
             "fqsen": "\\App\\Models\\OperationPlanned\u003A\u003AaddPlannedOperation\u0028\u0029",
             "name": "addPlannedOperation",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020una\u0020nueva\u0020operaci\u00F3n\u0020planificada.",
             "url": "classes/App-Models-OperationPlanned.html#method_addPlannedOperation"
         },                {
             "fqsen": "\\App\\Models\\OperationPlanned\u003A\u003A\u0024table",
             "name": "table",
-            "summary": "",
+            "summary": "Tabla\u0020asociada\u0020al\u0020modelo.",
             "url": "classes/App-Models-OperationPlanned.html#property_table"
         },                {
             "fqsen": "\\App\\Models\\OperationPlanned\u003A\u003A\u0024fillable",
             "name": "fillable",
-            "summary": "",
+            "summary": "Atributos\u0020asignables\u0020en\u0020masa.",
             "url": "classes/App-Models-OperationPlanned.html#property_fillable"
         },                {
             "fqsen": "\\App\\Models\\OperationUnschedule",
             "name": "OperationUnschedule",
-            "summary": "",
+            "summary": "Modelo\u0020OperationUnschedule\nRepresenta\u0020una\u0020operaci\u00F3n\u0020no\u0020recurrente\u0020\u0028no\u0020planificada\u0029.",
             "url": "classes/App-Models-OperationUnschedule.html"
         },                {
             "fqsen": "\\App\\Models\\OperationUnschedule\u003A\u003AaddUnscheduleOperation\u0028\u0029",
             "name": "addUnscheduleOperation",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020una\u0020operaci\u00F3n\u0020no\u0020planificada\u0020\u0028\u00FAnica\u0020vez\u0029.",
             "url": "classes/App-Models-OperationUnschedule.html#method_addUnscheduleOperation"
         },                {
             "fqsen": "\\App\\Models\\OperationUnschedule\u003A\u003A\u0024table",
             "name": "table",
-            "summary": "",
+            "summary": "Tabla\u0020asociada\u0020al\u0020modelo.",
             "url": "classes/App-Models-OperationUnschedule.html#property_table"
         },                {
             "fqsen": "\\App\\Models\\OperationUnschedule\u003A\u003A\u0024fillable",
             "name": "fillable",
-            "summary": "",
+            "summary": "Atributos\u0020asignables\u0020en\u0020masa.",
             "url": "classes/App-Models-OperationUnschedule.html#property_fillable"
         },                {
             "fqsen": "\\App\\Models\\Role",
             "name": "Role",
-            "summary": "",
+            "summary": "Modelo\u0020Role",
             "url": "classes/App-Models-Role.html"
         },                {
             "fqsen": "\\App\\Models\\Role\u003A\u003Ausers\u0028\u0029",
             "name": "users",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020uno\u0020a\u0020muchos\u0020con\u0020los\u0020usuarios.",
             "url": "classes/App-Models-Role.html#method_users"
         },                {
             "fqsen": "\\App\\Models\\Sentence",
             "name": "Sentence",
-            "summary": "",
+            "summary": "Modelo\u0020Sentence",
             "url": "classes/App-Models-Sentence.html"
         },                {
             "fqsen": "\\App\\Models\\Sentence\u003A\u003AgetAllSentencesEnabled\u0028\u0029",
             "name": "getAllSentencesEnabled",
-            "summary": "",
+            "summary": "Obtiene\u0020todas\u0020las\u0020frases\u0020habilitadas.",
             "url": "classes/App-Models-Sentence.html#method_getAllSentencesEnabled"
         },                {
             "fqsen": "\\App\\Models\\Sentence\u003A\u003AnumberOfSentences\u0028\u0029",
             "name": "numberOfSentences",
-            "summary": "",
+            "summary": "Cuenta\u0020el\u0020n\u00FAmero\u0020de\u0020frases\u0020habilitadas.",
             "url": "classes/App-Models-Sentence.html#method_numberOfSentences"
         },                {
             "fqsen": "\\App\\Models\\Sentence\u003A\u003AaddSentence\u0028\u0029",
             "name": "addSentence",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020una\u0020nueva\u0020frase.",
             "url": "classes/App-Models-Sentence.html#method_addSentence"
         },                {
             "fqsen": "\\App\\Models\\Sentence\u003A\u003AeditSentence\u0028\u0029",
             "name": "editSentence",
-            "summary": "",
+            "summary": "Edita\u0020una\u0020frase\u0020existente.",
             "url": "classes/App-Models-Sentence.html#method_editSentence"
         },                {
             "fqsen": "\\App\\Models\\Sentence\u003A\u003AdeleteSentence\u0028\u0029",
             "name": "deleteSentence",
-            "summary": "",
+            "summary": "Elimina\u0020l\u00F3gicamente\u0020una\u0020frase\u0020\u0028desactiva\u0029.",
             "url": "classes/App-Models-Sentence.html#method_deleteSentence"
         },                {
             "fqsen": "\\App\\Models\\Sentence\u003A\u003A\u0024table",
@@ -1228,172 +1243,172 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\User",
             "name": "User",
-            "summary": "",
+            "summary": "Clase\u0020User",
             "url": "classes/App-Models-User.html"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003Acasts\u0028\u0029",
             "name": "casts",
-            "summary": "Get\u0020the\u0020attributes\u0020that\u0020should\u0020be\u0020cast.",
+            "summary": "Atributos\u0020con\u0020casteo\u0020de\u0020tipo.",
             "url": "classes/App-Models-User.html#method_casts"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003AgetUser\u0028\u0029",
             "name": "getUser",
-            "summary": "",
+            "summary": "Devuelve\u0020el\u0020usuario\u0020autenticado\u0020con\u0020relaciones\u0020cargadas.",
             "url": "classes/App-Models-User.html#method_getUser"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003AnumberOfUsers\u0028\u0029",
             "name": "numberOfUsers",
-            "summary": "",
+            "summary": "Obtiene\u0020el\u0020n\u00FAmero\u0020total\u0020de\u0020usuarios.",
             "url": "classes/App-Models-User.html#method_numberOfUsers"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003Arole\u0028\u0029",
             "name": "role",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020con\u0020el\u0020rol\u0020del\u0020usuario.",
             "url": "classes/App-Models-User.html#method_role"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003AgetAllUsers\u0028\u0029",
             "name": "getAllUsers",
-            "summary": "",
+            "summary": "Obtiene\u0020todos\u0020los\u0020usuarios\u0020activos.",
             "url": "classes/App-Models-User.html#method_getAllUsers"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003AstoreUser\u0028\u0029",
             "name": "storeUser",
-            "summary": "",
+            "summary": "Crea\u0020un\u0020nuevo\u0020usuario.",
             "url": "classes/App-Models-User.html#method_storeUser"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003AdeleteUser\u0028\u0029",
             "name": "deleteUser",
-            "summary": "",
+            "summary": "Desactiva\u0020\u0028elimina\u0020l\u00F3gicamente\u0029\u0020un\u0020usuario.",
             "url": "classes/App-Models-User.html#method_deleteUser"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003AgetUserById\u0028\u0029",
             "name": "getUserById",
-            "summary": "",
+            "summary": "Obtiene\u0020un\u0020usuario\u0020por\u0020ID\u0020si\u0020est\u00E1\u0020habilitado.",
             "url": "classes/App-Models-User.html#method_getUserById"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003AupdateUserInfoFromInitialSetup\u0028\u0029",
             "name": "updateUserInfoFromInitialSetup",
-            "summary": "",
+            "summary": "Actualiza\u0020los\u0020datos\u0020iniciales\u0020del\u0020usuario\u0020desde\u0020el\u0020setup\u0020inicial.",
             "url": "classes/App-Models-User.html#method_updateUserInfoFromInitialSetup"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003AupdateNewUser\u0028\u0029",
             "name": "updateNewUser",
-            "summary": "",
+            "summary": "Marca\u0020el\u0020usuario\u0020como\u0020ya\u0020no\u0020nuevo.",
             "url": "classes/App-Models-User.html#method_updateNewUser"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003Aaccounts\u0028\u0029",
             "name": "accounts",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020con\u0020cuentas\u0020del\u0020usuario.",
             "url": "classes/App-Models-User.html#method_accounts"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003AgetPersonalCategoriesByUserId\u0028\u0029",
             "name": "getPersonalCategoriesByUserId",
-            "summary": "",
+            "summary": "Obtiene\u0020categor\u00EDas\u0020personales\u0020del\u0020usuario.",
             "url": "classes/App-Models-User.html#method_getPersonalCategoriesByUserId"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003AdeletePersonalCategory\u0028\u0029",
             "name": "deletePersonalCategory",
-            "summary": "",
+            "summary": "Elimina\u0020\u0028desactiva\u0029\u0020una\u0020categor\u00EDa\u0020personal.",
             "url": "classes/App-Models-User.html#method_deletePersonalCategory"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003AupdatePersonalCategory\u0028\u0029",
             "name": "updatePersonalCategory",
-            "summary": "",
+            "summary": "Actualiza\u0020una\u0020categor\u00EDa\u0020personal\u0020del\u0020usuario.",
             "url": "classes/App-Models-User.html#method_updatePersonalCategory"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003AaddPersonalCategory\u0028\u0029",
             "name": "addPersonalCategory",
-            "summary": "",
+            "summary": "Crea\u0020una\u0020nueva\u0020categor\u00EDa\u0020personal\u0020para\u0020el\u0020usuario.",
             "url": "classes/App-Models-User.html#method_addPersonalCategory"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003ApersonalCategories\u0028\u0029",
             "name": "personalCategories",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020con\u0020las\u0020categor\u00EDas\u0020personales\u0020del\u0020usuario.",
             "url": "classes/App-Models-User.html#method_personalCategories"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003A\u0024fillable",
             "name": "fillable",
-            "summary": "The\u0020attributes\u0020that\u0020are\u0020mass\u0020assignable.",
+            "summary": "Atributos\u0020asignables\u0020masivamente.",
             "url": "classes/App-Models-User.html#property_fillable"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003A\u0024hidden",
             "name": "hidden",
-            "summary": "The\u0020attributes\u0020that\u0020should\u0020be\u0020hidden\u0020for\u0020serialization.",
+            "summary": "Atributos\u0020ocultos\u0020para\u0020serializaci\u00F3n.",
             "url": "classes/App-Models-User.html#property_hidden"
         },                {
             "fqsen": "\\App\\Models\\UserAccount",
             "name": "UserAccount",
-            "summary": "",
+            "summary": "Clase\u0020UserAccount",
             "url": "classes/App-Models-UserAccount.html"
         },                {
             "fqsen": "\\App\\Models\\UserAccount\u003A\u003AaddUserAccount\u0028\u0029",
             "name": "addUserAccount",
-            "summary": "",
+            "summary": "Asocia\u0020un\u0020usuario\u0020a\u0020una\u0020cuenta.",
             "url": "classes/App-Models-UserAccount.html#method_addUserAccount"
         },                {
             "fqsen": "\\App\\Models\\UserAccount\u003A\u003AgetAccountsByUserId\u0028\u0029",
             "name": "getAccountsByUserId",
-            "summary": "",
+            "summary": "Obtiene\u0020todas\u0020las\u0020cuentas\u0020activas\u0020asociadas\u0020a\u0020un\u0020usuario.",
             "url": "classes/App-Models-UserAccount.html#method_getAccountsByUserId"
         },                {
             "fqsen": "\\App\\Models\\UserAccount\u003A\u003AdeletePersonalAccount\u0028\u0029",
             "name": "deletePersonalAccount",
-            "summary": "",
+            "summary": "Elimina\u0020\u0028desactiva\u0029\u0020una\u0020cuenta\u0020personal\u0020del\u0020usuario.",
             "url": "classes/App-Models-UserAccount.html#method_deletePersonalAccount"
         },                {
             "fqsen": "\\App\\Models\\UserAccount\u003A\u003AupdatePersonalAccount\u0028\u0029",
             "name": "updatePersonalAccount",
-            "summary": "",
+            "summary": "Actualiza\u0020los\u0020datos\u0020de\u0020una\u0020cuenta\u0020personal.",
             "url": "classes/App-Models-UserAccount.html#method_updatePersonalAccount"
         },                {
             "fqsen": "\\App\\Models\\UserAccount\u003A\u003AaddPersonalAccount\u0028\u0029",
             "name": "addPersonalAccount",
-            "summary": "",
+            "summary": "Crea\u0020una\u0020cuenta\u0020personal\u0020y\u0020la\u0020asocia\u0020al\u0020usuario.",
             "url": "classes/App-Models-UserAccount.html#method_addPersonalAccount"
         },                {
             "fqsen": "\\App\\Models\\UserAccount\u003A\u003A\u0024table",
             "name": "table",
-            "summary": "",
+            "summary": "Nombre\u0020de\u0020la\u0020tabla\u0020asociada\u0020al\u0020modelo.",
             "url": "classes/App-Models-UserAccount.html#property_table"
         },                {
             "fqsen": "\\App\\Models\\UserAccount\u003A\u003A\u0024fillable",
             "name": "fillable",
-            "summary": "",
+            "summary": "Atributos\u0020asignables\u0020masivamente.",
             "url": "classes/App-Models-UserAccount.html#property_fillable"
         },                {
             "fqsen": "\\App\\Models\\UserCategory",
             "name": "UserCategory",
-            "summary": "",
+            "summary": "Clase\u0020UserCategory",
             "url": "classes/App-Models-UserCategory.html"
         },                {
             "fqsen": "\\App\\Models\\UserCategory\u003A\u003AaddUserCategory\u0028\u0029",
             "name": "addUserCategory",
-            "summary": "",
+            "summary": "A\u00F1ade\u0020una\u0020relaci\u00F3n\u0020entre\u0020un\u0020usuario\u0020y\u0020una\u0020categor\u00EDa.",
             "url": "classes/App-Models-UserCategory.html#method_addUserCategory"
         },                {
             "fqsen": "\\App\\Models\\UserCategory\u003A\u003Acategory\u0028\u0029",
             "name": "category",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020con\u0020el\u0020modelo\u0020Category.",
             "url": "classes/App-Models-UserCategory.html#method_category"
         },                {
             "fqsen": "\\App\\Models\\UserCategory\u003A\u003Auser\u0028\u0029",
             "name": "user",
-            "summary": "",
+            "summary": "Relaci\u00F3n\u0020con\u0020el\u0020modelo\u0020User.",
             "url": "classes/App-Models-UserCategory.html#method_user"
         },                {
             "fqsen": "\\App\\Models\\UserCategory\u003A\u003A\u0024table",
             "name": "table",
-            "summary": "",
+            "summary": "Nombre\u0020de\u0020la\u0020tabla\u0020asociada\u0020al\u0020modelo.",
             "url": "classes/App-Models-UserCategory.html#property_table"
         },                {
             "fqsen": "\\App\\Models\\UserCategory\u003A\u003A\u0024fillable",
             "name": "fillable",
-            "summary": "",
+            "summary": "Atributos\u0020asignables\u0020masivamente.",
             "url": "classes/App-Models-UserCategory.html#property_fillable"
         },                {
             "fqsen": "\\App\\Models\\UserCategory\u003A\u003A\u0024timestamps",
             "name": "timestamps",
-            "summary": "",
+            "summary": "Indica\u0020si\u0020el\u0020modelo\u0020debe\u0020mantener\u0020las\u0020marcas\u0020de\u0020tiempo.",
             "url": "classes/App-Models-UserCategory.html#property_timestamps"
         },                {
             "fqsen": "\\App\\Models\\UsersFriend",
@@ -1771,6 +1786,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Validations-UserValidator.html#method_messagesAddOperationUser"
         },                {
+            "fqsen": "\\App\\Validations\\UserValidator\u003A\u003ArulesUpdatePersonalObjetives\u0028\u0029",
+            "name": "rulesUpdatePersonalObjetives",
+            "summary": "",
+            "url": "classes/App-Validations-UserValidator.html#method_rulesUpdatePersonalObjetives"
+        },                {
+            "fqsen": "\\App\\Validations\\UserValidator\u003A\u003AmessagesUpdatePersonalObjetives\u0028\u0029",
+            "name": "messagesUpdatePersonalObjetives",
+            "summary": "",
+            "url": "classes/App-Validations-UserValidator.html#method_messagesUpdatePersonalObjetives"
+        },                {
             "fqsen": "\\App\\Validations\\Validator",
             "name": "Validator",
             "summary": "",
@@ -1880,6 +1905,16 @@ Search.appendIndex(
             "name": "messagesIncomeOperations",
             "summary": "",
             "url": "classes/App-Validations-Validator.html#method_messagesIncomeOperations"
+        },                {
+            "fqsen": "\\App\\Validations\\Validator\u003A\u003ArulesUpdatePersonalObjetives\u0028\u0029",
+            "name": "rulesUpdatePersonalObjetives",
+            "summary": "",
+            "url": "classes/App-Validations-Validator.html#method_rulesUpdatePersonalObjetives"
+        },                {
+            "fqsen": "\\App\\Validations\\Validator\u003A\u003AmessagesUpdatePersonalObjetives\u0028\u0029",
+            "name": "messagesUpdatePersonalObjetives",
+            "summary": "",
+            "url": "classes/App-Validations-Validator.html#method_messagesUpdatePersonalObjetives"
         },                {
             "fqsen": "\\",
             "name": "\\",

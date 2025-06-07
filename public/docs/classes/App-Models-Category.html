@@ -105,6 +105,20 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/App.html" class="">App</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/App-Http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Models.html" class="">Models</a>
+                
+            </li>
+            </ul>
+
                         </section>
             
     <section class="phpdocumentor-sidebar__category -reports">
@@ -153,11 +167,12 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Category.php"><a href="files/app-models-category.html"><abbr title="app/Models/Category.php">Category.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Modelo Category que representa las categorías del sistema.</p>
+
 
 
 
@@ -189,14 +204,16 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-Category.html#property_fillable">$fillable</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: array&lt;int, string&gt;            </span>
 </dt>
+<dd>Atributos que se pueden asignar masivamente.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-Category.html#property_table">$table</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: string            </span>
 </dt>
+<dd>Nombre de la tabla asociada al modelo.</dd>
 
     </dl>
 
@@ -211,60 +228,70 @@
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;|false    </span>
 </dt>
+<dd>Añade una nueva categoría con un nombre y un icono.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Category.html#method_addUserCategory">addUserCategory()</a>
     <span>
                                 &nbsp;: bool|self    </span>
 </dt>
+<dd>Añade una categoría personalizada de usuario.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Category.html#method_deleteCategory">deleteCategory()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Marca una categoría como deshabilitada.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Category.html#method_getCategory">getCategory()</a>
     <span>
                                 &nbsp;: self|null    </span>
 </dt>
+<dd>Obtiene una categoría habilitada por su ID con sus tipos de movimiento.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Category.html#method_getPersonalCategoriesByUserId">getPersonalCategoriesByUserId()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Support\Collection">Collection</abbr>|null    </span>
 </dt>
+<dd>Obtiene las categorías personales habilitadas de un usuario.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Category.html#method_icon">icon()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Relations\BelongsTo">BelongsTo</abbr>    </span>
 </dt>
+<dd>Relación con el icono de la categoría.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Category.html#method_movementTypes">movementTypes()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Relations\BelongsToMany">BelongsToMany</abbr>    </span>
 </dt>
+<dd>Relación muchos a muchos con tipos de movimiento.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Category.html#method_numberOfCategories">numberOfCategories()</a>
     <span>
                                 &nbsp;: int    </span>
 </dt>
+<dd>Obtiene el número total de categorías registradas.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Category.html#method_operations">operations()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Relations\HasMany">HasMany</abbr>    </span>
 </dt>
+<dd>Relación uno a muchos con operaciones.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Category.html#method_updateCategory">updateCategory()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Actualiza los datos de una categoría existente.</dd>
 
     </dl>
 
@@ -296,15 +323,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Category.php"><a href="files/app-models-category.html"><abbr title="app/Models/Category.php">Category.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Atributos que se pueden asignar masivamente.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">array&lt;int, string&gt;</span>
     <span class="phpdocumentor-signature__name">$fillable</span>
      = <span class="phpdocumentor-signature__default-value">[&#039;name&#039;, &#039;icon_id&#039;, &#039;enabled&#039;]</span></code>
 
@@ -332,15 +360,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Category.php"><a href="files/app-models-category.html"><abbr title="app/Models/Category.php">Category.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Nombre de la tabla asociada al modelo.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$table</span>
      = <span class="phpdocumentor-signature__default-value">&#039;categories&#039;</span></code>
 
@@ -373,11 +402,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Category.php"><a href="files/app-models-category.html"><abbr title="app/Models/Category.php">Category.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Añade una nueva categoría con un nombre y un icono.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">addCategory</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$text</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$iconId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|false</span></code>
@@ -393,14 +423,18 @@
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Nombre de la categoría.</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$iconId</span>
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>ID del icono asociado.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -411,6 +445,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|false</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Datos de estado y ID de la categoría o false si falla.</p>
+</section>
+
             </section>
 
 </article>
@@ -428,11 +466,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Category.php"><a href="files/app-models-category.html"><abbr title="app/Models/Category.php">Category.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Añade una categoría personalizada de usuario.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">addUserCategory</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|self</span></code>
@@ -448,7 +487,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Datos de la categoría.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -459,6 +500,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool|self</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Instancia de la categoría si se guarda, false si falla.</p>
+</section>
+
             </section>
 
 </article>
@@ -476,11 +521,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Category.php"><a href="files/app-models-category.html"><abbr title="app/Models/Category.php">Category.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">83</span>
+    <span class="phpdocumentor-element-found-in__line">131</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Marca una categoría como deshabilitada.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">deleteCategory</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -496,7 +542,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>ID de la categoría.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -507,6 +555,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True si se deshabilita correctamente, false si falla.</p>
+</section>
+
             </section>
 
 </article>
@@ -524,11 +576,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Category.php"><a href="files/app-models-category.html"><abbr title="app/Models/Category.php">Category.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">76</span>
+    <span class="phpdocumentor-element-found-in__line">119</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene una categoría habilitada por su ID con sus tipos de movimiento.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getCategory</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$categoryId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self|null</span></code>
@@ -544,7 +597,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>ID de la categoría.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -572,11 +627,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Category.php"><a href="files/app-models-category.html"><abbr title="app/Models/Category.php">Category.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">148</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene las categorías personales habilitadas de un usuario.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getPersonalCategoriesByUserId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$userId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr>|null</span></code>
@@ -592,7 +648,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>ID del usuario.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -620,11 +678,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Category.php"><a href="files/app-models-category.html"><abbr title="app/Models/Category.php">Category.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">122</span>
+    <span class="phpdocumentor-element-found-in__line">183</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Relación con el icono de la categoría.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">icon</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\BelongsTo">BelongsTo</abbr></span></code>
@@ -658,14 +717,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Category.php"><a href="files/app-models-category.html"><abbr title="app/Models/Category.php">Category.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">126</span>
+    <span class="phpdocumentor-element-found-in__line">192</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Relación muchos a muchos con tipos de movimiento.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">movementTypes</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">movementTypes</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\BelongsToMany">BelongsToMany</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -676,7 +736,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\BelongsToMany">BelongsToMany</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -692,11 +756,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Category.php"><a href="files/app-models-category.html"><abbr title="app/Models/Category.php">Category.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene el número total de categorías registradas.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">numberOfCategories</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
@@ -730,11 +795,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Category.php"><a href="files/app-models-category.html"><abbr title="app/Models/Category.php">Category.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">118</span>
+    <span class="phpdocumentor-element-found-in__line">174</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Relación uno a muchos con operaciones.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">operations</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\HasMany">HasMany</abbr></span></code>
@@ -768,11 +834,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Category.php"><a href="files/app-models-category.html"><abbr title="app/Models/Category.php">Category.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">72</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Actualiza los datos de una categoría existente.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">updateCategory</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -788,7 +855,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Datos actualizados de la categoría.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -799,6 +868,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True si se actualiza correctamente, false si falla.</p>
+</section>
+
             </section>
 
 </article>

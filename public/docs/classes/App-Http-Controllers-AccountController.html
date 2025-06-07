@@ -105,6 +105,20 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/App.html" class="">App</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/App-Http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Models.html" class="">Models</a>
+                
+            </li>
+            </ul>
+
                         </section>
             
     <section class="phpdocumentor-sidebar__category -reports">
@@ -154,12 +168,15 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/AccountController.php"><a href="files/app-http-controllers-accountcontroller.html"><abbr title="app/Http/Controllers/AccountController.php">AccountController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">15</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Controlador AccountController</p>
 
+
+    <section class="phpdocumentor-description"><p>Gestiona la lógica relacionada con las cuentas de los usuarios.</p>
+</section>
 
 
 
@@ -193,12 +210,14 @@
     <span>
                                 &nbsp;: <a href="classes/App-Models-Account.html"><abbr title="\App\Models\Account">Account</abbr></a>    </span>
 </dt>
+<dd>Obtiene la cuenta asociada a un usuario por su ID.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-AccountController.html#method_getTotalSavedByAccountId">getTotalSavedByAccountId()</a>
     <span>
-                                &nbsp;: <abbr title="\Illuminate\Validation\Rules\Numeric">Numeric</abbr>|bool    </span>
+                                &nbsp;: (numeric)|bool    </span>
 </dt>
+<dd>Devuelve el total ahorrado por una cuenta específica.</dd>
 
     </dl>
 
@@ -228,11 +247,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/AccountController.php"><a href="files/app-http-controllers-accountcontroller.html"><abbr title="app/Http/Controllers/AccountController.php">AccountController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene la cuenta asociada a un usuario por su ID.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getAccountByUserId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$userId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/App-Models-Account.html"><abbr title="\App\Models\Account">Account</abbr></a></span></code>
@@ -248,7 +268,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>ID del usuario.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -259,6 +281,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/App-Models-Account.html"><abbr title="\App\Models\Account">Account</abbr></a></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Instancia del modelo Account.</p>
+</section>
+
             </section>
 
 </article>
@@ -276,14 +302,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/AccountController.php"><a href="files/app-http-controllers-accountcontroller.html"><abbr title="app/Http/Controllers/AccountController.php">AccountController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Devuelve el total ahorrado por una cuenta específica.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getTotalSavedByAccountId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Validation\Rules\Numeric">Numeric</abbr>|bool</span></code>
+                    <span class="phpdocumentor-signature__name">getTotalSavedByAccountId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">(numeric)|bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -296,7 +323,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>ID de la cuenta.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -306,7 +335,11 @@
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Validation\Rules\Numeric">Numeric</abbr>|bool</span>
+        <span class="phpdocumentor-signature__response_type">(numeric)|bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Total ahorrado o false si la cuenta no existe.</p>
+</section>
+
             </section>
 
 </article>

@@ -105,6 +105,20 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/App.html" class="">App</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/App-Http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Models.html" class="">Models</a>
+                
+            </li>
+            </ul>
+
                         </section>
             
     <section class="phpdocumentor-sidebar__category -reports">
@@ -154,12 +168,15 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/BaseCategoryController.php"><a href="files/app-http-controllers-basecategorycontroller.html"><abbr title="app/Http/Controllers/BaseCategoryController.php">BaseCategoryController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">9</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Controlador BaseCategoryController</p>
 
+
+    <section class="phpdocumentor-description"><p>Gestiona las categorías base disponibles en el sistema (CRUD).</p>
+</section>
 
 
 
@@ -193,18 +210,21 @@
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr>    </span>
 </dt>
+<dd>Añade una nueva categoría base si los datos son válidos.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-BaseCategoryController.html#method_editBaseCategory">editBaseCategory()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr>    </span>
 </dt>
+<dd>Edita una categoría base existente si los datos son válidos.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-BaseCategoryController.html#method_listAllBaseCategories">listAllBaseCategories()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
+<dd>Devuelve un listado de todas las categorías base.</dd>
 
     </dl>
 
@@ -234,11 +254,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/BaseCategoryController.php"><a href="files/app-http-controllers-basecategorycontroller.html"><abbr title="app/Http/Controllers/BaseCategoryController.php">BaseCategoryController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Añade una nueva categoría base si los datos son válidos.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">addBaseCategory</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></span></code>
@@ -254,7 +275,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Datos validados de la nueva categoría base.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -265,6 +288,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Redirección con mensaje de éxito o error.</p>
+</section>
+
             </section>
 
 </article>
@@ -282,11 +309,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/BaseCategoryController.php"><a href="files/app-http-controllers-basecategorycontroller.html"><abbr title="app/Http/Controllers/BaseCategoryController.php">BaseCategoryController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Edita una categoría base existente si los datos son válidos.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">editBaseCategory</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></span></code>
@@ -302,7 +330,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Datos validados con los cambios de la categoría base.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -313,6 +343,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Redirección con mensaje de éxito o error.</p>
+</section>
+
             </section>
 
 </article>
@@ -330,11 +364,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/BaseCategoryController.php"><a href="files/app-http-controllers-basecategorycontroller.html"><abbr title="app/Http/Controllers/BaseCategoryController.php">BaseCategoryController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Devuelve un listado de todas las categorías base.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">listAllBaseCategories</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
@@ -351,6 +386,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Lista de categorías base como array.</p>
+</section>
+
             </section>
 
 </article>

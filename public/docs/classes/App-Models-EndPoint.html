@@ -105,6 +105,20 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/App.html" class="">App</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/App-Http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Models.html" class="">Models</a>
+                
+            </li>
+            </ul>
+
                         </section>
             
     <section class="phpdocumentor-sidebar__category -reports">
@@ -153,11 +167,12 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/EndPoint.php"><a href="files/app-models-endpoint.html"><abbr title="app/Models/EndPoint.php">EndPoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">8</span>
+    <span class="phpdocumentor-element-found-in__line">11</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Modelo EndPoint que gestiona los endpoints disponibles en el sistema.</p>
+
 
 
 
@@ -189,14 +204,16 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-EndPoint.html#property_fillable">$fillable</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: array&lt;int, string&gt;            </span>
 </dt>
+<dd>Atributos que se pueden asignar masivamente.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-EndPoint.html#property_table">$table</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: string            </span>
 </dt>
+<dd>Nombre de la tabla asociada al modelo.</dd>
 
     </dl>
 
@@ -211,30 +228,35 @@
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Crea un nuevo endpoint con los datos proporcionados.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-EndPoint.html#method_deleteEndPoint">deleteEndPoint()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Deshabilita un endpoint lógico por su ID.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-EndPoint.html#method_editEndPoint">editEndPoint()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Edita un endpoint existente con los nuevos datos proporcionados.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-EndPoint.html#method_getAllEnabledEndPoints">getAllEnabledEndPoints()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Support\Collection">Collection</abbr>    </span>
 </dt>
+<dd>Obtiene todos los endpoints habilitados.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-EndPoint.html#method_getEndPointById">getEndPointById()</a>
     <span>
                                 &nbsp;: <a href="classes/App-Models-EndPoint.html"><abbr title="\App\Models\EndPoint">EndPoint</abbr></a>|null    </span>
 </dt>
+<dd>Devuelve un endpoint habilitado por su ID.</dd>
 
     </dl>
 
@@ -266,15 +288,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/EndPoint.php"><a href="files/app-models-endpoint.html"><abbr title="app/Models/EndPoint.php">EndPoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Atributos que se pueden asignar masivamente.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">array&lt;int, string&gt;</span>
     <span class="phpdocumentor-signature__name">$fillable</span>
      = <span class="phpdocumentor-signature__default-value">[&#039;name&#039;, &#039;url&#039;, &#039;method&#039;, &#039;parameters&#039;, &#039;return&#039;, &#039;return_data&#039;, &#039;enabled&#039;]</span></code>
 
@@ -302,15 +325,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/EndPoint.php"><a href="files/app-models-endpoint.html"><abbr title="app/Models/EndPoint.php">EndPoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Nombre de la tabla asociada al modelo.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$table</span>
      = <span class="phpdocumentor-signature__default-value">&#039;endpoints&#039;</span></code>
 
@@ -343,11 +367,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/EndPoint.php"><a href="files/app-models-endpoint.html"><abbr title="app/Models/EndPoint.php">EndPoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">66</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Crea un nuevo endpoint con los datos proporcionados.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">addEndPoint</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -391,11 +416,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/EndPoint.php"><a href="files/app-models-endpoint.html"><abbr title="app/Models/EndPoint.php">EndPoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">104</span>
+    <span class="phpdocumentor-element-found-in__line">134</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Deshabilita un endpoint lógico por su ID.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">deleteEndPoint</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -439,11 +465,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/EndPoint.php"><a href="files/app-models-endpoint.html"><abbr title="app/Models/EndPoint.php">EndPoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Edita un endpoint existente con los nuevos datos proporcionados.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">editEndPoint</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -487,11 +514,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/EndPoint.php"><a href="files/app-models-endpoint.html"><abbr title="app/Models/EndPoint.php">EndPoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene todos los endpoints habilitados.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getAllEnabledEndPoints</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr></span></code>
@@ -525,11 +553,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/EndPoint.php"><a href="files/app-models-endpoint.html"><abbr title="app/Models/EndPoint.php">EndPoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Devuelve un endpoint habilitado por su ID.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getEndPointById</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/App-Models-EndPoint.html"><abbr title="\App\Models\EndPoint">EndPoint</abbr></a>|null</span></code>

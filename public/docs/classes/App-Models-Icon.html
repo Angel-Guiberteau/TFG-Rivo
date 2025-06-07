@@ -105,6 +105,20 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/App.html" class="">App</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/App-Http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Models.html" class="">Models</a>
+                
+            </li>
+            </ul>
+
                         </section>
             
     <section class="phpdocumentor-sidebar__category -reports">
@@ -153,11 +167,12 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Icon.php"><a href="files/app-models-icon.html"><abbr title="app/Models/Icon.php">Icon.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">9</span>
+    <span class="phpdocumentor-element-found-in__line">12</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Modelo Icon que representa los iconos utilizados en categorías y otras entidades.</p>
+
 
 
 
@@ -189,14 +204,16 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-Icon.html#property_fillable">$fillable</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: array&lt;int, string&gt;            </span>
 </dt>
+<dd>Atributos que se pueden asignar masivamente.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-Icon.html#property_table">$table</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: string            </span>
 </dt>
+<dd>Nombre de la tabla asociada al modelo.</dd>
 
     </dl>
 
@@ -211,36 +228,42 @@
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Crea un nuevo icono con el nombre proporcionado.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Icon.html#method_categories">categories()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Relations\HasMany">HasMany</abbr>    </span>
 </dt>
+<dd>Relación con las categorías que usan este icono.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Icon.html#method_deleteIcon">deleteIcon()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Deshabilita un icono lógico por su ID.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Icon.html#method_editIcon">editIcon()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Edita la clase CSS de un icono existente.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Icon.html#method_getAllIconsEnabled">getAllIconsEnabled()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Support\Collection">Collection</abbr>    </span>
 </dt>
+<dd>Obtiene todos los iconos habilitados.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Icon.html#method_numberOfIcons">numberOfIcons()</a>
     <span>
                                 &nbsp;: int    </span>
 </dt>
+<dd>Devuelve el número total de iconos habilitados.</dd>
 
     </dl>
 
@@ -272,15 +295,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Icon.php"><a href="files/app-models-icon.html"><abbr title="app/Models/Icon.php">Icon.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Atributos que se pueden asignar masivamente.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">array&lt;int, string&gt;</span>
     <span class="phpdocumentor-signature__name">$fillable</span>
      = <span class="phpdocumentor-signature__default-value">[&#039;icon&#039;, &#039;enabled&#039;]</span></code>
 
@@ -308,15 +332,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Icon.php"><a href="files/app-models-icon.html"><abbr title="app/Models/Icon.php">Icon.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Nombre de la tabla asociada al modelo.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$table</span>
      = <span class="phpdocumentor-signature__default-value">&#039;icons&#039;</span></code>
 
@@ -349,11 +374,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Icon.php"><a href="files/app-models-icon.html"><abbr title="app/Models/Icon.php">Icon.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">59</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Crea un nuevo icono con el nombre proporcionado.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">addIcon</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -397,11 +423,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Icon.php"><a href="files/app-models-icon.html"><abbr title="app/Models/Icon.php">Icon.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">111</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Relación con las categorías que usan este icono.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">categories</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\HasMany">HasMany</abbr></span></code>
@@ -435,11 +462,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Icon.php"><a href="files/app-models-icon.html"><abbr title="app/Models/Icon.php">Icon.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">53</span>
+    <span class="phpdocumentor-element-found-in__line">95</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Deshabilita un icono lógico por su ID.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">deleteIcon</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -483,11 +511,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Icon.php"><a href="files/app-models-icon.html"><abbr title="app/Models/Icon.php">Icon.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">75</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Edita la clase CSS de un icono existente.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">editIcon</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$iconClass</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -538,11 +567,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Icon.php"><a href="files/app-models-icon.html"><abbr title="app/Models/Icon.php">Icon.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene todos los iconos habilitados.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getAllIconsEnabled</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr></span></code>
@@ -576,11 +606,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Icon.php"><a href="files/app-models-icon.html"><abbr title="app/Models/Icon.php">Icon.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Devuelve el número total de iconos habilitados.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">numberOfIcons</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>

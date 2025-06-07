@@ -105,6 +105,20 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/App.html" class="">App</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/App-Http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Models.html" class="">Models</a>
+                
+            </li>
+            </ul>
+
                         </section>
             
     <section class="phpdocumentor-sidebar__category -reports">
@@ -136,7 +150,9 @@
             <div class="phpdocumentor-element__package">
             in package
             <ul class="phpdocumentor-breadcrumbs">
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App.html">App</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App-Http.html">Http</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App-Http-Middleware.html">Middleware</a></li>
                             </ul>
         </div>
     
@@ -151,11 +167,12 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Middleware/CheckRole.php"><a href="files/app-http-middleware-checkrole.html"><abbr title="app/Http/Middleware/CheckRole.php">CheckRole.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Middleware que verifica si el usuario autenticado tiene alguno de los roles permitidos.</p>
+
 
 
 
@@ -188,9 +205,9 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Middleware-CheckRole.html#method_handle">handle()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr>    </span>
 </dt>
-<dd>Handle an incoming request.</dd>
+<dd>Maneja una solicitud entrante.</dd>
 
     </dl>
 
@@ -220,42 +237,51 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Middleware/CheckRole.php"><a href="files/app-http-middleware-checkrole.html"><abbr title="app/Http/Middleware/CheckRole.php">CheckRole.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Handle an incoming request.</p>
+        <p class="phpdocumentor-summary">Maneja una solicitud entrante.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">handle</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">callable(<abbr title="\Illuminate\Http\Request">Request</abbr>): <abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$next</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__variadic-operator">...</span><span class="phpdocumentor-signature__argument__name">$roles</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">handle</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Illuminate\Http\Request">Request</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Closure">Closure</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$next</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__variadic-operator">...</span><span class="phpdocumentor-signature__argument__name">$roles</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Comprueba si el usuario está autenticado y si su rol coincide con alguno de los roles permitidos.
+Si no está autenticado, redirige al inicio. Si no tiene el rol adecuado, lanza un error 403.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Illuminate\Http\Request">Request</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>La solicitud HTTP entrante.</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$next</span>
-                : <span class="phpdocumentor-signature__argument__return-type">callable(<abbr title="\Illuminate\Http\Request">Request</abbr>): <abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Closure">Closure</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>La siguiente función middleware.</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$roles</span>
                 : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Lista de roles permitidos.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -263,7 +289,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr></span>
+            </section>
+
 </article>
             </section>
 

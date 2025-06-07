@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,16 +11,19 @@ use App\Http\Controllers\UserController;
 use App\Models\UserCategory;
 use App\Models\Category;
 
-
+/**
+ * Clase User
+ *
+ * Representa a un usuario del sistema.
+ */
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * Atributos asignables masivamente.
      *
-     * @var list<string>
+     * @var array<string>
      */
     protected $fillable = [
         'email',
@@ -37,9 +39,9 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Atributos ocultos para serialización.
      *
-     * @var list<string>
+     * @var array<string>
      */
     protected $hidden = [
         'password',
@@ -47,7 +49,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Atributos con casteo de tipo.
      *
      * @return array<string, string>
      */
@@ -59,9 +61,14 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Devuelve el usuario autenticado con relaciones cargadas.
+     *
+     * @return User|null
+     */
     public static function getUser()
     {
-         /** @var \App\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
         return $user->load([
@@ -71,24 +78,45 @@ class User extends Authenticatable
         ]);
     }
 
+    /**
+     * Obtiene el número total de usuarios.
+     *
+     * @return int
+     */
     public static function numberOfUsers(): int {
         return self::count();
     }
 
+    /**
+     * Relación con el rol del usuario.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function role()
     {
         return $this->belongsTo(Role::class, 'rol_id');
     }
 
+    /**
+     * Obtiene todos los usuarios activos.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public static function getAllUsers()
-    {   
+    {
         return self::with('accounts')
-                    ->select('id','name', 'last_name', 'email', 'rol_id', 'google_id', 'birth_date', 'username', 'isNewUser')
-                    ->where('enabled', 1)
-                    ->get();
+            ->select('id','name', 'last_name', 'email', 'rol_id', 'google_id', 'birth_date', 'username', 'isNewUser')
+            ->where('enabled', 1)
+            ->get();
     }
 
-    public static function storeUser(UserController  $data): bool
+    /**
+     * Crea un nuevo usuario.
+     *
+     * @param UserController $data
+     * @return bool
+     */
+    public static function storeUser(UserController $data): bool
     {
         $user = new self();
 
@@ -100,10 +128,16 @@ class User extends Authenticatable
         $user->username = $data->username ?? null;
         $user->password = $data->password ?? null;
         $user->isNewUser = $data->newUser;
-        
+
         return $user->save();
     }
 
+    /**
+     * Desactiva (elimina lógicamente) un usuario.
+     *
+     * @param int $id
+     * @return bool
+     */
     public static function deleteUser(int $id): bool
     {
         $user = self::find($id);
@@ -117,6 +151,12 @@ class User extends Authenticatable
         return $user->save();
     }
 
+    /**
+     * Obtiene un usuario por ID si está habilitado.
+     *
+     * @param int $id
+     * @return self|null
+     */
     public static function getUserById(int $id): ?self
     {
         return self::where('id', $id)
@@ -124,7 +164,13 @@ class User extends Authenticatable
             ->first();
     }
 
-    public static function updateUserInfoFromInitialSetup(Array $data): ?User
+    /**
+     * Actualiza los datos iniciales del usuario desde el setup inicial.
+     *
+     * @param array $data
+     * @return User|null
+     */
+    public static function updateUserInfoFromInitialSetup(array $data): ?User
     {
         /** @var User $user */
         $user = Auth::user();
@@ -141,20 +187,34 @@ class User extends Authenticatable
         return $user->save() ? $user : null;
     }
 
-    public static function updateNewUser($user): bool{
+    /**
+     * Marca el usuario como ya no nuevo.
+     *
+     * @param User $user
+     * @return bool
+     */
+    public static function updateNewUser($user): bool
+    {
         $user->isNewUser = false;
-        if(!$user->save()){
-            return false;
-        }
-
-        return true;
+        return $user->save();
     }
 
+    /**
+     * Relación con cuentas del usuario.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function accounts()
     {
         return $this->belongsToMany(Account::class, 'users_accounts', 'user_id', 'account_id');
     }
 
+    /**
+     * Obtiene categorías personales del usuario.
+     *
+     * @param int $id
+     * @return \Illuminate\Support\Collection|null
+     */
     public static function getPersonalCategoriesByUserId($id)
     {
         return self::find($id)?->personalCategories()
@@ -162,24 +222,29 @@ class User extends Authenticatable
             ->with(['icon', 'movementTypes:id'])
             ->get()
             ->map(function ($category) {
-            return [
-                'id' => $category->id,
-                'name' => $category->name,
-                'icon' => $category->icon?->icon,
-                'movement_type_ids' => $category->movementTypes->pluck('id')->toArray()
-            ];
+                return [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                    'icon' => $category->icon?->icon,
+                    'movement_type_ids' => $category->movementTypes->pluck('id')->toArray()
+                ];
             });
     }
 
-    
+    /**
+     * Elimina (desactiva) una categoría personal.
+     *
+     * @param int $userId
+     * @param int $categoryId
+     * @return bool
+     */
     public static function deletePersonalCategory(int $userId, int $categoryId): bool
     {
         DB::beginTransaction();
 
         try {
+            $deletedCategory = Category::where('id', $categoryId)->update(['enabled' => 0]);
 
-            $deletedCategory = Category::where('id', $categoryId)
-                ->update(['enabled' => 0]);
             if (!$deletedCategory) {
                 DB::rollBack();
                 return false;
@@ -194,19 +259,26 @@ class User extends Authenticatable
         }
     }
 
+    /**
+     * Actualiza una categoría personal del usuario.
+     *
+     * @param int $userId
+     * @param int $categoryId
+     * @param string $newName
+     * @param string $iconHtml
+     * @return bool
+     */
     public static function updatePersonalCategory(int $userId, int $categoryId, string $newName, string $iconHtml): bool
     {
         DB::beginTransaction();
 
         try {
-            
             $category = Category::find($categoryId);
             if (!$category) {
                 DB::rollBack();
                 return false;
             }
 
-            
             $isLinked = UserCategory::where('user_id', $userId)
                 ->where('categories_id', $categoryId)
                 ->exists();
@@ -216,7 +288,6 @@ class User extends Authenticatable
                 return false;
             }
 
-           
             $icon = Icon::where('icon', $iconHtml)->first();
             if (!$icon) {
                 DB::rollBack();
@@ -235,12 +306,9 @@ class User extends Authenticatable
                 $hasChanges = true;
             }
 
-            if ($hasChanges) {
-                $saved = $category->save();
-                if (!$saved) {
-                    DB::rollBack();
-                    return false;
-                }
+            if ($hasChanges && !$category->save()) {
+                DB::rollBack();
+                return false;
             }
 
             DB::commit();
@@ -252,6 +320,14 @@ class User extends Authenticatable
         }
     }
 
+    /**
+     * Crea una nueva categoría personal para el usuario.
+     *
+     * @param int $userId
+     * @param string $name
+     * @param string $iconHtml
+     * @return int|false
+     */
     public static function addPersonalCategory(int $userId, string $name, string $iconHtml): int|false
     {
         DB::beginTransaction();
@@ -262,7 +338,7 @@ class User extends Authenticatable
                 DB::rollBack();
                 return false;
             }
-            
+
             $category = new Category();
             $category->name = $name;
             $category->icon_id = $icon->id;
@@ -290,9 +366,13 @@ class User extends Authenticatable
         }
     }
 
+    /**
+     * Relación con las categorías personales del usuario.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function personalCategories()
     {
         return $this->belongsToMany(Category::class, 'user_categories', 'user_id', 'categories_id');
     }
-
 }

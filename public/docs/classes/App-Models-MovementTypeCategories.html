@@ -105,6 +105,20 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/App.html" class="">App</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/App-Http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Models.html" class="">Models</a>
+                
+            </li>
+            </ul>
+
                         </section>
             
     <section class="phpdocumentor-sidebar__category -reports">
@@ -153,11 +167,12 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/MovementTypeCategories.php"><a href="files/app-models-movementtypecategories.html"><abbr title="app/Models/MovementTypeCategories.php">MovementTypeCategories.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">7</span>
+    <span class="phpdocumentor-element-found-in__line">10</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Modelo MovementTypeCategories que representa la relación entre tipos de movimiento y categorías.</p>
+
 
 
 
@@ -189,14 +204,16 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-MovementTypeCategories.html#property_fillable">$fillable</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: array&lt;int, string&gt;            </span>
 </dt>
+<dd>Atributos que se pueden asignar masivamente.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-MovementTypeCategories.html#property_table">$table</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: string            </span>
 </dt>
+<dd>Nombre de la tabla asociada al modelo.</dd>
 
     </dl>
 
@@ -211,12 +228,15 @@
     <span>
                                 &nbsp;: bool|self    </span>
 </dt>
+<dd>Añade una nueva relación entre tipo de movimiento y categoría.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-MovementTypeCategories.html#method_syncTypesOfCategory">syncTypesOfCategory()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
+<dd>Sincroniza los tipos de movimiento asociados a una categoría,
+añadiendo nuevos y eliminando los que ya no están presentes.</dd>
 
     </dl>
 
@@ -248,15 +268,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/MovementTypeCategories.php"><a href="files/app-models-movementtypecategories.html"><abbr title="app/Models/MovementTypeCategories.php">MovementTypeCategories.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Atributos que se pueden asignar masivamente.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">array&lt;int, string&gt;</span>
     <span class="phpdocumentor-signature__name">$fillable</span>
      = <span class="phpdocumentor-signature__default-value">[&#039;movement_type_id&#039;, &#039;category_id&#039;]</span></code>
 
@@ -284,15 +305,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/MovementTypeCategories.php"><a href="files/app-models-movementtypecategories.html"><abbr title="app/Models/MovementTypeCategories.php">MovementTypeCategories.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">9</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Nombre de la tabla asociada al modelo.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$table</span>
      = <span class="phpdocumentor-signature__default-value">&#039;movements_types_categories&#039;</span></code>
 
@@ -325,11 +347,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/MovementTypeCategories.php"><a href="files/app-models-movementtypecategories.html"><abbr title="app/Models/MovementTypeCategories.php">MovementTypeCategories.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">64</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Añade una nueva relación entre tipo de movimiento y categoría.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">addMovementTypeCategory</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|self</span></code>
@@ -373,11 +396,13 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/MovementTypeCategories.php"><a href="files/app-models-movementtypecategories.html"><abbr title="app/Models/MovementTypeCategories.php">MovementTypeCategories.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Sincroniza los tipos de movimiento asociados a una categoría,
+añadiendo nuevos y eliminando los que ya no están presentes.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">syncTypesOfCategory</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$categoryId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$newTypeIds</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>

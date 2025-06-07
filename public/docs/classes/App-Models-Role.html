@@ -105,6 +105,20 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/App.html" class="">App</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/App-Http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Models.html" class="">Models</a>
+                
+            </li>
+            </ul>
+
                         </section>
             
     <section class="phpdocumentor-sidebar__category -reports">
@@ -153,12 +167,15 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Role.php"><a href="files/app-models-role.html"><abbr title="app/Models/Role.php">Role.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">7</span>
+    <span class="phpdocumentor-element-found-in__line">12</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Modelo Role</p>
 
+
+    <section class="phpdocumentor-description"><p>Representa un rol dentro del sistema (por ejemplo, admin, user, etc.).</p>
+</section>
 
 
 
@@ -190,8 +207,9 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Role.html#method_users">users()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Relations\HasMany">HasMany</abbr>    </span>
 </dt>
+<dd>Relación uno a muchos con los usuarios.</dd>
 
     </dl>
 
@@ -221,14 +239,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Role.php"><a href="files/app-models-role.html"><abbr title="app/Models/Role.php">Role.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">9</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Relación uno a muchos con los usuarios.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">users</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">users</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\HasMany">HasMany</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -239,7 +258,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\HasMany">HasMany</abbr></span>
+            </section>
+
 </article>
             </section>
 

@@ -105,6 +105,20 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/App.html" class="">App</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/App-Http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Models.html" class="">Models</a>
+                
+            </li>
+            </ul>
+
                         </section>
             
     <section class="phpdocumentor-sidebar__category -reports">
@@ -154,12 +168,15 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/GoogleController.php"><a href="files/app-http-controllers-googlecontroller.html"><abbr title="app/Http/Controllers/GoogleController.php">GoogleController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">15</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Controlador GoogleController</p>
 
+
+    <section class="phpdocumentor-description"><p>Gestiona la autenticación mediante Google OAuth usando Laravel Socialite.</p>
+</section>
 
 
 
@@ -191,14 +208,16 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-GoogleController.html#method_handleGoogleCallback">handleGoogleCallback()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr>    </span>
 </dt>
+<dd>Maneja la respuesta de Google tras la autenticación.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-GoogleController.html#method_redirectToGoogle">redirectToGoogle()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Symfony\Component\HttpFoundation\RedirectResponse">RedirectResponse</abbr>    </span>
 </dt>
+<dd>Redirige al usuario a la página de autenticación de Google.</dd>
 
     </dl>
 
@@ -228,25 +247,33 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/GoogleController.php"><a href="files/app-http-controllers-googlecontroller.html"><abbr title="app/Http/Controllers/GoogleController.php">GoogleController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Maneja la respuesta de Google tras la autenticación.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">handleGoogleCallback</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">handleGoogleCallback</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Si el usuario no existe en la base de datos, lo crea con los datos de Google.
+Luego lo autentica en el sistema y lo redirige al panel correspondiente.</p>
+</section>
+
     
     
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -262,14 +289,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/GoogleController.php"><a href="files/app-http-controllers-googlecontroller.html"><abbr title="app/Http/Controllers/GoogleController.php">GoogleController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Redirige al usuario a la página de autenticación de Google.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">redirectToGoogle</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">redirectToGoogle</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Symfony\Component\HttpFoundation\RedirectResponse">RedirectResponse</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -280,7 +308,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Symfony\Component\HttpFoundation\RedirectResponse">RedirectResponse</abbr></span>
+            </section>
+
 </article>
             </section>
 

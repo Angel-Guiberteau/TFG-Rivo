@@ -105,6 +105,20 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/App.html" class="">App</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/App-Http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Models.html" class="">Models</a>
+                
+            </li>
+            </ul>
+
                         </section>
             
     <section class="phpdocumentor-sidebar__category -reports">
@@ -156,12 +170,15 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Clase User</p>
 
+
+    <section class="phpdocumentor-description"><p>Representa a un usuario del sistema.</p>
+</section>
 
 
 
@@ -192,16 +209,16 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-User.html#property_fillable">$fillable</a>
     <span>
-                        &nbsp;: array&lt;int, string&gt;            </span>
+                        &nbsp;: array&lt;string|int, string&gt;            </span>
 </dt>
-<dd>The attributes that are mass assignable.</dd>
+<dd>Atributos asignables masivamente.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-User.html#property_hidden">$hidden</a>
     <span>
-                        &nbsp;: array&lt;int, string&gt;            </span>
+                        &nbsp;: array&lt;string|int, string&gt;            </span>
 </dt>
-<dd>The attributes that should be hidden for serialization.</dd>
+<dd>Atributos ocultos para serialización.</dd>
 
     </dl>
 
@@ -214,99 +231,114 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-User.html#method_accounts">accounts()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Relations\BelongsToMany">BelongsToMany</abbr>    </span>
 </dt>
+<dd>Relación con cuentas del usuario.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-User.html#method_addPersonalCategory">addPersonalCategory()</a>
     <span>
                                 &nbsp;: int|false    </span>
 </dt>
+<dd>Crea una nueva categoría personal para el usuario.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-User.html#method_deletePersonalCategory">deletePersonalCategory()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Elimina (desactiva) una categoría personal.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-User.html#method_deleteUser">deleteUser()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Desactiva (elimina lógicamente) un usuario.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-User.html#method_getAllUsers">getAllUsers()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Collection">Collection</abbr>    </span>
 </dt>
+<dd>Obtiene todos los usuarios activos.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-User.html#method_getPersonalCategoriesByUserId">getPersonalCategoriesByUserId()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Illuminate\Support\Collection">Collection</abbr>|null    </span>
 </dt>
+<dd>Obtiene categorías personales del usuario.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-User.html#method_getUser">getUser()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <a href="classes/App-Models-User.html"><abbr title="\App\Models\User">User</abbr></a>|null    </span>
 </dt>
+<dd>Devuelve el usuario autenticado con relaciones cargadas.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-User.html#method_getUserById">getUserById()</a>
     <span>
                                 &nbsp;: self|null    </span>
 </dt>
+<dd>Obtiene un usuario por ID si está habilitado.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-User.html#method_numberOfUsers">numberOfUsers()</a>
     <span>
                                 &nbsp;: int    </span>
 </dt>
+<dd>Obtiene el número total de usuarios.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-User.html#method_personalCategories">personalCategories()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Relations\BelongsToMany">BelongsToMany</abbr>    </span>
 </dt>
+<dd>Relación con las categorías personales del usuario.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-User.html#method_role">role()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Relations\BelongsTo">BelongsTo</abbr>    </span>
 </dt>
+<dd>Relación con el rol del usuario.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-User.html#method_storeUser">storeUser()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Crea un nuevo usuario.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-User.html#method_updateNewUser">updateNewUser()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Marca el usuario como ya no nuevo.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-User.html#method_updatePersonalCategory">updatePersonalCategory()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Actualiza una categoría personal del usuario.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-User.html#method_updateUserInfoFromInitialSetup">updateUserInfoFromInitialSetup()</a>
     <span>
                                 &nbsp;: <a href="classes/App-Models-User.html"><abbr title="\App\Models\User">User</abbr></a>|null    </span>
 </dt>
+<dd>Actualiza los datos iniciales del usuario desde el setup inicial.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a class="" href="classes/App-Models-User.html#method_casts">casts()</a>
     <span>
                                 &nbsp;: array&lt;string, string&gt;    </span>
 </dt>
-<dd>Get the attributes that should be cast.</dd>
+<dd>Atributos con casteo de tipo.</dd>
 
     </dl>
 
@@ -338,16 +370,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The attributes that are mass assignable.</p>
+        <p class="phpdocumentor-summary">Atributos asignables masivamente.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">array&lt;int, string&gt;</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, string&gt;</span>
     <span class="phpdocumentor-signature__name">$fillable</span>
      = <span class="phpdocumentor-signature__default-value">[&#039;email&#039;, &#039;password&#039;, &#039;google_id&#039;, &#039;name&#039;, &#039;last_name&#039;, &#039;username&#039;, &#039;birth_date&#039;, &#039;rol_id&#039;, &#039;isNewUser&#039;, &#039;enabled&#039;]</span></code>
 
@@ -375,16 +407,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">44</span>
+    <span class="phpdocumentor-element-found-in__line">46</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The attributes that should be hidden for serialization.</p>
+        <p class="phpdocumentor-summary">Atributos ocultos para serialización.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">array&lt;int, string&gt;</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, string&gt;</span>
     <span class="phpdocumentor-signature__name">$hidden</span>
      = <span class="phpdocumentor-signature__default-value">[&#039;password&#039;, &#039;remember_token&#039;]</span></code>
 
@@ -417,14 +449,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">153</span>
+    <span class="phpdocumentor-element-found-in__line">207</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Relación con cuentas del usuario.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">accounts</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">accounts</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\BelongsToMany">BelongsToMany</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -435,7 +468,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\BelongsToMany">BelongsToMany</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -451,11 +488,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">255</span>
+    <span class="phpdocumentor-element-found-in__line">331</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Crea una nueva categoría personal para el usuario.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">addPersonalCategory</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$userId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$iconHtml</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|false</span></code>
@@ -513,11 +551,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">175</span>
+    <span class="phpdocumentor-element-found-in__line">241</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Elimina (desactiva) una categoría personal.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">deletePersonalCategory</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$userId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$categoryId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -568,11 +607,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">107</span>
+    <span class="phpdocumentor-element-found-in__line">141</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Desactiva (elimina lógicamente) un usuario.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">deleteUser</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -616,14 +656,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">83</span>
+    <span class="phpdocumentor-element-found-in__line">105</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene todos los usuarios activos.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getAllUsers</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getAllUsers</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Collection">Collection</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -634,7 +675,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Collection">Collection</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -650,14 +695,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">158</span>
+    <span class="phpdocumentor-element-found-in__line">218</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene categorías personales del usuario.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getPersonalCategoriesByUserId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getPersonalCategoriesByUserId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr>|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -667,7 +713,7 @@
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$id</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -678,7 +724,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr>|null</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -694,14 +744,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">62</span>
+    <span class="phpdocumentor-element-found-in__line">69</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Devuelve el usuario autenticado con relaciones cargadas.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getUser</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getUser</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/App-Models-User.html"><abbr title="\App\Models\User">User</abbr></a>|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -712,7 +763,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/App-Models-User.html"><abbr title="\App\Models\User">User</abbr></a>|null</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -728,11 +783,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">120</span>
+    <span class="phpdocumentor-element-found-in__line">160</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene un usuario por ID si está habilitado.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getUserById</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self|null</span></code>
@@ -776,11 +832,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene el número total de usuarios.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">numberOfUsers</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
@@ -814,14 +871,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">293</span>
+    <span class="phpdocumentor-element-found-in__line">374</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Relación con las categorías personales del usuario.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">personalCategories</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">personalCategories</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\BelongsToMany">BelongsToMany</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -832,7 +890,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\BelongsToMany">BelongsToMany</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -848,14 +910,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">78</span>
+    <span class="phpdocumentor-element-found-in__line">95</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Relación con el rol del usuario.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">role</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">role</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\BelongsTo">BelongsTo</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -866,7 +929,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\BelongsTo">BelongsTo</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -882,11 +949,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">91</span>
+    <span class="phpdocumentor-element-found-in__line">119</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Crea un nuevo usuario.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">storeUser</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Http-Controllers-UserController.html"><abbr title="\App\Http\Controllers\UserController">UserController</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -930,14 +998,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">144</span>
+    <span class="phpdocumentor-element-found-in__line">196</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Marca el usuario como ya no nuevo.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">updateNewUser</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$user</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">updateNewUser</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Models-User.html"><abbr title="\App\Models\User">User</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$user</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -947,7 +1016,7 @@
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$user</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Models-User.html"><abbr title="\App\Models\User">User</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -978,11 +1047,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">197</span>
+    <span class="phpdocumentor-element-found-in__line">271</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Actualiza una categoría personal del usuario.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">updatePersonalCategory</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$userId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$categoryId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$newName</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$iconHtml</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -1047,11 +1117,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">127</span>
+    <span class="phpdocumentor-element-found-in__line">173</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Actualiza los datos iniciales del usuario desde el setup inicial.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">updateUserInfoFromInitialSetup</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/App-Models-User.html"><abbr title="\App\Models\User">User</abbr></a>|null</span></code>
@@ -1095,11 +1166,11 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/User.php"><a href="files/app-models-user.html"><abbr title="app/Models/User.php">User.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">54</span>
+    <span class="phpdocumentor-element-found-in__line">56</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Get the attributes that should be cast.</p>
+        <p class="phpdocumentor-summary">Atributos con casteo de tipo.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>

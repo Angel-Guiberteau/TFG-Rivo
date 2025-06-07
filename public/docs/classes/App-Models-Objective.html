@@ -105,6 +105,20 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/App.html" class="">App</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/App-Http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Models.html" class="">Models</a>
+                
+            </li>
+            </ul>
+
                         </section>
             
     <section class="phpdocumentor-sidebar__category -reports">
@@ -153,11 +167,12 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Objective.php"><a href="files/app-models-objective.html"><abbr title="app/Models/Objective.php">Objective.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">8</span>
+    <span class="phpdocumentor-element-found-in__line">11</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Modelo Objective que representa los objetivos financieros de los usuarios.</p>
+
 
 
 
@@ -189,14 +204,16 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-Objective.html#property_fillable">$fillable</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: array&lt;int, string&gt;            </span>
 </dt>
+<dd>Atributos que se pueden asignar masivamente.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-Objective.html#property_table">$table</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: string            </span>
 </dt>
+<dd>Nombre de la tabla asociada al modelo.</dd>
 
     </dl>
 
@@ -211,42 +228,56 @@
     <span>
                                 &nbsp;: bool|self    </span>
 </dt>
+<dd>Crea un nuevo objetivo.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Objective.html#method_deleteObjective">deleteObjective()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Elimina un objetivo por su ID.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Objective.html#method_getObjective">getObjective()</a>
     <span>
-                                &nbsp;: self    </span>
+                                &nbsp;: self|null    </span>
 </dt>
+<dd>Obtiene un objetivo por su ID.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Objective.html#method_getObjectives">getObjectives()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Support\Collection">Collection</abbr>    </span>
 </dt>
+<dd>Obtiene todos los objetivos de una cuenta.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Objective.html#method_getObjectivesByAccountId">getObjectivesByAccountId()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Support\Collection">Collection</abbr>    </span>
 </dt>
+<dd>Obtiene todos los objetivos activos por ID de cuenta.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Objective.html#method_updateCurrentAmount">updateCurrentAmount()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Actualiza el valor actual del objetivo según el monto de una operación.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/App-Models-Objective.html#method_updateFullObjective">updateFullObjective()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Actualiza todos los campos de un objetivo.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Objective.html#method_updateObjective">updateObjective()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Actualiza parcialmente un objetivo.</dd>
 
     </dl>
 
@@ -278,15 +309,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Objective.php"><a href="files/app-models-objective.html"><abbr title="app/Models/Objective.php">Objective.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Atributos que se pueden asignar masivamente.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">array&lt;int, string&gt;</span>
     <span class="phpdocumentor-signature__name">$fillable</span>
      = <span class="phpdocumentor-signature__default-value">[&#039;name&#039;, &#039;target_amount&#039;, &#039;current_amount&#039;, &#039;deadline&#039;, &#039;account_id&#039;, &#039;enabled&#039;]</span></code>
 
@@ -314,15 +346,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Objective.php"><a href="files/app-models-objective.html"><abbr title="app/Models/Objective.php">Objective.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Nombre de la tabla asociada al modelo.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$table</span>
      = <span class="phpdocumentor-signature__default-value">&#039;objectives&#039;</span></code>
 
@@ -355,11 +388,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Objective.php"><a href="files/app-models-objective.html"><abbr title="app/Models/Objective.php">Objective.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Crea un nuevo objetivo.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">addObjective</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|self</span></code>
@@ -403,11 +437,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Objective.php"><a href="files/app-models-objective.html"><abbr title="app/Models/Objective.php">Objective.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">91</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Elimina un objetivo por su ID.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">deleteObjective</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$objectiveId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -451,14 +486,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Objective.php"><a href="files/app-models-objective.html"><abbr title="app/Models/Objective.php">Objective.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">69</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene un objetivo por su ID.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getObjective</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getObjective</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -481,7 +517,7 @@
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">self</span>
+        <span class="phpdocumentor-signature__response_type">self|null</span>
             </section>
 
 </article>
@@ -499,20 +535,31 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Objective.php"><a href="files/app-models-objective.html"><abbr title="app/Models/Objective.php">Objective.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">59</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene todos los objetivos de una cuenta.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getObjectives</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr></span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getObjectives</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountsId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
     
-    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$accountsId</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
     
 
     
@@ -537,11 +584,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Objective.php"><a href="files/app-models-objective.html"><abbr title="app/Models/Objective.php">Objective.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene todos los objetivos activos por ID de cuenta.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getObjectivesByAccountId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountsId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr></span></code>
@@ -585,11 +633,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Objective.php"><a href="files/app-models-objective.html"><abbr title="app/Models/Objective.php">Objective.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">149</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Actualiza el valor actual del objetivo según el monto de una operación.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">updateCurrentAmount</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$objectiveId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$operationAmount</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$negative</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -639,6 +688,55 @@
             -public
                                     -static                    "
 >
+    <h4 class="phpdocumentor-element__name" id="method_updateFullObjective">
+        updateFullObjective()
+        <a href="classes/App-Models-Objective.html#method_updateFullObjective" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Objective.php"><a href="files/app-models-objective.html"><abbr title="app/Models/Objective.php">Objective.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">127</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Actualiza todos los campos de un objetivo.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">updateFullObjective</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$data</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
     <h4 class="phpdocumentor-element__name" id="method_updateObjective">
         updateObjective()
         <a href="classes/App-Models-Objective.html#method_updateObjective" class="headerlink"><i class="fas fa-link"></i></a>
@@ -647,11 +745,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Objective.php"><a href="files/app-models-objective.html"><abbr title="app/Models/Objective.php">Objective.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Actualiza parcialmente un objetivo.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">updateObjective</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -808,6 +907,7 @@
                                             <li class=""><a href="classes/App-Models-Objective.html#method_getObjectives">getObjectives()</a></li>
                                             <li class=""><a href="classes/App-Models-Objective.html#method_getObjectivesByAccountId">getObjectivesByAccountId()</a></li>
                                             <li class=""><a href="classes/App-Models-Objective.html#method_updateCurrentAmount">updateCurrentAmount()</a></li>
+                                            <li class=""><a href="classes/App-Models-Objective.html#method_updateFullObjective">updateFullObjective()</a></li>
                                             <li class=""><a href="classes/App-Models-Objective.html#method_updateObjective">updateObjective()</a></li>
                                     </ul>
             </li>

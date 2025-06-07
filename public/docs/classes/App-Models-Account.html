@@ -105,6 +105,20 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/App.html" class="">App</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/App-Http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Models.html" class="">Models</a>
+                
+            </li>
+            </ul>
+
                         </section>
             
     <section class="phpdocumentor-sidebar__category -reports">
@@ -138,7 +152,8 @@
             <div class="phpdocumentor-element__package">
             in package
             <ul class="phpdocumentor-breadcrumbs">
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App.html">App</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App-Models.html">Models</a></li>
                             </ul>
         </div>
     
@@ -153,11 +168,12 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Account.php"><a href="files/app-models-account.html"><abbr title="app/Models/Account.php">Account.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">8</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Modelo que representa una cuenta financiera de un usuario.</p>
+
 
 
 
@@ -189,14 +205,16 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-Account.html#property_fillable">$fillable</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: array&lt;int, string&gt;            </span>
 </dt>
+<dd>Atributos asignables en masa.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-Account.html#property_table">$table</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: string            </span>
 </dt>
+<dd>Nombre de la tabla asociada al modelo.</dd>
 
     </dl>
 
@@ -211,72 +229,84 @@
     <span>
                                 &nbsp;: bool|self    </span>
 </dt>
+<dd>Añade una nueva cuenta.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Account.html#method_addExpenseToBalance">addExpenseToBalance()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Resta un gasto del balance de la cuenta.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Account.html#method_addIncomeToBalance">addIncomeToBalance()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Añade un ingreso al balance de la cuenta.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Account.html#method_addSaveToTotalSave">addSaveToTotalSave()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Añade un ahorro al total ahorrado.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Account.html#method_getAccountByUserId">getAccountByUserId()</a>
     <span>
                                 &nbsp;: <a href="classes/App-Models-Account.html"><abbr title="\App\Models\Account">Account</abbr></a>|null    </span>
 </dt>
+<dd>Obtiene la cuenta asociada a un usuario.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Account.html#method_getTotalSavedByAccountId">getTotalSavedByAccountId()</a>
     <span>
-                                &nbsp;: <abbr title="\Illuminate\Validation\Rules\Numeric">Numeric</abbr>|bool    </span>
+                                &nbsp;: (numeric)|bool    </span>
 </dt>
+<dd>Obtiene el total ahorrado por ID de cuenta.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Account.html#method_icon">icon()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Relations\BelongsTo">BelongsTo</abbr>    </span>
 </dt>
+<dd>Relación con el icono asignado a la cuenta.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Account.html#method_objectives">objectives()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Relations\HasMany">HasMany</abbr>    </span>
 </dt>
+<dd>Relación con los objetivos financieros de la cuenta.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Account.html#method_operations">operations()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Relations\HasMany">HasMany</abbr>    </span>
 </dt>
+<dd>Relación con las operaciones financieras realizadas.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Account.html#method_updateAccountBalance">updateAccountBalance()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Actualiza el balance de la cuenta.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Account.html#method_updateSaveToTotalSave">updateSaveToTotalSave()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Actualiza el total ahorrado de la cuenta.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Account.html#method_users">users()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Relations\BelongsToMany">BelongsToMany</abbr>    </span>
 </dt>
+<dd>Relación con el modelo User (usuarios asociados a la cuenta).</dd>
 
     </dl>
 
@@ -308,15 +338,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Account.php"><a href="files/app-models-account.html"><abbr title="app/Models/Account.php">Account.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Atributos asignables en masa.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">array&lt;int, string&gt;</span>
     <span class="phpdocumentor-signature__name">$fillable</span>
      = <span class="phpdocumentor-signature__default-value">[&#039;name&#039;, &#039;balance&#039;, &#039;total_saved&#039;, &#039;currency&#039;, &#039;enabled&#039;]</span></code>
 
@@ -344,15 +375,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Account.php"><a href="files/app-models-account.html"><abbr title="app/Models/Account.php">Account.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Nombre de la tabla asociada al modelo.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$table</span>
      = <span class="phpdocumentor-signature__default-value">&#039;accounts&#039;</span></code>
 
@@ -385,11 +417,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Account.php"><a href="files/app-models-account.html"><abbr title="app/Models/Account.php">Account.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Añade una nueva cuenta.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">addAccount</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|self</span></code>
@@ -405,7 +438,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Datos de la cuenta.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -416,6 +451,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool|self</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Retorna la instancia de la cuenta si se crea correctamente, false en caso contrario.</p>
+</section>
+
             </section>
 
 </article>
@@ -433,11 +472,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Account.php"><a href="files/app-models-account.html"><abbr title="app/Models/Account.php">Account.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">62</span>
+    <span class="phpdocumentor-element-found-in__line">95</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Resta un gasto del balance de la cuenta.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">addExpenseToBalance</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$amount</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -453,14 +493,18 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>ID de la cuenta.</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$amount</span>
                 : <span class="phpdocumentor-signature__argument__return-type">float</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Monto a restar.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -488,11 +532,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Account.php"><a href="files/app-models-account.html"><abbr title="app/Models/Account.php">Account.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">50</span>
+    <span class="phpdocumentor-element-found-in__line">81</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Añade un ingreso al balance de la cuenta.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">addIncomeToBalance</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$amount</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -508,14 +553,18 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>ID de la cuenta.</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$amount</span>
                 : <span class="phpdocumentor-signature__argument__return-type">float</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Monto a añadir.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -543,11 +592,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Account.php"><a href="files/app-models-account.html"><abbr title="app/Models/Account.php">Account.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">88</span>
+    <span class="phpdocumentor-element-found-in__line">124</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Añade un ahorro al total ahorrado.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">addSaveToTotalSave</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$amount</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -563,14 +613,18 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>ID de la cuenta.</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$amount</span>
                 : <span class="phpdocumentor-signature__argument__return-type">float</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Monto a añadir.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -598,11 +652,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Account.php"><a href="files/app-models-account.html"><abbr title="app/Models/Account.php">Account.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene la cuenta asociada a un usuario.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getAccountByUserId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$userId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/App-Models-Account.html"><abbr title="\App\Models\Account">Account</abbr></a>|null</span></code>
@@ -618,7 +673,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>ID del usuario.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -646,14 +703,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Account.php"><a href="files/app-models-account.html"><abbr title="app/Models/Account.php">Account.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">100</span>
+    <span class="phpdocumentor-element-found-in__line">137</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene el total ahorrado por ID de cuenta.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getTotalSavedByAccountId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Validation\Rules\Numeric">Numeric</abbr>|bool</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getTotalSavedByAccountId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">(numeric)|bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -666,7 +724,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>ID de la cuenta.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -676,7 +736,7 @@
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Validation\Rules\Numeric">Numeric</abbr>|bool</span>
+        <span class="phpdocumentor-signature__response_type">(numeric)|bool</span>
             </section>
 
 </article>
@@ -694,14 +754,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Account.php"><a href="files/app-models-account.html"><abbr title="app/Models/Account.php">Account.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">125</span>
+    <span class="phpdocumentor-element-found-in__line">175</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Relación con el icono asignado a la cuenta.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">icon</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">icon</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\BelongsTo">BelongsTo</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -712,7 +773,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\BelongsTo">BelongsTo</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -728,14 +793,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Account.php"><a href="files/app-models-account.html"><abbr title="app/Models/Account.php">Account.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">157</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Relación con los objetivos financieros de la cuenta.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">objectives</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">objectives</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\HasMany">HasMany</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -746,7 +812,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\HasMany">HasMany</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -762,14 +832,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Account.php"><a href="files/app-models-account.html"><abbr title="app/Models/Account.php">Account.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">120</span>
+    <span class="phpdocumentor-element-found-in__line">166</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Relación con las operaciones financieras realizadas.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">operations</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">operations</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\HasMany">HasMany</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -780,7 +851,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\HasMany">HasMany</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -796,11 +871,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Account.php"><a href="files/app-models-account.html"><abbr title="app/Models/Account.php">Account.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">67</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Actualiza el balance de la cuenta.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">updateAccountBalance</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$amount</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$negative</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -816,21 +892,27 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>ID de la cuenta.</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$amount</span>
                 : <span class="phpdocumentor-signature__argument__return-type">float</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Monto a actualizar.</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$negative</span>
                 : <span class="phpdocumentor-signature__argument__return-type">bool</span>
                  = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Indica si se debe restar el monto.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -858,11 +940,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Account.php"><a href="files/app-models-account.html"><abbr title="app/Models/Account.php">Account.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">110</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Actualiza el total ahorrado de la cuenta.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">updateSaveToTotalSave</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$amount</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$negative</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -878,21 +961,27 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>ID de la cuenta.</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$amount</span>
                 : <span class="phpdocumentor-signature__argument__return-type">float</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Monto a ajustar.</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$negative</span>
                 : <span class="phpdocumentor-signature__argument__return-type">bool</span>
                  = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Si es true, se resta; si no, se suma.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -920,14 +1009,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Account.php"><a href="files/app-models-account.html"><abbr title="app/Models/Account.php">Account.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">110</span>
+    <span class="phpdocumentor-element-found-in__line">148</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Relación con el modelo User (usuarios asociados a la cuenta).</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">users</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">users</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\BelongsToMany">BelongsToMany</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -938,7 +1028,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\BelongsToMany">BelongsToMany</abbr></span>
+            </section>
+
 </article>
             </section>
 

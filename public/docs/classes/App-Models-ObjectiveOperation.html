@@ -105,6 +105,20 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/App.html" class="">App</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/App-Http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Models.html" class="">Models</a>
+                
+            </li>
+            </ul>
+
                         </section>
             
     <section class="phpdocumentor-sidebar__category -reports">
@@ -153,11 +167,13 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/ObjectiveOperation.php"><a href="files/app-models-objectiveoperation.html"><abbr title="app/Models/ObjectiveOperation.php">ObjectiveOperation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">9</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Modelo ObjectiveOperation
+Relaciona operaciones con objetivos de ahorro.</p>
+
 
 
 
@@ -189,14 +205,16 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-ObjectiveOperation.html#property_fillable">$fillable</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: array&lt;int, string&gt;            </span>
 </dt>
+<dd>Atributos que se pueden asignar masivamente.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-ObjectiveOperation.html#property_table">$table</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: string            </span>
 </dt>
+<dd>Nombre de la tabla asociada al modelo.</dd>
 
     </dl>
 
@@ -211,12 +229,14 @@
     <span>
                                 &nbsp;: bool|self    </span>
 </dt>
+<dd>Crea una nueva relación entre un objetivo y una operación.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-ObjectiveOperation.html#method_getObjectiveOperationByOperationId">getObjectiveOperationByOperationId()</a>
     <span>
                                 &nbsp;: <a href="classes/App-Models-ObjectiveOperation.html"><abbr title="\App\Models\ObjectiveOperation">ObjectiveOperation</abbr></a>|null    </span>
 </dt>
+<dd>Obtiene una relación objetivo-operación por el ID de operación.</dd>
 
     </dl>
 
@@ -248,15 +268,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/ObjectiveOperation.php"><a href="files/app-models-objectiveoperation.html"><abbr title="app/Models/ObjectiveOperation.php">ObjectiveOperation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Atributos que se pueden asignar masivamente.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">array&lt;int, string&gt;</span>
     <span class="phpdocumentor-signature__name">$fillable</span>
      = <span class="phpdocumentor-signature__default-value">[&#039;objective_id&#039;, &#039;operation_id&#039;, &#039;enabled&#039;]</span></code>
 
@@ -284,15 +305,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/ObjectiveOperation.php"><a href="files/app-models-objectiveoperation.html"><abbr title="app/Models/ObjectiveOperation.php">ObjectiveOperation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Nombre de la tabla asociada al modelo.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$table</span>
      = <span class="phpdocumentor-signature__default-value">&#039;objectives_operations&#039;</span></code>
 
@@ -325,11 +347,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/ObjectiveOperation.php"><a href="files/app-models-objectiveoperation.html"><abbr title="app/Models/ObjectiveOperation.php">ObjectiveOperation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">51</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Crea una nueva relación entre un objetivo y una operación.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">addObjectiveOperation</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$objectiveId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$operationId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|self</span></code>
@@ -380,11 +403,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/ObjectiveOperation.php"><a href="files/app-models-objectiveoperation.html"><abbr title="app/Models/ObjectiveOperation.php">ObjectiveOperation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene una relación objetivo-operación por el ID de operación.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getObjectiveOperationByOperationId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$operationId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/App-Models-ObjectiveOperation.html"><abbr title="\App\Models\ObjectiveOperation">ObjectiveOperation</abbr></a>|null</span></code>

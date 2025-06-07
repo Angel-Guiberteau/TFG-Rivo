@@ -105,6 +105,20 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/App.html" class="">App</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/App-Http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Models.html" class="">Models</a>
+                
+            </li>
+            </ul>
+
                         </section>
             
     <section class="phpdocumentor-sidebar__category -reports">
@@ -154,12 +168,15 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/ObjectiveController.php"><a href="files/app-http-controllers-objectivecontroller.html"><abbr title="app/Http/Controllers/ObjectiveController.php">ObjectiveController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Controlador ObjectiveController</p>
 
+
+    <section class="phpdocumentor-description"><p>Gestiona las operaciones CRUD relacionadas con los objetivos de ahorro de los usuarios.</p>
+</section>
 
 
 
@@ -193,36 +210,35 @@
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Añade un nuevo objetivo.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-ObjectiveController.html#method_deleteObjective">deleteObjective()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Http\JsonResponse">JsonResponse</abbr>    </span>
 </dt>
+<dd>Elimina un objetivo por su ID.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-ObjectiveController.html#method_getObjective">getObjective()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Http\JsonResponse">JsonResponse</abbr>    </span>
 </dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/App-Http-Controllers-ObjectiveController.html#method_getObjectives">getObjectives()</a>
-    <span>
-                                &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Collection">Collection</abbr>    </span>
-</dt>
+<dd>Obtiene un objetivo por su ID.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-ObjectiveController.html#method_getObjectivesByAccountId">getObjectivesByAccountId()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Collection">Collection</abbr>    </span>
 </dt>
+<dd>Obtiene todos los objetivos de una cuenta por su ID.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-ObjectiveController.html#method_updateObjective">updateObjective()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Actualiza un objetivo existente.</dd>
 
     </dl>
 
@@ -252,11 +268,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/ObjectiveController.php"><a href="files/app-http-controllers-objectivecontroller.html"><abbr title="app/Http/Controllers/ObjectiveController.php">ObjectiveController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Añade un nuevo objetivo.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">addObjective</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -272,7 +289,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Datos del objetivo a añadir.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -283,6 +302,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True si se añadió correctamente, false si falló.</p>
+</section>
+
             </section>
 
 </article>
@@ -300,11 +323,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/ObjectiveController.php"><a href="files/app-http-controllers-objectivecontroller.html"><abbr title="app/Http/Controllers/ObjectiveController.php">ObjectiveController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">56</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Elimina un objetivo por su ID.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">deleteObjective</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Http\JsonResponse">JsonResponse</abbr></span></code>
@@ -320,7 +344,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>ID del objetivo.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -331,6 +357,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Http\JsonResponse">JsonResponse</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Resultado en formato JSON con mensaje de éxito o error.</p>
+</section>
+
             </section>
 
 </article>
@@ -348,11 +378,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/ObjectiveController.php"><a href="files/app-http-controllers-objectivecontroller.html"><abbr title="app/Http/Controllers/ObjectiveController.php">ObjectiveController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene un objetivo por su ID.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getObjective</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Http\JsonResponse">JsonResponse</abbr></span></code>
@@ -368,7 +399,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>ID del objetivo.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -379,44 +412,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Http\JsonResponse">JsonResponse</abbr></span>
-            </section>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Datos del objetivo en formato JSON.</p>
+</section>
 
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getObjectives">
-        getObjectives()
-        <a href="classes/App-Http-Controllers-ObjectiveController.html#method_getObjectives" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/ObjectiveController.php"><a href="files/app-http-controllers-objectivecontroller.html"><abbr title="app/Http/Controllers/ObjectiveController.php">ObjectiveController.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">15</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getObjectives</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Collection">Collection</abbr></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Collection">Collection</abbr></span>
             </section>
 
 </article>
@@ -434,14 +433,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/ObjectiveController.php"><a href="files/app-http-controllers-objectivecontroller.html"><abbr title="app/Http/Controllers/ObjectiveController.php">ObjectiveController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">75</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene todos los objetivos de una cuenta por su ID.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getObjectivesByAccountId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">getObjectivesByAccountId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Collection">Collection</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -454,7 +454,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>ID de la cuenta.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -462,7 +464,15 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Collection">Collection</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Colección de objetivos.</p>
+</section>
+
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -478,11 +488,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/ObjectiveController.php"><a href="files/app-http-controllers-objectivecontroller.html"><abbr title="app/Http/Controllers/ObjectiveController.php">ObjectiveController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">46</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Actualiza un objetivo existente.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">updateObjective</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -498,7 +509,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Datos del objetivo con cambios.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -509,6 +522,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True si la actualización fue exitosa, false si falló.</p>
+</section>
+
             </section>
 
 </article>
@@ -628,7 +645,6 @@
                                             <li class=""><a href="classes/App-Http-Controllers-ObjectiveController.html#method_addObjective">addObjective()</a></li>
                                             <li class=""><a href="classes/App-Http-Controllers-ObjectiveController.html#method_deleteObjective">deleteObjective()</a></li>
                                             <li class=""><a href="classes/App-Http-Controllers-ObjectiveController.html#method_getObjective">getObjective()</a></li>
-                                            <li class=""><a href="classes/App-Http-Controllers-ObjectiveController.html#method_getObjectives">getObjectives()</a></li>
                                             <li class=""><a href="classes/App-Http-Controllers-ObjectiveController.html#method_getObjectivesByAccountId">getObjectivesByAccountId()</a></li>
                                             <li class=""><a href="classes/App-Http-Controllers-ObjectiveController.html#method_updateObjective">updateObjective()</a></li>
                                     </ul>

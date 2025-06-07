@@ -105,6 +105,20 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/App.html" class="">App</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/App-Http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Models.html" class="">Models</a>
+                
+            </li>
+            </ul>
+
                         </section>
             
     <section class="phpdocumentor-sidebar__category -reports">
@@ -153,11 +167,13 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Modelo Operation
+Representa una operación financiera realizada en una cuenta.</p>
+
 
 
 
@@ -189,14 +205,16 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-Operation.html#property_fillable">$fillable</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: array&lt;int, string&gt;            </span>
 </dt>
+<dd>Atributos asignables en masa.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Models-Operation.html#property_table">$table</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: string            </span>
 </dt>
+<dd>Tabla asociada al modelo.</dd>
 
     </dl>
 
@@ -211,90 +229,105 @@
     <span>
                                 &nbsp;: bool|self    </span>
 </dt>
+<dd>Crea una nueva operación.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Operation.html#method_category">category()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Relations\BelongsTo">BelongsTo</abbr>    </span>
 </dt>
+<dd>Relación con la categoría.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Operation.html#method_deleteOperation">deleteOperation()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Elimina una operación y sus relaciones (planeada o no planeada).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Operation.html#method_getAllExpensesByAccountId">getAllExpensesByAccountId()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Support\Collection">Collection</abbr>|null    </span>
 </dt>
+<dd>Obtiene todos los egresos de una cuenta.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Operation.html#method_getAllIncomesByAccountId">getAllIncomesByAccountId()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Support\Collection">Collection</abbr>|null    </span>
 </dt>
+<dd>Obtiene todos los ingresos de una cuenta.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Operation.html#method_getAllOperationsByAccountId">getAllOperationsByAccountId()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Support\Collection">Collection</abbr>|null    </span>
 </dt>
+<dd>Obtiene todas las operaciones de una cuenta.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Operation.html#method_getAllOperationsWithLimitByAccountId">getAllOperationsWithLimitByAccountId()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Support\Collection">Collection</abbr>|null    </span>
 </dt>
+<dd>Obtiene todas las operaciones paginadas.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Operation.html#method_getExpensesWithLimitByAccountId">getExpensesWithLimitByAccountId()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Support\Collection">Collection</abbr>|null    </span>
 </dt>
+<dd>Obtiene egresos paginados.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Operation.html#method_getIncomesWithLimitByAccountId">getIncomesWithLimitByAccountId()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Support\Collection">Collection</abbr>|null    </span>
 </dt>
+<dd>Obtiene ingresos paginados.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Operation.html#method_getOperationById">getOperationById()</a>
     <span>
                                 &nbsp;: self|null    </span>
 </dt>
+<dd>Obtiene una operación por su ID.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Operation.html#method_getSaveWithLimitByAccountId">getSaveWithLimitByAccountId()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Support\Collection">Collection</abbr>|null    </span>
 </dt>
+<dd>Obtiene ahorros paginados.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Operation.html#method_getSixOperationsByAccountId">getSixOperationsByAccountId()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Support\Collection">Collection</abbr>|null    </span>
 </dt>
+<dd>Obtiene las últimas seis operaciones de una cuenta.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Operation.html#method_planned">planned()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Relations\HasOne">HasOne</abbr>    </span>
 </dt>
+<dd>Relación con la operación planeada.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Operation.html#method_thisMonthOperationsByAccountId">thisMonthOperationsByAccountId()</a>
     <span>
                                 &nbsp;: <abbr title="\Illuminate\Support\Collection">Collection</abbr>|null    </span>
 </dt>
+<dd>Obtiene las operaciones del mes actual agrupadas por categoría y tipo de movimiento.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-Operation.html#method_unschedule">unschedule()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Relations\HasOne">HasOne</abbr>    </span>
 </dt>
+<dd>Relación con la operación no planeada.</dd>
 
     </dl>
 
@@ -326,15 +359,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Atributos asignables en masa.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">array&lt;int, string&gt;</span>
     <span class="phpdocumentor-signature__name">$fillable</span>
      = <span class="phpdocumentor-signature__default-value">[&#039;subject&#039;, &#039;description&#039;, &#039;amount&#039;, &#039;movement_type_id&#039;, &#039;action_date&#039;, &#039;account_id&#039;, &#039;category_id&#039;, &#039;enabled&#039;]</span></code>
 
@@ -362,15 +396,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Tabla asociada al modelo.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$table</span>
      = <span class="phpdocumentor-signature__default-value">&#039;operations&#039;</span></code>
 
@@ -403,11 +438,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Crea una nueva operación.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">addOperation</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|self</span></code>
@@ -451,14 +487,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">167</span>
+    <span class="phpdocumentor-element-found-in__line">262</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Relación con la categoría.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">category</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">category</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\BelongsTo">BelongsTo</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -469,7 +506,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\BelongsTo">BelongsTo</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -485,11 +526,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">139</span>
+    <span class="phpdocumentor-element-found-in__line">231</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Elimina una operación y sus relaciones (planeada o no planeada).</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">deleteOperation</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -533,11 +575,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">91</span>
+    <span class="phpdocumentor-element-found-in__line">146</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene todos los egresos de una cuenta.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getAllExpensesByAccountId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr>|null</span></code>
@@ -581,11 +624,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">78</span>
+    <span class="phpdocumentor-element-found-in__line">121</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene todos los ingresos de una cuenta.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getAllIncomesByAccountId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr>|null</span></code>
@@ -629,11 +673,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">44</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene todas las operaciones de una cuenta.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getAllOperationsByAccountId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr>|null</span></code>
@@ -677,11 +722,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">129</span>
+    <span class="phpdocumentor-element-found-in__line">216</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene todas las operaciones paginadas.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getAllOperationsWithLimitByAccountId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$offset</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$limit</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr>|null</span></code>
@@ -739,11 +785,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">180</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene egresos paginados.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getExpensesWithLimitByAccountId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$offset</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$limit</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr>|null</span></code>
@@ -801,11 +848,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">99</span>
+    <span class="phpdocumentor-element-found-in__line">162</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene ingresos paginados.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getIncomesWithLimitByAccountId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$offset</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$limit</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr>|null</span></code>
@@ -863,11 +911,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">135</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene una operación por su ID.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getOperationById</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$operationId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self|null</span></code>
@@ -911,11 +960,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">119</span>
+    <span class="phpdocumentor-element-found-in__line">198</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene ahorros paginados.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getSaveWithLimitByAccountId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$offset</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$limit</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr>|null</span></code>
@@ -973,11 +1023,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">69</span>
+    <span class="phpdocumentor-element-found-in__line">107</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene las últimas seis operaciones de una cuenta.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getSixOperationsByAccountId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr>|null</span></code>
@@ -1021,14 +1072,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">172</span>
+    <span class="phpdocumentor-element-found-in__line">272</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Relación con la operación planeada.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">planned</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">planned</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\HasOne">HasOne</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1039,7 +1091,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\HasOne">HasOne</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1055,11 +1111,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">81</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Obtiene las operaciones del mes actual agrupadas por categoría y tipo de movimiento.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">thisMonthOperationsByAccountId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accountId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Support\Collection">Collection</abbr>|null</span></code>
@@ -1103,14 +1160,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/Operation.php"><a href="files/app-models-operation.html"><abbr title="app/Models/Operation.php">Operation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">177</span>
+    <span class="phpdocumentor-element-found-in__line">282</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Relación con la operación no planeada.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">unschedule</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">unschedule</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\HasOne">HasOne</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1121,7 +1179,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Illuminate\Database\Eloquent\Relations\HasOne">HasOne</abbr></span>
+            </section>
+
 </article>
             </section>
 
