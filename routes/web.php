@@ -506,7 +506,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             $request = request()->toArray();
 
             $validate = UserValidator::validate($request, ValidationEnum::UPDATE_PERSONAL_ACOUNTS->value);
-            
+
             if(!$validate['status']){
                 return redirect()->back()->with('error', $validate['error'] ?? 'Error al actualizar las cuentas personales. Póngase en contacto con el soporte.');
             }
