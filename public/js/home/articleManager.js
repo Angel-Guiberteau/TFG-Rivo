@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const contentSections = document.querySelectorAll(
         'main > section > article.home-article, main > section > article.income-article, main > section > article.egress-article, main > section > article.objective-article, main > section > article.settings-article, main > section > article.category-article, main > section > article.allHistory-section'
     );
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
     function setupCategoryFilteringByType(initialType = null) {
         const typeRadios = document.querySelectorAll('.type-radio');
@@ -141,8 +144,11 @@ document.addEventListener('DOMContentLoaded', function () {
         return movementHTML;
     }
 
-    function showSection(section, onShow = null) {
+    async function showSection(section, onShow = null) {
         if (!section) return;
+
+        await delay(350);
+
         section.style.display = 'flex';
         requestAnimationFrame(async () => {
             section.classList.add('show');
@@ -152,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
             section.classList.remove('fade-section');
         });
     }
+
 
     async function refreshHistory(type) {
         const container = document.getElementById(`${type}-movements`);

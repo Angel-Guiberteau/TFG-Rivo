@@ -3,7 +3,6 @@
     <form class="col-12 col-lg-10 mx-auto mt-4" method="POST" action="{{ route('updateSettingsUser') }}">
         @csrf
         @method('PUT')
-        <input type="hidden" name="operation_id" id="operation_id"> 
         <div class="d-flex flex-row justify-content-between align-items-center">
             <h2 class="fw-bold fs-3">Datos personales</h2>
         </div>
