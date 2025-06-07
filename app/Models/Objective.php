@@ -31,8 +31,8 @@ class Objective extends Model
 
     }
 
-    public static function getObjectives(): Collection{
-        return self::where('enabled', 1)
+    public static function getObjectives(int $accountsId): Collection{
+        return self::where('account_id', $accountsId)
             ->get();
     }
 

@@ -156,12 +156,15 @@ class UserController extends Controller
                 ->withInput();
         }
 
+        $objectives = Objective::getObjectives($user->id);
+        // dd($objetives);
         return view('admin.users.editUser')
             ->with('user', $user)
             ->with('personalCategories', $personalCategories)
             ->with('allIcons', $allIcons)
             ->with('personalAccounts', $accounts)
-            ->with('movementTypes', $movementTypes);
+            ->with('movementTypes', $movementTypes)
+            ->with('objectives', $objectives);
     }
 
     public static function updateUser(array $data): RedirectResponse

@@ -4,4 +4,6 @@
     <a class="step fs-6" id="stepCreation">Categorias personales</a>
     <div class="progress-line"></div>
     <a class="step fs-6" id="stepPreview" >Cuentas personales</a>
+    <div class="progress-line"></div>
+    <a class="step fs-6" id="stepObjetives" >Objetivos del usuario</a>
 </div>

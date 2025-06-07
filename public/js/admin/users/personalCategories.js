@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const sections = {
         stepInfo: document.getElementById('personalData'),
         stepCreation: document.getElementById('personalCategories'),
-        stepPreview: document.getElementById('personalAccounts')
+        stepPreview: document.getElementById('personalAccounts'),
+        stepObjetives: document.getElementById('personalObjetives')
     };
 
     steps.forEach(step => {
