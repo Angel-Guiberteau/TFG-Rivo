@@ -13,9 +13,9 @@
     </style>
     @endpush
 
-    <div id="loader">
+    {{-- <div id="loader">
         <img src="{{ asset('img/logos/whiteRivoPng.png') }}" alt="Cargando Rivo" class="loader-logo" />
-    </div>
+    </div> --}}
 
     <main>
 
@@ -136,7 +136,7 @@
                 @include('templates.home.thisMonthIncomesExpenses')
 
             </article>
-            
+
             @include('templates.home.operations.history', ['type' => 'income', 'title' => 'ingresos'])
             @include('templates.home.operations.history', ['type' => 'expense', 'title' => 'egresos'])
             @include('templates.home.operations.history', ['type' => 'save', 'title' => 'ahorro'])
