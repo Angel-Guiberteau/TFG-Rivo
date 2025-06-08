@@ -1,6 +1,6 @@
 <section id="firstStep">
     <div class="field-group mb-4">
-        <div class="input-group">
+        <div class="input-group w-100">
             <i class="fas fa-user"></i>
             <input type="text" id="name" name="name" placeholder="Nombre" />
         </div>

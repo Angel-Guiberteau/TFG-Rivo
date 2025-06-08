@@ -200,6 +200,9 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth', 'role:user']], functio
 |--------------------------------------------------------------------------
 */
 Route::get('/', function () {
+    if(Auth::check()) {
+        return redirect('/dashboard');
+    }
     return view('auth.login_register');
 });
 
@@ -244,8 +247,10 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 
 Route::group(['middleware' => ['auth', 'role:user']], function () {
 
-    Route::get('/home', function (): View {
-
+    Route::get('/home', function (): View | RedirectResponse {
+        if(!Auth::check()) {
+            return redirect('/');
+        }
         $userController = new UserController();
         $user = $userController->getUser();
         $accountController = new AccountController();

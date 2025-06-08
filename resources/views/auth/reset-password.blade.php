@@ -44,8 +44,6 @@
 
         <form method="POST" action="{{ route('password.update') }}">
             @csrf
-            <p>Token: {{ $request->route('token') }}</p>
-            <p>Email: {{ $request->query('email') }}</p>
 
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
             <input type="hidden" name="email" value="{{ $request->query('email') }}">
@@ -53,7 +51,7 @@
 
             <div class="mb-3">
                 <label for="password" class="form-label">Nueva contraseña</label>
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" 
+                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                        name="password" required autofocus>
                 @error('password')
                     <span class="invalid-feedback d-block fw-bold">{{ $message }}</span>
@@ -62,7 +60,7 @@
 
             <div class="mb-3">
                 <label for="password_confirmation" class="form-label">Confirmar contraseña</label>
-                <input id="password_confirmation" type="password" class="form-control" 
+                <input id="password_confirmation" type="password" class="form-control"
                        name="password_confirmation" required>
             </div>
 

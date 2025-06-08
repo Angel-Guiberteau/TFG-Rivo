@@ -6,16 +6,16 @@
 
     </head>
     <body>
-        <div id="loader">
+        {{-- <div id="loader">
             <img src="{{ asset('img/logos/whiteRivoPng.png') }}" class="loader-logo" />
-        </div>
+        </div> --}}
 
         @yield('content')
-        <script>
+        {{-- <script>
             const loader = document.getElementById('loader');
             let loaderVisible = false;
             let loaderTimeout;
-        
+
             const hideLoader = () => {
                 clearTimeout(loaderTimeout);
                 if (loaderVisible) {
@@ -23,23 +23,23 @@
                     setTimeout(() => loader.remove(), 600);
                 }
             };
-        
+
             loaderTimeout = setTimeout(() => {
                 loader.style.display = 'flex';
                 loaderVisible = true;
-        
+
                 if (document.readyState === 'complete') {
                     hideLoader();
                 }
             }, 1500);
-        
+
             if (document.readyState !== 'complete') {
                 window.addEventListener('load', hideLoader);
             } else {
                 hideLoader();
             }
-        </script>
-        
+        </script> --}}
+
         {{-- @include('footer') --}}
     </body>
 </html>

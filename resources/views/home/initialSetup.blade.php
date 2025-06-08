@@ -2,7 +2,7 @@
 
 @section('title', 'Configuración inicial')
 
-    
+
 @section('content')
 
     @push('styles')
@@ -25,18 +25,18 @@
                     <div class="alert alert-danger">{{ $error }}</div>
                 @endforeach
             @endif
-            
+
             </article>
-            
-            
-            <article class="row col-12 col-lg-6 mt-4 mt-lg-0">
+
+
+            <article class="row col-12 col-lg-6 mt-4 mt-lg-0"">
                 <div class="login-container register-container mx-auto">
-                    
+
                     <h2 id="title" class="fw-bold fs-2 mb-2">¡Empecemos!</h2>
                     <p id="subtitle" class="fs-5 w-100 text-center fw-light mb-4">Cuéntanos un poco sobre ti...</p>
                     <form class="fade-toggle active" action="/updateUserInfoFromInitialSetup" method="POST">
                         @csrf
-                        
+
                         @include('home.initialSetup.firstStep')
                         @include('home.initialSetup.secondStep')
                         @include('home.initialSetup.thirdStep')
@@ -72,5 +72,5 @@
         <script src="{{ asset('js/home/initialSetUpValidations/tenthStepValidation.js') }}"></script>
     @endpush
 @endsection
-    
+
 

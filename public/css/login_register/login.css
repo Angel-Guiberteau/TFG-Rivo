@@ -101,17 +101,19 @@ input::placeholder{
 }
 input:-webkit-autofill {
   -webkit-text-fill-color: #4A148C !important;
-  transition: background-color 5000s ease-in-out 0s; 
+  transition: background-color 5000s ease-in-out 0s;
 }
 .input-group {
-  background-color: #f5f5f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 1rem;
-  border-radius: 5px;
-  border: 3px solid transparent;
-  transition: all .1s;
+    width: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    border-radius: 5px;
+    border: 3px solid transparent;
+    transition: all .1s;
+    flex-wrap: nowrap !important;
 }
 .input-group:focus-within {
   border: 3px solid #c090f7;
@@ -131,6 +133,22 @@ input:-webkit-autofill {
 .input-group i {
   margin-right: 0.5rem;
   color: #888888;
+}
+@media screen and (max-width: 480px) {
+  .input-group {
+    flex-direction: row;
+    padding: 0 0.75rem;
+  }
+
+  .input-group input {
+    font-size: 1rem;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .input-group i {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+  }
 }
 
 .options {
@@ -218,7 +236,7 @@ a:hover {
   pointer-events: none;
   max-height: 0;
   overflow: hidden;
-  transition: 
+  transition:
     opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
     transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
     max-height 0.8s ease;
@@ -314,9 +332,9 @@ a:hover {
 .tooltip.tooltip-custom .tooltip-inner {
   max-width: 260px;
   background-color: #fff;
-  color: #333;   
+  color: #333;
   border-radius: 10px;
-  padding: 1rem;          
+  padding: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   font-size: 0.875rem;
   text-align: left;
