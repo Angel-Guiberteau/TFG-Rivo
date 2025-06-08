@@ -44,6 +44,21 @@ use App\Http\Controllers\GoogleMailController;
 
 /*
 |--------------------------------------------------------------------------
+| ERRORS
+|--------------------------------------------------------------------------
+*/
+Route::get('/custom-419-handler', function () {
+    Auth::logout();
+    session()->invalidate();
+    session()->regenerateToken();
+    return redirect()->route('login')->withErrors([
+        'session' => 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
+    ]);
+});
+
+
+/*
+|--------------------------------------------------------------------------
 | API
 |--------------------------------------------------------------------------
 */
@@ -250,6 +265,9 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
     Route::get('/home', function (): View | RedirectResponse {
         if(!Auth::check()) {
             return redirect('/');
+        }
+        if(Auth::user()->isNewUser){
+            return redirect('/dashboard');
         }
         $userController = new UserController();
         $user = $userController->getUser();

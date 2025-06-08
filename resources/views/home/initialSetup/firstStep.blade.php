@@ -15,15 +15,16 @@
         <div class="invalid-feedback"></div>
     </div>
 
-    <div class="field-group mb-4">
+    <div class="field-group mb-2 mb-sm-4">
         <div class="input-group">
             <i class="fas fa-user"></i>
             <input type="text" id="username" name="username" placeholder="Nombre de usuario"/>
         </div>
         <div class="invalid-feedback"></div>
     </div>
+<label class="form-label mobile-label mb-2">Fecha de nacimiento</label>
+    <div class="field-group mb-4 mt-0">
 
-    <div class="field-group mb-4">
         <div class="input-group">
             <i class="fas fa-calendar-alt"></i>
             <input type="text" id="birth_date" name="birth_date" placeholder="Selecciona la fecha de nacimiento"/>
