@@ -5,9 +5,10 @@
         <input type="hidden" name="operation_id" id="operation_id">
         <div class="d-flex flex-row justify-content-between align-items-center">
             <h2 class="fw-bold fs-3">Añadir operación</h2>
-            <button type="button" class="btn btn-primary fw-bold btn-sm fs-4 custom-gradient-btn w-25 " id="back-historyIncome">
-                    <i class="fas fa-arrow-left"></i>
+            <button type="button" class="btn btn-primary fw-bold btn-sm fs-4 custom-gradient-btn w-25" id="back-history">
+                <i class="fas fa-arrow-left"></i>
             </button>
+
         </div>
 
         <hr class="separator">
@@ -138,7 +139,7 @@
         </div>
         <div class="d-flex justify-content-center">
             <button type="submit" id="addOperation" class="btn btn-primary w-100 py-2 mt-3 fw-semibold fs-5 custom-gradient-btn">
-                Añadir ingreso
+                Añadir operación
             </button>
         </div>
     </form>

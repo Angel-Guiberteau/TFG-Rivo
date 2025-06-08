@@ -110,10 +110,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function hideContentSections() {
         contentSections.forEach(section => {
             section.classList.remove('show');
-            setTimeout(() => {
-                section.classList.add('fade-section');
-                section.style.display = 'none';
-            }, 300);
+            section.classList.add('fade-section');
+            section.style.display = 'none';
         });
     }
 
@@ -147,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
     async function showSection(section, onShow = null) {
         if (!section) return;
 
-        await delay(350);
+        await delay(10);
 
         section.style.display = 'flex';
         requestAnimationFrame(async () => {
@@ -248,6 +246,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (addFormBtn) {
             addFormBtn.addEventListener('click', () => {
+                formSection.setAttribute('data-type', type);
+
                 hideContentSections();
                 showSection(formSection, () => {
                     setMovementType(type);
@@ -278,6 +278,18 @@ document.addEventListener('DOMContentLoaded', function () {
             showHomeButton.addEventListener('click', () => {
                 hideContentSections();
                 showSection(homeSection);
+            });
+        }
+        const backFromFormBtn = document.getElementById('back-history');
+        if (backFromFormBtn) {
+            backFromFormBtn.addEventListener('click', () => {
+                const formSection = document.getElementById('operationAddForm-section');
+                const type = formSection.getAttribute('data-type') || 'income';
+                const section = document.getElementById(`${type}-section`);
+                if (section) {
+                    hideContentSections();
+                    showSection(section);
+                }
             });
         }
 
